@@ -7,7 +7,8 @@
       "token": "abridge",
       "tags": [
         "ai"
-      ]
+      ],
+      "domain": "abridge.com"
     },
     {
       "name": "Anthropic",
@@ -15,7 +16,8 @@
       "token": "anthropic",
       "tags": [
         "ai"
-      ]
+      ],
+      "domain": "anthropic.com"
     },
     {
       "name": "Baseten",
@@ -23,7 +25,8 @@
       "token": "baseten",
       "tags": [
         "ai"
-      ]
+      ],
+      "domain": "baseten.co"
     },
     {
       "name": "Character.AI",
@@ -31,7 +34,8 @@
       "token": "character",
       "tags": [
         "ai"
-      ]
+      ],
+      "domain": "character.ai"
     },
     {
       "name": "Cognition",
@@ -39,7 +43,8 @@
       "token": "cognition",
       "tags": [
         "ai"
-      ]
+      ],
+      "domain": "cognition.ai"
     },
     {
       "name": "CoreWeave",
@@ -47,7 +52,8 @@
       "token": "coreweave",
       "tags": [
         "ai"
-      ]
+      ],
+      "domain": "coreweave.com"
     },
     {
       "name": "Cresta",
@@ -55,7 +61,8 @@
       "token": "cresta",
       "tags": [
         "ai"
-      ]
+      ],
+      "domain": "cresta.com"
     },
     {
       "name": "Crusoe",
@@ -63,7 +70,8 @@
       "token": "crusoe",
       "tags": [
         "ai"
-      ]
+      ],
+      "domain": "crusoe.ai"
     },
     {
       "name": "Cursor",
@@ -71,7 +79,8 @@
       "token": "cursor",
       "tags": [
         "ai"
-      ]
+      ],
+      "domain": "cursor.com"
     },
     {
       "name": "Decagon",
@@ -79,7 +88,8 @@
       "token": "decagon",
       "tags": [
         "ai"
-      ]
+      ],
+      "domain": "decagon.ai"
     },
     {
       "name": "Distyl AI",
@@ -87,7 +97,8 @@
       "token": "distyl",
       "tags": [
         "ai"
-      ]
+      ],
+      "domain": "distyl.ai"
     },
     {
       "name": "ElevenLabs",
@@ -95,7 +106,8 @@
       "token": "elevenlabs",
       "tags": [
         "ai"
-      ]
+      ],
+      "domain": "elevenlabs.io"
     },
     {
       "name": "Fireworks AI",
@@ -103,7 +115,8 @@
       "token": "fireworks",
       "tags": [
         "ai"
-      ]
+      ],
+      "domain": "fireworks.ai"
     },
     {
       "name": "Harvey",
@@ -111,7 +124,8 @@
       "token": "harvey",
       "tags": [
         "ai"
-      ]
+      ],
+      "domain": "harvey.ai"
     },
     {
       "name": "Inflection",
@@ -119,7 +133,8 @@
       "token": "inflectionai",
       "tags": [
         "ai"
-      ]
+      ],
+      "domain": "inflection.ai"
     },
     {
       "name": "Lambda",
@@ -127,7 +142,8 @@
       "token": "lambda",
       "tags": [
         "ai"
-      ]
+      ],
+      "domain": "lambdalabs.com"
     },
     {
       "name": "Luma AI",
@@ -135,7 +151,8 @@
       "token": "lumaai",
       "tags": [
         "ai"
-      ]
+      ],
+      "domain": "lumalabs.ai"
     },
     {
       "name": "Mercor",
@@ -143,7 +160,8 @@
       "token": "mercor",
       "tags": [
         "ai"
-      ]
+      ],
+      "domain": "mercor.com"
     },
     {
       "name": "Modal",
@@ -151,7 +169,8 @@
       "token": "modal",
       "tags": [
         "ai"
-      ]
+      ],
+      "domain": "modal.com"
     },
     {
       "name": "OpenAI",
@@ -159,7 +178,8 @@
       "token": "openai",
       "tags": [
         "ai"
-      ]
+      ],
+      "domain": "openai.com"
     },
     {
       "name": "OpenEvidence",
@@ -167,7 +187,8 @@
       "token": "openevidence",
       "tags": [
         "ai"
-      ]
+      ],
+      "domain": "openevidence.com"
     },
     {
       "name": "Physical Intelligence",
@@ -175,7 +196,8 @@
       "token": "physicalintelligence",
       "tags": [
         "ai"
-      ]
+      ],
+      "domain": "physicalintelligence.company"
     },
     {
       "name": "Pika",
@@ -183,7 +205,8 @@
       "token": "pika",
       "tags": [
         "ai"
-      ]
+      ],
+      "domain": "pika.art"
     },
     {
       "name": "Pinecone",
@@ -191,7 +214,8 @@
       "token": "pinecone",
       "tags": [
         "ai"
-      ]
+      ],
+      "domain": "pinecone.io"
     },
     {
       "name": "Poolside",
@@ -199,7 +223,8 @@
       "token": "poolside",
       "tags": [
         "ai"
-      ]
+      ],
+      "domain": "poolside.ai"
     },
     {
       "name": "Runway",
@@ -207,7 +232,8 @@
       "token": "runway",
       "tags": [
         "ai"
-      ]
+      ],
+      "domain": "runwayml.com"
     },
     {
       "name": "Scale AI",
@@ -215,7 +241,8 @@
       "token": "scaleai",
       "tags": [
         "ai"
-      ]
+      ],
+      "domain": "scale.com"
     },
     {
       "name": "Sierra",
@@ -223,7 +250,8 @@
       "token": "sierra",
       "tags": [
         "ai"
-      ]
+      ],
+      "domain": "sierra.ai"
     },
     {
       "name": "Suno",
@@ -231,7 +259,8 @@
       "token": "suno",
       "tags": [
         "ai"
-      ]
+      ],
+      "domain": "suno.com"
     },
     {
       "name": "Thinking Machines",
@@ -239,7 +268,8 @@
       "token": "thinkingmachines",
       "tags": [
         "ai"
-      ]
+      ],
+      "domain": "thinkingmachines.ai"
     },
     {
       "name": "Together AI",
@@ -247,7 +277,8 @@
       "token": "togetherai",
       "tags": [
         "ai"
-      ]
+      ],
+      "domain": "together.ai"
     },
     {
       "name": "Weaviate",
@@ -255,7 +286,8 @@
       "token": "weaviate",
       "tags": [
         "ai"
-      ]
+      ],
+      "domain": "weaviate.io"
     },
     {
       "name": "World Labs",
@@ -263,7 +295,8 @@
       "token": "worldlabs",
       "tags": [
         "ai"
-      ]
+      ],
+      "domain": "worldlabs.ai"
     },
     {
       "name": "Writer",
@@ -271,7 +304,8 @@
       "token": "writer",
       "tags": [
         "ai"
-      ]
+      ],
+      "domain": "writer.com"
     },
     {
       "name": "xAI",
@@ -279,7 +313,8 @@
       "token": "xai",
       "tags": [
         "ai"
-      ]
+      ],
+      "domain": "x.ai"
     },
     {
       "name": "AQR",
@@ -287,7 +322,8 @@
       "token": "aqr",
       "tags": [
         "hedge"
-      ]
+      ],
+      "domain": "aqr.com"
     },
     {
       "name": "Capstone",
@@ -295,7 +331,8 @@
       "token": "capstoneinvestmentadvisors",
       "tags": [
         "hedge"
-      ]
+      ],
+      "domain": "capstoneco.com"
     },
     {
       "name": "Man Group",
@@ -303,7 +340,8 @@
       "token": "mangroup",
       "tags": [
         "hedge"
-      ]
+      ],
+      "domain": "man.com"
     },
     {
       "name": "Point72",
@@ -311,7 +349,8 @@
       "token": "point72",
       "tags": [
         "hedge"
-      ]
+      ],
+      "domain": "point72.com"
     },
     {
       "name": "Schonfeld",
@@ -319,7 +358,8 @@
       "token": "schonfeld",
       "tags": [
         "hedge"
-      ]
+      ],
+      "domain": "schonfeld.com"
     },
     {
       "name": "Squarepoint",
@@ -327,7 +367,8 @@
       "token": "squarepointcapital",
       "tags": [
         "hedge"
-      ]
+      ],
+      "domain": "squarepoint-capital.com"
     },
     {
       "name": "Akuna Capital",
@@ -335,7 +376,8 @@
       "token": "akunacapital",
       "tags": [
         "quant"
-      ]
+      ],
+      "domain": "akunacapital.com"
     },
     {
       "name": "Chicago Trading (CTC)",
@@ -343,7 +385,8 @@
       "token": "chicagotrading",
       "tags": [
         "quant"
-      ]
+      ],
+      "domain": "chicagotrading.com"
     },
     {
       "name": "DRW",
@@ -351,7 +394,8 @@
       "token": "drweng",
       "tags": [
         "quant"
-      ]
+      ],
+      "domain": "drw.com"
     },
     {
       "name": "Da Vinci",
@@ -359,7 +403,8 @@
       "token": "davinciderivatives",
       "tags": [
         "quant"
-      ]
+      ],
+      "domain": "davinciderivatives.com"
     },
     {
       "name": "Five Rings",
@@ -367,7 +412,8 @@
       "token": "fiveringsllc",
       "tags": [
         "quant"
-      ]
+      ],
+      "domain": "fiverings.com"
     },
     {
       "name": "Flow Traders",
@@ -375,7 +421,8 @@
       "token": "flowtraders",
       "tags": [
         "quant"
-      ]
+      ],
+      "domain": "flowtraders.com"
     },
     {
       "name": "GSA Capital",
@@ -383,7 +430,8 @@
       "token": "gsacapital",
       "tags": [
         "quant"
-      ]
+      ],
+      "domain": "gsacapital.com"
     },
     {
       "name": "Galaxy",
@@ -391,7 +439,8 @@
       "token": "galaxydigitalservices",
       "tags": [
         "quant"
-      ]
+      ],
+      "domain": "galaxy.com"
     },
     {
       "name": "Hudson River Trading",
@@ -399,7 +448,8 @@
       "token": "wehrtyou",
       "tags": [
         "quant"
-      ]
+      ],
+      "domain": "hudsonrivertrading.com"
     },
     {
       "name": "IMC Trading",
@@ -407,7 +457,8 @@
       "token": "imc",
       "tags": [
         "quant"
-      ]
+      ],
+      "domain": "imc.com"
     },
     {
       "name": "Jane Street",
@@ -415,7 +466,8 @@
       "token": "janestreet",
       "tags": [
         "quant"
-      ]
+      ],
+      "domain": "janestreet.com"
     },
     {
       "name": "Jump Trading",
@@ -423,7 +475,8 @@
       "token": "jumptrading",
       "tags": [
         "quant"
-      ]
+      ],
+      "domain": "jumptrading.com"
     },
     {
       "name": "Mako",
@@ -431,7 +484,8 @@
       "token": "mako",
       "tags": [
         "quant"
-      ]
+      ],
+      "domain": "mako.com"
     },
     {
       "name": "Old Mission",
@@ -439,7 +493,8 @@
       "token": "oldmissioncapital",
       "tags": [
         "quant"
-      ]
+      ],
+      "domain": "oldmissioncapital.com"
     },
     {
       "name": "PDT Partners",
@@ -447,7 +502,8 @@
       "token": "pdtpartners",
       "tags": [
         "quant"
-      ]
+      ],
+      "domain": "pdtpartners.com"
     },
     {
       "name": "Qube Research",
@@ -455,7 +511,8 @@
       "token": "quberesearchandtechnologies",
       "tags": [
         "quant"
-      ]
+      ],
+      "domain": "qube-rt.com"
     },
     {
       "name": "Tower Research",
@@ -463,7 +520,8 @@
       "token": "towerresearchcapital",
       "tags": [
         "quant"
-      ]
+      ],
+      "domain": "tower-research.com"
     },
     {
       "name": "Vatic Labs",
@@ -471,7 +529,8 @@
       "token": "vaticlabs",
       "tags": [
         "quant"
-      ]
+      ],
+      "domain": "vaticlabs.com"
     },
     {
       "name": "Virtu Financial",
@@ -479,7 +538,8 @@
       "token": "virtu",
       "tags": [
         "quant"
-      ]
+      ],
+      "domain": "virtu.com"
     },
     {
       "name": "Affirm",
@@ -487,7 +547,8 @@
       "token": "affirm",
       "tags": [
         "tech"
-      ]
+      ],
+      "domain": "affirm.com"
     },
     {
       "name": "Airbnb",
@@ -495,7 +556,8 @@
       "token": "airbnb",
       "tags": [
         "tech"
-      ]
+      ],
+      "domain": "airbnb.com"
     },
     {
       "name": "Airbyte",
@@ -503,7 +565,8 @@
       "token": "airbyte",
       "tags": [
         "tech"
-      ]
+      ],
+      "domain": "airbyte.com"
     },
     {
       "name": "Airtable",
@@ -511,7 +574,8 @@
       "token": "airtable",
       "tags": [
         "tech"
-      ]
+      ],
+      "domain": "airtable.com"
     },
     {
       "name": "Alpaca",
@@ -519,7 +583,8 @@
       "token": "alpaca",
       "tags": [
         "tech"
-      ]
+      ],
+      "domain": "alpaca.markets"
     },
     {
       "name": "Amplitude",
@@ -527,7 +592,8 @@
       "token": "amplitude",
       "tags": [
         "tech"
-      ]
+      ],
+      "domain": "amplitude.com"
     },
     {
       "name": "Asana",
@@ -535,7 +601,8 @@
       "token": "asana",
       "tags": [
         "tech"
-      ]
+      ],
+      "domain": "asana.com"
     },
     {
       "name": "Betterment",
@@ -543,7 +610,8 @@
       "token": "betterment",
       "tags": [
         "tech"
-      ]
+      ],
+      "domain": "betterment.com"
     },
     {
       "name": "Block",
@@ -551,7 +619,8 @@
       "token": "block",
       "tags": [
         "tech"
-      ]
+      ],
+      "domain": "block.xyz"
     },
     {
       "name": "Brex",
@@ -559,7 +628,8 @@
       "token": "brex",
       "tags": [
         "tech"
-      ]
+      ],
+      "domain": "brex.com"
     },
     {
       "name": "Carta",
@@ -567,7 +637,8 @@
       "token": "carta",
       "tags": [
         "tech"
-      ]
+      ],
+      "domain": "carta.com"
     },
     {
       "name": "Checkr",
@@ -575,7 +646,8 @@
       "token": "checkr",
       "tags": [
         "tech"
-      ]
+      ],
+      "domain": "checkr.com"
     },
     {
       "name": "Chime",
@@ -583,7 +655,8 @@
       "token": "chime",
       "tags": [
         "tech"
-      ]
+      ],
+      "domain": "chime.com"
     },
     {
       "name": "Cloudflare",
@@ -591,7 +664,8 @@
       "token": "cloudflare",
       "tags": [
         "tech"
-      ]
+      ],
+      "domain": "cloudflare.com"
     },
     {
       "name": "Cockroach Labs",
@@ -599,7 +673,8 @@
       "token": "cockroachlabs",
       "tags": [
         "tech"
-      ]
+      ],
+      "domain": "cockroachlabs.com"
     },
     {
       "name": "Coinbase",
@@ -607,7 +682,8 @@
       "token": "coinbase",
       "tags": [
         "tech"
-      ]
+      ],
+      "domain": "coinbase.com"
     },
     {
       "name": "Databricks",
@@ -615,7 +691,8 @@
       "token": "databricks",
       "tags": [
         "tech"
-      ]
+      ],
+      "domain": "databricks.com"
     },
     {
       "name": "Datadog",
@@ -623,7 +700,8 @@
       "token": "datadog",
       "tags": [
         "tech"
-      ]
+      ],
+      "domain": "datadoghq.com"
     },
     {
       "name": "Discord",
@@ -631,7 +709,8 @@
       "token": "discord",
       "tags": [
         "tech"
-      ]
+      ],
+      "domain": "discord.com"
     },
     {
       "name": "Dropbox",
@@ -639,7 +718,8 @@
       "token": "dropbox",
       "tags": [
         "tech"
-      ]
+      ],
+      "domain": "dropbox.com"
     },
     {
       "name": "Faire",
@@ -647,7 +727,8 @@
       "token": "faire",
       "tags": [
         "tech"
-      ]
+      ],
+      "domain": "faire.com"
     },
     {
       "name": "Figma",
@@ -655,7 +736,8 @@
       "token": "figma",
       "tags": [
         "tech"
-      ]
+      ],
+      "domain": "figma.com"
     },
     {
       "name": "Fireblocks",
@@ -663,7 +745,8 @@
       "token": "fireblocks",
       "tags": [
         "tech"
-      ]
+      ],
+      "domain": "fireblocks.com"
     },
     {
       "name": "Fivetran",
@@ -671,7 +754,8 @@
       "token": "fivetran",
       "tags": [
         "tech"
-      ]
+      ],
+      "domain": "fivetran.com"
     },
     {
       "name": "Flexport",
@@ -679,7 +763,8 @@
       "token": "flexport",
       "tags": [
         "tech"
-      ]
+      ],
+      "domain": "flexport.com"
     },
     {
       "name": "GitLab",
@@ -687,7 +772,8 @@
       "token": "gitlab",
       "tags": [
         "tech"
-      ]
+      ],
+      "domain": "gitlab.com"
     },
     {
       "name": "Gusto",
@@ -695,7 +781,8 @@
       "token": "gusto",
       "tags": [
         "tech"
-      ]
+      ],
+      "domain": "gusto.com"
     },
     {
       "name": "Hightouch",
@@ -703,7 +790,8 @@
       "token": "hightouch",
       "tags": [
         "tech"
-      ]
+      ],
+      "domain": "hightouch.com"
     },
     {
       "name": "Instacart",
@@ -711,7 +799,8 @@
       "token": "instacart",
       "tags": [
         "tech"
-      ]
+      ],
+      "domain": "instacart.com"
     },
     {
       "name": "Linear",
@@ -719,7 +808,8 @@
       "token": "linear",
       "tags": [
         "tech"
-      ]
+      ],
+      "domain": "linear.app"
     },
     {
       "name": "Lithic",
@@ -727,7 +817,8 @@
       "token": "lithic",
       "tags": [
         "tech"
-      ]
+      ],
+      "domain": "lithic.com"
     },
     {
       "name": "Modern Treasury",
@@ -735,7 +826,8 @@
       "token": "moderntreasury",
       "tags": [
         "tech"
-      ]
+      ],
+      "domain": "moderntreasury.com"
     },
     {
       "name": "Notion",
@@ -743,7 +835,8 @@
       "token": "notion",
       "tags": [
         "tech"
-      ]
+      ],
+      "domain": "notion.so"
     },
     {
       "name": "Okta",
@@ -751,7 +844,8 @@
       "token": "okta",
       "tags": [
         "tech"
-      ]
+      ],
+      "domain": "okta.com"
     },
     {
       "name": "Palantir",
@@ -759,7 +853,8 @@
       "token": "palantir",
       "tags": [
         "tech"
-      ]
+      ],
+      "domain": "palantir.com"
     },
     {
       "name": "Pinterest",
@@ -767,7 +862,8 @@
       "token": "pinterest",
       "tags": [
         "tech"
-      ]
+      ],
+      "domain": "pinterest.com"
     },
     {
       "name": "Postman",
@@ -775,7 +871,8 @@
       "token": "postman",
       "tags": [
         "tech"
-      ]
+      ],
+      "domain": "postman.com"
     },
     {
       "name": "Public",
@@ -783,7 +880,8 @@
       "token": "public",
       "tags": [
         "tech"
-      ]
+      ],
+      "domain": "public.com"
     },
     {
       "name": "Ramp",
@@ -791,7 +889,8 @@
       "token": "ramp",
       "tags": [
         "tech"
-      ]
+      ],
+      "domain": "ramp.com"
     },
     {
       "name": "Reddit",
@@ -799,7 +898,8 @@
       "token": "reddit",
       "tags": [
         "tech"
-      ]
+      ],
+      "domain": "reddit.com"
     },
     {
       "name": "Render",
@@ -807,7 +907,8 @@
       "token": "render",
       "tags": [
         "tech"
-      ]
+      ],
+      "domain": "render.com"
     },
     {
       "name": "Robinhood",
@@ -815,7 +916,8 @@
       "token": "robinhood",
       "tags": [
         "tech"
-      ]
+      ],
+      "domain": "robinhood.com"
     },
     {
       "name": "Roblox",
@@ -823,7 +925,8 @@
       "token": "roblox",
       "tags": [
         "tech"
-      ]
+      ],
+      "domain": "roblox.com"
     },
     {
       "name": "Rubrik",
@@ -831,7 +934,8 @@
       "token": "rubrik",
       "tags": [
         "tech"
-      ]
+      ],
+      "domain": "rubrik.com"
     },
     {
       "name": "Samsara",
@@ -839,7 +943,8 @@
       "token": "samsara",
       "tags": [
         "tech"
-      ]
+      ],
+      "domain": "samsara.com"
     },
     {
       "name": "Snowflake",
@@ -847,7 +952,8 @@
       "token": "snowflake",
       "tags": [
         "tech"
-      ]
+      ],
+      "domain": "snowflake.com"
     },
     {
       "name": "SoFi",
@@ -855,7 +961,8 @@
       "token": "sofi",
       "tags": [
         "tech"
-      ]
+      ],
+      "domain": "sofi.com"
     },
     {
       "name": "Spotify",
@@ -863,7 +970,8 @@
       "token": "spotify",
       "tags": [
         "tech"
-      ]
+      ],
+      "domain": "spotify.com"
     },
     {
       "name": "Starburst",
@@ -871,7 +979,8 @@
       "token": "starburst",
       "tags": [
         "tech"
-      ]
+      ],
+      "domain": "starburst.io"
     },
     {
       "name": "Stripe",
@@ -879,7 +988,8 @@
       "token": "stripe",
       "tags": [
         "tech"
-      ]
+      ],
+      "domain": "stripe.com"
     },
     {
       "name": "Supabase",
@@ -887,7 +997,8 @@
       "token": "supabase",
       "tags": [
         "tech"
-      ]
+      ],
+      "domain": "supabase.com"
     },
     {
       "name": "Temporal",
@@ -895,7 +1006,8 @@
       "token": "temporal",
       "tags": [
         "tech"
-      ]
+      ],
+      "domain": "temporal.io"
     },
     {
       "name": "Toast",
@@ -903,7 +1015,8 @@
       "token": "toast",
       "tags": [
         "tech"
-      ]
+      ],
+      "domain": "toasttab.com"
     },
     {
       "name": "Vanta",
@@ -911,7 +1024,8 @@
       "token": "vanta",
       "tags": [
         "tech"
-      ]
+      ],
+      "domain": "vanta.com"
     },
     {
       "name": "Vercel",
@@ -919,7 +1033,8 @@
       "token": "vercel",
       "tags": [
         "tech"
-      ]
+      ],
+      "domain": "vercel.com"
     },
     {
       "name": "Webflow",
@@ -927,7 +1042,8 @@
       "token": "webflow",
       "tags": [
         "tech"
-      ]
+      ],
+      "domain": "webflow.com"
     }
   ]
 }

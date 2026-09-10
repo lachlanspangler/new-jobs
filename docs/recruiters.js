@@ -12,10 +12,18 @@ function linkedinRecruiters(co) {
 }
 function careers(co) { return `https://www.google.com/search?q=${enc(co + " careers software engineer")}`; }
 
-function contactRow(c) {
+function mailtoDraft(c, company) {
+  const first = (c.name || "there").split(" ")[0];
+  const subject = `Software / quant roles at ${company}`;
+  const body = `Hi ${first},\n\nI'm Lachlan Spangler, a software engineer (Amazon) with a quant/low-latency background. I'm very interested in engineering and quantitative roles at ${company} and would love to connect about current openings.\n\nGitHub: https://github.com/lachlanspangler\nLinkedIn: https://linkedin.com/in/lachlan-spangler\n\nThanks for your time,\nLachlan`;
+  return `mailto:${encodeURIComponent(c.email)}?subject=${enc(subject)}&body=${enc(body)}`;
+}
+function contactRow(c, company) {
+  const conf = typeof c.confidence === "number"
+    ? `<span class="pill" title="Hunter deliverability score">${c.confidence}%</span>` : "";
   const email = c.email && !c.locked
-    ? `<a class="pill sal" href="mailto:${esc(c.email)}">${esc(c.email)}</a>`
-    : `<span class="pill">email locked (unlock in Apollo)</span>`;
+    ? `<a class="pill sal" href="${mailtoDraft(c, company)}">✉ ${esc(c.email)}</a>${conf}`
+    : `<span class="pill">email locked (unlock in your data tool)</span>`;
   const li = c.linkedin ? `<a class="pill" href="${esc(c.linkedin)}" target="_blank" rel="noreferrer">LinkedIn ↗</a>` : "";
   return `<div class="rc"><b>${esc(c.name || "—")}</b><span class="rc-title">${esc(c.title || "")}</span>${email}${li}</div>`;
 }
@@ -28,7 +36,7 @@ function render() {
   $("recruiters").innerHTML = cos.length ? cos.map((c) => {
     const contacts = state.contacts[c.name] || [];
     const body = contacts.length
-      ? contacts.map(contactRow).join("")
+      ? contacts.map((ct) => contactRow(ct, c.name)).join("")
       : `<div class="rc muted-note">No fetched contacts yet — use the links below (add an Apollo key to populate real contacts).</div>`;
     return `<div class="co-item">
       <button class="co-head" aria-expanded="false">

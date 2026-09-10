@@ -52,6 +52,26 @@ token returns a non-empty job list first:
 - Ashby: `https://api.ashbyhq.com/posting-api/job-board/<token>`
 - Lever: `https://api.lever.co/v0/postings/<token>?mode=json`
 
+## Recruiter contacts (Recruiters page)
+
+`fetch_recruiters.py` pulls talent/HR contacts per company using an official API
+with **your** key and writes `docs/recruiters.json`. Nothing is scraped or
+guessed.
+
+```bash
+HUNTER_API_KEY=xxxx python3 fetch_recruiters.py            # preferred (real, scored emails)
+HUNTER_API_KEY=xxxx python3 fetch_recruiters.py --tag quant --tag ai
+APOLLO_API_KEY=xxxx python3 fetch_recruiters.py            # fallback (emails often locked)
+```
+
+- **Hunter.io** (Domain Search) is the higher-yield source: it returns real,
+  deliverability-scored addresses for each company's `domain` (mapped in
+  `companies.json`), with name, title, and LinkedIn. The page shows a
+  confidence % and a ready-to-send email draft (mailto) per contact.
+- Free tiers are limited (Hunter ~25–50 searches/mo), so run by `--tag` in
+  batches. Keep outreach personalized and low-volume — cold-blasting a big list
+  wrecks deliverability and can violate anti-spam law and platform terms.
+
 ## Notes
 
 - Only employers on these three ATSes are covered; firms on custom career sites
