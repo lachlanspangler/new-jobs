@@ -61,6 +61,7 @@ def apollo(name):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--tag", action="append", default=[])
+    ap.add_argument("--company", default="", help="only companies whose name contains this")
     args = ap.parse_args()
     if not HUNTER and not APOLLO:
         sys.exit("Set HUNTER_API_KEY (preferred) or APOLLO_API_KEY, then re-run.")
@@ -69,6 +70,8 @@ def main():
     if args.tag:
         tags = {t.lower() for t in args.tag}
         companies = [c for c in companies if set(t.lower() for t in c.get("tags", [])) & tags]
+    if args.company:
+        companies = [c for c in companies if args.company.lower() in c["name"].lower()]
 
     src = "hunter" if HUNTER else "apollo"
     path = ROOT / "docs" / "recruiters.json"
