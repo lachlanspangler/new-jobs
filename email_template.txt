@@ -1,10 +1,13 @@
 Hi {first},
 
-I'm Lachlan Spangler, a software engineer at Amazon with a quant / low-latency background (matching engines, execution, market-microstructure tooling). I'm exploring software and quantitative roles at {company} and would love to connect about current openings.
+I'm an SDE at Amazon and an Emory CS/Finance grad, and I'm interested in opportunities at {company}. I would love to help lead {company} build tools to help the next several generations of builders.
 
-A bit of my work: https://github.com/lachlanspangler  ·  https://linkedin.com/in/lachlan-spangler
+At Amazon, I've shipped 120+ production changes across 20+ services (rank #1 on my 10-person team) and recently owned a pricing-engine extension projected to unlock ~$22M in annual gross profit. Last month, I built an Auto AI Triage system for our ticket queue to automatically deep-dive logs and root-cause tickets. I'm proud of that foundation, but I'm eager to dive deeper, build bigger, and help more people. I also have prior quantitative engineering experience at a hedge fund and a startup.
 
-Would you be open to a quick chat, or point me to the right person? Happy to send my resume — and totally understand if now isn't the time.
+I'd love to connect or hop on a quick call.
 
-Thanks,
+Best,
 Lachlan Spangler
+Computer Science & Finance, Emory University | BBA '25
+lachlan.spangler@gmail.com | 949-282-4816
+github.com/lachlanspangler | linkedin.com/in/lachlan-spangler | lachlanspangler.github.io
