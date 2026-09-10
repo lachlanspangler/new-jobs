@@ -107,6 +107,13 @@ def main():
                 merged[c["name"]] = rows   # refresh/add this company
                 added += len(rows)
             print(f"{c['name']}: {len(rows)}")
+        except urllib.error.HTTPError as e:
+            if e.code == 429:
+                print(f"{c['name']}: still 429 after retries — Hunter's monthly search quota is "
+                      "likely exhausted. Stopping (progress saved).")
+                save()
+                break
+            print(f"{c['name']}: error {e}")
         except Exception as e:
             print(f"{c['name']}: error {e}")
         save()          # persist after every company so an interrupt keeps progress
