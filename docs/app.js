@@ -33,6 +33,15 @@ function agoFrom(iso) {
   return `${Math.floor(days / 30)}mo ago`;
 }
 const edge = (tags) => { for (const t of tags || []) if (TAG_COLORS[t]) return TAG_COLORS[t]; return "#7c8cff"; };
+const dayKey = (iso) => (iso || "").slice(0, 10) || "undated";
+function dayLabel(iso) {
+  const d = new Date((iso || "").replace(" ", "T"));
+  if (isNaN(d)) return "Undated";
+  const today = new Date(), y = new Date(); y.setDate(y.getDate() - 1);
+  if (d.toDateString() === today.toDateString()) return "Today";
+  if (d.toDateString() === y.toDateString()) return "Yesterday";
+  return d.toLocaleDateString("en-US", { weekday: "short", month: "short", day: "numeric", year: "numeric" });
+}
 
 function filtered() {
   const q = state.q.trim().toLowerCase();
@@ -53,12 +62,19 @@ let APPLIED = new Set();
 
 function render() {
   const list = $("list");
-  const all = filtered();
+  const all = filtered().sort((a, b) => {
+    const d = (b.posted || "").localeCompare(a.posted || "");   // newest day first
+    return d !== 0 ? d : (b.priority === a.priority ? 0 : b.priority ? 1 : -1);
+  });
   const rows = all.slice(0, state.shown);
-  list.innerHTML = rows.length
-    ? '<div class="list-inner">' + rows.map((j) => {
-        const done = APPLIED.has(j.key);
-        return `<a class="row ${done ? "applied" : ""}" style="--edge:${edge(j.tags)}" href="${esc(j.url)}" target="_blank" rel="noreferrer" data-key="${esc(j.key)}">
+  if (!rows.length) { list.innerHTML = `<div class="empty">No matching roles.</div>`; }
+  else {
+    let html = '<div class="list-inner">', lastKey = null;
+    rows.forEach((j) => {
+      const key = dayKey(j.posted);
+      if (key !== lastKey) { html += `<div class="day-divider">${dayLabel(j.posted)}</div>`; lastKey = key; }
+      const done = APPLIED.has(j.key);
+      html += `<a class="row ${done ? "applied" : ""}" style="--edge:${edge(j.tags)}" href="${esc(j.url)}" target="_blank" rel="noreferrer" data-key="${esc(j.key)}">
           <span class="r-dot"></span>
           <span class="r-title">${esc(j.title)}</span>
           <span class="r-co">${esc(j.company)}</span>
@@ -68,8 +84,9 @@ function render() {
           <span class="r-src">${esc(j.source)}</span>
           <span class="r-go">${done ? "✓ applied" : "Apply ↗"}</span>
         </a>`;
-      }).join("") + "</div>"
-    : `<div class="empty">No matching roles.</div>`;
+    });
+    list.innerHTML = html + "</div>";
+  }
   $("more").classList.toggle("hidden", all.length <= state.shown);
   $("s-apps").textContent = loadApps().length;
   $("nav-count").textContent = loadApps().length;

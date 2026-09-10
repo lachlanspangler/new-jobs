@@ -112,3 +112,7 @@ td:last-child { text-align: right; font-variant-numeric: tabular-nums; color: va
 .pill.sal { color: var(--quant); background: rgba(67,224,138,.12); border-color: rgba(67,224,138,.3); }
 #banner { font-size: 13.5px; color: var(--muted); line-height: 1.6; }
 #banner b { color: var(--fg); }
+
+/* day dividers (Recent) */
+.day-divider { padding: 10px 16px; background: rgba(124,140,255,.10); border-bottom: 1px solid var(--line);
+  font-family: var(--mono); font-size: 12px; letter-spacing: .05em; text-transform: uppercase; color: var(--accent); font-weight: 700; }

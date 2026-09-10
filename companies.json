@@ -335,6 +335,15 @@
       "domain": "capstoneco.com"
     },
     {
+      "name": "ExodusPoint",
+      "ats": "greenhouse",
+      "token": "exoduspoint",
+      "tags": [
+        "hedge"
+      ],
+      "domain": "exoduspoint.com"
+    },
+    {
       "name": "Man Group",
       "ats": "greenhouse",
       "token": "mangroup",
@@ -378,6 +387,15 @@
         "quant"
       ],
       "domain": "akunacapital.com"
+    },
+    {
+      "name": "Aquatic Capital",
+      "ats": "greenhouse",
+      "token": "aquaticcapitalmanagement",
+      "tags": [
+        "quant"
+      ],
+      "domain": "aquaticcapital.com"
     },
     {
       "name": "Chicago Trading (CTC)",
@@ -506,6 +524,15 @@
       "domain": "pdtpartners.com"
     },
     {
+      "name": "Quadrature",
+      "ats": "greenhouse",
+      "token": "quadraturecapital",
+      "tags": [
+        "quant"
+      ],
+      "domain": "quadrature.ai"
+    },
+    {
       "name": "Qube Research",
       "ats": "greenhouse",
       "token": "quberesearchandtechnologies",
@@ -540,6 +567,15 @@
         "quant"
       ],
       "domain": "virtu.com"
+    },
+    {
+      "name": "WorldQuant",
+      "ats": "greenhouse",
+      "token": "worldquant",
+      "tags": [
+        "quant"
+      ],
+      "domain": "worldquant.com"
     },
     {
       "name": "Affirm",
@@ -686,6 +722,15 @@
       "domain": "coinbase.com"
     },
     {
+      "name": "Coupang",
+      "ats": "greenhouse",
+      "token": "coupang",
+      "tags": [
+        "tech"
+      ],
+      "domain": "coupang.com"
+    },
+    {
       "name": "Databricks",
       "ats": "greenhouse",
       "token": "databricks",
@@ -720,6 +765,15 @@
         "tech"
       ],
       "domain": "dropbox.com"
+    },
+    {
+      "name": "Elastic",
+      "ats": "greenhouse",
+      "token": "elastic",
+      "tags": [
+        "tech"
+      ],
+      "domain": "elastic.co"
     },
     {
       "name": "Faire",
@@ -830,6 +884,15 @@
       "domain": "moderntreasury.com"
     },
     {
+      "name": "MongoDB",
+      "ats": "greenhouse",
+      "token": "mongodb",
+      "tags": [
+        "tech"
+      ],
+      "domain": "mongodb.com"
+    },
+    {
       "name": "Notion",
       "ats": "ashby",
       "token": "notion",
@@ -929,6 +992,15 @@
       "domain": "roblox.com"
     },
     {
+      "name": "Roku",
+      "ats": "greenhouse",
+      "token": "roku",
+      "tags": [
+        "tech"
+      ],
+      "domain": "roku.com"
+    },
+    {
       "name": "Rubrik",
       "ats": "greenhouse",
       "token": "rubrik",
@@ -972,6 +1044,15 @@
         "tech"
       ],
       "domain": "spotify.com"
+    },
+    {
+      "name": "Squarespace",
+      "ats": "greenhouse",
+      "token": "squarespace",
+      "tags": [
+        "tech"
+      ],
+      "domain": "squarespace.com"
     },
     {
       "name": "Starburst",
@@ -1019,6 +1100,15 @@
       "domain": "toasttab.com"
     },
     {
+      "name": "Twilio",
+      "ats": "greenhouse",
+      "token": "twilio",
+      "tags": [
+        "tech"
+      ],
+      "domain": "twilio.com"
+    },
+    {
       "name": "Vanta",
       "ats": "ashby",
       "token": "vanta",
@@ -1044,6 +1134,15 @@
         "tech"
       ],
       "domain": "webflow.com"
+    },
+    {
+      "name": "Zscaler",
+      "ats": "greenhouse",
+      "token": "zscaler",
+      "tags": [
+        "tech"
+      ],
+      "domain": "zscaler.com"
     }
   ]
 }
