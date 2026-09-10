@@ -2,7 +2,8 @@
 
 const TAG_COLORS = { ai: "#b08cff", quant: "#43e08a", hedge: "#ffa94d", tech: "#34d3ee" };
 const STORE = "nj-apps";
-const state = { jobs: [], q: "", city: "", role: "", newonly: false, hideapplied: false, tags: new Set(), shown: 60 };
+const DSTORE = "nj-dismissed";
+const state = { jobs: [], q: "", city: "", role: "", newonly: false, hideapplied: false, showdismissed: false, tags: new Set(), shown: 60 };
 
 const $ = (id) => document.getElementById(id);
 const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
@@ -10,6 +11,9 @@ const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&
 function loadApps() { try { return JSON.parse(localStorage.getItem(STORE)) || []; } catch { return []; } }
 function saveApps(a) { localStorage.setItem(STORE, JSON.stringify(a)); }
 function appliedSet() { return new Set(loadApps().map((r) => r.key)); }
+function loadDismissed() { try { return new Set(JSON.parse(localStorage.getItem(DSTORE)) || []); } catch { return new Set(); } }
+function saveDismissed(s) { localStorage.setItem(DSTORE, JSON.stringify([...s])); }
+let DISMISSED = new Set();
 
 function roleOf(title) {
   const t = title.toLowerCase();
@@ -46,6 +50,7 @@ function dayLabel(iso) {
 function filtered() {
   const q = state.q.trim().toLowerCase();
   return state.jobs.filter((j) => {
+    if (!state.showdismissed && DISMISSED.has(j.key)) return false;
     if (state.tags.size && !(j.tags || []).some((t) => state.tags.has(t))) return false;
     if (state.newonly && !j.isNew) return false;
     if (state.role && roleOf(j.title) !== state.role) return false;
@@ -73,8 +78,8 @@ function render() {
     rows.forEach((j) => {
       const key = dayKey(j.posted);
       if (key !== lastKey) { html += `<div class="day-divider">${dayLabel(j.posted)}</div>`; lastKey = key; }
-      const done = APPLIED.has(j.key);
-      html += `<a class="row ${done ? "applied" : ""}" style="--edge:${edge(j.tags)}" href="${esc(j.url)}" target="_blank" rel="noreferrer" data-key="${esc(j.key)}">
+      const done = APPLIED.has(j.key), gone = DISMISSED.has(j.key);
+      html += `<a class="row ${done ? "applied" : ""} ${gone ? "dismissed" : ""}" style="--edge:${edge(j.tags)}" href="${esc(j.url)}" target="_blank" rel="noreferrer" data-key="${esc(j.key)}">
           <span class="r-dot"></span>
           <span class="r-title">${esc(j.title)}</span>
           <span class="r-co">${esc(j.company)}</span>
@@ -83,6 +88,7 @@ function render() {
           ${j.isNew ? '<span class="r-new">new</span>' : ""}
           <span class="r-src">${esc(j.source)}</span>
           <span class="r-go">${done ? "✓ applied" : "Apply ↗"}</span>
+          <button class="r-trash" data-trash="${esc(j.key)}" title="${gone ? "Restore" : "Not interested"}">${gone ? "↺" : "✕"}</button>
         </a>`;
     });
     list.innerHTML = html + "</div>";
@@ -115,6 +121,7 @@ function renderTags() {
 
 async function load() {
   APPLIED = appliedSet();
+  DISMISSED = loadDismissed();
   try {
     const d = await (await fetch("./jobs.json", { cache: "no-store" })).json();
     state.jobs = d.jobs || [];
@@ -129,9 +136,17 @@ async function load() {
 }
 
 ["q", "city", "role"].forEach((id) => $(id).addEventListener("input", (e) => { state[id] = e.target.value; state.shown = 60; render(); }));
-["newonly", "hideapplied"].forEach((id) => $(id).addEventListener("change", (e) => { state[id] = e.target.checked; render(); }));
+["newonly", "hideapplied", "showdismissed"].forEach((id) => $(id).addEventListener("change", (e) => { state[id] = e.target.checked; render(); }));
 $("more").addEventListener("click", () => { state.shown += 60; render(); });
 $("list").addEventListener("click", (e) => {
+  const trash = e.target.closest(".r-trash");
+  if (trash) {
+    e.preventDefault(); e.stopPropagation();
+    const k = trash.dataset.trash;
+    DISMISSED.has(k) ? DISMISSED.delete(k) : DISMISSED.add(k);
+    saveDismissed(DISMISSED); render();
+    return;
+  }
   const row = e.target.closest(".row");
   if (!row) return;
   const job = state.jobs.find((j) => j.key === row.dataset.key);

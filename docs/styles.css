@@ -116,3 +116,9 @@ td:last-child { text-align: right; font-variant-numeric: tabular-nums; color: va
 /* day dividers (Recent) */
 .day-divider { padding: 10px 16px; background: rgba(124,140,255,.10); border-bottom: 1px solid var(--line);
   font-family: var(--mono); font-size: 12px; letter-spacing: .05em; text-transform: uppercase; color: var(--accent); font-weight: 700; }
+
+/* dismiss / trash */
+.r-trash { flex: 0 0 auto; background: none; border: 0; color: var(--muted); cursor: pointer; font-size: 14px; line-height: 1; padding: 2px 4px; }
+.r-trash:hover { color: #ff6b6b; }
+.row.dismissed { opacity: .4; }
+.row.dismissed .r-title { text-decoration: line-through; }

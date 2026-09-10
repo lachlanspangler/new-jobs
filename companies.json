@@ -29,6 +29,15 @@
       "domain": "baseten.co"
     },
     {
+      "name": "Cartesia",
+      "ats": "ashby",
+      "token": "cartesia",
+      "tags": [
+        "ai"
+      ],
+      "domain": "cartesia.ai"
+    },
+    {
       "name": "Character.AI",
       "ats": "ashby",
       "token": "character",
@@ -110,6 +119,24 @@
       "domain": "elevenlabs.io"
     },
     {
+      "name": "Featherless AI",
+      "ats": "ashby",
+      "token": "featherlessai",
+      "tags": [
+        "ai"
+      ],
+      "domain": "featherless.ai"
+    },
+    {
+      "name": "Figure",
+      "ats": "greenhouse",
+      "token": "figure",
+      "tags": [
+        "ai"
+      ],
+      "domain": "figure.ai"
+    },
+    {
       "name": "Fireworks AI",
       "ats": "ashby",
       "token": "fireworks",
@@ -144,6 +171,15 @@
         "ai"
       ],
       "domain": "lambdalabs.com"
+    },
+    {
+      "name": "Lovable",
+      "ats": "ashby",
+      "token": "lovable",
+      "tags": [
+        "ai"
+      ],
+      "domain": "lovable.dev"
     },
     {
       "name": "Luma AI",
@@ -227,6 +263,15 @@
       "domain": "poolside.ai"
     },
     {
+      "name": "Replit",
+      "ats": "ashby",
+      "token": "replit",
+      "tags": [
+        "ai"
+      ],
+      "domain": "replit.com"
+    },
+    {
       "name": "Runway",
       "ats": "ashby",
       "token": "runway",
@@ -236,6 +281,15 @@
       "domain": "runwayml.com"
     },
     {
+      "name": "SambaNova",
+      "ats": "greenhouse",
+      "token": "sambanovasystems",
+      "tags": [
+        "ai"
+      ],
+      "domain": "sambanova.ai"
+    },
+    {
       "name": "Scale AI",
       "ats": "greenhouse",
       "token": "scaleai",
@@ -243,6 +297,15 @@
         "ai"
       ],
       "domain": "scale.com"
+    },
+    {
+      "name": "Sesame",
+      "ats": "ashby",
+      "token": "sesame",
+      "tags": [
+        "ai"
+      ],
+      "domain": "sesame.com"
     },
     {
       "name": "Sierra",
@@ -279,6 +342,15 @@
         "ai"
       ],
       "domain": "together.ai"
+    },
+    {
+      "name": "Vapi",
+      "ats": "ashby",
+      "token": "vapi",
+      "tags": [
+        "ai"
+      ],
+      "domain": "vapi.ai"
     },
     {
       "name": "Weaviate",
@@ -423,6 +495,15 @@
         "quant"
       ],
       "domain": "davinciderivatives.com"
+    },
+    {
+      "name": "FalconX",
+      "ats": "greenhouse",
+      "token": "falconx",
+      "tags": [
+        "quant"
+      ],
+      "domain": "falconx.io"
     },
     {
       "name": "Five Rings",
@@ -632,6 +713,15 @@
       "domain": "amplitude.com"
     },
     {
+      "name": "Anduril",
+      "ats": "greenhouse",
+      "token": "andurilindustries",
+      "tags": [
+        "tech"
+      ],
+      "domain": "anduril.com"
+    },
+    {
       "name": "Asana",
       "ats": "greenhouse",
       "token": "asana",
@@ -639,6 +729,15 @@
         "tech"
       ],
       "domain": "asana.com"
+    },
+    {
+      "name": "Attentive",
+      "ats": "greenhouse",
+      "token": "attentive",
+      "tags": [
+        "tech"
+      ],
+      "domain": "attentive.com"
     },
     {
       "name": "Betterment",
@@ -720,6 +819,15 @@
         "tech"
       ],
       "domain": "coinbase.com"
+    },
+    {
+      "name": "Column",
+      "ats": "ashby",
+      "token": "column",
+      "tags": [
+        "tech"
+      ],
+      "domain": "column.com"
     },
     {
       "name": "Coupang",
@@ -821,6 +929,15 @@
       "domain": "flexport.com"
     },
     {
+      "name": "Gemini",
+      "ats": "greenhouse",
+      "token": "gemini",
+      "tags": [
+        "tech"
+      ],
+      "domain": "gemini.com"
+    },
+    {
       "name": "GitLab",
       "ats": "greenhouse",
       "token": "gitlab",
@@ -837,6 +954,15 @@
         "tech"
       ],
       "domain": "gusto.com"
+    },
+    {
+      "name": "Hex",
+      "ats": "ashby",
+      "token": "hex",
+      "tags": [
+        "tech"
+      ],
+      "domain": "hex.tech"
     },
     {
       "name": "Hightouch",
@@ -900,6 +1026,15 @@
         "tech"
       ],
       "domain": "notion.so"
+    },
+    {
+      "name": "Nuro",
+      "ats": "greenhouse",
+      "token": "nuro",
+      "tags": [
+        "tech"
+      ],
+      "domain": "nuro.ai"
     },
     {
       "name": "Okta",
@@ -1019,6 +1154,24 @@
       "domain": "samsara.com"
     },
     {
+      "name": "Sardine",
+      "ats": "ashby",
+      "token": "sardine",
+      "tags": [
+        "tech"
+      ],
+      "domain": "sardine.ai"
+    },
+    {
+      "name": "Saronic",
+      "ats": "ashby",
+      "token": "saronic",
+      "tags": [
+        "tech"
+      ],
+      "domain": "saronic.com"
+    },
+    {
       "name": "Snowflake",
       "ats": "ashby",
       "token": "snowflake",
@@ -1125,6 +1278,15 @@
         "tech"
       ],
       "domain": "vercel.com"
+    },
+    {
+      "name": "Verkada",
+      "ats": "greenhouse",
+      "token": "verkada",
+      "tags": [
+        "tech"
+      ],
+      "domain": "verkada.com"
     },
     {
       "name": "Webflow",
