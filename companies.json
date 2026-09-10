@@ -659,6 +659,17 @@
       "domain": "worldquant.com"
     },
     {
+      "name": "Adobe",
+      "ats": "workday",
+      "token": "adobe",
+      "host": "wd5",
+      "site": "external_experienced",
+      "tags": [
+        "tech"
+      ],
+      "domain": "adobe.com"
+    },
+    {
       "name": "Affirm",
       "ats": "greenhouse",
       "token": "affirm",
@@ -740,6 +751,17 @@
       "domain": "attentive.com"
     },
     {
+      "name": "Autodesk",
+      "ats": "workday",
+      "token": "autodesk",
+      "host": "wd1",
+      "site": "Ext",
+      "tags": [
+        "tech"
+      ],
+      "domain": "autodesk.com"
+    },
+    {
       "name": "Betterment",
       "ats": "greenhouse",
       "token": "betterment",
@@ -765,6 +787,17 @@
         "tech"
       ],
       "domain": "brex.com"
+    },
+    {
+      "name": "Capital One",
+      "ats": "workday",
+      "token": "capitalone",
+      "host": "wd12",
+      "site": "Capital_One",
+      "tags": [
+        "tech"
+      ],
+      "domain": "capitalone.com"
     },
     {
       "name": "Carta",
@@ -1019,6 +1052,17 @@
       "domain": "mongodb.com"
     },
     {
+      "name": "NVIDIA",
+      "ats": "workday",
+      "token": "nvidia",
+      "host": "wd5",
+      "site": "NVIDIAExternalCareerSite",
+      "tags": [
+        "tech"
+      ],
+      "domain": "nvidia.com"
+    },
+    {
       "name": "Notion",
       "ats": "ashby",
       "token": "notion",
@@ -1143,6 +1187,17 @@
         "tech"
       ],
       "domain": "rubrik.com"
+    },
+    {
+      "name": "Salesforce",
+      "ats": "workday",
+      "token": "salesforce",
+      "host": "wd12",
+      "site": "External_Career_Site",
+      "tags": [
+        "tech"
+      ],
+      "domain": "salesforce.com"
     },
     {
       "name": "Samsara",
@@ -1296,6 +1351,17 @@
         "tech"
       ],
       "domain": "webflow.com"
+    },
+    {
+      "name": "Workday",
+      "ats": "workday",
+      "token": "workday",
+      "host": "wd5",
+      "site": "Workday",
+      "tags": [
+        "tech"
+      ],
+      "domain": "workday.com"
     },
     {
       "name": "Zscaler",

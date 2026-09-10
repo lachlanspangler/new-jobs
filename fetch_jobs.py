@@ -113,7 +113,50 @@ def _row(c, source, jid, title, loc, url, posted, salary):
             "location": loc, "url": url, "posted": posted, "salary": salary}
 
 
-FETCHERS = {"greenhouse": norm_greenhouse, "ashby": norm_ashby, "lever": norm_lever}
+def workday_date(txt):
+    t = (txt or "").lower()
+    today = dt.date.today()
+    if "today" in t:
+        return today.isoformat()
+    if "yesterday" in t:
+        return (today - dt.timedelta(days=1)).isoformat()
+    m = re.search(r"(\d+)\+?\s*day", t)
+    if m:
+        return (today - dt.timedelta(days=int(m.group(1)))).isoformat()
+    m = re.search(r"(\d+)\+?\s*month", t)
+    if m:
+        return (today - dt.timedelta(days=30 * int(m.group(1)))).isoformat()
+    return ""
+
+
+def norm_workday(c):
+    host, tenant, site = c["host"], c["token"], c["site"]
+    base = f"https://{tenant}.{host}.myworkdayjobs.com"
+    url = f"{base}/wday/cxs/{tenant}/{site}/jobs"
+    seen, out = set(), []
+    for term in ("software engineer", "c++", "python", "quant"):  # query relevant roles server-side
+        for offset in range(0, 80, 20):
+            body = json.dumps({"limit": 20, "offset": offset, "searchText": term, "appliedFacets": {}}).encode()
+            req = urllib.request.Request(url, data=body, headers={
+                "User-Agent": UA, "Accept": "application/json", "Content-Type": "application/json"})
+            with urllib.request.urlopen(req, timeout=20) as r:
+                data = json.loads(r.read().decode())
+            postings = data.get("jobPostings") or []
+            for jp in postings:
+                path = jp.get("externalPath") or ""
+                if not path or path in seen:
+                    continue
+                seen.add(path)
+                out.append(_row(c, "workday", path, jp.get("title", ""),
+                                jp.get("locationsText") or "", f"{base}/en-US/{site}{path}",
+                                workday_date(jp.get("postedOn")), ""))
+            if not postings or offset + 20 >= (data.get("total") or 0):
+                break
+            time.sleep(0.1)
+    return out
+
+
+FETCHERS = {"greenhouse": norm_greenhouse, "ashby": norm_ashby, "lever": norm_lever, "workday": norm_workday}
 
 
 def main():
