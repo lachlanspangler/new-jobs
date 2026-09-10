@@ -1,0 +1,4 @@
+.DS_Store
+__pycache__/
+scripts/launchd.out
+scripts/launchd.err

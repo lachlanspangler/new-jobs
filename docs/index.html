@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>new-jobs — software &amp; quant openings</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <header class="top">
+      <div class="brand"><span class="logo">◆</span> new<span>-jobs</span></div>
+      <nav class="tabs">
+        <a class="tab active" href="./index.html">Jobs</a>
+        <a class="tab" href="./stats.html">My applications <span id="nav-count" class="badge">0</span></a>
+      </nav>
+      <div class="updated" id="updated">loading…</div>
+    </header>
+
+    <section class="statbar" id="statbar">
+      <div class="stat"><b id="s-count">0</b><span>roles</span></div>
+      <div class="stat accent"><b id="s-new">0</b><span>new today</span></div>
+      <div class="stat"><b id="s-co">0</b><span>companies</span></div>
+      <div class="stat"><b id="s-apps">0</b><span>you applied</span></div>
+    </section>
+
+    <section class="controls">
+      <input id="q" type="search" placeholder="Search title, company, location…" autocomplete="off" />
+      <select id="city">
+        <option value="">All locations</option>
+        <option value="priority">★ SF / Chicago / NYC</option>
+        <option value="san francisco">San Francisco</option>
+        <option value="new york">New York</option>
+        <option value="chicago">Chicago</option>
+        <option value="remote">Remote</option>
+      </select>
+      <select id="role">
+        <option value="">All roles</option>
+        <option>Software Engineer</option>
+        <option>C++ Engineer</option>
+        <option>Python Engineer</option>
+        <option>Quant Developer</option>
+        <option>Quant Researcher</option>
+        <option>Quant</option>
+        <option>Trade Desk Ops</option>
+      </select>
+      <label class="tog"><input type="checkbox" id="newonly" /> New today</label>
+      <label class="tog"><input type="checkbox" id="hideapplied" /> Hide applied</label>
+    </section>
+
+    <div id="tags" class="tags"></div>
+    <main id="list" class="list"></main>
+    <button id="more" class="more hidden">Show more</button>
+    <footer class="foot">Live from public Greenhouse / Ashby / Lever board APIs · rebuilt daily · clicking <b>Apply</b> counts toward your tally (stored in this browser).</footer>
+
+    <script src="./app.js" defer></script>
+  </body>
+</html>

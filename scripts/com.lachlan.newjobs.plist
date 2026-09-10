@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Daily new-jobs refresh at 07:30 local time.
+  Install:
+    cp scripts/com.lachlan.newjobs.plist ~/Library/LaunchAgents/
+    launchctl load ~/Library/LaunchAgents/com.lachlan.newjobs.plist
+  Uninstall:
+    launchctl unload ~/Library/LaunchAgents/com.lachlan.newjobs.plist
+-->
+<plist version="1.0">
+<dict>
+    <key>Label</key><string>com.lachlan.newjobs</string>
+    <key>ProgramArguments</key>
+    <array>
+        <string>/bin/bash</string>
+        <string>/Users/spanglew/new-jobs/scripts/update.sh</string>
+    </array>
+    <key>StartCalendarInterval</key>
+    <dict><key>Hour</key><integer>7</integer><key>Minute</key><integer>30</integer></dict>
+    <key>RunAtLoad</key><false/>
+    <key>StandardOutPath</key><string>/Users/spanglew/new-jobs/scripts/launchd.out</string>
+    <key>StandardErrorPath</key><string>/Users/spanglew/new-jobs/scripts/launchd.err</string>
+</dict>
+</plist>

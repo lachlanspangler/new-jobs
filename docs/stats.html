@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>My applications — new-jobs</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <header class="top">
+      <div class="brand"><span class="logo">◆</span> new<span>-jobs</span></div>
+      <nav class="tabs">
+        <a class="tab" href="./index.html">Jobs</a>
+        <a class="tab active" href="./stats.html">My applications</a>
+      </nav>
+      <div class="updated"></div>
+    </header>
+
+    <section class="statbar">
+      <div class="stat accent"><b id="t-total">0</b><span>total applications</span></div>
+      <div class="stat"><b id="t-co">0</b><span>companies</span></div>
+      <div class="stat"><b id="t-roles">0</b><span>role types</span></div>
+      <div class="stat"><b id="t-today">0</b><span>today</span></div>
+    </section>
+
+    <div class="cols">
+      <section class="panel">
+        <h2>By company</h2>
+        <table id="by-company"><tbody></tbody></table>
+      </section>
+      <section class="panel">
+        <h2>By role</h2>
+        <table id="by-role"><tbody></tbody></table>
+      </section>
+    </div>
+
+    <section class="panel">
+      <div class="panel-head">
+        <h2>Application log</h2>
+        <button id="export" class="mini">Export JSON</button>
+        <button id="clear" class="mini danger">Clear all</button>
+      </div>
+      <ul id="log" class="log"></ul>
+    </section>
+
+    <footer class="foot">Tallies are stored in this browser (localStorage). Clicking <b>Apply</b> on the Jobs page adds an entry here.</footer>
+
+    <script src="./stats.js" defer></script>
+  </body>
+</html>
