@@ -134,8 +134,9 @@ def norm_workday(c):
     base = f"https://{tenant}.{host}.myworkdayjobs.com"
     url = f"{base}/wday/cxs/{tenant}/{site}/jobs"
     seen, out = set(), []
-    for term in ("software engineer", "c++", "python", "quant"):  # query relevant roles server-side
-        for offset in range(0, 80, 20):
+    terms = ("software engineer", "c++", "python", "quant", "developer", "research", "data engineer", "trading")
+    for term in terms:  # query relevant roles server-side, then dedup
+        for offset in range(0, 100, 20):
             body = json.dumps({"limit": 20, "offset": offset, "searchText": term, "appliedFacets": {}}).encode()
             req = urllib.request.Request(url, data=body, headers={
                 "User-Agent": UA, "Accept": "application/json", "Content-Type": "application/json"})

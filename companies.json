@@ -398,6 +398,28 @@
       "domain": "aqr.com"
     },
     {
+      "name": "BlackRock",
+      "ats": "workday",
+      "token": "blackrock",
+      "host": "wd1",
+      "site": "BlackRock_Professional",
+      "tags": [
+        "hedge"
+      ],
+      "domain": "blackrock.com"
+    },
+    {
+      "name": "Blackstone",
+      "ats": "workday",
+      "token": "blackstone",
+      "host": "wd1",
+      "site": "Blackstone_Careers",
+      "tags": [
+        "hedge"
+      ],
+      "domain": "blackstone.com"
+    },
+    {
       "name": "Capstone",
       "ats": "greenhouse",
       "token": "capstoneinvestmentadvisors",
@@ -1016,6 +1038,17 @@
       "domain": "instacart.com"
     },
     {
+      "name": "Intel",
+      "ats": "workday",
+      "token": "intel",
+      "host": "wd1",
+      "site": "External",
+      "tags": [
+        "tech"
+      ],
+      "domain": "intel.com"
+    },
+    {
       "name": "Linear",
       "ats": "ashby",
       "token": "linear",
@@ -1032,6 +1065,17 @@
         "tech"
       ],
       "domain": "lithic.com"
+    },
+    {
+      "name": "Mastercard",
+      "ats": "workday",
+      "token": "mastercard",
+      "host": "wd1",
+      "site": "CorporateCareers",
+      "tags": [
+        "tech"
+      ],
+      "domain": "mastercard.com"
     },
     {
       "name": "Modern Treasury",
@@ -1097,6 +1141,17 @@
         "tech"
       ],
       "domain": "palantir.com"
+    },
+    {
+      "name": "PayPal",
+      "ats": "workday",
+      "token": "paypal",
+      "host": "wd1",
+      "site": "jobs",
+      "tags": [
+        "tech"
+      ],
+      "domain": "paypal.com"
     },
     {
       "name": "Pinterest",
