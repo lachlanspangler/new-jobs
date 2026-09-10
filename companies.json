@@ -2,6 +2,14 @@
   "_comment": "Verified Ashby/Greenhouse/Lever boards. Add entries as {name, ats, token, tags}; validate the token returns a non-empty jobs list before adding.",
   "companies": [
     {
+      "name": "Abridge",
+      "ats": "ashby",
+      "token": "abridge",
+      "tags": [
+        "ai"
+      ]
+    },
+    {
       "name": "Anthropic",
       "ats": "greenhouse",
       "token": "anthropic",
@@ -10,9 +18,49 @@
       ]
     },
     {
+      "name": "Baseten",
+      "ats": "ashby",
+      "token": "baseten",
+      "tags": [
+        "ai"
+      ]
+    },
+    {
+      "name": "Character.AI",
+      "ats": "ashby",
+      "token": "character",
+      "tags": [
+        "ai"
+      ]
+    },
+    {
+      "name": "Cognition",
+      "ats": "ashby",
+      "token": "cognition",
+      "tags": [
+        "ai"
+      ]
+    },
+    {
       "name": "CoreWeave",
       "ats": "greenhouse",
       "token": "coreweave",
+      "tags": [
+        "ai"
+      ]
+    },
+    {
+      "name": "Cresta",
+      "ats": "greenhouse",
+      "token": "cresta",
+      "tags": [
+        "ai"
+      ]
+    },
+    {
+      "name": "Crusoe",
+      "ats": "ashby",
+      "token": "crusoe",
       "tags": [
         "ai"
       ]
@@ -29,6 +77,14 @@
       "name": "Decagon",
       "ats": "ashby",
       "token": "decagon",
+      "tags": [
+        "ai"
+      ]
+    },
+    {
+      "name": "Distyl AI",
+      "ats": "ashby",
+      "token": "distyl",
       "tags": [
         "ai"
       ]
@@ -58,6 +114,22 @@
       ]
     },
     {
+      "name": "Inflection",
+      "ats": "greenhouse",
+      "token": "inflectionai",
+      "tags": [
+        "ai"
+      ]
+    },
+    {
+      "name": "Lambda",
+      "ats": "ashby",
+      "token": "lambda",
+      "tags": [
+        "ai"
+      ]
+    },
+    {
       "name": "Luma AI",
       "ats": "ashby",
       "token": "lumaai",
@@ -74,9 +146,25 @@
       ]
     },
     {
+      "name": "Modal",
+      "ats": "ashby",
+      "token": "modal",
+      "tags": [
+        "ai"
+      ]
+    },
+    {
       "name": "OpenAI",
       "ats": "ashby",
       "token": "openai",
+      "tags": [
+        "ai"
+      ]
+    },
+    {
+      "name": "OpenEvidence",
+      "ats": "ashby",
+      "token": "openevidence",
       "tags": [
         "ai"
       ]
@@ -93,6 +181,22 @@
       "name": "Pika",
       "ats": "ashby",
       "token": "pika",
+      "tags": [
+        "ai"
+      ]
+    },
+    {
+      "name": "Pinecone",
+      "ats": "ashby",
+      "token": "pinecone",
+      "tags": [
+        "ai"
+      ]
+    },
+    {
+      "name": "Poolside",
+      "ats": "ashby",
+      "token": "poolside",
       "tags": [
         "ai"
       ]
@@ -146,6 +250,14 @@
       ]
     },
     {
+      "name": "Weaviate",
+      "ats": "ashby",
+      "token": "weaviate",
+      "tags": [
+        "ai"
+      ]
+    },
+    {
       "name": "World Labs",
       "ats": "ashby",
       "token": "worldlabs",
@@ -162,9 +274,25 @@
       ]
     },
     {
+      "name": "xAI",
+      "ats": "greenhouse",
+      "token": "xai",
+      "tags": [
+        "ai"
+      ]
+    },
+    {
       "name": "AQR",
       "ats": "greenhouse",
       "token": "aqr",
+      "tags": [
+        "hedge"
+      ]
+    },
+    {
+      "name": "Capstone",
+      "ats": "greenhouse",
+      "token": "capstoneinvestmentadvisors",
       "tags": [
         "hedge"
       ]
@@ -210,9 +338,25 @@
       ]
     },
     {
+      "name": "Chicago Trading (CTC)",
+      "ats": "greenhouse",
+      "token": "chicagotrading",
+      "tags": [
+        "quant"
+      ]
+    },
+    {
       "name": "DRW",
       "ats": "greenhouse",
       "token": "drweng",
+      "tags": [
+        "quant"
+      ]
+    },
+    {
+      "name": "Da Vinci",
+      "ats": "greenhouse",
+      "token": "davinciderivatives",
       "tags": [
         "quant"
       ]
@@ -229,6 +373,22 @@
       "name": "Flow Traders",
       "ats": "greenhouse",
       "token": "flowtraders",
+      "tags": [
+        "quant"
+      ]
+    },
+    {
+      "name": "GSA Capital",
+      "ats": "greenhouse",
+      "token": "gsacapital",
+      "tags": [
+        "quant"
+      ]
+    },
+    {
+      "name": "Galaxy",
+      "ats": "greenhouse",
+      "token": "galaxydigitalservices",
       "tags": [
         "quant"
       ]
@@ -290,6 +450,14 @@
       ]
     },
     {
+      "name": "Qube Research",
+      "ats": "greenhouse",
+      "token": "quberesearchandtechnologies",
+      "tags": [
+        "quant"
+      ]
+    },
+    {
       "name": "Tower Research",
       "ats": "greenhouse",
       "token": "towerresearchcapital",
@@ -330,9 +498,25 @@
       ]
     },
     {
+      "name": "Airbyte",
+      "ats": "ashby",
+      "token": "airbyte",
+      "tags": [
+        "tech"
+      ]
+    },
+    {
       "name": "Airtable",
       "ats": "greenhouse",
       "token": "airtable",
+      "tags": [
+        "tech"
+      ]
+    },
+    {
+      "name": "Alpaca",
+      "ats": "greenhouse",
+      "token": "alpaca",
       "tags": [
         "tech"
       ]
@@ -349,6 +533,14 @@
       "name": "Asana",
       "ats": "greenhouse",
       "token": "asana",
+      "tags": [
+        "tech"
+      ]
+    },
+    {
+      "name": "Betterment",
+      "ats": "greenhouse",
+      "token": "betterment",
       "tags": [
         "tech"
       ]
@@ -397,6 +589,14 @@
       "name": "Cloudflare",
       "ats": "greenhouse",
       "token": "cloudflare",
+      "tags": [
+        "tech"
+      ]
+    },
+    {
+      "name": "Cockroach Labs",
+      "ats": "greenhouse",
+      "token": "cockroachlabs",
       "tags": [
         "tech"
       ]
@@ -458,6 +658,22 @@
       ]
     },
     {
+      "name": "Fireblocks",
+      "ats": "greenhouse",
+      "token": "fireblocks",
+      "tags": [
+        "tech"
+      ]
+    },
+    {
+      "name": "Fivetran",
+      "ats": "greenhouse",
+      "token": "fivetran",
+      "tags": [
+        "tech"
+      ]
+    },
+    {
       "name": "Flexport",
       "ats": "greenhouse",
       "token": "flexport",
@@ -482,6 +698,14 @@
       ]
     },
     {
+      "name": "Hightouch",
+      "ats": "ashby",
+      "token": "hightouch",
+      "tags": [
+        "tech"
+      ]
+    },
+    {
       "name": "Instacart",
       "ats": "greenhouse",
       "token": "instacart",
@@ -498,9 +722,33 @@
       ]
     },
     {
+      "name": "Lithic",
+      "ats": "greenhouse",
+      "token": "lithic",
+      "tags": [
+        "tech"
+      ]
+    },
+    {
+      "name": "Modern Treasury",
+      "ats": "ashby",
+      "token": "moderntreasury",
+      "tags": [
+        "tech"
+      ]
+    },
+    {
       "name": "Notion",
       "ats": "ashby",
       "token": "notion",
+      "tags": [
+        "tech"
+      ]
+    },
+    {
+      "name": "Okta",
+      "ats": "greenhouse",
+      "token": "okta",
       "tags": [
         "tech"
       ]
@@ -530,6 +778,14 @@
       ]
     },
     {
+      "name": "Public",
+      "ats": "greenhouse",
+      "token": "public",
+      "tags": [
+        "tech"
+      ]
+    },
+    {
       "name": "Ramp",
       "ats": "ashby",
       "token": "ramp",
@@ -541,6 +797,14 @@
       "name": "Reddit",
       "ats": "greenhouse",
       "token": "reddit",
+      "tags": [
+        "tech"
+      ]
+    },
+    {
+      "name": "Render",
+      "ats": "ashby",
+      "token": "render",
       "tags": [
         "tech"
       ]
@@ -562,6 +826,14 @@
       ]
     },
     {
+      "name": "Rubrik",
+      "ats": "greenhouse",
+      "token": "rubrik",
+      "tags": [
+        "tech"
+      ]
+    },
+    {
       "name": "Samsara",
       "ats": "greenhouse",
       "token": "samsara",
@@ -578,6 +850,14 @@
       ]
     },
     {
+      "name": "SoFi",
+      "ats": "greenhouse",
+      "token": "sofi",
+      "tags": [
+        "tech"
+      ]
+    },
+    {
       "name": "Spotify",
       "ats": "lever",
       "token": "spotify",
@@ -586,9 +866,33 @@
       ]
     },
     {
+      "name": "Starburst",
+      "ats": "greenhouse",
+      "token": "starburst",
+      "tags": [
+        "tech"
+      ]
+    },
+    {
       "name": "Stripe",
       "ats": "greenhouse",
       "token": "stripe",
+      "tags": [
+        "tech"
+      ]
+    },
+    {
+      "name": "Supabase",
+      "ats": "ashby",
+      "token": "supabase",
+      "tags": [
+        "tech"
+      ]
+    },
+    {
+      "name": "Temporal",
+      "ats": "ashby",
+      "token": "temporal",
       "tags": [
         "tech"
       ]
