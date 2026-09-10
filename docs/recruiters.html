@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Recruiters — new-jobs</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <header class="top">
+      <div class="brand"><span class="logo">◆</span> new<span>-jobs</span></div>
+      <nav class="tabs">
+        <a class="tab" href="./index.html">Recent</a>
+        <a class="tab" href="./companies.html">Companies</a>
+        <a class="tab active" href="./recruiters.html">Recruiters</a>
+        <a class="tab" href="./stats.html">Applications <span id="nav-count" class="badge">0</span></a>
+      </nav>
+      <div class="updated" id="updated">loading…</div>
+    </header>
+
+    <section class="panel" id="banner">
+      <b>Suggested contacts.</b> When an Apollo API key is configured, verified recruiter / hiring-manager
+      contacts show here per company. Until then, each company links straight to a LinkedIn recruiter search
+      and its careers page. No emails are guessed or invented.
+    </section>
+
+    <section class="controls">
+      <input id="q" type="search" placeholder="Filter companies…" autocomplete="off" />
+      <div id="tags" class="tags" style="margin:0"></div>
+    </section>
+
+    <main id="recruiters" class="companies"></main>
+    <footer class="foot">Contact data (when present) comes from the Apollo People API using your own key. Respect each platform's terms and anti-spam rules; these are outreach starting points, not a mailing list.</footer>
+
+    <script src="./recruiters.js" defer></script>
+  </body>
+</html>

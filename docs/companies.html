@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Companies — new-jobs</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <header class="top">
+      <div class="brand"><span class="logo">◆</span> new<span>-jobs</span></div>
+      <nav class="tabs">
+        <a class="tab" href="./index.html">Recent</a>
+        <a class="tab active" href="./companies.html">Companies</a>
+        <a class="tab" href="./recruiters.html">Recruiters</a>
+        <a class="tab" href="./stats.html">Applications <span id="nav-count" class="badge">0</span></a>
+      </nav>
+      <div class="updated" id="updated">loading…</div>
+    </header>
+
+    <section class="controls">
+      <input id="q" type="search" placeholder="Filter companies…" autocomplete="off" />
+      <div id="tags" class="tags" style="margin:0"></div>
+    </section>
+
+    <main id="companies" class="companies"></main>
+    <footer class="foot">Click a company to expand its open roles. Applied roles stay struck through across pages.</footer>
+
+    <script src="./companies.js" defer></script>
+  </body>
+</html>
