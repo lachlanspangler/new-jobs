@@ -15,7 +15,7 @@ Both are official APIs used with YOUR key. Nothing is scraped or invented; keep
 outreach personalized and low-volume so you stay on the right side of anti-spam
 rules and each platform's terms.
 """
-import argparse, datetime as dt, json, os, sys, time, urllib.parse, urllib.request
+import argparse, datetime as dt, json, os, sys, time, urllib.error, urllib.parse, urllib.request
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent
@@ -78,22 +78,37 @@ def main():
             merged = json.loads(path.read_text()).get("byCompany", {})   # accumulate across runs
         except ValueError:
             merged = {}
+    def fetch_one(c):
+        for attempt in range(4):
+            try:
+                return hunter(c["domain"]) if (HUNTER and c.get("domain")) else apollo(c["name"])
+            except urllib.error.HTTPError as e:
+                if e.code == 429 and attempt < 3:
+                    wait = 20 * (attempt + 1)
+                    print(f"  rate-limited (429) — waiting {wait}s…")
+                    time.sleep(wait)
+                    continue
+                raise
+
+    def save():
+        path.write_text(json.dumps({
+            "generated_at": dt.datetime.now(dt.timezone.utc).isoformat(),
+            "source": src, "byCompany": merged,
+        }))
+
     added = 0
     for c in companies:
         try:
-            rows = hunter(c["domain"]) if (HUNTER and c.get("domain")) else apollo(c["name"])
+            rows = fetch_one(c)
             if rows:
                 merged[c["name"]] = rows   # refresh/add this company
                 added += len(rows)
             print(f"{c['name']}: {len(rows)}")
         except Exception as e:
             print(f"{c['name']}: error {e}")
-        time.sleep(0.5)
+        save()          # persist after every company so an interrupt keeps progress
+        time.sleep(1.5)
 
-    path.write_text(json.dumps({
-        "generated_at": dt.datetime.now(dt.timezone.utc).isoformat(),
-        "source": src, "byCompany": merged,
-    }))
     print(f"\nwrote docs/recruiters.json ({src}) — {added} contacts added/refreshed this run; "
           f"{sum(len(v) for v in merged.values())} total across {len(merged)} companies")
 
