@@ -72,6 +72,26 @@ APOLLO_API_KEY=xxxx python3 fetch_recruiters.py            # fallback (emails of
   batches. Keep outreach personalized and low-volume — cold-blasting a big list
   wrecks deliverability and can violate anti-spam law and platform terms.
 
+## Draft outreach emails (Gmail)
+
+`make_drafts.py` turns the contacts in `docs/recruiters.json` into personalized
+**Gmail drafts** — it never sends. You review each in Gmail and hit send.
+
+One-time setup: in Google Cloud Console, enable the **Gmail API**, create an
+OAuth **Desktop app** client, and download it as `client_secret.json` here
+(git-ignored). Then:
+
+```bash
+python3 make_drafts.py --dry-run     # preview who'd be drafted
+python3 make_drafts.py --limit 20    # create up to 20 drafts (browser auth once)
+```
+
+- Uses the `gmail.compose` scope — create-drafts only; it can't send or read mail.
+- Edit `email_template.txt` (placeholders `{first}`, `{company}`).
+- Already-drafted addresses are tracked in `drafted.json` to avoid duplicates.
+- Keep volume low and personalize — this is a review-then-send workflow, not a
+  bulk sender.
+
 ## Notes
 
 - Only employers on these three ATSes are covered; firms on custom career sites

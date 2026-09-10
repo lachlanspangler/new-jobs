@@ -1,0 +1,10 @@
+Hi {first},
+
+I'm Lachlan Spangler, a software engineer at Amazon with a quant / low-latency background (matching engines, execution, market-microstructure tooling). I'm exploring software and quantitative roles at {company} and would love to connect about current openings.
+
+A bit of my work: https://github.com/lachlanspangler  ·  https://linkedin.com/in/lachlan-spangler
+
+Would you be open to a quick chat, or point me to the right person? Happy to send my resume — and totally understand if now isn't the time.
+
+Thanks,
+Lachlan Spangler
