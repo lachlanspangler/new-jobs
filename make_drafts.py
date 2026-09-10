@@ -20,6 +20,9 @@ It uses the gmail.compose scope (create drafts only) — it cannot send or read
 mail. Already-drafted addresses are remembered in drafted.json to avoid dupes.
 """
 import argparse, base64, datetime as dt, json, os, sys, time, urllib.parse, urllib.request, webbrowser
+from email import encoders
+from email.mime.base import MIMEBase
+from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from http.server import BaseHTTPRequestHandler, HTTPServer
 from pathlib import Path
@@ -29,6 +32,7 @@ SCOPE = "https://www.googleapis.com/auth/gmail.compose"
 TOKEN = ROOT / "token.json"
 CLIENT = ROOT / "client_secret.json"
 DRAFTED = ROOT / "drafted.json"
+ATTACH_DIR = ROOT / "attachments"
 PORT = 8765
 REDIRECT = f"http://localhost:{PORT}/"
 
@@ -109,17 +113,52 @@ def access_token():
     return tok["access_token"]
 
 
-def create_draft(token, to, subject, body):
-    msg = MIMEText(body)
+def build_message(to, subject, body):
+    files = sorted(p for p in ATTACH_DIR.glob("*") if p.is_file()) if ATTACH_DIR.exists() else []
+    if not files:
+        msg = MIMEText(body)
+    else:
+        msg = MIMEMultipart()
+        msg.attach(MIMEText(body))
+        for p in files:
+            part = MIMEBase("application", "octet-stream")
+            part.set_payload(p.read_bytes())
+            encoders.encode_base64(part)
+            part.add_header("Content-Disposition", "attachment", filename=p.name)
+            msg.attach(part)
     msg["To"] = to
     msg["Subject"] = subject
-    raw = base64.urlsafe_b64encode(msg.as_bytes()).decode()
-    data = json.dumps({"message": {"raw": raw}}).encode()
-    req = urllib.request.Request("https://gmail.googleapis.com/gmail/v1/users/me/drafts",
-                                 data=data, headers={"Authorization": f"Bearer {token}",
-                                                     "Content-Type": "application/json"})
+    return msg
+
+
+def _api(token, method, path, data=None):
+    req = urllib.request.Request("https://gmail.googleapis.com" + path, data=data, method=method,
+                                 headers={"Authorization": f"Bearer {token}", "Content-Type": "application/json"})
     with urllib.request.urlopen(req, timeout=30) as r:
-        return json.loads(r.read().decode())
+        return json.loads(r.read().decode() or "{}")
+
+
+def create_draft(token, to, subject, body):
+    raw = base64.urlsafe_b64encode(build_message(to, subject, body).as_bytes()).decode()
+    return _api(token, "POST", "/gmail/v1/users/me/drafts", json.dumps({"message": {"raw": raw}}).encode()).get("id")
+
+
+def purge(token):
+    """Delete drafts this tool created (subject starts with the outreach prefix)."""
+    deleted, page = 0, None
+    while True:
+        res = _api(token, "GET", "/gmail/v1/users/me/drafts?maxResults=100" + (f"&pageToken={page}" if page else ""))
+        for d in res.get("drafts", []):
+            meta = _api(token, "GET", f"/gmail/v1/users/me/drafts/{d['id']}?format=metadata&metadataHeaders=Subject")
+            hdrs = (meta.get("message", {}).get("payload", {}) or {}).get("headers", [])
+            subj = next((h["value"] for h in hdrs if h["name"].lower() == "subject"), "")
+            if subj.startswith("Software / quant roles at "):
+                _api(token, "DELETE", f"/gmail/v1/users/me/drafts/{d['id']}")
+                deleted += 1
+        page = res.get("nextPageToken")
+        if not page:
+            break
+    return deleted
 
 
 def main():
@@ -127,7 +166,15 @@ def main():
     ap.add_argument("--limit", type=int, default=25)
     ap.add_argument("--dry-run", action="store_true")
     ap.add_argument("--template", default="email_template.txt")
+    ap.add_argument("--purge", action="store_true", help="delete drafts this tool created, then exit")
     args = ap.parse_args()
+
+    if args.purge:
+        n = purge(access_token())
+        if DRAFTED.exists():
+            DRAFTED.unlink()
+        print(f"Deleted {n} tool-created drafts and reset the history. Re-run to recreate them.")
+        return
 
     tpath = ROOT / args.template
     template = tpath.read_text() if tpath.exists() else DEFAULT_TEMPLATE

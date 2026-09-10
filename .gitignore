@@ -5,3 +5,4 @@ scripts/launchd.err
 token.json
 client_secret.json
 drafted.json
+attachments/
