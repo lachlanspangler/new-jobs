@@ -56,22 +56,19 @@ function render() {
   const all = filtered();
   const rows = all.slice(0, state.shown);
   list.innerHTML = rows.length
-    ? rows.map((j) => {
+    ? '<div class="list-inner">' + rows.map((j) => {
         const done = APPLIED.has(j.key);
-        const tags = (j.tags || []).map((t) => `<span class="pill" style="color:${TAG_COLORS[t] || "#8b93a9"}">${esc(t)}</span>`).join("");
-        return `<article class="card ${done ? "applied" : ""}" style="--edge:${edge(j.tags)}">
-          <div class="t">${esc(j.title)}</div>
-          <div class="co"><span class="cdot"></span>${esc(j.company)}</div>
-          <div class="loc">${j.priority ? "★ " : ""}${esc(j.location || "—")}</div>
-          <div class="row2">
-            ${j.isNew ? '<span class="pill new">new</span>' : ""}
-            ${j.salary ? `<span class="pill sal">${esc(j.salary)}</span>` : ""}
-            ${tags}
-            <span class="pill">${esc(j.source)}</span>
-            <a class="apply ${done ? "done" : ""}" href="${esc(j.url)}" target="_blank" rel="noreferrer" data-key="${esc(j.key)}">${done ? "Applied ✓" : "Apply ↗"}</a>
-          </div>
-        </article>`;
-      }).join("")
+        return `<a class="row ${done ? "applied" : ""}" style="--edge:${edge(j.tags)}" href="${esc(j.url)}" target="_blank" rel="noreferrer" data-key="${esc(j.key)}">
+          <span class="r-dot"></span>
+          <span class="r-title">${esc(j.title)}</span>
+          <span class="r-co">${esc(j.company)}</span>
+          <span class="r-loc">${j.priority ? "★ " : ""}${esc(j.location || "—")}</span>
+          ${j.salary ? `<span class="r-sal">${esc(j.salary)}</span>` : ""}
+          ${j.isNew ? '<span class="r-new">new</span>' : ""}
+          <span class="r-src">${esc(j.source)}</span>
+          <span class="r-go">${done ? "✓ applied" : "Apply ↗"}</span>
+        </a>`;
+      }).join("") + "</div>"
     : `<div class="empty">No matching roles.</div>`;
   $("more").classList.toggle("hidden", all.length <= state.shown);
   $("s-apps").textContent = loadApps().length;
@@ -118,10 +115,10 @@ async function load() {
 ["newonly", "hideapplied"].forEach((id) => $(id).addEventListener("change", (e) => { state[id] = e.target.checked; render(); }));
 $("more").addEventListener("click", () => { state.shown += 60; render(); });
 $("list").addEventListener("click", (e) => {
-  const a = e.target.closest(".apply");
-  if (!a) return;
-  const job = state.jobs.find((j) => j.key === a.dataset.key);
-  if (job) { recordApply(job); render(); }  // link still opens in a new tab
+  const row = e.target.closest(".row");
+  if (!row) return;
+  const job = state.jobs.find((j) => j.key === row.dataset.key);
+  if (job) { recordApply(job); render(); }  // row is a link; still opens in a new tab
 });
 
 load();
