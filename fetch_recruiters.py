@@ -70,23 +70,32 @@ def main():
         tags = {t.lower() for t in args.tag}
         companies = [c for c in companies if set(t.lower() for t in c.get("tags", [])) & tags]
 
-    out, src = {}, ("hunter" if HUNTER else "apollo")
+    src = "hunter" if HUNTER else "apollo"
+    path = ROOT / "docs" / "recruiters.json"
+    merged = {}
+    if path.exists():
+        try:
+            merged = json.loads(path.read_text()).get("byCompany", {})   # accumulate across runs
+        except ValueError:
+            merged = {}
+    added = 0
     for c in companies:
         try:
             rows = hunter(c["domain"]) if (HUNTER and c.get("domain")) else apollo(c["name"])
             if rows:
-                out[c["name"]] = rows
+                merged[c["name"]] = rows   # refresh/add this company
+                added += len(rows)
             print(f"{c['name']}: {len(rows)}")
         except Exception as e:
             print(f"{c['name']}: error {e}")
         time.sleep(0.5)
 
-    (ROOT / "docs" / "recruiters.json").write_text(json.dumps({
+    path.write_text(json.dumps({
         "generated_at": dt.datetime.now(dt.timezone.utc).isoformat(),
-        "source": src, "byCompany": out,
+        "source": src, "byCompany": merged,
     }))
-    print(f"\nwrote docs/recruiters.json ({src}) — "
-          f"{sum(len(v) for v in out.values())} contacts / {len(out)} companies")
+    print(f"\nwrote docs/recruiters.json ({src}) — {added} contacts added/refreshed this run; "
+          f"{sum(len(v) for v in merged.values())} total across {len(merged)} companies")
 
 
 if __name__ == "__main__":
