@@ -24,7 +24,7 @@ GENERIC = re.compile(
 # role-inbox keywords, matched anywhere in the local-part or the title
 GEN_KW = ("career", "recruit", "talent", "hiring", "campus", "graduate", "grad",
           "people", "resourc", "staffing", "earlycareer", "interview", "helpdesk",
-          "askhr", "hrconnect", "hranswer", "candidate")
+          "askhr", "hrconnect", "hranswer", "candidate", "job", "apply", "resume")
 
 
 def is_generic(row):
