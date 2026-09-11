@@ -94,6 +94,11 @@ table.pipe td:first-child { font-weight: 600; }
 table.pipe .muted { color: var(--muted); }
 .pstatus { background: var(--bg); color: var(--fg); border: 1px solid var(--line); border-radius: 8px; padding: 5px 8px; font-size: 13px; }
 
+.co-mail { color: var(--accent); font-size: 12px; margin-left: 2px; }
+.co-emails { padding: 8px 14px 4px; font-size: 13px; color: var(--muted); }
+.co-emails a { color: var(--accent); text-decoration: none; }
+.co-emails a:hover { text-decoration: underline; }
+
 .foot { max-width: 1100px; margin: 24px auto; padding: 20px 22px 50px; color: var(--muted); font-size: 12px; text-align: center; }
 @media (max-width: 720px) { .statbar { grid-template-columns: repeat(2,1fr); } .cols { grid-template-columns: 1fr; } }
 
