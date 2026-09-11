@@ -234,8 +234,6 @@ def main():
     made = 0
     for company, email, name in todo:
         subject = f"Amazon SDE interested in {company}"
-        if not name:                       # generic role inbox (careers@, recruiting@, …)
-            subject = "[Generic inbox] " + subject
         roles = " I'm especially keen on your current openings." if company in with_roles else ""
         body = template.format(greeting=greeting_for(name, company), company=company, roles=roles)
         try:
