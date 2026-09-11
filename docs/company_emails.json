@@ -30,12 +30,18 @@
 "ARCAISYS": [
 "careers@arcaisystech.com"
 ],
+"Abbott": [
+"talentacquisition@abbott.com"
+],
 "Accenture": [
 "recruiting_germany@accenture.com",
 "recruiting.ch@accenture.com"
 ],
 "Advanced Intelligent Systems": [
 "careers@ai-systems.ca"
+],
+"Air Liquide": [
+"recruiting.us@airliquide.com"
 ],
 "Airbus": [
 "erecruiting@airbus.com"
@@ -80,7 +86,8 @@
 "careers@arkgrowth.co"
 ],
 "Arm": [
-"recruitmentenquiries@arm.com"
+"recruitmentenquiries@arm.com",
+"globalrecruitmentenquiries@arm.com"
 ],
 "Aspect Capital": [
 "recruitment@aspectcapital.com"
@@ -91,8 +98,14 @@
 "canadarecruitment@baesystems.com",
 "gart@baesystems.com"
 ],
+"BCG": [
+"associate.recruiting@bcg.com"
+],
 "BNP Paribas": [
 "mea.recruitment@bnpparibas.com"
+],
+"Bain & Company": [
+"global.recruiting@bain.com"
 ],
 "Baseten": [
 "careers@baseten.co"
@@ -345,6 +358,9 @@
 "Maven Securities": [
 "recruitment@mavensecurities.com",
 "emergingtalent@mavensecurities.com"
+],
+"Micron Technology": [
+"hrsupport_na@micron.com"
 ],
 "ModalAI": [
 "jobs@modalai.com"
@@ -614,6 +630,9 @@
 ],
 "insitro": [
 "info@insitro.com"
+],
+"onsemi": [
+"talent.acquisition@onsemi.com"
 ],
 "vFunction": [
 "jobs@vfunction.com"
