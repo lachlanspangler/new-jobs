@@ -113,6 +113,11 @@ def access_token():
     return tok["access_token"]
 
 
+def greeting_for(name, company):
+    first = name.split(" ")[0] if name else ""
+    return first if first else f"{company} team"
+
+
 def build_message(to, subject, body):
     files = sorted(p for p in ATTACH_DIR.glob("*") if p.is_file()) if ATTACH_DIR.exists() else []
     if not files:
@@ -152,7 +157,7 @@ def purge(token):
             meta = _api(token, "GET", f"/gmail/v1/users/me/drafts/{d['id']}?format=metadata&metadataHeaders=Subject")
             hdrs = (meta.get("message", {}).get("payload", {}) or {}).get("headers", [])
             subj = next((h["value"] for h in hdrs if h["name"].lower() == "subject"), "")
-            if subj.startswith("Software / quant roles at "):
+            if subj.startswith(("Software / quant roles at ", "Amazon SDE interested in ")):
                 _api(token, "DELETE", f"/gmail/v1/users/me/drafts/{d['id']}")
                 deleted += 1
         page = res.get("nextPageToken")
@@ -194,8 +199,8 @@ def main():
             email = c.get("email")
             if not email or c.get("locked") or email in done:
                 continue
-            first = (c.get("name") or "there").split(" ")[0]
-            todo.append((company, email, first))
+            name = (c.get("name") or "").strip()
+            todo.append((company, email, name))
     todo = todo[: args.limit]
 
     if not todo:
@@ -204,16 +209,16 @@ def main():
         return
 
     if args.dry_run:
-        for company, email, first in todo:
-            print(f"DRAFT -> {email:34} {first} @ {company}")
+        for company, email, name in todo:
+            print(f"DRAFT -> {email:34} Hi {greeting_for(name, company)} @ {company}")
         print(f"\n{len(todo)} drafts would be created (dry run).")
         return
 
     token = access_token()
     made = 0
-    for company, email, first in todo:
-        subject = f"Software / quant roles at {company}"
-        body = template.format(first=first, company=company)
+    for company, email, name in todo:
+        subject = f"Amazon SDE interested in {company}"
+        body = template.format(greeting=greeting_for(name, company), company=company)
         try:
             create_draft(token, email, subject, body)
             done.add(email); made += 1

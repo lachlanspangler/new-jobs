@@ -1,4 +1,4 @@
-Hi {first},
+Hi {greeting},
 
 I'm an SDE at Amazon and an Emory CS/Finance grad, and I'm interested in opportunities at {company}. I would love to help lead {company} build tools to help the next several generations of builders.
 
