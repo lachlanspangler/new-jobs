@@ -21,10 +21,22 @@ GENERIC = re.compile(
     r"([._+-]?[a-z0-9]+)*@", re.I)
 
 
+# role-inbox keywords, matched anywhere in the local-part or the title
+GEN_KW = ("career", "recruit", "talent", "hiring", "campus", "graduate", "grad",
+          "people", "resourc", "staffing", "earlycareer", "interview", "helpdesk",
+          "askhr", "hrconnect", "hranswer", "candidate")
+
+
 def is_generic(row):
     email = (row.get("email") or "").strip()
     name = (row.get("name") or "").strip()
-    return bool(email) and not name and bool(GENERIC.match(email))
+    if not email or name:        # must be a role inbox, not a named person
+        return False
+    if GENERIC.match(email):     # local part starts with a generic keyword
+        return True
+    local = re.sub(r"[^a-z0-9]", "", email.split("@")[0].lower())
+    hay = local + " " + (row.get("title") or "").lower()
+    return any(k in hay for k in GEN_KW)
 
 
 def collect(path, out):

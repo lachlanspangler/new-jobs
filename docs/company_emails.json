@@ -1,5 +1,8 @@
 {
 "byCompany": {
+"1X Technologies": [
+"wmlab@1x.tech"
+],
 "3Red Partners": [
 "careers@3redpartners.com"
 ],
@@ -12,17 +15,30 @@
 "AI Lean": [
 "jobs@ai-lean.com"
 ],
+"AIG": [
+"early.careers@aig.com"
+],
 "AIStorm": [
 "careers@aistorm.ai"
 ],
 "ALAS": [
 "jobs@alasdoo.com"
 ],
+"AMD": [
+"askhr@amd.com"
+],
 "ARCAISYS": [
 "careers@arcaisystech.com"
 ],
+"Accenture": [
+"recruiting_germany@accenture.com",
+"recruiting.ch@accenture.com"
+],
 "Advanced Intelligent Systems": [
 "careers@ai-systems.ca"
+],
+"Airbus": [
+"erecruiting@airbus.com"
 ],
 "Akuna Capital": [
 "recruitment@akunacapital.com"
@@ -36,8 +52,25 @@
 "Ambience Healthcare": [
 "info@ambiencehealthcare.com"
 ],
+"American Express": [
+"recruitment.support.americas@aexp.com",
+"campusrecruitment@aexp.com",
+"recruitment.support.emea@aexp.com",
+"recruitment.support.apac@aexp.com",
+"recruitment.support.india@aexp.com"
+],
+"Amgen": [
+"hrconnect@amgen.com"
+],
+"Analog Devices": [
+"software.talent@analog.com",
+"saleshiring@analog.com"
+],
 "Antela AI": [
 "jobs@antela.ai"
+],
+"Applied Materials": [
+"careers@amat.com"
 ],
 "Aquatic Capital Management": [
 "recruiting@aquatic.com",
@@ -46,8 +79,20 @@
 "Ark Growth": [
 "careers@arkgrowth.co"
 ],
+"Arm": [
+"recruitmentenquiries@arm.com"
+],
 "Aspect Capital": [
 "recruitment@aspectcapital.com"
+],
+"BAE Systems": [
+"recruitment@baesystems.com",
+"recruitmentqueries@baesystems.com",
+"canadarecruitment@baesystems.com",
+"gart@baesystems.com"
+],
+"BNP Paribas": [
+"mea.recruitment@bnpparibas.com"
 ],
 "Baseten": [
 "careers@baseten.co"
@@ -64,6 +109,9 @@
 "Blueheaven Software": [
 "hr@blueheavensoftware.com"
 ],
+"Booking.com": [
+"recruitment@booking.com"
+],
 "Brex": [
 "careers@brex.com"
 ],
@@ -76,8 +124,14 @@
 "CapSen Robotics": [
 "jobs@capsenrobotics.com"
 ],
+"Capgemini": [
+"cg_interview_helpdesk.in@capgemini.com"
+],
 "Capital Fund Management": [
 "careers@cfm.com"
+],
+"Capital One": [
+"careers@capitalone.com"
 ],
 "Carbon Robotics": [
 "jobs@carbonrobotics.com"
@@ -87,6 +141,9 @@
 ],
 "Cerebras": [
 "info@cerebras.ai"
+],
+"Clairity": [
+"engineeringjobs@clairity.com"
 ],
 "Clinware": [
 "join@clinware.com"
@@ -100,8 +157,18 @@
 "Codverx": [
 "careers@codverx.com"
 ],
+"Cognizant": [
+"careersna2@cognizant.com",
+"careers-apac@cognizant.com",
+"careersuki@cognizant.com",
+"careerslatmsupport@cognizant.com",
+"talentattractteam@cognizant.com"
+],
 "Corner Bowl Software": [
 "careers@cornerbowl.com"
+],
+"CrowdStrike": [
+"mission@crowdstrike.com"
 ],
 "D. E. Shaw": [
 "careers@deshaw.com",
@@ -125,6 +192,9 @@
 "ELMET": [
 "careers@elmet.ai"
 ],
+"Elevance Health": [
+"elevancehealthjobssupport@elevancehealth.com"
+],
 "Ellipsis Health": [
 "careers@ellipsishealth.com"
 ],
@@ -136,6 +206,9 @@
 ],
 "EveryOps": [
 "careers@everyops.ai"
+],
+"ExodusPoint": [
+"noninv-careers@exoduspoint.com"
 ],
 "Faraday Future": [
 "recruiting@ff.com"
@@ -158,11 +231,21 @@
 "G-Research": [
 "recruitment@gresearch.com"
 ],
+"GE Aerospace": [
+"ukearly.careers@geaerospace.com"
+],
 "GSA Capital": [
 "careers@gsacapital.com"
 ],
 "GSR": [
 "recruiting@gsr.io"
+],
+"Geneva Trading": [
+"bbrownstein@genevatrading.com",
+"mperry@genevatrading.com"
+],
+"Gilead Sciences": [
+"hr.answer@gilead.com"
 ],
 "GitLab": [
 "recruiting@gitlab.com"
@@ -175,6 +258,16 @@
 ],
 "HDAI": [
 "careers@hda-institute.com"
+],
+"HPE": [
+"recruiting@hpe.com"
+],
+"HSBC": [
+"na.resourcing.helpdesk@us.hsbc.com",
+"emergingtalent@us.hsbc.com",
+"hsbc.recruitment@hsbc.com",
+"careers@hsbc.co.in",
+"careers.hti@hsbc.co.in"
 ],
 "Headlands Technologies": [
 "info@headlandstech.com"
@@ -197,8 +290,15 @@
 "Infinity Software": [
 "recruitment@infinity-software.com"
 ],
+"Infosys": [
+"infosys_ta@infosys.com",
+"infy_rec_helpdesk@infosys.com"
+],
 "Insight Security": [
 "careers@insightsecurity.io"
+],
+"Intuit": [
+"talentacquisition@intuit.com"
 ],
 "Jane Street": [
 "jobs@janestreet.com"
@@ -227,13 +327,31 @@
 "Luma AI": [
 "careers@lumalabs.ai"
 ],
+"Macquarie Group": [
+"macquarieamericasrecruitment@macquarie.com",
+"uscampusrecruitment@macquarie.com",
+"careers@macquarie.com"
+],
+"Man AHL": [
+"amita.chohan@man.com",
+"danielle.ashley@man.com",
+"elia.nieto@man.com",
+"donnell@man.com",
+"raneet.shogan@man.com",
+"sarah.salta@man.com",
+"shakey.ullah@man.com",
+"slavey.trenin@man.com"
+],
 "Maven Securities": [
-"recruitment@mavensecurities.com"
+"recruitment@mavensecurities.com",
+"emergingtalent@mavensecurities.com"
 ],
 "ModalAI": [
 "jobs@modalai.com"
 ],
 "Morgan Stanley": [
+"mscampusrecruiting@morganstanley.com",
+"asia.recruit@morganstanley.com",
 "graduaterecruitmenteurope@morganstanley.com",
 "recruit.japan@morganstanley.com"
 ],
@@ -246,11 +364,18 @@
 "Neotechie": [
 "jobs@neotechie.in"
 ],
+"NetApp": [
+"careers@netapp.com"
+],
 "Nextastra": [
 "careers@nextastra.com"
 ],
 "Nexuni": [
 "hr@nexuni.com"
+],
+"Nomura": [
+"campusrecruitingamr@nomura.com",
+"eurrecruitingevents-eu@nomura.com"
 ],
 "Nortex Cyber": [
 "jobs@nortexcyber.com"
@@ -269,7 +394,11 @@
 ],
 "Optiver": [
 "recruiting@optiver.us",
-"careers@optiver.com.au"
+"careers@optiver.com.au",
+"chinacareers@optiver.com.au",
+"indiacareers@optiver.com.au",
+"singaporecareers@optiver.com.au",
+"taiwancareers@optiver.com.au"
 ],
 "Outmarket": [
 "careers@outmarket.ai"
@@ -289,6 +418,12 @@
 "PaymentHooks": [
 "careers@paymenthooks.com"
 ],
+"Peraton": [
+"careers@peraton.com"
+],
+"Pfizer": [
+"globalrecruiting@pfizer.com"
+],
 "PharMAX": [
 "careers@pharmax.com"
 ],
@@ -302,7 +437,8 @@
 "careers@primordial-labs.com"
 ],
 "Productive Robotics": [
-"jobs@productiverobotics.com"
+"jobs@productiverobotics.com",
+"michelle.tahan@productiverobotics.com"
 ],
 "Promptax": [
 "careers@promptax.io"
@@ -371,6 +507,9 @@
 "S3K Technologies": [
 "hr@s3ktech.ai"
 ],
+"SAP": [
+"careers@sap.com"
+],
 "Selsoft": [
 "jobs@selsoftinc.com"
 ],
@@ -397,6 +536,9 @@
 ],
 "Tanius Technology": [
 "info@tanius.com"
+],
+"Tata Consultancy Services (TCS)": [
+"careers@tcs.com"
 ],
 "Techril": [
 "careers@techril.com"
@@ -455,6 +597,9 @@
 "X Performance Robotics": [
 "careers@xperformancerobotics.com"
 ],
+"XR Trading": [
+"xrrecruitingteam@xrtrading.com"
+],
 "XTX Markets": [
 "careers@xtxmarkets.com"
 ],
@@ -472,6 +617,9 @@
 ],
 "vFunction": [
 "jobs@vfunction.com"
+],
+"xAI": [
+"usg-careers@x.ai"
 ]
 }
 }
