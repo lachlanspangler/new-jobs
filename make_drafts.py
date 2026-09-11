@@ -179,12 +179,17 @@ def main():
     tpath = ROOT / args.template
     template = tpath.read_text() if tpath.exists() else DEFAULT_TEMPLATE
 
-    rj = json.loads((ROOT / "docs" / "recruiters.json").read_text())
+    by = json.loads((ROOT / "docs" / "recruiters.json").read_text()).get("byCompany", {})
+    local = ROOT / "contacts_local.json"
+    if local.exists():  # merge in the git-ignored imported list
+        for company, rows in json.loads(local.read_text()).get("byCompany", {}).items():
+            have = {x.get("email", "").lower() for x in by.get(company, [])}
+            by.setdefault(company, []).extend(r for r in rows if r.get("email", "").lower() not in have)
     done = set(json.loads(DRAFTED.read_text())) if DRAFTED.exists() else set()
 
     # flatten contacts that have a usable email and aren't already drafted
     todo = []
-    for company, contacts in (rj.get("byCompany") or {}).items():
+    for company, contacts in by.items():
         for c in contacts:
             email = c.get("email")
             if not email or c.get("locked") or email in done:
