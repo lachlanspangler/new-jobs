@@ -157,7 +157,7 @@ def purge(token):
             meta = _api(token, "GET", f"/gmail/v1/users/me/drafts/{d['id']}?format=metadata&metadataHeaders=Subject")
             hdrs = (meta.get("message", {}).get("payload", {}) or {}).get("headers", [])
             subj = next((h["value"] for h in hdrs if h["name"].lower() == "subject"), "")
-            if subj.startswith(("Software / quant roles at ", "Amazon SDE interested in ")):
+            if any(p in subj for p in ("Software / quant roles at ", "Amazon SDE interested in ")):
                 _api(token, "DELETE", f"/gmail/v1/users/me/drafts/{d['id']}")
                 deleted += 1
         page = res.get("nextPageToken")
@@ -218,6 +218,8 @@ def main():
     made = 0
     for company, email, name in todo:
         subject = f"Amazon SDE interested in {company}"
+        if not name:                       # generic role inbox (careers@, recruiting@, …)
+            subject = "[Generic inbox] " + subject
         body = template.format(greeting=greeting_for(name, company), company=company)
         try:
             create_draft(token, email, subject, body)
