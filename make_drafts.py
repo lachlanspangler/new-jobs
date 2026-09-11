@@ -172,6 +172,8 @@ def main():
     ap.add_argument("--dry-run", action="store_true")
     ap.add_argument("--template", default="email_template.txt")
     ap.add_argument("--purge", action="store_true", help="delete drafts this tool created, then exit")
+    ap.add_argument("--generic", action="store_true", help="only generic role inboxes (no named person)")
+    ap.add_argument("--one-per-company", action="store_true", help="at most one draft per company")
     args = ap.parse_args()
 
     if args.purge:
@@ -201,6 +203,15 @@ def main():
                 continue
             name = (c.get("name") or "").strip()
             todo.append((company, email, name))
+    if args.generic:
+        todo = [t for t in todo if not t[2]]          # only no-name role inboxes
+    if args.one_per_company:
+        seen, uniq = set(), []
+        for t in todo:
+            if t[0] in seen:
+                continue
+            seen.add(t[0]); uniq.append(t)
+        todo = uniq
     todo = todo[: args.limit]
 
     if not todo:
