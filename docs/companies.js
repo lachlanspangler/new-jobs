@@ -10,7 +10,7 @@ let APPLIED = new Set();
 
 const state = { jobs: [], byCo: [], q: "", tags: new Set(), emails: {} };
 const normName = (s) => String(s).toLowerCase().replace(/[^a-z0-9]/g, "");
-const emailsFor = (name) => state.emails[normName(name)] || [];
+const emailsFor = (name) => (state.emails[normName(name)] || {}).emails || [];
 
 function roleOf(title) {
   const t = title.toLowerCase();
@@ -34,7 +34,12 @@ const edge = (tags) => { for (const t of tags || []) if (TAG_COLORS[t]) return T
 function group() {
   const m = new Map();
   state.jobs.forEach((j) => { if (!m.has(j.company)) m.set(j.company, { name: j.company, tags: j.tags || [], jobs: [] }); m.get(j.company).jobs.push(j); });
-  state.byCo = [...m.values()].sort((a, b) => b.jobs.length - a.jobs.length);
+  // include companies that only have an email (no live roles)
+  const haveNorm = new Set([...m.keys()].map(normName));
+  Object.values(state.emails).forEach((e) => {
+    if (!haveNorm.has(normName(e.name))) { m.set(e.name, { name: e.name, tags: [], jobs: [] }); haveNorm.add(normName(e.name)); }
+  });
+  state.byCo = [...m.values()].sort((a, b) => b.jobs.length - a.jobs.length || a.name.localeCompare(b.name));
 }
 
 function render() {
@@ -67,7 +72,7 @@ function render() {
         <b>${esc(c.name)}</b>
         ${emails.length ? '<span class="co-mail" title="careers inbox available">✉</span>' : ""}
         <span class="co-tags">${(c.tags || []).map((t) => `<span class="pill">${esc(t)}</span>`).join("")}</span>
-        <span class="co-count">${appliedN ? `<span class="co-applied">${appliedN} applied</span> · ` : ""}${c.jobs.length} roles</span>
+        <span class="co-count">${appliedN ? `<span class="co-applied">${appliedN} applied</span> · ` : ""}${c.jobs.length ? `${c.jobs.length} roles` : "email only"}</span>
         <span class="co-caret">▸</span>
       </button>
       <div class="co-body">${emailLine}<div class="list-inner">${rows}</div></div>
@@ -99,7 +104,7 @@ $("q").addEventListener("input", (e) => { state.q = e.target.value; render(); })
   APPLIED = new Set(loadApps().map((r) => r.key));
   try {
     const em = await fetch("./company_emails.json", { cache: "no-store" }).then((r) => r.json()).catch(() => ({}));
-    for (const [co, list] of Object.entries(em.byCompany || {})) state.emails[normName(co)] = list;
+    for (const [co, list] of Object.entries(em.byCompany || {})) state.emails[normName(co)] = { name: co, emails: list };
   } catch { /* no email file yet */ }
   try {
     const d = await (await fetch("./jobs.json", { cache: "no-store" })).json();
