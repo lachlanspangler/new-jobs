@@ -1,6 +1,6 @@
 Hi {greeting},
 
-I'm an SDE at Amazon and an Emory CS/Finance grad, and I'm interested in opportunities at {company}. I would love to help lead {company} build tools to help the next several generations of builders.
+I'm an SDE at Amazon and an Emory CS/Finance grad, and I'm interested in opportunities at {company}.{roles} I would love to help lead {company} build tools to help the next several generations of builders.
 
 At Amazon, I've shipped 120+ production changes across 20+ services (rank #1 on my 10-person team) and recently owned a pricing-engine extension projected to unlock ~$22M in annual gross profit. Last month, I built an Auto AI Triage system for our ticket queue to automatically deep-dive logs and root-cause tickets. I'm proud of that foundation, but I'm eager to dive deeper, build bigger, and help more people. I also have prior quantitative engineering experience at a hedge fund and a startup.
 

@@ -214,13 +214,19 @@ def main():
         print(f"\n{len(todo)} drafts would be created (dry run).")
         return
 
+    try:
+        with_roles = {j["company"] for j in json.loads((ROOT / "docs" / "jobs.json").read_text()).get("jobs", [])}
+    except Exception:
+        with_roles = set()
+
     token = access_token()
     made = 0
     for company, email, name in todo:
         subject = f"Amazon SDE interested in {company}"
         if not name:                       # generic role inbox (careers@, recruiting@, …)
             subject = "[Generic inbox] " + subject
-        body = template.format(greeting=greeting_for(name, company), company=company)
+        roles = " I'm especially keen on your current openings." if company in with_roles else ""
+        body = template.format(greeting=greeting_for(name, company), company=company, roles=roles)
         try:
             create_draft(token, email, subject, body)
             done.add(email); made += 1
