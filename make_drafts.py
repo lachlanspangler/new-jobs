@@ -19,7 +19,7 @@ Flags:
 It uses the gmail.compose scope (create drafts only) — it cannot send or read
 mail. Already-drafted addresses are remembered in drafted.json to avoid dupes.
 """
-import argparse, base64, datetime as dt, json, os, sys, time, urllib.parse, urllib.request, webbrowser
+import argparse, base64, datetime as dt, json, os, socket, subprocess, sys, time, urllib.parse, urllib.request, webbrowser
 from email import encoders
 from email.mime.base import MIMEBase
 from email.mime.multipart import MIMEMultipart
@@ -118,6 +118,30 @@ def greeting_for(name, company):
     return first if first else f"{company} team"
 
 
+_MX = {}
+def deliverable(email):
+    """True if the email's domain plausibly accepts mail (has MX, or at least
+    resolves). Skips only clearly dead/typo domains to protect deliverability."""
+    dom = email.rsplit("@", 1)[-1].lower()
+    if dom in _MX:
+        return _MX[dom]
+    ok = False
+    try:
+        out = subprocess.run(["nslookup", "-query=mx", dom], capture_output=True,
+                             text=True, timeout=6).stdout.lower()
+        ok = "mail exchanger" in out
+    except Exception:
+        pass
+    if not ok:
+        try:
+            socket.getaddrinfo(dom, None)  # domain at least resolves
+            ok = True
+        except Exception:
+            ok = False
+    _MX[dom] = ok
+    return ok
+
+
 def build_message(to, subject, body):
     files = sorted(p for p in ATTACH_DIR.glob("*") if p.is_file()) if ATTACH_DIR.exists() else []
     if not files:
@@ -166,6 +190,21 @@ def purge(token):
     return deleted
 
 
+def write_outreach(records):
+    """Publish a per-company emailed tally (counts + dates only, no addresses) for the site."""
+    by = {}
+    for r in records:
+        co, d = r.get("company") or "?", r.get("date") or ""
+        e = by.setdefault(co, {"emailed": 0, "first": d, "last": d})
+        e["emailed"] += 1
+        if d:
+            e["first"] = min(e["first"] or d, d)
+            e["last"] = max(e["last"] or d, d)
+    (ROOT / "docs" / "outreach.json").write_text(json.dumps({
+        "generated_at": dt.datetime.now(dt.timezone.utc).isoformat(),
+        "total": len(records), "byCompany": by}))
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--limit", type=int, default=25)
@@ -174,6 +213,7 @@ def main():
     ap.add_argument("--purge", action="store_true", help="delete drafts this tool created, then exit")
     ap.add_argument("--generic", action="store_true", help="only generic role inboxes (no named person)")
     ap.add_argument("--one-per-company", action="store_true", help="at most one draft per company")
+    ap.add_argument("--no-mx", action="store_true", help="skip the MX/domain deliverability check")
     args = ap.parse_args()
 
     if args.purge:
@@ -192,7 +232,11 @@ def main():
         for company, rows in json.loads(local.read_text()).get("byCompany", {}).items():
             have = {x.get("email", "").lower() for x in by.get(company, [])}
             by.setdefault(company, []).extend(r for r in rows if r.get("email", "").lower() not in have)
-    done = set(json.loads(DRAFTED.read_text())) if DRAFTED.exists() else set()
+    records = []
+    if DRAFTED.exists():
+        raw = json.loads(DRAFTED.read_text())
+        records = [r if isinstance(r, dict) else {"email": r} for r in raw]
+    done = {r["email"] for r in records}
 
     # flatten contacts that have a usable email and aren't already drafted
     todo = []
@@ -212,7 +256,17 @@ def main():
                 continue
             seen.add(t[0]); uniq.append(t)
         todo = uniq
-    todo = todo[: args.limit]
+    # take up to --limit deliverable contacts (skip dead/typo domains unless --no-mx)
+    picked, skipped = [], 0
+    for t in todo:
+        if len(picked) >= args.limit:
+            break
+        if not args.no_mx and not deliverable(t[1]):
+            print(f"skip (no MX / dead domain): {t[1]}"); skipped += 1; continue
+        picked.append(t)
+    todo = picked
+    if skipped:
+        print(f"({skipped} contact(s) skipped for undeliverable domains)")
 
     if not todo:
         print("No new contacts with unlocked emails to draft. "
@@ -231,6 +285,7 @@ def main():
         with_roles = set()
 
     token = access_token()
+    today = dt.date.today().isoformat()
     made = 0
     for company, email, name in todo:
         subject = f"Amazon SDE interested in {company}"
@@ -238,13 +293,15 @@ def main():
         body = template.format(greeting=greeting_for(name, company), company=company, roles=roles)
         try:
             create_draft(token, email, subject, body)
-            done.add(email); made += 1
+            records.append({"email": email, "company": company, "date": today})
+            made += 1
             print(f"drafted -> {email} ({company})")
         except Exception as e:
             print(f"error {email}: {e}")
         time.sleep(0.3)
-    DRAFTED.write_text(json.dumps(sorted(done)))
-    print(f"\nCreated {made} Gmail drafts. Open Gmail → Drafts, review, and send.")
+    DRAFTED.write_text(json.dumps(records, indent=0))
+    write_outreach(records)
+    print(f"\nCreated {made} Gmail drafts ({len(records)} total logged). Open Gmail → Drafts, review, and send.")
 
 
 if __name__ == "__main__":
