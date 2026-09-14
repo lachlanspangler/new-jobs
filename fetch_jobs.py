@@ -191,6 +191,72 @@ def _oq_salary(j):
     return ""
 
 
+# --- Built In city job boards (SF, NYC). Server-rendered HTML, robots.txt allows
+# /jobs pagination (only ?search= queries are disallowed). Cards expose company,
+# title, job id, and a "Posted/Reposted N ago" label. All roles are in-city.
+BUILTIN_SITES = [("https://www.builtinsf.com", "San Francisco"),
+                 ("https://www.builtinnyc.com", "New York")]
+BROWSER_UA = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0 Safari/537.36"
+BI_TITLE_RE = re.compile(r'data-id="job-card-title"[^>]*>([^<]+)</a>')
+BI_ID_RE = re.compile(r'track-job-id="(\d+)"')
+BI_CO_RE = re.compile(r'data-id="company-title".*?<span>([^<]+)</span>', re.S)
+BI_PATH_RE = re.compile(r'data-alias="(/job/[^"]+)"')
+BI_POSTED_RE = re.compile(r'>([^<]*(?:Ago|Today))</span>')
+
+
+def fetch_html(url):
+    req = urllib.request.Request(url, headers={"User-Agent": BROWSER_UA, "Accept": "text/html"})
+    with urllib.request.urlopen(req, timeout=20) as r:
+        return r.read().decode("utf-8", "ignore")
+
+
+def builtin_date(txt):
+    t = (txt or "").lower()
+    today = dt.date.today()
+    if any(w in t for w in ("today", "minute", "hour", "just")):
+        return today.isoformat()
+    if "yesterday" in t:
+        return (today - dt.timedelta(days=1)).isoformat()
+    for unit, days in (("day", 1), ("week", 7), ("month", 30)):
+        m = re.search(rf"(\d+)\s*{unit}", t)
+        if m:
+            return (today - dt.timedelta(days=int(m.group(1)) * days)).isoformat()
+    return ""
+
+
+def norm_builtin(base, city, pages=6):
+    out, seen = [], set()
+    for p in range(1, pages + 1):
+        try:
+            html_ = fetch_html(f"{base}/jobs?page={p}")
+        except (urllib.error.URLError, urllib.error.HTTPError, ValueError):
+            break
+        blocks = html_.split('data-id="job-card"')[1:]
+        if not blocks:
+            break
+        for b in blocks:
+            mid = BI_ID_RE.search(b)
+            mti = BI_TITLE_RE.search(b)
+            if not mid or not mti or mid.group(1) in seen:
+                continue
+            seen.add(mid.group(1))
+            mpath = BI_PATH_RE.search(b)
+            mco = BI_CO_RE.search(b)
+            mpost = BI_POSTED_RE.search(b)
+            out.append({
+                "company": html.unescape(mco.group(1).strip()) if mco else "?",
+                "tags": ["tech"], "source": "builtin",
+                "key": f"builtin:{mid.group(1)}",
+                "title": html.unescape(mti.group(1).strip()),
+                "location": city,
+                "url": base + (mpath.group(1) if mpath else f"/job/{mid.group(1)}"),
+                "posted": builtin_date(mpost.group(1) if mpost else ""),
+                "salary": "",
+            })
+        time.sleep(PACING)
+    return out
+
+
 def fetch_openquant():
     """Return normalized quant rows from openquant.co (unioned across filter values)."""
     rows = {}
@@ -230,6 +296,7 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--tag", action="append", default=[])
     ap.add_argument("--no-openquant", action="store_true", help="skip the openquant.co quant board")
+    ap.add_argument("--no-builtin", action="store_true", help="skip the Built In SF/NYC boards")
     args = ap.parse_args()
 
     cfg = json.loads((ROOT / "companies.json").read_text())
@@ -245,6 +312,17 @@ def main():
         except (urllib.error.URLError, urllib.error.HTTPError, ValueError, KeyError, TimeoutError) as e:
             errors.append(f"{c['name']}: {e}")
         time.sleep(PACING)
+
+    # Built In SF/NYC boards (general tech listings -> filtered to target roles below)
+    want_builtin = not args.no_builtin and (not args.tag or "tech" in {t.lower() for t in args.tag})
+    if want_builtin:
+        for base, city in BUILTIN_SITES:
+            try:
+                rows = norm_builtin(base, city)
+                all_jobs.extend(rows)
+                print(f"{base}: +{len(rows)} listings")
+            except (urllib.error.URLError, urllib.error.HTTPError, ValueError) as e:
+                errors.append(f"{base}: {e}")
 
     matched = [j for j in all_jobs if is_target(j["title"])]
 
@@ -277,7 +355,8 @@ def main():
     export = matched[:MAX_EXPORT]
     if len(matched) > MAX_EXPORT:
         have = {j["key"] for j in export}
-        export += [j for j in matched[MAX_EXPORT:] if j["source"] == "openquant" and j["key"] not in have]
+        export += [j for j in matched[MAX_EXPORT:]
+                   if j["source"] in ("openquant", "builtin") and j["key"] not in have]
     payload = {
         "generated_at": dt.datetime.now(dt.timezone.utc).isoformat(),
         "count": len(matched),
