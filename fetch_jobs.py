@@ -159,10 +159,77 @@ def norm_workday(c):
 
 FETCHERS = {"greenhouse": norm_greenhouse, "ashby": norm_ashby, "lever": norm_lever, "workday": norm_workday}
 
+# --- openquant.co: a curated quant job board (Next.js + Supabase, server-rendered).
+# It caps the unfiltered feed at 25 and ignores ?page, but server-side filters each
+# return their COMPLETE set, so we union across filter values to recover every role.
+OQ_URL = "https://openquant.co/"
+OQ_NEXT_RE = re.compile(r'__NEXT_DATA__" type="application/json">(.*?)</script>', re.S)
+OQ_FILTERS = [
+    ("companyType", ["Hedge Fund", "Prop Trading", "Proprietary Trading", "Market Maker",
+                     "Asset Manager", "Investment Bank", "Bank", "Fintech", "Crypto",
+                     "Insurance", "Pension Fund", "Consulting", "Technology", "Other"]),
+    ("level", ["Internship", "Entry Level", "Mid Level", "Senior Level", "Director", "Manager"]),
+    ("keywords", ["Quantitative Researcher", "Quantitative Developer", "Quantitative Analyst",
+                  "Quantitative Trader", "Software Engineer", "Data Scientist",
+                  "Machine Learning", "Trader", "Research"]),
+]
+
+
+def _oq_page(params):
+    import urllib.parse
+    q = ("?" + urllib.parse.urlencode(params)) if params else ""
+    req = urllib.request.Request(OQ_URL + q, headers={"User-Agent": UA})
+    with urllib.request.urlopen(req, timeout=20) as r:
+        m = OQ_NEXT_RE.search(r.read().decode("utf-8"))
+    return json.loads(m.group(1))["props"]["pageProps"].get("data", []) if m else []
+
+
+def _oq_salary(j):
+    lo, hi = j.get("MinSalary"), j.get("MaxSalary")
+    if lo and hi:
+        return f"${round(lo/1000)}K - ${round(hi/1000)}K"
+    return ""
+
+
+def fetch_openquant():
+    """Return normalized quant rows from openquant.co (unioned across filter values)."""
+    rows = {}
+    def add(items):
+        for j in items:
+            jid = j.get("ID")
+            if jid and jid not in rows:
+                rows[jid] = j
+    add(_oq_page({}))
+    for field, values in OQ_FILTERS:
+        for v in values:
+            try:
+                add(_oq_page({field: v}))
+            except (urllib.error.URLError, urllib.error.HTTPError, ValueError):
+                pass
+            time.sleep(0.2)
+    out = []
+    for j in rows.values():
+        loc = j.get("Location") or (j.get("Country") or "")
+        pos_type = j.get("PositionType") or ""
+        title = j.get("Position") or ""
+        out.append({
+            "company": j.get("CompanyName") or "?",
+            "tags": ["quant"],
+            "source": "openquant",
+            "key": f"openquant:{j.get('ID')}",
+            "title": title.strip(),
+            "location": loc,
+            "url": j.get("ApplicationUrl") or "",
+            "posted": j.get("PostedDate") or "",
+            "salary": _oq_salary(j),
+        })
+    return out
+
 
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--tag", action="append", default=[])
+    ap.add_argument("--no-openquant", action="store_true", help="skip the openquant.co quant board")
     args = ap.parse_args()
 
     cfg = json.loads((ROOT / "companies.json").read_text())
@@ -181,6 +248,17 @@ def main():
 
     matched = [j for j in all_jobs if is_target(j["title"])]
 
+    # openquant.co is already a curated quant board — include its roles as-is
+    # (skip the title filter) unless a non-quant --tag filter is in effect.
+    want_oq = not args.no_openquant and (not args.tag or "quant" in {t.lower() for t in args.tag})
+    if want_oq:
+        try:
+            oq = fetch_openquant()
+            matched.extend(oq)
+            print(f"openquant.co: +{len(oq)} quant roles")
+        except (urllib.error.URLError, urllib.error.HTTPError, ValueError) as e:
+            errors.append(f"openquant.co: {e}")
+
     # first-seen tracking for "new today"
     today = dt.date.today().isoformat()
     seen = json.loads(SEEN_PATH.read_text()) if SEEN_PATH.exists() else {}
@@ -195,6 +273,11 @@ def main():
     matched.sort(key=lambda j: (j["priority"], j.get("posted", "")), reverse=True)
 
     DOCS.mkdir(exist_ok=True)
+    # export the top MAX_EXPORT by sort, but always keep every openquant role
+    export = matched[:MAX_EXPORT]
+    if len(matched) > MAX_EXPORT:
+        have = {j["key"] for j in export}
+        export += [j for j in matched[MAX_EXPORT:] if j["source"] == "openquant" and j["key"] not in have]
     payload = {
         "generated_at": dt.datetime.now(dt.timezone.utc).isoformat(),
         "count": len(matched),
@@ -202,7 +285,7 @@ def main():
         "companies": len(companies),
         "jobs": [{k: j[k] for k in ("company", "tags", "source", "key", "title",
                                     "location", "url", "posted", "salary", "firstSeen", "isNew", "priority")}
-                 for j in matched[:MAX_EXPORT]],
+                 for j in export],
     }
     (DOCS / "jobs.json").write_text(json.dumps(payload))
     print(f"{len(all_jobs)} live postings -> {len(matched)} target roles "
