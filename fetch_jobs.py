@@ -313,6 +313,13 @@ def main():
             errors.append(f"{c['name']}: {e}")
         time.sleep(PACING)
 
+    # optional per-company location allow-list (e.g. SpaceX -> California only)
+    loc_filters = {c["name"]: re.compile(c["onlyLocations"], re.IGNORECASE)
+                   for c in companies if c.get("onlyLocations")}
+    if loc_filters:
+        all_jobs = [j for j in all_jobs if j["company"] not in loc_filters
+                    or loc_filters[j["company"]].search(j.get("location") or "")]
+
     # Built In SF/NYC boards (general tech listings -> filtered to target roles below)
     want_builtin = not args.no_builtin and (not args.tag or "tech" in {t.lower() for t in args.tag})
     if want_builtin:
