@@ -1436,6 +1436,663 @@
    ],
    "domain": "spacex.com",
    "onlyLocations": "\\bCA\\b|California"
+  },
+  {
+   "name": "Rocket Lab",
+   "ats": "greenhouse",
+   "token": "rocketlab",
+   "tags": [
+    "tech"
+   ],
+   "domain": "rocket.com"
+  },
+  {
+   "name": "Shield AI",
+   "ats": "ashby",
+   "token": "shield-ai",
+   "tags": [
+    "tech"
+   ],
+   "domain": "shield.com"
+  },
+  {
+   "name": "Lucid Motors",
+   "ats": "greenhouse",
+   "token": "lucidmotors",
+   "tags": [
+    "tech"
+   ],
+   "domain": "lucid.com"
+  },
+  {
+   "name": "Waymo",
+   "ats": "greenhouse",
+   "token": "waymo",
+   "tags": [
+    "tech"
+   ],
+   "domain": "waymo.com"
+  },
+  {
+   "name": "Zoox",
+   "ats": "lever",
+   "token": "zoox",
+   "tags": [
+    "tech"
+   ],
+   "domain": "zoox.com"
+  },
+  {
+   "name": "Adyen",
+   "ats": "greenhouse",
+   "token": "adyen",
+   "tags": [
+    "tech"
+   ],
+   "domain": "adyen.com"
+  },
+  {
+   "name": "ClickHouse",
+   "ats": "ashby",
+   "token": "clickhouse",
+   "tags": [
+    "tech"
+   ],
+   "domain": "clickhouse.com"
+  },
+  {
+   "name": "Lyft",
+   "ats": "greenhouse",
+   "token": "lyft",
+   "tags": [
+    "tech"
+   ],
+   "domain": "lyft.com"
+  },
+  {
+   "name": "Wayve",
+   "ats": "greenhouse",
+   "token": "wayve",
+   "tags": [
+    "tech"
+   ],
+   "domain": "wayve.com"
+  },
+  {
+   "name": "Cohere",
+   "ats": "ashby",
+   "token": "cohere",
+   "tags": [
+    "ai"
+   ],
+   "domain": "cohere.com"
+  },
+  {
+   "name": "Skydio",
+   "ats": "ashby",
+   "token": "skydio",
+   "tags": [
+    "tech"
+   ],
+   "domain": "skydio.com"
+  },
+  {
+   "name": "Tenstorrent",
+   "ats": "greenhouse",
+   "token": "tenstorrent",
+   "tags": [
+    "ai"
+   ],
+   "domain": "tenstorrent.com"
+  },
+  {
+   "name": "Nubank",
+   "ats": "ashby",
+   "token": "nubank",
+   "tags": [
+    "tech"
+   ],
+   "domain": "nubank.com"
+  },
+  {
+   "name": "Perplexity",
+   "ats": "ashby",
+   "token": "perplexity",
+   "tags": [
+    "ai"
+   ],
+   "domain": "perplexity.com"
+  },
+  {
+   "name": "Grafana Labs",
+   "ats": "greenhouse",
+   "token": "grafanalabs",
+   "tags": [
+    "tech"
+   ],
+   "domain": "grafana.com"
+  },
+  {
+   "name": "Plaid",
+   "ats": "ashby",
+   "token": "plaid",
+   "tags": [
+    "tech"
+   ],
+   "domain": "plaid.com"
+  },
+  {
+   "name": "Cerebras",
+   "ats": "ashby",
+   "token": "cerebras",
+   "tags": [
+    "ai"
+   ],
+   "domain": "cerebras.com"
+  },
+  {
+   "name": "LangChain",
+   "ats": "ashby",
+   "token": "langchain",
+   "tags": [
+    "ai"
+   ],
+   "domain": "langchain.com"
+  },
+  {
+   "name": "Etched",
+   "ats": "ashby",
+   "token": "etched",
+   "tags": [
+    "ai"
+   ],
+   "domain": "etched.com"
+  },
+  {
+   "name": "Justworks",
+   "ats": "greenhouse",
+   "token": "justworks",
+   "tags": [
+    "tech"
+   ],
+   "domain": "justworks.com"
+  },
+  {
+   "name": "Deepgram",
+   "ats": "ashby",
+   "token": "deepgram",
+   "tags": [
+    "ai"
+   ],
+   "domain": "deepgram.com"
+  },
+  {
+   "name": "Astranis",
+   "ats": "greenhouse",
+   "token": "astranis",
+   "tags": [
+    "tech"
+   ],
+   "domain": "astranis.com"
+  },
+  {
+   "name": "Mixpanel",
+   "ats": "greenhouse",
+   "token": "mixpanel",
+   "tags": [
+    "tech"
+   ],
+   "domain": "mixpanel.com"
+  },
+  {
+   "name": "Chainguard",
+   "ats": "greenhouse",
+   "token": "chainguard",
+   "tags": [
+    "tech"
+   ],
+   "domain": "chainguard.com"
+  },
+  {
+   "name": "Abnormal Security",
+   "ats": "greenhouse",
+   "token": "abnormalsecurity",
+   "tags": [
+    "tech"
+   ],
+   "domain": "abnormal.com"
+  },
+  {
+   "name": "Sigma Computing",
+   "ats": "greenhouse",
+   "token": "sigmacomputing",
+   "tags": [
+    "tech"
+   ],
+   "domain": "sigma.com"
+  },
+  {
+   "name": "Mercury",
+   "ats": "greenhouse",
+   "token": "mercury",
+   "tags": [
+    "tech"
+   ],
+   "domain": "mercury.com"
+  },
+  {
+   "name": "1Password",
+   "ats": "ashby",
+   "token": "1password",
+   "tags": [
+    "tech"
+   ],
+   "domain": "1password.com"
+  },
+  {
+   "name": "Tailscale",
+   "ats": "greenhouse",
+   "token": "tailscale",
+   "tags": [
+    "tech"
+   ],
+   "domain": "tailscale.com"
+  },
+  {
+   "name": "The Voleon Group",
+   "ats": "ashby",
+   "token": "voleon",
+   "tags": [
+    "quant"
+   ],
+   "domain": "the.com"
+  },
+  {
+   "name": "Synthesia",
+   "ats": "ashby",
+   "token": "synthesia",
+   "tags": [
+    "ai"
+   ],
+   "domain": "synthesia.com"
+  },
+  {
+   "name": "LaunchDarkly",
+   "ats": "greenhouse",
+   "token": "launchdarkly",
+   "tags": [
+    "tech"
+   ],
+   "domain": "launchdarkly.com"
+  },
+  {
+   "name": "PagerDuty",
+   "ats": "greenhouse",
+   "token": "pagerduty",
+   "tags": [
+    "tech"
+   ],
+   "domain": "pagerduty.com"
+  },
+  {
+   "name": "Fastly",
+   "ats": "greenhouse",
+   "token": "fastly",
+   "tags": [
+    "tech"
+   ],
+   "domain": "fastly.com"
+  },
+  {
+   "name": "Sentry",
+   "ats": "ashby",
+   "token": "sentry",
+   "tags": [
+    "tech"
+   ],
+   "domain": "sentry.com"
+  },
+  {
+   "name": "Drata",
+   "ats": "ashby",
+   "token": "drata",
+   "tags": [
+    "tech"
+   ],
+   "domain": "drata.com"
+  },
+  {
+   "name": "Miro",
+   "ats": "ashby",
+   "token": "miro",
+   "tags": [
+    "tech"
+   ],
+   "domain": "miro.com"
+  },
+  {
+   "name": "SingleStore",
+   "ats": "greenhouse",
+   "token": "singlestore",
+   "tags": [
+    "tech"
+   ],
+   "domain": "singlestore.com"
+  },
+  {
+   "name": "Braintrust",
+   "ats": "ashby",
+   "token": "braintrust",
+   "tags": [
+    "ai"
+   ],
+   "domain": "braintrust.com"
+  },
+  {
+   "name": "WorkOS",
+   "ats": "ashby",
+   "token": "workos",
+   "tags": [
+    "tech"
+   ],
+   "domain": "workos.com"
+  },
+  {
+   "name": "Dust",
+   "ats": "ashby",
+   "token": "dust",
+   "tags": [
+    "ai"
+   ],
+   "domain": "dust.com"
+  },
+  {
+   "name": "Arize AI",
+   "ats": "greenhouse",
+   "token": "arizeai",
+   "tags": [
+    "ai"
+   ],
+   "domain": "arize.com"
+  },
+  {
+   "name": "Wealthfront",
+   "ats": "lever",
+   "token": "wealthfront",
+   "tags": [
+    "tech"
+   ],
+   "domain": "wealthfront.com"
+  },
+  {
+   "name": "Alloy",
+   "ats": "greenhouse",
+   "token": "alloy",
+   "tags": [
+    "tech"
+   ],
+   "domain": "alloy.com"
+  },
+  {
+   "name": "Sysdig",
+   "ats": "lever",
+   "token": "sysdig",
+   "tags": [
+    "tech"
+   ],
+   "domain": "sysdig.com"
+  },
+  {
+   "name": "Confluent",
+   "ats": "ashby",
+   "token": "confluent",
+   "tags": [
+    "tech"
+   ],
+   "domain": "confluent.com"
+  },
+  {
+   "name": "Anyscale",
+   "ats": "ashby",
+   "token": "anyscale",
+   "tags": [
+    "tech"
+   ],
+   "domain": "anyscale.com"
+  },
+  {
+   "name": "Astronomer",
+   "ats": "ashby",
+   "token": "astronomer",
+   "tags": [
+    "tech"
+   ],
+   "domain": "astronomer.com"
+  },
+  {
+   "name": "AssemblyAI",
+   "ats": "greenhouse",
+   "token": "assemblyai",
+   "tags": [
+    "ai"
+   ],
+   "domain": "assemblyai.com"
+  },
+  {
+   "name": "Belvedere Trading",
+   "ats": "lever",
+   "token": "belvederetrading",
+   "tags": [
+    "quant"
+   ],
+   "domain": "belvedere.com"
+  },
+  {
+   "name": "Ambience Healthcare",
+   "ats": "ashby",
+   "token": "ambiencehealthcare",
+   "tags": [
+    "ai"
+   ],
+   "domain": "ambience.com"
+  },
+  {
+   "name": "Tavus",
+   "ats": "ashby",
+   "token": "tavus",
+   "tags": [
+    "ai"
+   ],
+   "domain": "tavus.com"
+  },
+  {
+   "name": "Secureframe",
+   "ats": "ashby",
+   "token": "secureframe",
+   "tags": [
+    "tech"
+   ],
+   "domain": "secureframe.com"
+  },
+  {
+   "name": "PlanetScale",
+   "ats": "greenhouse",
+   "token": "planetscale",
+   "tags": [
+    "tech"
+   ],
+   "domain": "planetscale.com"
+  },
+  {
+   "name": "Descript",
+   "ats": "greenhouse",
+   "token": "descript",
+   "tags": [
+    "ai"
+   ],
+   "domain": "descript.com"
+  },
+  {
+   "name": "PostHog",
+   "ats": "ashby",
+   "token": "posthog",
+   "tags": [
+    "tech"
+   ],
+   "domain": "posthog.com"
+  },
+  {
+   "name": "Semgrep",
+   "ats": "ashby",
+   "token": "semgrep",
+   "tags": [
+    "tech"
+   ],
+   "domain": "semgrep.com"
+  },
+  {
+   "name": "Resend",
+   "ats": "ashby",
+   "token": "resend",
+   "tags": [
+    "tech"
+   ],
+   "domain": "resend.com"
+  },
+  {
+   "name": "Orca Security",
+   "ats": "greenhouse",
+   "token": "orcasecurity",
+   "tags": [
+    "tech"
+   ],
+   "domain": "orca.com"
+  },
+  {
+   "name": "Prefect",
+   "ats": "ashby",
+   "token": "prefect",
+   "tags": [
+    "tech"
+   ],
+   "domain": "prefect.com"
+  },
+  {
+   "name": "Railway",
+   "ats": "ashby",
+   "token": "railway",
+   "tags": [
+    "tech"
+   ],
+   "domain": "railway.com"
+  },
+  {
+   "name": "Stability AI",
+   "ats": "greenhouse",
+   "token": "stabilityai",
+   "tags": [
+    "ai"
+   ],
+   "domain": "stability.com"
+  },
+  {
+   "name": "Neon",
+   "ats": "ashby",
+   "token": "neon",
+   "tags": [
+    "tech"
+   ],
+   "domain": "neon.com"
+  },
+  {
+   "name": "Stytch",
+   "ats": "ashby",
+   "token": "stytch",
+   "tags": [
+    "tech"
+   ],
+   "domain": "stytch.com"
+  },
+  {
+   "name": "Material Security",
+   "ats": "ashby",
+   "token": "materialsecurity",
+   "tags": [
+    "tech"
+   ],
+   "domain": "material.com"
+  },
+  {
+   "name": "Highnote",
+   "ats": "greenhouse",
+   "token": "highnote",
+   "tags": [
+    "tech"
+   ],
+   "domain": "highnote.com"
+  },
+  {
+   "name": "Materialize",
+   "ats": "ashby",
+   "token": "materialize",
+   "tags": [
+    "tech"
+   ],
+   "domain": "materialize.com"
+  },
+  {
+   "name": "Deepnote",
+   "ats": "ashby",
+   "token": "deepnote",
+   "tags": [
+    "tech"
+   ],
+   "domain": "deepnote.com"
+  },
+  {
+   "name": "Unit",
+   "ats": "ashby",
+   "token": "unit",
+   "tags": [
+    "tech"
+   ],
+   "domain": "unit.com"
+  },
+  {
+   "name": "Mem0",
+   "ats": "ashby",
+   "token": "mem0",
+   "tags": [
+    "ai"
+   ],
+   "domain": "mem0.com"
+  },
+  {
+   "name": "Knock",
+   "ats": "greenhouse",
+   "token": "knock",
+   "tags": [
+    "tech"
+   ],
+   "domain": "knock.com"
+  },
+  {
+   "name": "Netlify",
+   "ats": "greenhouse",
+   "token": "netlify",
+   "tags": [
+    "tech"
+   ],
+   "domain": "netlify.com"
+  },
+  {
+   "name": "Clerk",
+   "ats": "ashby",
+   "token": "clerk",
+   "tags": [
+    "tech"
+   ],
+   "domain": "clerk.com"
   }
  ]
 }

@@ -20,7 +20,7 @@ SEEN_PATH = ROOT / "seen.json"          # key -> first-seen ISO date
 DOCS = ROOT / "docs"
 UA = "new-jobs/1.0 (personal job search)"
 PACING = 0.25
-MAX_EXPORT = 2000
+MAX_EXPORT = 15000
 
 INCLUDE_RE = re.compile(
     r"\b(software|developer|engineer|engineering|swe|sde|programmer|back[\s-]?end|"
