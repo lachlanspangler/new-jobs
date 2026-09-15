@@ -58,6 +58,9 @@
 "recruiting_germany@accenture.com",
 "recruiting.ch@accenture.com"
 ],
+"Adobe": [
+"usmailresume@adobe.com"
+],
 "Advanced Intelligent Systems": [
 "careers@ai-systems.ca"
 ],
@@ -96,7 +99,9 @@
 "campusrecruitment@aexp.com",
 "recruitment.support.emea@aexp.com",
 "recruitment.support.apac@aexp.com",
-"recruitment.support.india@aexp.com"
+"recruitment.support.india@aexp.com",
+"recruitmentoperationsservicing@aexp.com",
+"global.recruiting@aexp.com"
 ],
 "Amgen": [
 "hrconnect@amgen.com"
@@ -108,8 +113,18 @@
 "Antela AI": [
 "jobs@antela.ai"
 ],
+"Anthropic": [
+"performance-recruiting@anthropic.com"
+],
+"AppLovin": [
+"jobs@applovin.com"
+],
+"Apple": [
+"quality_recruiting@apple.com"
+],
 "Applied Materials": [
-"careers@amat.com"
+"careers@amat.com",
+"applied_resumes_team@amat.com"
 ],
 "Aquatic Capital": [
 "recruiting@aquatic.com",
@@ -128,12 +143,16 @@
 "Arcitix": [
 "hr-support@arcitix.com"
 ],
+"Ares Management": [
+"campuscareers@aresmgmt.com"
+],
 "Ark Growth": [
 "careers@arkgrowth.co"
 ],
 "Arm": [
 "recruitmentenquiries@arm.com",
-"globalrecruitmentenquiries@arm.com"
+"globalrecruitmentenquiries@arm.com",
+"arm-recruitad@arm.com"
 ],
 "Artifact": [
 "careers@artifact.engineer"
@@ -165,11 +184,32 @@
 "BCG": [
 "associate.recruiting@bcg.com"
 ],
+"BMO": [
+"campus.recruiting@bmo.com"
+],
+"BMO Capital Markets": [
+"bmo.cmcrt@bmo.com"
+],
 "BNP Paribas": [
-"mea.recruitment@bnpparibas.com"
+"mea.recruitment@bnpparibas.com",
+"recruiting.germany@bnpparibas.com"
 ],
 "Bain & Company": [
 "global.recruiting@bain.com"
+],
+"Balyasny": [
+"hrrecruiting@bamfunds.com"
+],
+"Bank of America": [
+"juniortalentemea@bofa.com",
+"apac_campus@bofa.com",
+"japan_campus@bofa.com",
+"canada_campus@bofa.com",
+"us_campus@bofa.com",
+"talent.latam@bofa.com"
+],
+"Barclays": [
+"programmaticrecruitingamericas@barclays.com"
 ],
 "Baroque Capital": [
 "careers@baroquecapital.com"
@@ -195,6 +235,15 @@
 "Biobase": [
 "jobs@biobase.ai"
 ],
+"BlackRock": [
+"apaccampusrecruiting@blackrock.com",
+"blackrockcampusrecruiting@blackrock.com",
+"emeacampusrecruitment@blackrock.com",
+"groupblackrockforuniversities@blackrock.com"
+],
+"Blackstone": [
+"campusrecruiting@blackstone.com"
+],
 "BlueAlpha": [
 "careers@bluealpha.ai"
 ],
@@ -207,8 +256,16 @@
 "Booking.com": [
 "recruitment@booking.com"
 ],
+"Brevan Howard": [
+"usrecruitment@brevanhoward.com"
+],
 "Brex": [
 "careers@brex.com"
+],
+"ByteDance": [
+"hr@bytedance.com",
+"lpresumes@bytedance.com",
+"seed.feedback@bytedance.com"
 ],
 "C12.ai": [
 "career@c12.ai"
@@ -218,6 +275,9 @@
 ],
 "CCI": [
 "campusrecruiting@cci.com"
+],
+"CME Group": [
+"humanresources@cmegroup.com"
 ],
 "CampLife": [
 "jobs@camplife.com"
@@ -249,8 +309,19 @@
 "Cerebras": [
 "info@cerebras.ai"
 ],
+"Cisco": [
+"hiring@careers.cisco.com",
+"opportunities@careeralerts.cisco.com"
+],
 "CistekAI": [
 "hr@cistekai.com"
+],
+"Citadel": [
+"citadelrecruitment@citadel.com"
+],
+"Citi": [
+"midcareer.recruitjp@citi.com",
+"hrdasia@citi.com"
 ],
 "CityData.ai": [
 "hr@citydata.ai"
@@ -295,11 +366,17 @@
 "careerslatmsupport@cognizant.com",
 "talentattractteam@cognizant.com"
 ],
+"Cohere": [
+"talent@cohere.com"
+],
 "Colleague AI": [
 "jobs@colleague.ai"
 ],
 "Compound Express": [
 "careers@compoundexpress.com"
+],
+"CoreWeave": [
+"careers@coreweave.com"
 ],
 "Corner Bowl Software": [
 "careers@cornerbowl.com"
@@ -311,10 +388,12 @@
 "careers@credorbit.com"
 ],
 "CrowdStrike": [
-"mission@crowdstrike.com"
+"mission@crowdstrike.com",
+"recruiting@crowdstrike.com"
 ],
 "Cubist (Point72)": [
-"cubist-talent@cubistsystematic.com"
+"cubist-talent@cubistsystematic.com",
+"kepl-talent@cubistsystematic.com"
 ],
 "Cursor": [
 "hiring@cursor.com"
@@ -327,6 +406,9 @@
 "recruitment-nyc@world.deshaw.com",
 "recruiting-inquiries@deshaw.com",
 "campus-hotline@deshaw.com"
+],
+"DRW": [
+"apply@drw.com"
 ],
 "Da Vinci": [
 "recruitment@davincitrading.com"
@@ -348,6 +430,13 @@
 ],
 "DeepSight": [
 "careers@deepsight.so"
+],
+"Dell": [
+"jobs_dell@dell.com"
+],
+"Deutsche Bank": [
+"hr.direct@db.com",
+"dbmc-global.recruiting@db.com"
 ],
 "Dime Software": [
 "careers@dime-software.com"
@@ -382,6 +471,11 @@
 "Etharia Quants": [
 "careers@ethariaquants.com"
 ],
+"Evercore": [
+"recruiting@evercore.com",
+"recursoshumanos@evercore.com.mx",
+"recruit.europe@evercore.com"
+],
 "EveryOps": [
 "careers@everyops.ai"
 ],
@@ -393,6 +487,11 @@
 ],
 "Faraday Future": [
 "recruiting@ff.com"
+],
+"Fidelity International": [
+"earlycareersatfidelity@fil.com",
+"mycareer@fil.com",
+"asia.campusrecruitment@fil.com"
 ],
 "Firmus": [
 "jobs@firmus.ai"
@@ -437,11 +536,18 @@
 "GitLab": [
 "recruiting@gitlab.com"
 ],
+"Goldman Sachs": [
+"careersfeedback@gs.com"
+],
 "Grey Wing Security": [
 "careers@greywingsec.com"
 ],
 "Group One Trading": [
 "hrrecruit@group1.com"
+],
+"Guggenheim Securities": [
+"gsibcampusrecruiting@guggenheimpartners.com",
+"gslateralrecruiting@guggenheimpartners.com"
 ],
 "HDAI": [
 "careers@hda-institute.com"
@@ -472,11 +578,18 @@
 "Holistic Health": [
 "careers@holistic.health"
 ],
+"Hudson River Trading": [
+"careers@hudson-trading.com"
+],
 "Hume AI": [
 "careers@hume.ai"
 ],
 "ICON Trading": [
 "join@icontrading.com"
+],
+"ING": [
+"inghubsph-recruitment@ing.com",
+"hr_hubses@ing.com"
 ],
 "Ignosis": [
 "careers@ignosis.ai"
@@ -509,8 +622,18 @@
 "Invictus Technology": [
 "careers@invictusinvestments.com"
 ],
+"JPMorgan": [
+"jpmorgan_asia_recruiting@jpmorgan.com",
+"csi.early.careers.recruiting@jpmorgan.com",
+"apac.corporate.campus.recruitment@jpmorgan.com"
+],
 "Jane Street": [
 "jobs@janestreet.com"
+],
+"Jefferies": [
+"asiacampusrecruiting@jefferies.com",
+"emeacampusrecruitment@jefferies.com",
+"uscampusrecruiting@jefferies.com"
 ],
 "Jivi AI": [
 "careers@jivi.ai"
@@ -536,11 +659,20 @@
 "LLVM Foundation": [
 "careers@llvm.org"
 ],
+"LSEG": [
+"peopleservices@lseg.com"
+],
 "LTK Soft": [
 "careers@ltksoft.com"
 ],
 "LangChain": [
 "hello@langchain.dev"
+],
+"Lazard": [
+"lamukrecruiting@lazard.com"
+],
+"Lloyds Banking Group": [
+"careers@lloydsbanking.com"
 ],
 "LockedIn AI": [
 "careers@lockedinai.com"
@@ -556,6 +688,18 @@
 ],
 "M37": [
 "hr@m37.com"
+],
+"MUFG": [
+"careers@mpms.mufg.com"
+],
+"Macquarie": [
+"careers@macquarie.com",
+"macquarieamericasrecruitment@macquarie.com",
+"recruitment.emea@macquarie.com",
+"graduate@macquarie.com",
+"graduateasia@macquarie.com",
+"uscampusrecruitment@macquarie.com",
+"emeaearlycareers@macquarie.com"
 ],
 "Macquarie Group": [
 "macquarieamericasrecruitment@macquarie.com",
@@ -579,14 +723,33 @@
 "MergeOn": [
 "careers@mergeon.com"
 ],
+"Meta": [
+"swapplicant@meta.com",
+"llmcore-rs-intern-hiring@meta.com"
+],
 "Micron Technology": [
 "hrsupport_na@micron.com"
+],
+"Microsoft": [
+"pythonjobs@microsoft.com"
+],
+"Microsoft Research": [
+"hywayjobs@microsoft.com"
 ],
 "Midas Technologies": [
 "careers@midas-technologies.com"
 ],
+"Millennium": [
+"quanttalentus@mlp.com",
+"quanttalent@mlp.com",
+"india.quant.talent@mlp.com",
+"china.quant.talent@mlp.com"
+],
 "Mindgard": [
 "careers@mindgard.ai"
+],
+"Mizuho": [
+"recruitment@mizuhoemea.com"
 ],
 "MobDial": [
 "careers@mobdial.com"
@@ -598,10 +761,16 @@
 "mscampusrecruiting@morganstanley.com",
 "asia.recruit@morganstanley.com",
 "graduaterecruitmenteurope@morganstanley.com",
-"recruit.japan@morganstanley.com"
+"recruit.japan@morganstanley.com",
+"emeaec@morganstanley.com"
 ],
 "Mylio": [
 "jobs@mylio.com"
+],
+"NVIDIA": [
+"nvidia-recruitad@nvidia.com",
+"campus.tw@nvidia.com",
+"campuscn@nvidia.com"
 ],
 "Nabla": [
 "contact@nabla.com"
@@ -632,13 +801,18 @@
 ],
 "Nomura": [
 "campusrecruitingamr@nomura.com",
-"eurrecruitingevents-eu@nomura.com"
+"eurrecruitingevents-eu@nomura.com",
+"earlycareersaej@nomura.com",
+"indiacampusprogram@nomura.com"
 ],
 "Nortex Cyber": [
 "jobs@nortexcyber.com"
 ],
 "North Point Global": [
 "careers@northpointgl.com"
+],
+"Nutanix": [
+"resume@nutanix.com"
 ],
 "OTS Research": [
 "internationalcareerenquiries@ots-research.com",
@@ -672,6 +846,9 @@
 "OptumSoft": [
 "jobs@optumsoft.com"
 ],
+"Oracle": [
+"exadata_career_us_grp@oracle.com"
+],
 "Outmarket": [
 "careers@outmarket.ai"
 ],
@@ -681,8 +858,21 @@
 "PDT Partners": [
 "careers@pdtpartners.com"
 ],
+"PEAK6": [
+"hr@peak6.com"
+],
 "PG Ecom": [
 "careers@pgecom.com"
+],
+"PGIM": [
+"campusrecruiting@prudential.com"
+],
+"PJT Partners": [
+"campusrecruitingus@pjtpartners.com",
+"campusrecruitingeurope@pjtpartners.com"
+],
+"Palo Alto Networks": [
+"usmailresumes@paloaltonetworks.com"
 ],
 "Pangaea Data": [
 "careers@pangaeadata.ai"
@@ -693,6 +883,9 @@
 "PayLaterr": [
 "careers@paylaterr.com"
 ],
+"PayPal": [
+"paypalglobaltalentacquisition@paypal.com"
+],
 "PaymentHooks": [
 "careers@paymenthooks.com"
 ],
@@ -702,15 +895,24 @@
 "Peraton": [
 "careers@peraton.com"
 ],
+"Perella Weinberg Partners": [
+"campusrecruiting@pwpartners.com",
+"pwp@dartmouthpartners.com",
+"recruitment@pwpartners.com"
+],
 "Pfizer": [
 "globalrecruiting@pfizer.com"
 ],
 "PharMAX": [
 "careers@pharmax.com"
 ],
+"Plaid": [
+"recruiting-inquiries@plaid.com"
+],
 "Point72": [
 "academyrecruiting@point72.com",
-"is-recruiting-us@point72.com"
+"is-recruiting-us@point72.com",
+"svcrecruiting@point72.com"
 ],
 "PolyAI": [
 "talent@poly.ai"
@@ -736,11 +938,18 @@
 "QVR Advisors": [
 "careers@qvradvisors.com"
 ],
+"Qatalyst Partners": [
+"uscareers@qatalyst.com",
+"ukcareers@qatalyst.com"
+],
 "Qognitive": [
 "careers@qognitive.io"
 ],
 "Quadeye": [
 "hrconnect@quadeye.com"
+],
+"Qualcomm": [
+"hr.ressubmit@qualcomm.com"
 ],
 "Qualsoft": [
 "careers@qualsofttech.com"
@@ -779,6 +988,11 @@
 ],
 "Quasar": [
 "careers@quasar.ai"
+],
+"RBC Capital Markets": [
+"campusrecruitment@rbc.com",
+"uscampusrecruiting@rbccm.com",
+"ukcampusrecruiting@rbccm.com"
 ],
 "Radenso Labs / No Limits Enterprises": [
 "careers@nolimitsenterprises.com"
@@ -825,6 +1039,13 @@
 "Rokos Capital Management": [
 "careers@rokoscapital.com"
 ],
+"Rothschild & Co": [
+"asiarecruit@rothschildandco.com",
+"rh@rothschildandco.com",
+"carecruiting@rothschildandco.com",
+"lon.hrapplications@rothschildandco.com",
+"nmrmexico@rothschildandco.com"
+],
 "Runway": [
 "recruiting@runwayml.com"
 ],
@@ -843,6 +1064,9 @@
 "SHC Technologies": [
 "hr@shctech.io"
 ],
+"SMBC": [
+"campusrecruitment@smbcgroup.com"
+],
 "SagaAI": [
 "careers@sagaai.io"
 ],
@@ -852,6 +1076,13 @@
 "Sanctuary Software Studio": [
 "jobs@sancsoft.com"
 ],
+"Santander": [
+"internshipprogram@santander.us",
+"taops@santander.us"
+],
+"Scale AI": [
+"hoh-skillbridge-26-3@scale.com"
+],
 "Second Axis": [
 "careers@secondaxis.ai"
 ],
@@ -860,6 +1091,9 @@
 ],
 "Selsoft": [
 "jobs@selsoftinc.com"
+],
+"ServiceNow": [
+"servicenowresumesus@servicenow.com"
 ],
 "Shadowell": [
 "careers@shadowell.com"
@@ -876,8 +1110,15 @@
 "Snorkel AI": [
 "careers@snorkel.ai"
 ],
+"Snowflake": [
+"snowflakecareers@snowflake.com",
+"snowflakerecruiting@snowflake.com"
+],
 "Socaity": [
 "careers@socaity.ai"
+],
+"Societe Generale": [
+"lon-hr-earlycareers@sgcib.com"
 ],
 "SoftwareOrbits": [
 "careers@softwareorbits.com"
@@ -890,6 +1131,12 @@
 ],
 "Splendo": [
 "jobs@splendo.com"
+],
+"Squarepoint": [
+"campusrecruitment@squarepoint-capital.com"
+],
+"State Street": [
+"globaltasolutions@statestreet.com"
 ],
 "Steg.AI": [
 "careers@steg.ai"
@@ -916,6 +1163,9 @@
 "TBCASoft": [
 "jobs@tbcasoft.com"
 ],
+"TD Securities": [
+"tdrecruit@tdsecurities.com"
+],
 "Tactus AI": [
 "careers@tactus.ai"
 ],
@@ -940,11 +1190,22 @@
 "ThatWare": [
 "hr@thatware.co"
 ],
+"The Voleon Group": [
+"hr@voleon.com"
+],
 "ThinkingAI": [
 "hr@thinkingai.io"
 ],
 "Thinkscoop": [
 "hr@thinkscoopinc.com"
+],
+"TikTok": [
+"apac-earlycareers@tiktok.com",
+"emea-earlycareers@tiktok.com",
+"ams-earlycareers@tiktok.com"
+],
+"Tower Research": [
+"us-ta@tower-research.com"
 ],
 "Town": [
 "jobs@corp.town.com"
@@ -967,6 +1228,13 @@
 "Two Sigma": [
 "m&tcampus@twosigma.com"
 ],
+"UBS": [
+"sh-campus-hk@ubs.com",
+"sh-campus-recruiting-tokyo@ubs.com"
+],
+"Uber": [
+"resumes_uberus@uber.com"
+],
 "Union": [
 "careers@gounion.com"
 ],
@@ -985,8 +1253,14 @@
 "Valliance AI": [
 "careers@valliance.ai"
 ],
+"Vanguard": [
+"careers@vanguard.com"
+],
 "Velocity Cyber": [
 "careers@velocitycyber.io"
+],
+"Vercel": [
+"ta@vercel.com"
 ],
 "Vertraus": [
 "careers@vertraus.com"
@@ -999,6 +1273,9 @@
 ],
 "VivCourt": [
 "recruitment@vivcourt.com"
+],
+"Volant Trading": [
+"careers@volanttrading.com"
 ],
 "WIZ.AI": [
 "hr@wiz.ai"
@@ -1014,6 +1291,10 @@
 ],
 "WebWorks": [
 "jobs@webworks.com"
+],
+"Wellington Management": [
+"undergradrecruiting@wellington.com",
+"gmcaninq@wellington.com"
 ],
 "Wheeling Software": [
 "careers@wheelingsoft.com"

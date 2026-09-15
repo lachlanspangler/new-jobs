@@ -30,7 +30,7 @@ GEN_KW = ("career", "recruit", "talent", "hiring", "campus", "graduate", "grad",
 def is_generic(row):
     email = (row.get("email") or "").strip()
     name = (row.get("name") or "").strip()
-    if not email or name:        # must be a role inbox, not a named person
+    if not email or name or row.get("public") is False:  # role inbox, not a person/alias
         return False
     if GENERIC.match(email):     # local part starts with a generic keyword
         return True
