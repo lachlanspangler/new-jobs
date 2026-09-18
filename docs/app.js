@@ -3,7 +3,11 @@
 const TAG_COLORS = { ai: "#b08cff", quant: "#43e08a", hedge: "#ffa94d", tech: "#34d3ee" };
 const STORE = "nj-apps";
 const DSTORE = "nj-dismissed";
-const state = { jobs: [], q: "", city: "", role: "", newonly: false, hideapplied: false, showdismissed: false, tags: new Set(), shown: 60 };
+const state = { jobs: [], q: "", city: "", role: "", newonly: false, hideapplied: false, hidestaff: false, hidesenior: false, hideintern: false, showdismissed: false, tags: new Set(), shown: 60 };
+
+const IS_STAFF = /\bstaff\b|\bprincipal\b|\bdistinguished\b|\bfellow\b/i;
+const IS_SENIOR = /\bsenior\b|\bsr\.?\b/i;
+const IS_INTERN = /\bintern(ship)?s?\b|\bco-?op\b|\bapprentice\b/i;
 
 const $ = (id) => document.getElementById(id);
 const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
@@ -58,6 +62,9 @@ function filtered() {
     if (state.city === "priority" && !j.priority) return false;
     else if (state.city && state.city !== "priority" && !loc.includes(state.city)) return false;
     if (state.hideapplied && APPLIED.has(j.key)) return false;
+    if (state.hidestaff && IS_STAFF.test(j.title)) return false;
+    if (state.hidesenior && IS_SENIOR.test(j.title)) return false;
+    if (state.hideintern && IS_INTERN.test(j.title)) return false;
     if (!q) return true;
     return j.title.toLowerCase().includes(q) || j.company.toLowerCase().includes(q) || loc.includes(q);
   });
@@ -136,7 +143,7 @@ async function load() {
 }
 
 ["q", "city", "role"].forEach((id) => $(id).addEventListener("input", (e) => { state[id] = e.target.value; state.shown = 60; render(); }));
-["newonly", "hideapplied", "showdismissed"].forEach((id) => $(id).addEventListener("change", (e) => { state[id] = e.target.checked; render(); }));
+["newonly", "hideapplied", "hidestaff", "hidesenior", "hideintern", "showdismissed"].forEach((id) => $(id).addEventListener("change", (e) => { state[id] = e.target.checked; state.shown = 60; render(); }));
 $("more").addEventListener("click", () => { state.shown += 60; render(); });
 $("list").addEventListener("click", (e) => {
   const trash = e.target.closest(".r-trash");
