@@ -811,17 +811,6 @@
    "domain": "brex.com"
   },
   {
-   "name": "Capital One",
-   "ats": "workday",
-   "token": "capitalone",
-   "host": "wd12",
-   "site": "Capital_One",
-   "tags": [
-    "tech"
-   ],
-   "domain": "capitalone.com"
-  },
-  {
    "name": "Carta",
    "ats": "greenhouse",
    "token": "carta",
@@ -1065,17 +1054,6 @@
     "tech"
    ],
    "domain": "lithic.com"
-  },
-  {
-   "name": "Mastercard",
-   "ats": "workday",
-   "token": "mastercard",
-   "host": "wd1",
-   "site": "CorporateCareers",
-   "tags": [
-    "tech"
-   ],
-   "domain": "mastercard.com"
   },
   {
    "name": "Modern Treasury",
