@@ -2575,6 +2575,60 @@
     "tech"
    ],
    "domain": "socket.com"
+  },
+  {
+   "name": "Snorkel AI",
+   "ats": "greenhouse",
+   "token": "snorkelai",
+   "tags": [
+    "ai"
+   ],
+   "domain": "snorkelai.com"
+  },
+  {
+   "name": "Chai Discovery",
+   "ats": "ashby",
+   "token": "chaidiscovery",
+   "tags": [
+    "ai"
+   ],
+   "domain": "chaidiscovery.com"
+  },
+  {
+   "name": "Exa",
+   "ats": "ashby",
+   "token": "exa",
+   "tags": [
+    "ai"
+   ],
+   "domain": "exa.com"
+  },
+  {
+   "name": "Epic Games",
+   "ats": "greenhouse",
+   "token": "epicgames",
+   "tags": [
+    "tech"
+   ],
+   "domain": "epicgames.com"
+  },
+  {
+   "name": "Riot Games",
+   "ats": "greenhouse",
+   "token": "riotgames",
+   "tags": [
+    "tech"
+   ],
+   "domain": "riotgames.com"
+  },
+  {
+   "name": "Duolingo",
+   "ats": "greenhouse",
+   "token": "duolingo",
+   "tags": [
+    "tech"
+   ],
+   "domain": "duolingo.com"
   }
  ]
 }
