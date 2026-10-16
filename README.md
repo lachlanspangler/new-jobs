@@ -1,4 +1,4 @@
-# new-jobs
+# [no longer used, I switched to job-finder]
 
 A daily board of the newest **software & quant** roles across the biggest tech,
 AI, quant, and hedge-fund employers — pulled from the public **Greenhouse**,
