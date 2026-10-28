@@ -7,6 +7,7 @@ import json
 import os
 import sys
 import tempfile
+import time
 import unittest
 from argparse import Namespace
 from pathlib import Path
@@ -39,7 +40,7 @@ def row(key, title="Software Engineer", company="Acme", location="New York, NY",
 
 def args(tmp, **kw):
     a = Namespace(tag=[], no_openquant=True, no_builtin=True, seen=str(Path(tmp) / "seen.json"),
-                  out=str(Path(tmp) / "jobs.json"), previous=None, prune_days=30, today=None)
+                  out=str(Path(tmp) / "jobs.json"), previous=None, prune_days=30, today=None, allow_drop=False)
     for k, v in kw.items():
         setattr(a, k, v)
     return a
@@ -86,9 +87,19 @@ class Parsers(unittest.TestCase):
         self.assertEqual(out[1]["posted"], "")
         self.assertEqual(out[1]["salary"], "GBP 100,000 – 120,000")
 
-    def test_lever_non_list_is_empty(self):
-        with mock.patch.object(fj, "fetch", return_value={"ok": False}):
-            self.assertEqual(fj.norm_lever(LEV), [])
+    def test_lever_unexpected_payload_is_a_board_failure(self):
+        with mock.patch.object(fj, "fetch", return_value={"ok": False}), self.assertRaises(ValueError):
+            fj.norm_lever(LEV)
+
+    def test_builtin_page_without_cards_is_an_outage(self):
+        with mock.patch.object(fj, "fetch_html", return_value="<html>checking your browser</html>"), \
+                mock.patch.object(fj.time, "sleep"), self.assertRaises(ValueError):
+            fj.norm_builtin("https://www.builtinsf.com", "San Francisco")
+
+    def test_openquant_without_next_data_is_an_outage(self):
+        with mock.patch.object(fj.urllib.request, "urlopen", return_value=FakeResp(b"<html>nope</html>")), \
+                self.assertRaises(ValueError):
+            fj._oq_page({})
 
     def test_workday_dedups_across_terms_and_dates(self):
         page = {"total": 2, "jobPostings": [
@@ -175,11 +186,24 @@ class Seen(unittest.TestCase):
             self.assertEqual(fj.load_seen(p, {}, "2026-10-28"),
                              {"k": ["2026-09-01", "2026-10-28"], "n": ["2026-10-01", "2026-10-02"]})
 
-    def test_missing_state_seeds_from_previous_site(self):
-        prev = {"generated_at": "2026-10-12T03:22:02+00:00",
+    def test_missing_state_seeds_from_previous_site_in_local_time(self):
+        prev = {"generated_at": "2026-10-12T03:22:02+00:00",  # = 22:22 on Oct 11 in Chicago
                 "jobs": [row("greenhouse:acme:1", first="2026-09-03")]}
-        self.assertEqual(fj.load_seen("/nonexistent/seen.json", prev, "2026-10-28"),
-                         {"greenhouse:acme:1": ["2026-09-03", "2026-10-12"]})
+        with mock.patch.dict(os.environ, {"TZ": "America/Chicago"}):
+            time.tzset()
+            try:
+                seeded = fj.load_seen("/nonexistent/seen.json", prev, "2026-10-28")
+            finally:
+                os.environ.pop("TZ", None)
+        time.tzset()
+        self.assertEqual(seeded, {"greenhouse:acme:1": ["2026-09-03", "2026-10-11"]})
+
+    def test_corrupt_state_stops_with_an_explanation(self):
+        with tempfile.TemporaryDirectory() as t:
+            Path(t, "seen.json").write_text("{not json")
+            with self.assertRaises(SystemExit) as e:
+                fj.load_seen(Path(t, "seen.json"), {}, "2026-10-28")
+        self.assertIn("not valid JSON", str(e.exception.code))
 
     def test_prune_after_30_days_gone_and_return_is_new(self):
         seen = {"greenhouse:acme:old": ["2026-08-01", "2026-09-27"],   # gone 31 days -> pruned
@@ -220,6 +244,37 @@ class Run(unittest.TestCase):
         self.assertEqual(rep["carried"], 1)
         self.assertEqual(seen["ashby:bolt:7"], ["2026-10-02", "2026-10-27"])  # not refreshed: not confirmed live
         self.assertEqual(seen["greenhouse:acme:1"], ["2026-10-01", "2026-10-28"])
+
+    def test_a_board_broken_for_30_days_stops_showing_its_old_jobs(self):
+        with tempfile.TemporaryDirectory() as t:
+            prev = {"jobs": [row("ashby:bolt:7", company="Bolt", first="2026-08-01"),
+                             row("ashby:bolt:8", company="Bolt", first="2026-08-01")]}
+            Path(t, "prev.json").write_text(json.dumps(prev))
+            Path(t, "seen.json").write_text(json.dumps({"ashby:bolt:7": ["2026-08-01", "2026-09-27"],  # 31 d ago
+                                                        "ashby:bolt:8": ["2026-08-01", "2026-09-28"]}))  # 30 d ago
+            a = args(t, previous=str(Path(t, "prev.json")))
+            with mock.patch("sys.stdout", new_callable=io.StringIO):
+                payload, seen, rep = fj.build([GH, ASH], a, "2026-10-28",
+                                              self.fetched([row("greenhouse:acme:1")], failed={"ashby:bolt"}))
+        self.assertEqual(sorted(j["key"] for j in payload["jobs"]), ["ashby:bolt:8", "greenhouse:acme:1"])
+        self.assertIn("ashby:bolt:7", seen)  # still not pruned: its board failed, so "gone" isn't known
+
+    def test_a_silent_mass_outage_aborts(self):
+        with tempfile.TemporaryDirectory() as t:
+            Path(t, "prev.json").write_text(json.dumps({"count": 10, "jobs": []}))
+            live = [row(f"greenhouse:acme:{i}") for i in range(4)]  # 4 roles vs 10 last run: under 50%
+            with self.assertRaises(SystemExit), mock.patch("sys.stdout", new_callable=io.StringIO):
+                fj.build([GH], args(t, previous=str(Path(t, "prev.json"))), "2026-10-28", self.fetched(live))
+            payload, _s, _r = fj.build([GH], args(t, previous=str(Path(t, "prev.json")), allow_drop=True),
+                                       "2026-10-28", self.fetched(live))
+            self.assertEqual(payload["count"], 4)
+
+    def test_abort_names_the_failed_boards(self):
+        with tempfile.TemporaryDirectory() as t, mock.patch("sys.stdout", new_callable=io.StringIO) as out:
+            with self.assertRaises(SystemExit):
+                fj.build([GH, ASH, LEV], args(t), "2026-10-28",
+                         self.fetched([], failed={"ashby:bolt", "lever:cog", "x:y"}))
+        self.assertIn("board failed: lever:cog: boom", out.getvalue())
 
     def test_a_closed_posting_leaves_the_site(self):
         with tempfile.TemporaryDirectory() as t:

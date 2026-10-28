@@ -29,6 +29,7 @@ PACING = 0.25
 MAX_EXPORT = 15000
 PRUNE_DAYS = 30
 FAIL_LIMIT = 0.5          # more than this share of boards failing aborts the run
+DROP_LIMIT = 0.5          # fewer than this share of the previous run's roles aborts the run (silent mass outage)
 
 INCLUDE_RE = re.compile(
     r"\b(software|developer|engineer|engineering|swe|sde|programmer|back[\s-]?end|"
@@ -99,7 +100,9 @@ def norm_ashby(c):
 def norm_lever(c):
     data = fetch(f"https://api.lever.co/v0/postings/{c['token']}?mode=json")
     out = []
-    for p in data if isinstance(data, list) else []:
+    if not isinstance(data, list):
+        raise ValueError(f"lever {c['token']}: expected a list of postings, got {type(data).__name__}")
+    for p in data:
         created = p.get("createdAt")
         posted = dt.datetime.fromtimestamp(created / 1000, dt.timezone.utc).isoformat() if isinstance(created, (int, float)) else ""
         sr = p.get("salaryRange") or {}
@@ -189,7 +192,9 @@ def _oq_page(params):
     req = urllib.request.Request(OQ_URL + q, headers={"User-Agent": UA})
     with urllib.request.urlopen(req, timeout=20) as r:
         m = OQ_NEXT_RE.search(r.read().decode("utf-8"))
-    return json.loads(m.group(1))["props"]["pageProps"].get("data", []) if m else []
+    if not m:  # page structure changed or a challenge page: an outage, not "no jobs"
+        raise ValueError("openquant.co: no __NEXT_DATA__ in page")
+    return json.loads(m.group(1))["props"]["pageProps"].get("data", [])
 
 
 def _oq_salary(j):
@@ -243,6 +248,8 @@ def norm_builtin(base, city, pages=6):
             break
         blocks = html_.split('data-id="job-card"')[1:]
         if not blocks:
+            if p == 1:  # a 200 with no job cards (bot challenge, redesign) is an outage, not "no jobs"
+                raise ValueError(f"{base}: no job cards on page 1")
             break
         for b in blocks:
             mid = BI_ID_RE.search(b)
@@ -329,6 +336,8 @@ def load_json(path, default):
         return json.loads(Path(path).read_text())
     except FileNotFoundError:
         return default
+    except ValueError as e:
+        raise SystemExit(f"{path} is not valid JSON ({e}); fix or delete it (CI: the state branch) and rerun")
 
 
 def load_seen(path, previous, today):
@@ -337,7 +346,10 @@ def load_seen(path, previous, today):
     raw = load_json(path, None)
     if raw is None:
         seeded = {}
-        gen = (previous.get("generated_at") or "")[:10] or today
+        try:  # generated_at is UTC; every other date here is local (TZ)
+            gen = dt.datetime.fromisoformat(previous["generated_at"]).astimezone().date().isoformat()
+        except (KeyError, TypeError, ValueError):
+            gen = today
         for j in previous.get("jobs", []):
             if j.get("key") and j.get("firstSeen"):
                 seeded[j["key"]] = [j["firstSeen"], gen]
@@ -426,19 +438,33 @@ def build(companies, args, today, fetched=None):
     """Everything after the network: returns (payload, seen, report) or raises SystemExit(2) on a bad run."""
     all_jobs, curated, failed, errors, attempted = fetched if fetched is not None else collect(companies, args)
     previous = load_json(args.previous, {}) if args.previous else {}
-    if attempted and len(failed) / attempted > FAIL_LIMIT:
-        annotate("error", f"{len(failed)} of {attempted} boards failed — keeping the last good site and state")
+
+    def abort(msg):
+        for e in errors:  # name the failures: this is the run the owner will open to diagnose
+            annotate("warning", f"board failed: {e}")
+        annotate("error", f"{msg} — keeping the last good site and state")
         raise SystemExit(2)
+
+    if attempted and len(failed) / attempted > FAIL_LIMIT:
+        abort(f"{len(failed)} of {attempted} boards failed")
 
     matched = [j for j in all_jobs if is_target(j["title"])] + curated
     live_keys = {j["key"] for j in matched}
-    carried = [j for j in previous.get("jobs", [])
-               if board_of(j) in failed and j.get("key") not in live_keys]
-    if not matched and not carried:
-        annotate("error", "no target roles came back — keeping the last good site and state")
-        raise SystemExit(2)
-
     seen = load_seen(args.seen, previous, today)
+    cutoff = (dt.date.fromisoformat(today) - dt.timedelta(days=args.prune_days)).isoformat()
+    candidates = [j for j in previous.get("jobs", []) if board_of(j) in failed and j.get("key") not in live_keys]
+    # carry a broken board's last good jobs, but only while they were confirmed live within the prune window:
+    # a board that stays broken must not keep long-closed postings on the site forever
+    carried = [j for j in candidates if j["key"] in seen and seen[j["key"]][1] >= cutoff]
+    for b in sorted({board_of(j) for j in candidates} - {board_of(j) for j in carried}):
+        annotate("warning", f"{b} has failed for {args.prune_days}+ days; its old jobs are no longer shown")
+    if not matched and not carried:
+        abort("no target roles came back")
+    prev_count = previous.get("count") or 0
+    if not args.tag and not args.allow_drop and prev_count and len(matched) + len(carried) < DROP_LIMIT * prev_count:
+        abort(f"only {len(matched) + len(carried):,} roles vs {prev_count:,} last run (rerun with --allow-drop "
+              "if that's real)")
+
     before = len(seen)
     mark_seen(seen, matched, today)
     mark_seen(seen, carried, today, live=False)
@@ -500,6 +526,8 @@ def main(argv=None):
     ap.add_argument("--previous", default=None,
                     help="last good jobs.json, for carrying forward broken boards (default: --out if it exists)")
     ap.add_argument("--prune-days", type=int, default=PRUNE_DAYS)
+    ap.add_argument("--allow-drop", action="store_true",
+                    help=f"accept a run with under {DROP_LIMIT:.0%} of the previous run's roles")
     ap.add_argument("--today", default=None, help="override the local date (YYYY-MM-DD), for tests")
     args = ap.parse_args(argv)
     if args.previous is None and Path(args.out).exists():
