@@ -46,3 +46,26 @@ filter works, and clicking Apply recorded the job in `nj-apps` and showed it on 
 fresh deploy read "updated 1h ago". It now shows minutes.
 **Noted, not changed (scope):** 5 dead board tokens in `companies.json`; those boards fail every run, so their old
 seen entries are protected from pruning until they're fixed or removed.
+
+## 2026-10-28 — Fresh code review: findings and fixes
+A fresh reviewer (given the code and the requirements, not my conclusions) verified the pinned SHAs against their
+tags, confirmed the owner's setup order is safe, and found:
+1. **A board that fails forever kept its jobs on the site forever** (carried rows never aged). Fixed: carry only rows
+   confirmed live within the 30-day window; warn once a board has failed past that.
+2. **Outages that look like empty boards** (Built In serving a 200 challenge page from datacenter IPs, openquant
+   without `__NEXT_DATA__`, a non-list Lever payload) silently dropped jobs. Fixed: they raise, so they count as
+   failures. Added a mass-outage guard: abort if roles fall under 50% of the last run (`--allow-drop`, exposed as a
+   "Run workflow" checkbox).
+3. **State was saved before the deploy, and from any branch.** Fixed: three jobs, refresh → deploy → save-state;
+   save-state runs only after a successful deploy; everything is gated to `main`.
+4. **A red run didn't name the failed boards.** Fixed: the abort path annotates each failure first.
+5. **`build_site.sh` would `rm -rf` any target**, including `.` or `docs`. Fixed: unsafe targets are refused (11
+   tested), and the build goes to a temp dir that's swapped in only on success.
+Hardening: the fetch job is now read-only (`contents: read`, `persist-credentials: false`, since the fetcher parses
+untrusted remote data), and `contents: write` exists only in save-state. The keepalive moved to its own job holding
+the only `actions: write` grant; it runs even after a red refresh. First-run seeding converts `generated_at` to local
+time. A corrupt state file now stops with an explanation.
+**Not fixed (low risk, in STATUS):** no per-board time budget; local `--tag` runs overwrite `docs/jobs.json` (as
+before); failures are keyed by `ats:token`.
+29 unit tests + 2 shell test suites + actionlint/shellcheck green. Re-verified the hardened `build_site.sh` with a
+small real run (`--tag hedge`: 341 roles).

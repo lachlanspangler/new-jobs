@@ -8,6 +8,11 @@ on:
   schedule:
     - cron: "17 */3 * * *" # every 3 hours, off the hour (UTC); ~8 runs/day, polite to the ATS APIs (ADR 0002)
   workflow_dispatch:
+    inputs:
+      allow_drop:
+        description: "Accept a run with under half of last run's roles (only if the drop is real)"
+        type: boolean
+        default: false
 
 permissions: {}
 
@@ -38,7 +43,9 @@ jobs:
 
       # Exits 2 without writing if most boards fail or roles collapse; the steps below then never run.
       - name: Fetch jobs and build the site
-        run: scripts/build_site.sh .state _site
+        env:
+          ALLOW_DROP: ${{ inputs.allow_drop && '--allow-drop' || '' }}
+        run: scripts/build_site.sh .state _site ${ALLOW_DROP:+"$ALLOW_DROP"}
 
       - uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5.0.0
         with:

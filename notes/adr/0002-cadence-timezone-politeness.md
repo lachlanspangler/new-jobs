@@ -18,9 +18,15 @@ rather than race on the state branch. Job timeout 30 minutes (four times a norma
 (15–20 s) bound any single board.
 
 **Bad runs:** one failing board is skipped, logged as a warning annotation, and its last good jobs are carried
-forward. If more than half the boards fail, or no roles come back, the fetcher exits 2 *before writing*, so the
-workflow goes red, the site keeps its last good deploy and state is untouched.
+forward, but only jobs confirmed live within the last 30 days, so a board that stays broken doesn't keep closed
+postings up forever. Outages that look like empty boards (a 200 with no job cards, a page without its data, an
+unexpected payload) count as failures. The fetcher exits 2 *before writing*, naming every failed board, if more than
+half the boards fail, if no roles come back, or if roles fall below half of the last run (a silent mass outage;
+`--allow-drop` overrides it once if the drop is real). The workflow then goes red, the site keeps its last good
+deploy and state is untouched: state is saved in a final job that runs only after a successful deploy, and only
+from `main`.
 
 **Schedule lapse:** GitHub disables schedules in public repos after 60 days without repository activity. The workflow
-re-enables itself each scheduled run (best effort, `continue-on-error`). If the Actions tab ever shows the workflow
+re-enables itself on every scheduled run, including red ones (a separate best-effort job holding the only
+`actions: write` grant). If the Actions tab ever shows the workflow
 disabled, click "Enable workflow".

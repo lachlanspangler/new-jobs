@@ -13,7 +13,8 @@ first/last-seen dates (for "new today" and pruning) and the last good data (so a
    freshly generated `jobs.json`, assembled by `scripts/build_site.sh`. `docs/jobs.json` and `seen.json` are untracked
    and gitignored. Pages' source switches from "Deploy from a branch" to "GitHub Actions".
 2. **State lives on a `state` branch holding exactly one parentless commit** (`seen.json` + the last deployed
-   `jobs.json`), written with `git mktree`/`commit-tree` and force-pushed each run (`scripts/state.sh`). History never
+   `jobs.json`), written with `git mktree`/`commit-tree` and force-pushed each run by a final `save-state` job that
+   runs only after the deploy succeeds (`scripts/state.sh`). The fetch job itself is read-only. History never
    grows; old blobs become unreachable and GitHub garbage-collects them. Nobody needs to check it out.
 3. **First run with no state branch** seeds from the live site's `jobs.json` (its `firstSeen` per job), so existing
    roles don't all show up as "new today" once. Failing to *reach* the remote is fatal rather than a reason to

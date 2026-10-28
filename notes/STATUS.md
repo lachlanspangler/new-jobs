@@ -3,23 +3,27 @@
 ## What's built
 The board now updates itself, with no laptop involved.
 - **`.github/workflows/refresh.yml`** runs every 3 hours (`17 */3 * * *` UTC, 8 runs a day, ~7 minutes each) and on
-  demand (**Actions → Refresh jobs → Run workflow**). It restores state, runs `fetch_jobs.py`, builds `docs/` plus a
-  fresh `jobs.json` into a Pages artifact, saves state, and deploys with the official `upload-pages-artifact` +
-  `deploy-pages` actions. Runs never overlap (`concurrency: refresh-jobs`); the refresh job times out at 30 minutes,
-  the deploy at 10. Actions are pinned to commit SHAs, and Dependabot keeps them current.
+  demand (**Actions → Refresh jobs → Run workflow**). Three jobs: **refresh** (restores state, runs
+  `fetch_jobs.py`, builds `docs/` plus a fresh `jobs.json` into a Pages artifact) → **deploy** (official
+  `upload-pages-artifact` + `deploy-pages`) → **save-state** (only after a successful deploy, only from `main`). Runs
+  never overlap (`concurrency: refresh-jobs`); the jobs time out at 30, 10 and 5 minutes. Actions are pinned to commit SHAs, and Dependabot keeps them current.
 - **No generated data in git:** `docs/jobs.json` and `seen.json` are untracked and gitignored. State (`seen.json` +
   the last deployed `jobs.json`) lives on the **`state` branch**: one parentless commit, replaced every run, so history
   never grows (ADR 0001).
 - **Resilient runs:** a broken board is skipped and shown as a warning on the run, and its last good jobs stay on the
-  site. If more than half the boards fail, or nothing comes back, the run goes red *before* writing anything: the
-  live site and state stay as they were.
+  site (for up to 30 days, so a board that stays broken doesn't show closed jobs forever). Outages that look like an
+  empty board count as failures. If more than half the boards fail, nothing comes back, or roles fall under half of
+  the last run, the run goes red *before* writing anything and names the failed boards. The live site and state stay
+  as they were.
 - **Memory:** `seen.json` keeps first- and last-seen dates. Postings gone from every board for 30+ days are pruned,
   and a pruned posting that returns counts as new. First real run: 19,449 → 16,601 entries (−2,879), 1.42 → 1.18 MB.
   `jobs.json` holds open postings only (12,168 roles today).
 - **Unchanged:** the site's pages, job `key` formats and localStorage keys, so the apply tracker (`stats.html`) works
   exactly as before (verified: Apply → counted on the Applications page).
-- `make check` is green: 23 unit tests (every parser, role filters, seen dates, pruning, carry-forward, the bad-run
-  guard, step summary), a `state.sh` integration test against a local bare repo, and actionlint + shellcheck.
+- `make check` is green: 29 unit tests (every parser and its outage cases, role filters, seen dates, pruning, a
+  pruned job coming back, carry-forward and its 30-day limit, the bad-run guards, step summary), a `state.sh`
+  integration test against a local bare repo, a `build_site.sh` safety test, and actionlint + shellcheck.
+- A fresh code reviewer found 5 bugs and 8 smaller issues; all fixed except three low-risk ones listed under Known (see DIARY).
 
 ## What you need to do (once, in this order)
 Order matters. Pushing `main` deletes `docs/jobs.json` from the branch, so the Pages source must already be
@@ -32,8 +36,9 @@ Order matters. Pushing `main` deletes `docs/jobs.json` from the branch, so the P
 3. **Push main:** `git push origin main`.
 4. **Start the first run:** **Actions → Refresh jobs → Run workflow** (branch `main`).
 
-No other settings need to change. The workflow declares its own token permissions (`contents: write` for the state
-branch, `pages: write` + `id-token: write` for the deploy, `actions: write` for the keepalive). The `github-pages`
+No other settings need to change. The workflow declares its own least-privilege token permissions per job: the fetch
+job is read-only, `pages: write` + `id-token: write` for the deploy, `contents: write` only in the final save-state
+job, and `actions: write` only for the keepalive. The `github-pages`
 environment is created automatically and allows `main`. If Settings → Actions → General restricts which actions can
 run, allow GitHub-authored actions (`actions/*`).
 
@@ -42,11 +47,18 @@ run, allow GitHub-authored actions (`actions/*`).
   roles, new today, carried, pruned, seen before/after) and lists any boards it skipped.
 - **The site:** the header shows "updated N m/h ago", which should never read more than ~3–4 h.
 - **The `state` branch:** its single commit's message carries the time of the last successful run.
-- **A red run** means most boards failed or nothing came back; the site is still the last good one. Open the run to
-  see why. If the Actions tab says the workflow is *disabled* (GitHub does this after 60 days without repo activity;
+- **A red run** means most boards failed, nothing came back, or roles fell under half of the last run. The site and
+  state are still the last good ones. Open the run: it names every failed board. If a big drop is real (e.g. you
+  removed many companies), use **Run workflow** with **"Accept a run with under half of last run's roles"** ticked,
+  once. If the Actions tab says the workflow is *disabled* (GitHub does this after 60 days without repo activity;
   the workflow tries to prevent it), click **Enable workflow**.
 
 ## Known / next
+- Don't push the `state` branch by hand while a run is in progress: the run's save would overwrite it.
 - 5 board tokens in `companies.json` return 404 on every run: Old Mission, Amplitude, Postman, Shield AI, Wayve.
   Fix or remove them; until then their old `seen.json` entries are protected from pruning.
 - If the repo ever goes private, Actions minutes stop being free: drop the cron to every 6 hours (ADR 0002).
+- Not fixed from review, low risk: (a) no per-board time budget; enough slow boards could push a run past 30 minutes.
+  Nothing is written then, so it's only a wasted run. (b) A local `--tag` run overwrites `docs/jobs.json` with the
+  subset (local only, as before). (c) Failures are keyed by `ats:token`, so two companies sharing a token would count
+  as one (none do).
