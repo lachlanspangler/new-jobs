@@ -9,10 +9,16 @@ researcher, quant, trade-desk operations (and adjacent SWE titles).
 Usage:
   python3 fetch_jobs.py            # fetch, update seen store, export site data
   python3 fetch_jobs.py --tag ai   # limit to a company tag (repeatable)
+  python3 fetch_jobs.py --seen state/seen.json --previous state/jobs.json --out _site/jobs.json   # CI
+
+State (seen.json): key -> [first_seen, last_seen] ISO dates in local time (TZ env; CI uses America/Chicago).
+A posting gone from every board for --prune-days (30) is forgotten; if it comes back it is new again.
+A board that fails to fetch is skipped and logged, and its jobs from --previous are carried forward.
+Exit 2 (nothing written) if most boards fail or no roles come back, so a bad run never replaces a good site.
 """
 
 from __future__ import annotations
-import argparse, datetime as dt, html, json, re, time, urllib.error, urllib.request
+import argparse, datetime as dt, html, json, os, re, sys, time, urllib.error, urllib.request
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent
@@ -21,6 +27,8 @@ DOCS = ROOT / "docs"
 UA = "new-jobs/1.0 (personal job search)"
 PACING = 0.25
 MAX_EXPORT = 15000
+PRUNE_DAYS = 30
+FAIL_LIMIT = 0.5          # more than this share of boards failing aborts the run
 
 INCLUDE_RE = re.compile(
     r"\b(software|developer|engineer|engineering|swe|sde|programmer|back[\s-]?end|"
@@ -229,7 +237,9 @@ def norm_builtin(base, city, pages=6):
     for p in range(1, pages + 1):
         try:
             html_ = fetch_html(f"{base}/jobs?page={p}")
-        except (urllib.error.URLError, urllib.error.HTTPError, ValueError):
+        except (urllib.error.URLError, urllib.error.HTTPError, ValueError, OSError):
+            if p == 1:
+                raise  # the whole board is down: let the caller carry its last good jobs forward
             break
         blocks = html_.split('data-id="job-card"')[1:]
         if not blocks:
@@ -292,24 +302,92 @@ def fetch_openquant():
     return out
 
 
-def main():
-    ap = argparse.ArgumentParser()
-    ap.add_argument("--tag", action="append", default=[])
-    ap.add_argument("--no-openquant", action="store_true", help="skip the openquant.co quant board")
-    ap.add_argument("--no-builtin", action="store_true", help="skip the Built In SF/NYC boards")
-    args = ap.parse_args()
+# --- state: first/last-seen dates, pruning, broken-board carry-forward ----------------------------
 
-    cfg = json.loads((ROOT / "companies.json").read_text())
-    companies = cfg["companies"]
-    if args.tag:
-        tags = {t.lower() for t in args.tag}
-        companies = [c for c in companies if set(t.lower() for t in c.get("tags", [])) & tags]
+def board_of(row):
+    """The board a row came from: 'greenhouse:<token>', 'builtin:<city>', 'openquant'."""
+    src = row["key"].split(":", 1)[0]
+    if src == "builtin":
+        return f"builtin:{row.get('location') or ''}"
+    if src == "openquant":
+        return "openquant"
+    return ":".join(row["key"].split(":")[:2])
 
-    all_jobs, errors = [], []
+
+def key_guard(key):
+    """Coarse board of a seen.json key (builtin keys don't carry their city, so all of builtin is one guard)."""
+    parts = key.split(":")
+    return parts[0] if parts[0] in ("builtin", "openquant") else ":".join(parts[:2])
+
+
+def guard_of(board):
+    return board.split(":", 1)[0] if board.startswith("builtin:") else board
+
+
+def load_json(path, default):
+    try:
+        return json.loads(Path(path).read_text())
+    except FileNotFoundError:
+        return default
+
+
+def load_seen(path, previous, today):
+    """seen.json -> {key: [first, last]}. Upgrades the old {key: first} format (last-seen unknown, so the 30-day
+    clock starts today), and seeds from the previous jobs.json when there is no state at all (first CI run)."""
+    raw = load_json(path, None)
+    if raw is None:
+        seeded = {}
+        gen = (previous.get("generated_at") or "")[:10] or today
+        for j in previous.get("jobs", []):
+            if j.get("key") and j.get("firstSeen"):
+                seeded[j["key"]] = [j["firstSeen"], gen]
+        return seeded
+    return {k: ([v, today] if isinstance(v, str) else [v[0], v[1]]) for k, v in raw.items()}
+
+
+def mark_seen(seen, rows, today, live=True):
+    """Record first/last-seen; set firstSeen/isNew on each row. A key not in seen (never seen, or pruned) is new."""
+    for j in rows:
+        ent = seen.get(j["key"])
+        if ent is None:
+            ent = seen[j["key"]] = [today, today]
+        elif live:
+            ent[1] = today
+        j["firstSeen"] = ent[0]
+        j["isNew"] = ent[0] == today
+
+
+def prune_seen(seen, today, failed_guards, days=PRUNE_DAYS):
+    """Forget postings gone from every board for `days`+ days. Never prunes a board that failed this run."""
+    cutoff = (dt.date.fromisoformat(today) - dt.timedelta(days=days)).isoformat()
+    drop = [k for k, (_first, last) in seen.items() if last < cutoff and key_guard(k) not in failed_guards]
+    for k in drop:
+        del seen[k]
+    return len(drop)
+
+
+def write_atomic(path, text):
+    path = Path(path)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    tmp = path.with_name(path.name + ".tmp")
+    tmp.write_text(text)
+    os.replace(tmp, path)
+
+
+def annotate(level, msg):
+    """GitHub Actions annotation when running in CI, plain line otherwise."""
+    print(f"::{level}::{msg}" if os.environ.get("GITHUB_ACTIONS") else f"{level}: {msg}")
+
+
+def collect(companies, args):
+    """Fetch every board. Returns (rows_before_title_filter, curated_rows, failed_boards, errors, attempted)."""
+    all_jobs, curated, failed, errors, attempted = [], [], set(), [], 0
     for c in companies:
+        attempted += 1
         try:
             all_jobs.extend(FETCHERS[c["ats"]](c))
-        except (urllib.error.URLError, urllib.error.HTTPError, ValueError, KeyError, TimeoutError) as e:
+        except Exception as e:  # one broken board never fails the run
+            failed.add(f"{c['ats']}:{c['token']}")
             errors.append(f"{c['name']}: {e}")
         time.sleep(PACING)
 
@@ -320,64 +398,124 @@ def main():
         all_jobs = [j for j in all_jobs if j["company"] not in loc_filters
                     or loc_filters[j["company"]].search(j.get("location") or "")]
 
-    # Built In SF/NYC boards (general tech listings -> filtered to target roles below)
-    want_builtin = not args.no_builtin and (not args.tag or "tech" in {t.lower() for t in args.tag})
-    if want_builtin:
+    tags = {t.lower() for t in args.tag}
+    if not args.no_builtin and (not tags or "tech" in tags):  # Built In SF/NYC (filtered to target roles later)
         for base, city in BUILTIN_SITES:
+            attempted += 1
             try:
                 rows = norm_builtin(base, city)
                 all_jobs.extend(rows)
                 print(f"{base}: +{len(rows)} listings")
-            except (urllib.error.URLError, urllib.error.HTTPError, ValueError) as e:
+            except Exception as e:
+                failed.add(f"builtin:{city}")
                 errors.append(f"{base}: {e}")
 
-    matched = [j for j in all_jobs if is_target(j["title"])]
-
-    # openquant.co is already a curated quant board — include its roles as-is
-    # (skip the title filter) unless a non-quant --tag filter is in effect.
-    want_oq = not args.no_openquant and (not args.tag or "quant" in {t.lower() for t in args.tag})
-    if want_oq:
+    # openquant.co is already a curated quant board — its roles skip the title filter
+    if not args.no_openquant and (not tags or "quant" in tags):
+        attempted += 1
         try:
-            oq = fetch_openquant()
-            matched.extend(oq)
-            print(f"openquant.co: +{len(oq)} quant roles")
-        except (urllib.error.URLError, urllib.error.HTTPError, ValueError) as e:
+            curated = fetch_openquant()
+            print(f"openquant.co: +{len(curated)} quant roles")
+        except Exception as e:
+            failed.add("openquant")
             errors.append(f"openquant.co: {e}")
+    return all_jobs, curated, failed, errors, attempted
 
-    # first-seen tracking for "new today"
-    today = dt.date.today().isoformat()
-    seen = json.loads(SEEN_PATH.read_text()) if SEEN_PATH.exists() else {}
-    for j in matched:
-        seen.setdefault(j["key"], today)
-        j["firstSeen"] = seen[j["key"]]
-        j["isNew"] = seen[j["key"]] == today
-        j["priority"] = bool(PRIORITY_RE.search(j["location"] or ""))
-    SEEN_PATH.write_text(json.dumps(seen))
 
-    # newest first, priority cities boosted
-    matched.sort(key=lambda j: (j["priority"], j.get("posted", "")), reverse=True)
+def build(companies, args, today, fetched=None):
+    """Everything after the network: returns (payload, seen, report) or raises SystemExit(2) on a bad run."""
+    all_jobs, curated, failed, errors, attempted = fetched if fetched is not None else collect(companies, args)
+    previous = load_json(args.previous, {}) if args.previous else {}
+    if attempted and len(failed) / attempted > FAIL_LIMIT:
+        annotate("error", f"{len(failed)} of {attempted} boards failed — keeping the last good site and state")
+        raise SystemExit(2)
 
-    DOCS.mkdir(exist_ok=True)
-    # export the top MAX_EXPORT by sort, but always keep every openquant role
-    export = matched[:MAX_EXPORT]
-    if len(matched) > MAX_EXPORT:
+    matched = [j for j in all_jobs if is_target(j["title"])] + curated
+    live_keys = {j["key"] for j in matched}
+    carried = [j for j in previous.get("jobs", [])
+               if board_of(j) in failed and j.get("key") not in live_keys]
+    if not matched and not carried:
+        annotate("error", "no target roles came back — keeping the last good site and state")
+        raise SystemExit(2)
+
+    seen = load_seen(args.seen, previous, today)
+    before = len(seen)
+    mark_seen(seen, matched, today)
+    mark_seen(seen, carried, today, live=False)
+    added = len(seen) - before
+    pruned = prune_seen(seen, today, {guard_of(b) for b in failed}, args.prune_days) if not args.tag else 0
+
+    rows = matched + carried
+    for j in rows:
+        j["priority"] = bool(PRIORITY_RE.search(j.get("location") or ""))
+    rows.sort(key=lambda j: (j["priority"], j.get("posted") or ""), reverse=True)  # newest first, cities boosted
+
+    export = rows[:MAX_EXPORT]  # the top MAX_EXPORT, but always keep every openquant/builtin role
+    if len(rows) > MAX_EXPORT:
         have = {j["key"] for j in export}
-        export += [j for j in matched[MAX_EXPORT:]
-                   if j["source"] in ("openquant", "builtin") and j["key"] not in have]
+        export += [j for j in rows[MAX_EXPORT:] if j["source"] in ("openquant", "builtin") and j["key"] not in have]
     payload = {
         "generated_at": dt.datetime.now(dt.timezone.utc).isoformat(),
-        "count": len(matched),
-        "new_today": sum(1 for j in matched if j["isNew"]),
+        "count": len(rows),
+        "new_today": sum(1 for j in rows if j["isNew"]),
         "companies": len(companies),
-        "jobs": [{k: j[k] for k in ("company", "tags", "source", "key", "title",
-                                    "location", "url", "posted", "salary", "firstSeen", "isNew", "priority")}
-                 for j in export],
+        "jobs": [{k: j.get(k, "" if k not in ("tags",) else []) for k in (
+            "company", "tags", "source", "key", "title", "location", "url", "posted", "salary",
+            "firstSeen", "isNew", "priority")} for j in export],
     }
-    (DOCS / "jobs.json").write_text(json.dumps(payload))
-    print(f"{len(all_jobs)} live postings -> {len(matched)} target roles "
-          f"({payload['new_today']} new today) across {len(companies)} companies")
-    if errors:
-        print(f"{len(errors)} fetch errors:", *errors[:8], sep="\n  ")
+    report = {"live": len(all_jobs) + len(curated), "matched": len(matched), "carried": len(carried),
+              "new_today": payload["new_today"], "exported": len(export), "seen_before": before,
+              "seen_added": added, "pruned": pruned, "seen_after": len(seen), "failed": sorted(failed),
+              "errors": errors, "attempted": attempted}
+    return payload, seen, report
+
+
+def summarize(report, companies):
+    r = report
+    line = (f"{r['live']} live postings -> {r['matched']} target roles ({r['new_today']} new today) across "
+            f"{companies} companies; carried {r['carried']} from {len(r['failed'])} failed boards; "
+            f"seen {r['seen_before']} -> {r['seen_after']} (+{r['seen_added']}, pruned {r['pruned']})")
+    print(line)
+    for e in r["errors"]:
+        annotate("warning", f"board skipped, last good jobs kept: {e}")
+    out = os.environ.get("GITHUB_STEP_SUMMARY")
+    if out:
+        with open(out, "a") as f:
+            f.write("### Job refresh\n\n| | |\n|---|---:|\n")
+            for k in ("live", "matched", "new_today", "carried", "exported", "seen_before", "seen_added",
+                      "pruned", "seen_after", "attempted"):
+                f.write(f"| {k.replace('_', ' ')} | {r[k]:,} |\n")
+            if r["errors"]:
+                f.write(f"\n**{len(r['errors'])} boards skipped** (last good jobs kept):\n\n")
+                f.write("".join(f"- {e}\n" for e in r["errors"]))
+
+
+def main(argv=None):
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--tag", action="append", default=[])
+    ap.add_argument("--no-openquant", action="store_true", help="skip the openquant.co quant board")
+    ap.add_argument("--no-builtin", action="store_true", help="skip the Built In SF/NYC boards")
+    ap.add_argument("--seen", default=str(SEEN_PATH), help="first/last-seen state file (read + written)")
+    ap.add_argument("--out", default=str(DOCS / "jobs.json"), help="site data to write")
+    ap.add_argument("--previous", default=None,
+                    help="last good jobs.json, for carrying forward broken boards (default: --out if it exists)")
+    ap.add_argument("--prune-days", type=int, default=PRUNE_DAYS)
+    ap.add_argument("--today", default=None, help="override the local date (YYYY-MM-DD), for tests")
+    args = ap.parse_args(argv)
+    if args.previous is None and Path(args.out).exists():
+        args.previous = args.out
+
+    cfg = json.loads((ROOT / "companies.json").read_text())
+    companies = cfg["companies"]
+    if args.tag:
+        tags = {t.lower() for t in args.tag}
+        companies = [c for c in companies if set(t.lower() for t in c.get("tags", [])) & tags]
+
+    today = args.today or dt.date.today().isoformat()
+    payload, seen, report = build(companies, args, today)
+    write_atomic(args.seen, json.dumps(seen, separators=(",", ":")))
+    write_atomic(args.out, json.dumps(payload))
+    summarize(report, len(companies))
 
 
 if __name__ == "__main__":
