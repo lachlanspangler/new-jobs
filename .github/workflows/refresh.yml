@@ -1,0 +1,67 @@
+# Refresh the job board and redeploy GitHub Pages: on a schedule, and on demand ("Run workflow" in the Actions tab).
+# Generated data never touches main: the site deploys as a Pages artifact (ADR 0001) and the fetcher's state lives on
+# the `state` branch as one force-pushed commit. Details: README "How it updates".
+name: Refresh jobs
+
+on:
+  schedule:
+    - cron: "17 */3 * * *" # every 3 hours, off the hour (UTC); ~8 runs/day, polite to the ATS APIs (ADR 0002)
+  workflow_dispatch:
+
+permissions: {}
+
+concurrency:
+  group: refresh-jobs # never two refreshes at once: they'd race on the state branch
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30 # a full run takes ~7 min
+    permissions:
+      contents: write # push the state branch
+      actions: write # keep the schedule enabled (see the last step)
+    env:
+      TZ: America/Chicago # "new today" means the owner's calendar day (ADR 0002)
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
+        with:
+          python-version: "3.12"
+
+      - name: Restore state
+        run: scripts/state.sh restore .state
+
+      - name: Fetch jobs and build the site
+        run: scripts/build_site.sh .state _site
+
+      - uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5.0.0
+        with:
+          path: _site
+
+      - name: Save state
+        run: scripts/state.sh save .state/seen.json _site/jobs.json
+
+      # GitHub disables scheduled workflows in public repos after 60 days without repository activity; re-enabling
+      # an enabled workflow is a no-op that keeps it from lapsing. Best effort: never fails the run.
+      - name: Keep the schedule enabled
+        if: github.event_name == 'schedule'
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh api --method PUT "repos/${GITHUB_REPOSITORY}/actions/workflows/refresh.yml/enable"
+
+  deploy:
+    needs: refresh
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@368f82528645a54fb793d4d04e342629a3f51346 # v5.0.1
