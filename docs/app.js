@@ -36,7 +36,8 @@ function agoFrom(iso) {
   const t = new Date((iso || "").replace(" ", "T")).getTime();
   if (Number.isNaN(t)) return "";
   const days = (Date.now() - t) / 86400000;
-  if (days < 1) return `${Math.max(1, Math.floor(days * 24))}h ago`;
+  if (days < 1 / 24) return `${Math.max(1, Math.floor(days * 1440))}m ago`;
+  if (days < 1) return `${Math.floor(days * 24)}h ago`;
   if (days < 30) return `${Math.floor(days)}d ago`;
   return `${Math.floor(days / 30)}mo ago`;
 }
