@@ -6,7 +6,7 @@
 GitHub's scheduler (scheduled runs are often delayed there). One run takes ~7 minutes, so ~1 runner-hour a day. The
 repo is public, so standard-runner minutes are free and unlimited; private would cost ~1,700 of the 2,000 free
 minutes a month, so going private means dropping to every 6 hours. Each board is fetched once per run with the
-existing pacing (0.25 s between boards, 0.1–0.2 s between pages), about 2,400 requests a day in all, spread over
+existing pacing (0.25 s between boards, 0.1–0.2 s between pages), about 500 requests a run (~4,000 a day), spread over
 hundreds of hosts and tenants: far below anything the public Greenhouse/Ashby/Lever posting APIs throttle.
 
 **Time zone:** CI sets `TZ=America/Chicago`. "New today", `firstSeen`, the Workday/Built In relative dates
