@@ -47,6 +47,9 @@ that's replaced each run, so the repo doesn't grow (`notes/adr/0001-data-out-of-
 - **Check it's working:** the run list shows each run. Each run's summary has a table (live postings, target roles,
   new today, boards skipped, pruned). The board itself shows "updated N ago" next to the counts.
 - Runs never overlap (a manual run queues behind a scheduled one), and each is capped at 30 minutes.
+- **A red run** keeps the last good site. The run names every board that failed. If roles really did drop by more
+  than half (say you removed many companies), use **Run workflow** with the "accept a run with under half of last
+  run's roles" box ticked, once.
 
 ## Run it locally
 
