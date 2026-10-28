@@ -8,13 +8,14 @@ check: test lint ## everything: unit tests, compile check, actionlint (+shellche
 test:
 	python3 -m py_compile fetch_jobs.py
 	python3 -m unittest discover -s tests
+	tests/test_state.sh
 
 tools:
 	@scripts/tools.sh
 
 lint: tools
 	.tools/actionlint -shellcheck .tools/shellcheck .github/workflows/refresh.yml
-	.tools/shellcheck scripts/*.sh
+	.tools/shellcheck scripts/*.sh tests/*.sh
 
 fetch: ## refresh docs/jobs.json + seen.json locally (both gitignored)
 	python3 fetch_jobs.py
