@@ -10,7 +10,8 @@ Live site: **https://lachlanspangler.github.io/new-jobs/**
 
 ## What it does
 
-- Scans ~80 verified company boards (see `companies.json`) across three ATSes.
+- Scans ~290 verified company boards (see `companies.json`) on Greenhouse, Ashby, Lever and Workday, plus
+  openquant.co and Built In SF/NYC.
 - Keeps target roles only: software / C++ / Python engineers, quant developer,
   quant researcher, quant, trade-desk operations, and adjacent SWE titles.
 - Prioritizes **SF / Chicago / NYC** (★), flags roles first seen **today**, and
@@ -19,28 +20,44 @@ Live site: **https://lachlanspangler.github.io/new-jobs/**
   your browser (localStorage) and tallies totals by company, by role, and
   overall. Export or clear anytime.
 
-## How it's built
+## How it updates
 
-- `fetch_jobs.py` — stdlib-only fetcher; writes `docs/jobs.json` and tracks a
-  first-seen date per posting in `seen.json` (powers "new today").
-- `docs/` — static site (`index.html` jobs board, `stats.html` tracker). No
-  backend; tallies live in the browser.
-- Rebuilt daily via `scripts/update.sh` + a launchd job.
+A GitHub Actions workflow (`.github/workflows/refresh.yml`) refreshes the board **every 3 hours** (at :17 past,
+UTC) and redeploys the site. No laptop needed.
 
-## Run it
+1. Restores the fetcher's state from the `state` branch: `seen.json` (first/last-seen date per posting) and the
+   last deployed `jobs.json`.
+2. Runs `fetch_jobs.py` over every board, then assembles `docs/` plus the fresh `jobs.json` into a Pages artifact.
+3. Deploys it with the official Pages actions and saves the new state.
+
+Generated data is never committed to `main`. The site ships as an artifact, and the `state` branch is a single commit
+that's replaced each run, so the repo doesn't grow (`notes/adr/0001-data-out-of-git.md`).
+
+- **A broken board never fails the run.** It's skipped, shown as a warning on the run, and its last good jobs stay on
+  the site. If more than half the boards fail, or nothing comes back, the run stops before writing anything, so the
+  live site and state stay as they were.
+- **"New today"** means first seen on the current America/Chicago calendar day.
+- **Old jobs are forgotten:** a posting gone from every board for 30+ days is pruned from `seen.json`. If it comes
+  back, it counts as new. `jobs.json` only ever lists postings that are open now.
+- **The apply tracker** (`stats.html`) lives in your browser's localStorage and isn't affected by any of this.
+
+### Run it now, or check on it
+
+- **Run now:** GitHub → **Actions** → **Refresh jobs** → **Run workflow**.
+- **Check it's working:** the run list shows each run. Each run's summary has a table (live postings, target roles,
+  new today, boards skipped, pruned). The board itself shows "updated N ago" next to the counts.
+- Runs never overlap (a manual run queues behind a scheduled one), and each is capped at 30 minutes.
+
+## Run it locally
 
 ```bash
-python3 fetch_jobs.py            # refresh docs/jobs.json
-python3 fetch_jobs.py --tag ai   # limit to a tag: ai / quant / hedge / tech
-# serve locally:
+python3 fetch_jobs.py            # refresh docs/jobs.json + seen.json (both gitignored)
+python3 fetch_jobs.py --tag ai   # limit to a tag: ai / quant / hedge / tech (never prunes)
 python3 -m http.server -d docs 8000   # open http://localhost:8000
-```
 
-## Daily automation
-
-```bash
-cp scripts/com.lachlan.newjobs.plist ~/Library/LaunchAgents/
-launchctl load ~/Library/LaunchAgents/com.lachlan.newjobs.plist   # runs 07:30 daily
+make check   # unit tests + actionlint/shellcheck on the workflow and scripts
+make site    # build the Pages artifact into _site/ exactly as CI does (state in .state/)
+make serve   # serve _site/ on http://127.0.0.1:8611
 ```
 
 ## Add companies
