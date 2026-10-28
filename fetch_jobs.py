@@ -455,7 +455,7 @@ def build(companies, args, today, fetched=None):
     candidates = [j for j in previous.get("jobs", []) if board_of(j) in failed and j.get("key") not in live_keys]
     # carry a broken board's last good jobs, but only while they were confirmed live within the prune window:
     # a board that stays broken must not keep long-closed postings on the site forever
-    carried = [j for j in candidates if j["key"] in seen and seen[j["key"]][1] >= cutoff]
+    carried = [j for j in candidates if j.get("key") in seen and seen[j["key"]][1] >= cutoff]
     for b in sorted({board_of(j) for j in candidates} - {board_of(j) for j in carried}):
         annotate("warning", f"{b} has failed for {args.prune_days}+ days; its old jobs are no longer shown")
     if not matched and not carried:

@@ -57,7 +57,9 @@ run, allow GitHub-authored actions (`actions/*`).
 - Don't push the `state` branch by hand while a run is in progress: the run's save would overwrite it.
 - 5 board tokens in `companies.json` return 404 on every run: Old Mission, Amplitude, Postman, Shield AI, Wayve.
   Fix or remove them; until then their old `seen.json` entries are protected from pruning.
-- If the repo ever goes private, Actions minutes stop being free: drop the cron to every 6 hours (ADR 0002).
+- If the repo ever goes private: Actions minutes stop being free, so drop the cron to every 6 hours; and the restore
+  step reads `state` anonymously, so give the refresh job the token. Until then every run fails safely at restore
+  (ADR 0002).
 - Not fixed from review, low risk: (a) no per-board time budget; enough slow boards could push a run past 30 minutes.
   Nothing is written then, so it's only a wasted run. (b) A local `--tag` run overwrites `docs/jobs.json` with the
   subset (local only, as before). (c) Failures are keyed by `ats:token`, so two companies sharing a token would count

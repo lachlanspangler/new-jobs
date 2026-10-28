@@ -69,3 +69,12 @@ time. A corrupt state file now stops with an explanation.
 before); failures are keyed by `ats:token`.
 29 unit tests + 2 shell test suites + actionlint/shellcheck green. Re-verified the hardened `build_site.sh` with a
 small real run (`--tag hedge`: 341 roles).
+
+## 2026-10-28 — Review sign-off
+The reviewer re-checked all three fix commits and **signed off** (5/5 bugs fixed; new action pins verified). Its
+non-blocking follow-ups are done too: `build_site.sh`'s guard was a denylist that still accepted `.git`, `scripts`,
+`docs//` and `Docs` (the same folder as `docs` on case-insensitive macOS). It's now an **allowlist** (only a top-level
+`_site`, `_site-*` or `_site_*`), tested against 20 unsafe targets. Also: a carried row without a key can't crash;
+STATUS and ADR 0002 note that going private would need the token for the anonymous state restore (it fails safely
+until then). Accepted as is: if save-state fails after a good deploy, the site is one run ahead of its state (worst
+case a few jobs show "new" for a second day).

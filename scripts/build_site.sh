@@ -2,17 +2,19 @@
 # Assemble the Pages artifact exactly as CI does: the static site from docs/ plus a fresh jobs.json.
 #   scripts/build_site.sh <state-dir> <site-dir> [fetch_jobs.py args...]
 # <state-dir>/seen.json is read and updated; <state-dir>/jobs.json (last good data) feeds broken-board carry-forward.
-# Paths are relative to the repo root. <site-dir> is replaced only after a successful build, and must be a dedicated
-# output directory (never the repo, docs/, or anything outside the repo).
+# Paths are relative to the repo root. <site-dir> is replaced only after a successful build, so it must be a dedicated
+# top-level output directory named _site or _site-*/_site_* (an allowlist: nothing else can ever be deleted).
 set -euo pipefail
 state=${1:?state dir}; site=${2:?site dir}; shift 2
 cd "$(dirname "$0")/.."
 root=$(pwd -P)
 
+site=${site%/}
 case "$site" in
-  "" | . | ./ | / | docs | docs/ | ./docs | ./docs/ | .. | ../* | /* | *..*)
-    echo "build_site: refusing to write the site to '$site' (use a dedicated directory like _site)" >&2; exit 64 ;;
+  _site | _site-* | _site_*) ;;
+  *) echo "build_site: refusing to write the site to '$site' (use _site or _site-<name>)" >&2; exit 64 ;;
 esac
+case "$site" in */*) echo "build_site: '$site' must be a top-level directory" >&2; exit 64 ;; esac
 
 mkdir -p "$state"
 tmp=$(mktemp -d "$root/.site-build.XXXXXX")

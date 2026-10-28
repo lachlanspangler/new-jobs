@@ -5,7 +5,9 @@
 **Cadence:** `cron: "17 */3 * * *"`, 8 runs a day at :17 past the hour to avoid the top-of-hour load spike on
 GitHub's scheduler (scheduled runs are often delayed there). One run takes ~7 minutes, so ~1 runner-hour a day. The
 repo is public, so standard-runner minutes are free and unlimited; private would cost ~1,700 of the 2,000 free
-minutes a month, so going private means dropping to every 6 hours. Each board is fetched once per run with the
+minutes a month, so going private means dropping to every 6 hours. Going private also needs the refresh job's
+`Restore state` step to read the `state` branch with the token (today it reads anonymously, so it would fail safely
+with "could not reach origin"). Each board is fetched once per run with the
 existing pacing (0.25 s between boards, 0.1–0.2 s between pages), about 500 requests a run (~4,000 a day), spread over
 hundreds of hosts and tenants: far below anything the public Greenhouse/Ashby/Lever posting APIs throttle.
 
