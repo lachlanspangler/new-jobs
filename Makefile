@@ -9,6 +9,7 @@ test:
 	python3 -m py_compile fetch_jobs.py
 	python3 -m unittest discover -s tests
 	tests/test_state.sh
+	tests/test_build_site.sh
 
 tools:
 	@scripts/tools.sh

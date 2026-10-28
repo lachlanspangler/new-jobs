@@ -1,6 +1,7 @@
 # Refresh the job board and redeploy GitHub Pages: on a schedule, and on demand ("Run workflow" in the Actions tab).
-# Generated data never touches main: the site deploys as a Pages artifact (ADR 0001) and the fetcher's state lives on
-# the `state` branch as one force-pushed commit. Details: README "How it updates".
+# Generated data never touches main: the site deploys as a Pages artifact and the fetcher's state lives on the
+# `state` branch as one force-pushed commit (notes/adr/0001). Order matters: refresh -> deploy -> save-state, so state
+# only advances after the site it describes is live, and any failed step leaves both the site and state as they were.
 name: Refresh jobs
 
 on:
@@ -16,15 +17,17 @@ concurrency:
 
 jobs:
   refresh:
+    if: github.ref == 'refs/heads/main' # only main may publish the site or its state
     runs-on: ubuntu-latest
     timeout-minutes: 30 # a full run takes ~7 min
     permissions:
-      contents: write # push the state branch
-      actions: write # keep the schedule enabled (see the last step)
+      contents: read # the state branch is read anonymously (public repo); nothing here can write
     env:
       TZ: America/Chicago # "new today" means the owner's calendar day (ADR 0002)
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false # the fetcher parses untrusted remote data: keep no token on disk
 
       - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
         with:
@@ -33,6 +36,7 @@ jobs:
       - name: Restore state
         run: scripts/state.sh restore .state
 
+      # Exits 2 without writing if most boards fail or roles collapse; the steps below then never run.
       - name: Fetch jobs and build the site
         run: scripts/build_site.sh .state _site
 
@@ -40,17 +44,15 @@ jobs:
         with:
           path: _site
 
-      - name: Save state
-        run: scripts/state.sh save .state/seen.json _site/jobs.json
+      - name: Stage the new state
+        run: mkdir new-state && cp .state/seen.json _site/jobs.json new-state/
 
-      # GitHub disables scheduled workflows in public repos after 60 days without repository activity; re-enabling
-      # an enabled workflow is a no-op that keeps it from lapsing. Best effort: never fails the run.
-      - name: Keep the schedule enabled
-        if: github.event_name == 'schedule'
-        continue-on-error: true
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: gh api --method PUT "repos/${GITHUB_REPOSITORY}/actions/workflows/refresh.yml/enable"
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: new-state
+          path: new-state/
+          retention-days: 1
+          if-no-files-found: error
 
   deploy:
     needs: refresh
@@ -65,3 +67,37 @@ jobs:
     steps:
       - id: deployment
         uses: actions/deploy-pages@368f82528645a54fb793d4d04e342629a3f51346 # v5.0.1
+
+  save-state:
+    needs: deploy # state advances only once the site it describes is live
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: write # force-push the one-commit state branch
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
+        with:
+          name: new-state
+          path: new-state
+
+      - name: Save state
+        run: scripts/state.sh save new-state/seen.json new-state/jobs.json
+
+  # GitHub disables scheduled workflows in public repos after 60 days without repository activity; re-enabling an
+  # enabled workflow is a harmless no-op that keeps it from lapsing. Runs even when the refresh fails (that's when a
+  # lapse would go unnoticed); best effort.
+  keepalive:
+    if: always() && github.event_name == 'schedule'
+    needs: refresh
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    permissions:
+      actions: write
+    steps:
+      - name: Keep the schedule enabled
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh api --method PUT "repos/${GITHUB_REPOSITORY}/actions/workflows/refresh.yml/enable"

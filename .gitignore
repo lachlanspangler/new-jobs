@@ -16,3 +16,4 @@ _site/
 docs/jobs.json
 seen.json
 *.tmp
+.site-build.*/
