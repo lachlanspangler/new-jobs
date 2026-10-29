@@ -137,3 +137,10 @@ table.pipe .muted { color: var(--muted); }
 .r-trash:hover { color: #ff6b6b; }
 .row.dismissed { opacity: .4; }
 .row.dismissed .r-title { text-decoration: line-through; }
+.guest-pill { margin-left: 10px; padding: 2px 10px; border-radius: 999px; font-size: 12px; font-weight: 700;
+  letter-spacing: .04em; text-transform: uppercase; color: #08101f; background: #ffa94d; text-decoration: none; }
+.guest-pill:hover { filter: brightness(1.1); }
+.reset-box { margin-top: 12px; padding: 14px 16px; border: 1px solid #ff6b6b66; border-radius: 12px; background: #ff6b6b14; }
+.reset-box p { margin: 0 0 10px; }
+.reset-box .row-btns { display: flex; gap: 8px; flex-wrap: wrap; }
+.reset-box #reset-confirm { background: #ff6b6b; border-color: #ff6b6b; color: #08101f; font-weight: 700; }

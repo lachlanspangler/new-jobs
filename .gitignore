@@ -17,3 +17,6 @@ docs/jobs.json
 seen.json
 *.tmp
 .site-build.*/
+node_modules/
+test-results/
+playwright-report/

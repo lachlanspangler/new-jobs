@@ -41,13 +41,24 @@
       <div class="panel-head">
         <h2>Application log</h2>
         <button id="export" class="mini">Export JSON</button>
-        <button id="clear" class="mini danger">Clear all</button>
+        <button id="clear" class="mini danger">Clear applications</button>
+        <button id="reset" class="mini danger" aria-expanded="false" aria-controls="reset-box">Reset everything…</button>
+      </div>
+      <div id="reset-box" class="reset-box" role="region" aria-label="Reset everything" hidden>
+        <p id="reset-what"></p>
+        <p>This can't be undone. Download a backup first if you might want it back.</p>
+        <div class="row-btns">
+          <button id="reset-export" class="mini">Export backup (everything)</button>
+          <button id="reset-confirm" class="mini danger">Yes, reset everything</button>
+          <button id="reset-cancel" class="mini">Cancel</button>
+        </div>
       </div>
       <ul id="log" class="log"></ul>
     </section>
 
     <footer class="foot">Tallies are stored in this browser (localStorage). Clicking <b>Apply</b> on the Jobs page adds an entry here.</footer>
 
+    <script src="./store.js" defer></script>
     <script src="./stats.js" defer></script>
   </body>
 </html>

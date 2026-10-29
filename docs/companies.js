@@ -1,11 +1,11 @@
 "use strict";
 
 const TAG_COLORS = { ai: "#b08cff", quant: "#43e08a", hedge: "#ffa94d", tech: "#34d3ee" };
-const STORE = "nj-apps";
+const STORE = NJ.KEYS.apps;
 const $ = (id) => document.getElementById(id);
 const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
-const loadApps = () => { try { return JSON.parse(localStorage.getItem(STORE)) || []; } catch { return []; } };
-const saveApps = (a) => localStorage.setItem(STORE, JSON.stringify(a));
+const loadApps = () => NJ.get(STORE, []);
+const saveApps = (a) => NJ.set(STORE, a);
 let APPLIED = new Set();
 
 const state = { jobs: [], byCo: [], q: "", tags: new Set(), emails: {} };

@@ -1,0 +1,72 @@
+{
+ "generated_at": "2026-10-29T06:49:47+00:00",
+ "count": 4,
+ "new_today": 4,
+ "companies": 3,
+ "jobs": [
+  {
+   "company": "Acme",
+   "tags": [
+    "tech"
+   ],
+   "source": "greenhouse",
+   "key": "greenhouse:acme:0",
+   "title": "Software Engineer",
+   "location": "New York, NY",
+   "url": "https://example.com/jobs/0",
+   "posted": "2026-10-28",
+   "salary": "",
+   "firstSeen": "2026-10-28",
+   "isNew": true,
+   "priority": true
+  },
+  {
+   "company": "Acme",
+   "tags": [
+    "tech"
+   ],
+   "source": "greenhouse",
+   "key": "greenhouse:acme:1",
+   "title": "Quant Developer",
+   "location": "Chicago, IL",
+   "url": "https://example.com/jobs/1",
+   "posted": "2026-10-28",
+   "salary": "",
+   "firstSeen": "2026-10-28",
+   "isNew": true,
+   "priority": true
+  },
+  {
+   "company": "Bolt",
+   "tags": [
+    "tech"
+   ],
+   "source": "greenhouse",
+   "key": "greenhouse:bolt:2",
+   "title": "Backend Engineer",
+   "location": "San Francisco, CA",
+   "url": "https://example.com/jobs/2",
+   "posted": "2026-10-28",
+   "salary": "",
+   "firstSeen": "2026-10-28",
+   "isNew": true,
+   "priority": true
+  },
+  {
+   "company": "Cog",
+   "tags": [
+    "tech"
+   ],
+   "source": "greenhouse",
+   "key": "greenhouse:cog:3",
+   "title": "Python Engineer",
+   "location": "Remote",
+   "url": "https://example.com/jobs/3",
+   "posted": "2026-10-28",
+   "salary": "",
+   "firstSeen": "2026-10-28",
+   "isNew": true,
+   "priority": true
+  }
+ ]
+}

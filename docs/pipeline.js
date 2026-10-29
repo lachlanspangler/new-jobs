@@ -5,9 +5,9 @@ const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&
 const STAGES = ["", "Applied", "Emailed", "Replied", "Interview", "Offer", "Rejected"];
 const state = { rows: [], q: "" };
 
-const loadApps = () => { try { return JSON.parse(localStorage.getItem("nj-apps")) || []; } catch { return []; } };
-const loadStatus = () => { try { return JSON.parse(localStorage.getItem("nj-status")) || {}; } catch { return {}; } };
-const saveStatus = (s) => localStorage.setItem("nj-status", JSON.stringify(s));
+const loadApps = () => NJ.get(NJ.KEYS.apps, []);
+const loadStatus = () => NJ.get(NJ.KEYS.status, {});
+const saveStatus = (s) => NJ.set(NJ.KEYS.status, s);
 
 async function build() {
   const apps = loadApps();

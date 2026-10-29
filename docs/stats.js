@@ -1,10 +1,10 @@
 "use strict";
 
-const STORE = "nj-apps";
+const STORE = NJ.KEYS.apps;
 const $ = (id) => document.getElementById(id);
 const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
-const load = () => { try { return JSON.parse(localStorage.getItem(STORE)) || []; } catch { return []; } };
-const save = (a) => localStorage.setItem(STORE, JSON.stringify(a));
+const load = () => NJ.get(STORE, []);
+const save = (a) => NJ.set(STORE, a);
 
 function tally(apps, field) {
   const m = new Map();
@@ -41,10 +41,42 @@ $("log").addEventListener("click", (e) => {
   render();
 });
 $("clear").addEventListener("click", () => { if (confirm("Clear all logged applications?")) { save([]); render(); } });
-$("export").addEventListener("click", () => {
-  const blob = new Blob([JSON.stringify(load(), null, 2)], { type: "application/json" });
+
+// Reset everything: every store this site keeps (applications, dismissed jobs, pipeline statuses, and any future
+// nj-* store), in the current mode only. A guest reset clears the guest session and never the real tracker.
+function download(name, data) {
+  const blob = new Blob([JSON.stringify(data, null, 2)], { type: "application/json" });
   const a = document.createElement("a");
-  a.href = URL.createObjectURL(blob); a.download = "applications.json"; a.click();
+  a.href = URL.createObjectURL(blob); a.download = name; a.click();
+  setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+}
+function describeStores() {
+  const n = (v) => (Array.isArray(v) ? v.length : v && typeof v === "object" ? Object.keys(v).length : v ? 1 : 0);
+  const snap = NJ.snapshot();
+  const count = (k, one, many) => { const c = n(snap[k]); return `${c} ${c === 1 ? one : many}`; };
+  const parts = [count(NJ.KEYS.apps, "application", "applications"), count(NJ.KEYS.dismissed, "dismissed job", "dismissed jobs"),
+    count(NJ.KEYS.status, "pipeline status", "pipeline statuses")];
+  const other = Object.keys(snap).filter((k) => !Object.values(NJ.KEYS).includes(k) && snap[k] !== null);
+  if (other.length) parts.push(`${other.length} other saved ${other.length === 1 ? "setting" : "settings"}`);
+  return (NJ.guest ? "Clears this guest session: " : "Deletes everything this browser has saved for new-jobs: ") +
+    parts.join(", ") + ".";
+}
+const box = $("reset-box");
+const showReset = (open) => { box.hidden = !open; $("reset").setAttribute("aria-expanded", String(open)); };
+$("reset").addEventListener("click", () => {
+  $("reset-what").textContent = describeStores();
+  showReset(true);
+  $("reset-export").focus();
 });
+$("reset-cancel").addEventListener("click", () => { showReset(false); $("reset").focus(); });
+$("reset-export").addEventListener("click", () =>
+  download(`new-jobs-backup-${new Date().toISOString().slice(0, 10)}.json`, NJ.snapshot()));
+$("reset-confirm").addEventListener("click", () => {
+  NJ.resetAll();
+  showReset(false);
+  render();
+  $("reset").focus();
+});
+$("export").addEventListener("click", () => download("applications.json", load()));
 
 render();

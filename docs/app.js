@@ -1,8 +1,8 @@
 "use strict";
 
 const TAG_COLORS = { ai: "#b08cff", quant: "#43e08a", hedge: "#ffa94d", tech: "#34d3ee" };
-const STORE = "nj-apps";
-const DSTORE = "nj-dismissed";
+const STORE = NJ.KEYS.apps;
+const DSTORE = NJ.KEYS.dismissed;
 const state = { jobs: [], q: "", city: "", role: "", newonly: false, hideapplied: false, hidestaff: false, hidesenior: false, hideintern: false, showdismissed: false, tags: new Set(), shown: 60 };
 
 const IS_STAFF = /\bstaff\b|\bprincipal\b|\bdistinguished\b|\bfellow\b/i;
@@ -12,11 +12,11 @@ const IS_INTERN = /\bintern(ship)?s?\b|\bco-?op\b|\bapprentice\b/i;
 const $ = (id) => document.getElementById(id);
 const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 
-function loadApps() { try { return JSON.parse(localStorage.getItem(STORE)) || []; } catch { return []; } }
-function saveApps(a) { localStorage.setItem(STORE, JSON.stringify(a)); }
+function loadApps() { return NJ.get(STORE, []); }
+function saveApps(a) { NJ.set(STORE, a); }
 function appliedSet() { return new Set(loadApps().map((r) => r.key)); }
-function loadDismissed() { try { return new Set(JSON.parse(localStorage.getItem(DSTORE)) || []); } catch { return new Set(); } }
-function saveDismissed(s) { localStorage.setItem(DSTORE, JSON.stringify([...s])); }
+function loadDismissed() { return new Set(NJ.get(DSTORE, [])); }
+function saveDismissed(s) { NJ.set(DSTORE, [...s]); }
 let DISMISSED = new Set();
 
 function roleOf(title) {

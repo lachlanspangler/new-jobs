@@ -55,7 +55,7 @@ function render() {
       </div></div>
     </div>`;
   }).join("") : `<div class="empty">No companies match.</div>`;
-  try { $("nav-count").textContent = (JSON.parse(localStorage.getItem("nj-apps")) || []).length; } catch {}
+  $("nav-count").textContent = NJ.get(NJ.KEYS.apps, []).length;
 }
 
 function renderTags() {
