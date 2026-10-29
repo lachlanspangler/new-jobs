@@ -12,13 +12,15 @@ going. Big decisions get an ADR in `notes/adr/NNNN-title.md`.
   `docs/` + the fresh `jobs.json` with the official Pages actions. Generated data is **never committed to main**.
 - State that must survive between runs (`seen.json` first/last-seen dates, last `jobs.json` for broken-board
   carry-forward) lives on the `state` branch as a single force-pushed commit (ADR 0001).
-- `docs/` is the static site; `stats.html` tracks applications in the browser's localStorage (keys `nj-apps`,
-  `nj-dismissed`, `nj-status`) — never change job `key` formats or those storage keys.
+- `docs/` is the static site; `stats.html` tracks applications in the browser (keys `nj-apps`, `nj-dismissed`,
+  `nj-status`) — never change job `key` formats or those storage keys. **All storage goes through `docs/store.js`**
+  (`NJ.get/set/snapshot/resetAll`); a new store must be an `nj-*` key added to `NJ.KEYS`. `?guest` on any page swaps
+  in sessionStorage so guests never touch the real tracker.
 
 ## Commands
 | | |
 |---|---|
-| `make check` | unit tests + actionlint on the workflow + compile check |
+| `make check` | unit tests + actionlint/shellcheck + browser tests (`make e2e`: guest mode, reset) |
 | `make fetch` | run the fetcher locally (writes gitignored `docs/jobs.json`, `seen.json`) |
 | `make site` | assemble the Pages artifact into `_site/` exactly as CI does |
 | `make serve` | serve `_site/` on http://127.0.0.1:8611 |

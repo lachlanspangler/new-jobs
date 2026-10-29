@@ -28,6 +28,21 @@ The board now updates itself, with no laptop involved.
   integration test against a local bare repo, a `build_site.sh` safety test, and actionlint + shellcheck.
 - A fresh code reviewer found 5 bugs and 8 smaller issues; all fixed except three low-risk ones listed under Known (see DIARY).
 
+## Guest mode and reset (2026-10-29)
+- **`?guest` on any page** (e.g. https://lachlanspangler.github.io/new-jobs/?guest) shows the board with a completely
+  empty tracker: no applications, dismissed jobs or pipeline statuses. The Companies and Recruiters pages derive from
+  those, so they're empty too. Guest data lives in the tab's sessionStorage, never in localStorage. It stays guest on
+  every page (internal links carry `?guest`) and shows an orange "guest" pill. The pill or the normal link takes you
+  back to the real data, untouched.
+- **Reset everything** on the Applications page clears every `nj-*` store, now and in future, behind an inline
+  confirm that lists what will go and offers a full backup download first. A guest reset clears only the guest
+  session.
+- All storage now goes through `docs/store.js`. Browser tests (`make e2e`, part of `make check`) prove the real
+  data is byte-for-byte identical before and after a guest session that applies, dismisses and sets a status; a
+  guest reset leaves the real data alone; and reset offers the export, then clears every store and only this
+  site's. Deliberately broken versions (guest writing to localStorage; reset skipping a store) make the tests fail.
+- To ship: `git push origin main`. The next run (or **Run workflow**) deploys it.
+
 ## What you need to do (once, in this order)
 Order matters. Pushing `main` deletes `docs/jobs.json` from the branch, so the Pages source must already be
 "GitHub Actions" or the current site loses its data.

@@ -41,6 +41,16 @@ that's replaced each run, so the repo doesn't grow (`notes/adr/0001-data-out-of-
   back, it counts as new. `jobs.json` only ever lists postings that are open now.
 - **The apply tracker** (`stats.html`) lives in your browser's localStorage and isn't affected by any of this.
 
+## Guest mode and reset
+
+- **Guest link:** add `?guest` to any page (e.g. `https://lachlanspangler.github.io/new-jobs/?guest`) to show the
+  board with an empty tracker. A guest's applications, dismissals and pipeline statuses go to the tab's
+  sessionStorage (gone when the tab closes) and never touch your real tracker. Guest mode carries across every page
+  and shows an orange **guest** pill; click the pill, or open the normal link, to get back to your real data.
+- **Reset everything** (Applications page) clears every store the site keeps: applications, dismissed jobs and
+  pipeline statuses. It shows what it will delete, offers a full backup download first, and only clears after you
+  confirm. In guest mode it clears only the guest session.
+
 ### Run it now, or check on it
 
 - **Run now:** GitHub → **Actions** → **Refresh jobs** → **Run workflow**.
