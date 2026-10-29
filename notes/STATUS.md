@@ -1,4 +1,7 @@
-# Status — 2026-10-28
+# Status — 2026-10-29: live
+
+The setup below is **done** (2026-10-29): state and main pushed, Pages source = GitHub Actions, first run green
+(12,198 roles deployed). It now runs on its schedule; nothing more is needed from you.
 
 ## What's built
 The board now updates itself, with no laptop involved.

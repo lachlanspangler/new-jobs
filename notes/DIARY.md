@@ -81,3 +81,6 @@ case a few jobs show "new" for a second day).
 
 ## 2026-10-29 — Synced with GitHub
 The remote had two web edits to the README title ("[no longer used, I switched to job-finder]", then back to "new-jobs"); merged both, so local main is now 0 behind / 17+ ahead of origin and will fast-forward. The owner's first push attempt ran `! cd … && git push` in Terminal, where zsh's `!` inverts the exit status, so nothing was pushed.
+
+## 2026-10-29 — Live
+Owner pushed `state` and `main`, switched Pages to GitHub Actions, and ran the workflow. Run #1 (manual): refresh 4 m 29 s, deploy 18 s, save-state 19 s, all green (keepalive skipped, as it should be on a manual run). Live site 2026-10-29T06:49Z: 12,198 roles, 123 new today; `state` is one parentless commit. From now on the schedule (:17 every 3 h UTC) runs it.
