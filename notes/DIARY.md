@@ -84,3 +84,6 @@ The remote had two web edits to the README title ("[no longer used, I switched t
 
 ## 2026-10-29 — Live
 Owner pushed `state` and `main`, switched Pages to GitHub Actions, and ran the workflow. Run #1 (manual): refresh 4 m 29 s, deploy 18 s, save-state 19 s, all green (keepalive skipped, as it should be on a manual run). Live site 2026-10-29T06:49Z: 12,198 roles, 123 new today; `state` is one parentless commit. From now on the schedule (:17 every 3 h UTC) runs it.
+
+## 2026-10-29 — Owner report: "Yesterday" twice
+Cause (in the original app.js, now exposed by overnight deploys): rows were grouped by the raw `posted` string's first 10 characters but labelled from local time, so a UTC timestamp after local midnight (e.g. 03:12Z = 10:12 pm Oct 28 in Chicago) started an "Oct 29" group labelled "Yesterday", followed by the real Oct 28 group also labelled "Yesterday". Date-only strings (Workday, Built In) were also read as UTC midnight, so "today" showed as yesterday. Fix: one local-day key per posting drives sorting, grouping and labels; date-only values are local days. Verified with Playwright against the live jobs.json at 2 am and noon Chicago time and in UTC: 4 dividers, all unique (Today, Yesterday, Tue Oct 27, Mon Oct 26), no errors. Footer now says "refreshed every 3 hours".

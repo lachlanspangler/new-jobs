@@ -42,14 +42,26 @@ function agoFrom(iso) {
   return `${Math.floor(days / 30)}mo ago`;
 }
 const edge = (tags) => { for (const t of tags || []) if (TAG_COLORS[t]) return TAG_COLORS[t]; return "#7c8cff"; };
-const dayKey = (iso) => (iso || "").slice(0, 10) || "undated";
-function dayLabel(iso) {
-  const d = new Date((iso || "").replace(" ", "T"));
-  if (isNaN(d)) return "Undated";
-  const today = new Date(), y = new Date(); y.setDate(y.getDate() - 1);
-  if (d.toDateString() === today.toDateString()) return "Today";
-  if (d.toDateString() === y.toDateString()) return "Yesterday";
-  return d.toLocaleDateString("en-US", { weekday: "short", month: "short", day: "numeric", year: "numeric" });
+// One local calendar day per posting, used for sorting, grouping AND labelling (they used to disagree: the group came
+// from the raw string's first 10 chars, the label from local time, so late-evening UTC timestamps made two
+// "Yesterday" groups). A date-only "YYYY-MM-DD" (Workday, Built In) is already a local day, not UTC midnight.
+const pad = (n) => String(n).padStart(2, "0");
+const localKey = (d) => `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
+function dayKey(iso) {
+  const s = (iso || "").trim();
+  if (/^\d{4}-\d{2}-\d{2}$/.test(s)) return s;
+  const d = new Date(s.replace(" ", "T"));
+  return isNaN(d) ? "undated" : localKey(d);
+}
+const postedAt = (iso) => { const t = new Date((iso || "").replace(" ", "T")).getTime(); return isNaN(t) ? 0 : t; };
+function dayLabel(key) {
+  if (key === "undated") return "Undated";
+  const today = new Date(), y = new Date();
+  y.setDate(y.getDate() - 1);
+  if (key === localKey(today)) return "Today";
+  if (key === localKey(y)) return "Yesterday";
+  const [yy, mm, dd] = key.split("-").map(Number);
+  return new Date(yy, mm - 1, dd).toLocaleDateString("en-US", { weekday: "short", month: "short", day: "numeric", year: "numeric" });
 }
 
 function filtered() {
@@ -75,17 +87,18 @@ let APPLIED = new Set();
 
 function render() {
   const list = $("list");
-  const all = filtered().sort((a, b) => {
-    const d = (b.posted || "").localeCompare(a.posted || "");   // newest day first
-    return d !== 0 ? d : (b.priority === a.priority ? 0 : b.priority ? 1 : -1);
+  const all = filtered().map((j) => ({ j, day: dayKey(j.posted), at: postedAt(j.posted) })).sort((a, b) => {
+    if (a.day !== b.day) return a.day === "undated" ? 1 : b.day === "undated" ? -1 : b.day.localeCompare(a.day); // newest day first
+    if (a.j.priority !== b.j.priority) return a.j.priority ? -1 : 1;                                              // then SF/CHI/NYC
+    return b.at - a.at;                                                                                             // then newest
   });
-  const rows = all.slice(0, state.shown);
+  const rows = all.slice(0, state.shown).map((x) => x.j);
   if (!rows.length) { list.innerHTML = `<div class="empty">No matching roles.</div>`; }
   else {
     let html = '<div class="list-inner">', lastKey = null;
     rows.forEach((j) => {
       const key = dayKey(j.posted);
-      if (key !== lastKey) { html += `<div class="day-divider">${dayLabel(j.posted)}</div>`; lastKey = key; }
+      if (key !== lastKey) { html += `<div class="day-divider">${dayLabel(key)}</div>`; lastKey = key; }
       const done = APPLIED.has(j.key), gone = DISMISSED.has(j.key);
       html += `<a class="row ${done ? "applied" : ""} ${gone ? "dismissed" : ""}" style="--edge:${edge(j.tags)}" href="${esc(j.url)}" target="_blank" rel="noreferrer" data-key="${esc(j.key)}">
           <span class="r-dot"></span>
