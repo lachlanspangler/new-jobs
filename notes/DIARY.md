@@ -78,3 +78,6 @@ non-blocking follow-ups are done too: `build_site.sh`'s guard was a denylist tha
 STATUS and ADR 0002 note that going private would need the token for the anonymous state restore (it fails safely
 until then). Accepted as is: if save-state fails after a good deploy, the site is one run ahead of its state (worst
 case a few jobs show "new" for a second day).
+
+## 2026-10-29 — Synced with GitHub
+The remote had two web edits to the README title ("[no longer used, I switched to job-finder]", then back to "new-jobs"); merged both, so local main is now 0 behind / 17+ ahead of origin and will fast-forward. The owner's first push attempt ran `! cd … && git push` in Terminal, where zsh's `!` inverts the exit status, so nothing was pushed.
