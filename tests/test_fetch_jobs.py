@@ -156,6 +156,38 @@ class Filters(unittest.TestCase):
         for t in drop:
             self.assertFalse(fj.is_target(t), t)
 
+    def test_finance_roles_need_a_finance_field_and_an_entry_type_role(self):
+        keep = ["Financial Analyst", "Senior Financial Analyst, FP&A", "FP&A Analyst", "Investment Banking Analyst",
+                "2027 Summer Analyst - Investment Banking", "Equity Research Associate", "Private Equity Associate",
+                "Credit Analyst", "Treasury Analyst", "M&A Analyst", "Corporate Development Associate",
+                "Wealth Management Associate", "Valuation Analyst", "Fund Accounting Analyst", "Economist",
+                "Sales & Trading Analyst", "Sales and Trading Summer Analyst", "Capital Markets Analyst Program",
+                "Investment Associate", "Junior Portfolio Analyst", "Finance Rotational Program"]
+        drop = ["Data Analyst", "Security Analyst", "Business Analyst", "Marketing Analyst", "Sales Analyst",
+                "VP, Investment Banking", "Finance Manager", "Managing Director, Equity Research",
+                "Sales Associate", "Investment Sales Associate", "Recruiting Associate, Finance", "Legal Associate",
+                "Customer Success Associate", "Accounts Payable Specialist"]
+        for t in keep:
+            self.assertTrue(fj.is_target(t), t)
+        for t in drop:
+            self.assertFalse(fj.is_target(t), t)
+        self.assertTrue(fj.is_target("Software Engineer") and not fj.is_finance("Software Engineer"))
+
+    def test_workday_finance_term_preset(self):
+        terms = []
+
+        def urlopen(req, timeout=0):
+            terms.append(json.loads(req.data)["searchText"])
+            return FakeResp(json.dumps({"total": 0, "jobPostings": []}).encode())
+
+        with mock.patch.object(fj.urllib.request, "urlopen", urlopen), mock.patch.object(fj.time, "sleep"):
+            fj.norm_workday({**WD, "terms": "finance"})
+            self.assertEqual(terms, list(fj.FINANCE_WORKDAY_TERMS))
+            terms.clear()
+            fj.norm_workday(WD)
+            self.assertEqual(terms, list(fj.WORKDAY_TERMS))
+        self.assertIn("financial analyst", fj.WORKDAY_TERMS)
+
     def test_priority_cities_and_salary_text(self):
         self.assertTrue(fj.PRIORITY_RE.search("New York, NY"))
         self.assertTrue(fj.PRIORITY_RE.search("SF Bay Area"))

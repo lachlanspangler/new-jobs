@@ -45,6 +45,26 @@ EXCLUDE_RE = re.compile(
     r"chemical|civil|clinical|nurse|technician|manufacturing|facilities)\b",
     re.IGNORECASE,
 )
+# Finance roles (financial analyst / entry-level finance): a finance FIELD and an entry-type ROLE, both required, so
+# "Investment Banking Analyst" and "FP&A Associate" match but "Data Analyst" and "VP, Investment Banking" don't.
+FIN_FIELD_RE = re.compile(
+    r"\b(financ(e|ial)|fp\s*&\s*a|investment|investing|banking|equity\s+research|private\s+(equity|credit|markets)|"
+    r"venture|capital\s+markets|corporate\s+(development|finance)|corp\s*dev|treasury|valuations?|credit|"
+    r"m\s*&\s*a|mergers|acquisitions|asset\s+management|wealth|portfolio|fund\s+(accounting|administration|operations)|"
+    r"underwriting|restructuring|leveraged\s+finance|real\s+estate|market\s+risk|risk\s+management|"
+    r"accounting|econom(ic|ics|ist)|fixed\s+income|equities|securities|sales\s*(&|and)\s*trading)\b",
+    re.IGNORECASE,
+)
+FIN_ROLE_RE = re.compile(
+    r"\b(analysts?|associates?|summer\s+analyst|analyst\s+program|rotational|rotation\s+program|new\s+grad|"
+    r"graduate|junior|jr\.?|entry[\s-]+level|early\s+career|campus|interns?|internship|economist)\b",
+    re.IGNORECASE,
+)
+FIN_EXCLUDE_RE = re.compile(
+    r"\b(sales(?!\s*(&|and)\s*trading)|customer|support|success|account\s+executive|marketing|recruit\w*|talent|"
+    r"human\s+resources|\bhr\b|legal|counsel|paralegal|designer|nurse|clinical|facilities|insurance\s+agent)\b",
+    re.IGNORECASE,
+)
 PRIORITY_RE = re.compile(r"san francisco|\bsf\b|bay area|chicago|new york|\bnyc\b|manhattan", re.IGNORECASE)
 YEARS_RE = re.compile(r"(\d{1,2})\s*\+?\s*years", re.IGNORECASE)
 TAG_RE = re.compile(r"<[^>]+>")
@@ -65,8 +85,14 @@ def extract_salary(text):
     return re.sub(r"\s+", " ", m.group(0)).strip() if m else ""
 
 
+def is_finance(title):
+    """Financial analyst / entry-level finance roles (see FIN_FIELD_RE)."""
+    return bool(FIN_FIELD_RE.search(title) and FIN_ROLE_RE.search(title)) and not FIN_EXCLUDE_RE.search(title)
+
+
 def is_target(title):
-    return bool(INCLUDE_RE.search(title)) and not EXCLUDE_RE.search(title)
+    swe_quant = bool(INCLUDE_RE.search(title)) and not EXCLUDE_RE.search(title)
+    return swe_quant or is_finance(title)
 
 
 def norm_greenhouse(c):
@@ -140,12 +166,20 @@ def workday_date(txt):
     return ""
 
 
+WORKDAY_TERMS = ("software engineer", "c++", "python", "quant", "developer", "research", "data engineer", "trading",
+                 "financial analyst")
+FINANCE_WORKDAY_TERMS = ("analyst", "associate", "financial analyst", "investment banking", "software engineer", "quant")
+
+
 def norm_workday(c):
     host, tenant, site = c["host"], c["token"], c["site"]
     base = f"https://{tenant}.{host}.myworkdayjobs.com"
     url = f"{base}/wday/cxs/{tenant}/{site}/jobs"
     seen, out = set(), []
-    terms = ("software engineer", "c++", "python", "quant", "developer", "research", "data engineer", "trading")
+    # banks etc. use "terms": "finance" (or their own list) in companies.json
+    terms = c.get("terms") or WORKDAY_TERMS
+    if terms == "finance":
+        terms = FINANCE_WORKDAY_TERMS
     for term in terms:  # query relevant roles server-side, then dedup
         for offset in range(0, 100, 20):
             body = json.dumps({"limit": 20, "offset": offset, "searchText": term, "appliedFacets": {}}).encode()
