@@ -1,8 +1,8 @@
 {
  "generated_at": "2026-10-29T06:49:47+00:00",
- "count": 4,
- "new_today": 4,
- "companies": 3,
+ "count": 6,
+ "new_today": 6,
+ "companies": 4,
  "jobs": [
   {
    "company": "Acme",
@@ -62,6 +62,38 @@
    "title": "Python Engineer",
    "location": "Remote",
    "url": "https://example.com/jobs/3",
+   "posted": "2026-10-28",
+   "salary": "",
+   "firstSeen": "2026-10-28",
+   "isNew": true,
+   "priority": true
+  },
+  {
+   "company": "Dime Bank",
+   "tags": [
+    "finance"
+   ],
+   "source": "workday",
+   "key": "workday:dime:/job/4",
+   "title": "Investment Banking Analyst",
+   "location": "New York, NY",
+   "url": "https://example.com/jobs/4",
+   "posted": "2026-10-28",
+   "salary": "",
+   "firstSeen": "2026-10-28",
+   "isNew": true,
+   "priority": true
+  },
+  {
+   "company": "Dime Bank",
+   "tags": [
+    "finance"
+   ],
+   "source": "workday",
+   "key": "workday:dime:/job/5",
+   "title": "Senior Financial Analyst, FP&A",
+   "location": "New York, NY",
+   "url": "https://example.com/jobs/5",
    "posted": "2026-10-28",
    "salary": "",
    "firstSeen": "2026-10-28",

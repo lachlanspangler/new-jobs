@@ -1,9 +1,9 @@
 "use strict";
 
-const TAG_COLORS = { ai: "#b08cff", quant: "#43e08a", hedge: "#ffa94d", tech: "#34d3ee" };
+const TAG_COLORS = { ai: "#b08cff", quant: "#43e08a", hedge: "#ffa94d", tech: "#34d3ee", finance: "#ffd84d" };
 const STORE = NJ.KEYS.apps;
 const DSTORE = NJ.KEYS.dismissed;
-const state = { jobs: [], q: "", city: "", role: "", newonly: false, hideapplied: false, hidestaff: false, hidesenior: false, hideintern: false, showdismissed: false, tags: new Set(), shown: 60 };
+const state = { jobs: [], q: "", city: "", role: "", newonly: false, hideapplied: false, hidestaff: false, hidesenior: false, hideintern: false, entryonly: false, showdismissed: false, tags: new Set(), shown: 60 };
 
 const IS_STAFF = /\bstaff\b|\bprincipal\b|\bdistinguished\b|\bfellow\b/i;
 const IS_SENIOR = /\bsenior\b|\bsr\.?\b/i;
@@ -19,18 +19,7 @@ function loadDismissed() { return new Set(NJ.get(DSTORE, [])); }
 function saveDismissed(s) { NJ.set(DSTORE, [...s]); }
 let DISMISSED = new Set();
 
-function roleOf(title) {
-  const t = title.toLowerCase();
-  if (/c\+\+/.test(t)) return "C++ Engineer";
-  if (/python/.test(t)) return "Python Engineer";
-  if (/(quant|quantitative)[^.]*research|research[^.]*(quant)/.test(t)) return "Quant Researcher";
-  if (/(quant|quantitative)[^.]*(develop|engineer|software)/.test(t)) return "Quant Developer";
-  if (/quant/.test(t)) return "Quant";
-  if (/trade\s*desk|desk\s*operations|trading operations/.test(t)) return "Trade Desk Ops";
-  if (/software|\bswe\b|\bsde\b|developer|engineer|back[\s-]?end|front[\s-]?end|full[\s-]?stack|platform|infrastructure|systems?|sre|devops/.test(t))
-    return "Software Engineer";
-  return "Other";
-}
+const roleOf = ROLES.roleOf;
 
 function agoFrom(iso) {
   const t = new Date((iso || "").replace(" ", "T")).getTime();
@@ -78,6 +67,7 @@ function filtered() {
     if (state.hidestaff && IS_STAFF.test(j.title)) return false;
     if (state.hidesenior && IS_SENIOR.test(j.title)) return false;
     if (state.hideintern && IS_INTERN.test(j.title)) return false;
+    if (state.entryonly && !ROLES.isEntry(j.title)) return false;
     if (!q) return true;
     return j.title.toLowerCase().includes(q) || j.company.toLowerCase().includes(q) || loc.includes(q);
   });
@@ -157,7 +147,7 @@ async function load() {
 }
 
 ["q", "city", "role"].forEach((id) => $(id).addEventListener("input", (e) => { state[id] = e.target.value; state.shown = 60; render(); }));
-["newonly", "hideapplied", "hidestaff", "hidesenior", "hideintern", "showdismissed"].forEach((id) => $(id).addEventListener("change", (e) => { state[id] = e.target.checked; state.shown = 60; render(); }));
+["newonly", "hideapplied", "hidestaff", "hidesenior", "hideintern", "entryonly", "showdismissed"].forEach((id) => $(id).addEventListener("change", (e) => { state[id] = e.target.checked; state.shown = 60; render(); }));
 $("more").addEventListener("click", () => { state.shown += 60; render(); });
 $("list").addEventListener("click", (e) => {
   const trash = e.target.closest(".r-trash");

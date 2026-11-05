@@ -1,6 +1,6 @@
 "use strict";
 
-const TAG_COLORS = { ai: "#b08cff", quant: "#43e08a", hedge: "#ffa94d", tech: "#34d3ee" };
+const TAG_COLORS = { ai: "#b08cff", quant: "#43e08a", hedge: "#ffa94d", tech: "#34d3ee", finance: "#ffd84d" };
 const STORE = NJ.KEYS.apps;
 const $ = (id) => document.getElementById(id);
 const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
@@ -12,16 +12,7 @@ const state = { jobs: [], byCo: [], q: "", tags: new Set(), emails: {} };
 const normName = (s) => String(s).toLowerCase().replace(/[^a-z0-9]/g, "");
 const emailsFor = (name) => (state.emails[normName(name)] || {}).emails || [];
 
-function roleOf(title) {
-  const t = title.toLowerCase();
-  if (/c\+\+/.test(t)) return "C++ Engineer";
-  if (/python/.test(t)) return "Python Engineer";
-  if (/(quant|quantitative)[^.]*research|research[^.]*(quant)/.test(t)) return "Quant Researcher";
-  if (/(quant|quantitative)[^.]*(develop|engineer|software)/.test(t)) return "Quant Developer";
-  if (/quant/.test(t)) return "Quant";
-  if (/trade\s*desk|desk\s*operations|trading operations/.test(t)) return "Trade Desk Ops";
-  return "Software Engineer";
-}
+const roleOf = ROLES.roleOf;
 function recordApply(job) {
   const apps = loadApps();
   if (apps.some((r) => r.key === job.key)) return;

@@ -45,7 +45,7 @@ test("a guest session starts empty, stays guest on every page, and leaves the re
     for (const href of internal) expect(href, `${p} link ${href}`).toMatch(/\?guest$/);
   }
   await page.goto("/index.html?guest");
-  await expect(page.locator(".row")).toHaveCount(4); // no dismissed job hidden: the guest has dismissed nothing
+  await expect(page.locator(".row")).toHaveCount(6); // no dismissed job hidden: the guest has dismissed nothing
   await expect(page.locator("#s-apps")).toHaveText("0");
   await expect(page.locator("#nav-count")).toHaveText("0");
   await page.goto("/stats.html?guest");
@@ -76,7 +76,7 @@ test("a guest session starts empty, stays guest on every page, and leaves the re
   await expect(page.locator("#t-total")).toHaveText("2");
   await page.goto("/index.html");
   await expect(page.locator("#s-apps")).toHaveText("2");
-  await expect(page.locator(".row")).toHaveCount(3); // the owner's dismissed job is still hidden
+  await expect(page.locator(".row")).toHaveCount(5); // the owner's dismissed job is still hidden
   expect(await localDump(page)).toEqual(before);
 });
 
@@ -123,7 +123,7 @@ test("'Reset everything' offers an export, asks first, and then clears every sto
   await expect(page.locator("#t-total")).toHaveText("0");
   await page.goto("/index.html");
   await expect(page.locator("#s-apps")).toHaveText("0");
-  await expect(page.locator(".row")).toHaveCount(4); // no dismissed jobs any more
+  await expect(page.locator(".row")).toHaveCount(6); // no dismissed jobs any more
   await page.goto("/pipeline.html");
   await expect(page.locator(".pstatus")).toHaveCount(0);
 });

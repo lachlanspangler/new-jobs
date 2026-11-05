@@ -45,12 +45,14 @@
         <option>Quant Researcher</option>
         <option>Quant</option>
         <option>Trade Desk Ops</option>
+        <option>Finance</option>
       </select>
       <label class="tog"><input type="checkbox" id="newonly" /> New today</label>
       <label class="tog"><input type="checkbox" id="hideapplied" /> Hide applied</label>
       <label class="tog"><input type="checkbox" id="hidestaff" /> Hide staff</label>
       <label class="tog"><input type="checkbox" id="hidesenior" /> Hide senior</label>
       <label class="tog"><input type="checkbox" id="hideintern" /> Hide intern</label>
+      <label class="tog" title="Titles that say they're entry level: analyst/associate programs, new grad, junior, level I, intern; nothing senior"><input type="checkbox" id="entryonly" /> Entry level</label>
       <label class="tog"><input type="checkbox" id="showdismissed" /> Show dismissed</label>
     </section>
 
@@ -60,6 +62,7 @@
     <footer class="foot">Live from public Greenhouse / Ashby / Lever board APIs · refreshed every 3 hours · clicking <b>Apply</b> counts toward your tally (stored in this browser).</footer>
 
     <script src="./store.js" defer></script>
+    <script src="./roles.js" defer></script>
     <script src="./app.js" defer></script>
   </body>
 </html>
