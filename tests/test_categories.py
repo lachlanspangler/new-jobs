@@ -38,6 +38,12 @@ class Quant(unittest.TestCase):
                   "Trade Desk Operations Associate", "Junior Trader"]:
             self.assertEqual(cat(t), "quant", t)
 
+    def test_software_titles_that_mention_trading_stay_software(self):
+        self.assertEqual(cat("Associate Director, Software Engineering | Trading Technology"), "software")
+        self.assertEqual(cat("Software Engineer, Trading Platform"), "software")
+        self.assertEqual(cat("Quantitative Software Engineer"), "quant")  # "quantitative" still wins
+        self.assertEqual(cat("Trader"), "quant")
+
     def test_sales_and_trading_is_finance_not_quant(self):
         self.assertEqual(cat("Sales & Trading Analyst"), "finance")
         self.assertEqual(cat("Sales and Trading Summer Analyst"), "finance")
@@ -129,6 +135,23 @@ class Levels(unittest.TestCase):
         self.assertEqual(cat("Senior Software Engineer"), "software")
         self.assertEqual(cat("Staff Software Engineer"), "software")
         self.assertEqual(cat("Principal Quant Researcher"), "quant")
+
+
+class ExportCap(unittest.TestCase):
+    def test_the_cap_only_trims_software_roles(self):
+        def r(i, title, tags=("tech",)):
+            return {"company": "C", "tags": list(tags), "source": "greenhouse", "key": f"greenhouse:c:{i}", "title": title,
+                    "location": "Austin, TX", "url": "u", "posted": f"2026-11-{10 - i // 10:02d}", "salary": ""}
+        live = [r(i, "Software Engineer") for i in range(5)] + [r(5, "Investment Banking Analyst"), r(6, "Quant Trader"),
+                                                               r(7, "Development Associate", ("realestate",))]
+        with tempfile.TemporaryDirectory() as t, mock.patch.object(fj, "MAX_EXPORT", 3), \
+                mock.patch("sys.stdout", new_callable=io.StringIO):
+            a = Namespace(tag=[], no_openquant=True, no_builtin=True, seen=f"{t}/seen.json", out=f"{t}/jobs.json",
+                          previous=None, prune_days=30, today=None, allow_drop=False)
+            payload, _s, _r = fj.build([], a, "2026-11-10", (live, [], set(), [], 1))
+        cats = sorted(j["category"] for j in payload["jobs"])
+        self.assertEqual(cats.count("software"), 3)  # trimmed to the cap
+        self.assertEqual(set(cats) - {"software"}, {"finance", "quant", "development"})  # all kept
 
 
 class Tagging(unittest.TestCase):

@@ -113,6 +113,7 @@ NOT_RE_DEV_RE = re.compile(  # "development" that isn't real estate development
     r"platform|systems?|data|ml|ai|tools?)\s+development\b|\bdevelopment\s+(engineer|operations|tools)\b|"
     r"\b(developer|devops|sdk)\b", re.IGNORECASE)
 QUANT_RE = re.compile(r"\b(quant|quantitative|trader|trading|trade\s*desk|desk\s*operations)\b", re.IGNORECASE)
+QUANT_STRONG_RE = re.compile(r"\b(quant|quantitative|traders?)\b", re.IGNORECASE)
 SALES_TRADING_RE = re.compile(r"\bsales\s*(&|and)\s*trading\b", re.IGNORECASE)
 SWE_STRONG_RE = re.compile(r"\b(software|developer|engineer|engineering|programmer|swe|sde|sre|devops)\b|c\+\+",
                            re.IGNORECASE)
@@ -145,7 +146,10 @@ def _category(title, tags=()):
         if RE_WORDS_RE.search(t) or RE_FIELD_RE.search(t):
             return "realestate"
     swe_or_quant = bool(INCLUDE_RE.search(t)) and not EXCLUDE_RE.search(t)
-    if swe_or_quant and QUANT_RE.search(t) and not SALES_TRADING_RE.search(t):
+    # quant: quant/quantitative/trader always; "trading" only when the title isn't a software engineering one
+    # ("Software Engineer, Trading Technology" is software)
+    if swe_or_quant and not SALES_TRADING_RE.search(t) and (
+            QUANT_STRONG_RE.search(t) or (QUANT_RE.search(t) and not SWE_STRONG_RE.search(t))):
         return "quant"
     if swe_or_quant and SWE_STRONG_RE.search(t):
         return "software"
@@ -828,10 +832,14 @@ def build(companies, args, today, fetched=None):
         j["category"] = category_of(j["title"], j.get("tags")) or ("quant" if j["source"] == "openquant" else "software")
     rows.sort(key=lambda j: (j["priority"], j.get("posted") or ""), reverse=True)  # newest first, cities boosted
 
-    export = rows[:MAX_EXPORT]  # the top MAX_EXPORT, but always keep every openquant/builtin role
+    # the size cap applies to software roles only: every quant, real estate, development and finance role ships
+    # (otherwise the newest 15,000 software postings would crowd out older analyst roles), as does every
+    # openquant/Built In role
+    export = rows[:MAX_EXPORT]
     if len(rows) > MAX_EXPORT:
         have = {j["key"] for j in export}
-        export += [j for j in rows[MAX_EXPORT:] if j["source"] in ("openquant", "builtin") and j["key"] not in have]
+        export += [j for j in rows[MAX_EXPORT:] if j["key"] not in have and (
+            j["source"] in ("openquant", "builtin") or j["category"] != "software")]
     payload = {
         "generated_at": dt.datetime.now(dt.timezone.utc).isoformat(),
         "count": len(rows),
