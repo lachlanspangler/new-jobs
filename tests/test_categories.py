@@ -58,7 +58,9 @@ class RealEstate(unittest.TestCase):
             self.assertEqual(cat(t), "realestate", t)
 
     def test_dropped(self):
-        for t in ["Leasing Agent", "Property Manager", "Construction Project Manager", "Maintenance Technician",
+        for t in ["Entry-Level Commercial Real Estate Agent", "Associate - Real Estate Broker",
+                  "CAM Analyst II - Foreclosure, Bankruptcy and Property Preservation",
+                  "Leasing Agent", "Property Manager", "Construction Project Manager", "Maintenance Technician",
                   "Leasing Consultant", "Business Development Associate", "Sales Associate", "Marketing Analyst"]:
             self.assertIsNone(cat(t, RE), t)
 
