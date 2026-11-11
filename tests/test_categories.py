@@ -96,8 +96,13 @@ class Finance(unittest.TestCase):
 
     def test_dropped(self):
         for t in ["Data Analyst", "Business Analyst", "VP, Investment Banking", "Finance Manager", "Investment Sales Associate",
-                  "Recruiting Associate, Finance", "Accounts Payable Specialist"]:
+                  "Recruiting Associate, Finance", "Accounts Payable Specialist",
+                  # back-office titles seen in the first real run (2026-11-10)
+                  "Junior Accounts Payable Specialist (Product & Investment)", "Analyst, Banking Operations (Domestic)",
+                  "Banking Services Operations Associate III - Non Real Estate Collateral", "Payroll Analyst",
+                  "Loan Servicing Associate", "Wealth Client Service Associate", "Financial Data Analyst"]:
             self.assertIsNone(cat(t), t)
+        self.assertNotIn(cat("Capital Markets Business Systems Analyst- Real Estate"), {"finance", "realestate"})
 
 
 class Levels(unittest.TestCase):

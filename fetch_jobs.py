@@ -62,7 +62,10 @@ FIN_ROLE_RE = re.compile(
 )
 FIN_EXCLUDE_RE = re.compile(
     r"\b(sales(?!\s*(&|and)\s*trading)|customer|support|success|account\s+executive|marketing|recruit\w*|talent|"
-    r"human\s+resources|\bhr\b|legal|counsel|paralegal|designer|nurse|clinical|facilities|insurance\s+agent)\b",
+    r"human\s+resources|\bhr\b|legal|counsel|paralegal|designer|nurse|clinical|facilities|insurance\s+agent|"
+    # back-office and IT roles that wear an analyst/associate title (2026-11-10 precision pass)
+    r"accounts\s+(payable|receivable)|payroll|bookkeep\w*|billing|collections|teller|operations|"
+    r"business\s+(systems\s+)?analyst|systems\s+analyst|data\s+analyst|client\s+service|loan\s+servic\w*|processor)\b",
     re.IGNORECASE,
 )
 PRIORITY_RE = re.compile(r"san francisco|\bsf\b|bay area|chicago|new york|\bnyc\b|manhattan", re.IGNORECASE)
