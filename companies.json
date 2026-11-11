@@ -3475,6 +3475,749 @@
     "tech"
    ],
    "domain": "acorns.com"
+  },
+  {
+   "name": "JPMorgan Chase",
+   "ats": "oracle",
+   "token": "jpmc",
+   "host": "jpmc.fa.oraclecloud.com",
+   "site": "CX_1001",
+   "tags": [
+    "finance"
+   ],
+   "domain": "jpmorganchase.com"
+  },
+  {
+   "name": "BNY",
+   "ats": "oracle",
+   "token": "bny",
+   "host": "eofe.fa.us2.oraclecloud.com",
+   "site": "BNY-Careers",
+   "tags": [
+    "finance"
+   ],
+   "domain": "bny.com"
+  },
+  {
+   "name": "Lazard",
+   "ats": "oracle",
+   "token": "lazard",
+   "host": "icbpjb.fa.ocs.oraclecloud.com",
+   "site": "LazardProfessionalCareers",
+   "tags": [
+    "finance"
+   ],
+   "domain": "lazard.com"
+  },
+  {
+   "name": "Citizens",
+   "ats": "oracle",
+   "token": "citizens",
+   "host": "hcgn.fa.us2.oraclecloud.com",
+   "site": "CX_1",
+   "tags": [
+    "finance"
+   ],
+   "domain": "citizensbank.com"
+  },
+  {
+   "name": "Moelis",
+   "ats": "workday",
+   "token": "moelis",
+   "host": "wd1",
+   "site": "Experienced-Hires",
+   "tags": [
+    "finance"
+   ],
+   "domain": "moelis.com",
+   "terms": "finance"
+  },
+  {
+   "name": "Guggenheim Securities",
+   "ats": "workday",
+   "token": "guggenheim",
+   "host": "wd1",
+   "site": "Guggenheim_Careers",
+   "tags": [
+    "finance"
+   ],
+   "domain": "guggenheimsecurities.com",
+   "terms": "finance"
+  },
+  {
+   "name": "Guggenheim Securities (Campus)",
+   "ats": "workday",
+   "token": "guggenheim",
+   "host": "wd1",
+   "site": "Guggenheim_Careers_Campus",
+   "tags": [
+    "finance"
+   ],
+   "domain": "guggenheimsecurities.com",
+   "terms": "finance"
+  },
+  {
+   "name": "KKR",
+   "ats": "greenhouse",
+   "token": "stage",
+   "tags": [
+    "finance"
+   ],
+   "domain": "kkr.com"
+  },
+  {
+   "name": "Bain Capital",
+   "ats": "workday",
+   "token": "baincapital",
+   "host": "wd1",
+   "site": "External_Public",
+   "tags": [
+    "finance"
+   ],
+   "domain": "baincapital.com",
+   "terms": "finance"
+  },
+  {
+   "name": "Oaktree",
+   "ats": "workday",
+   "token": "oaktree",
+   "host": "wd1",
+   "site": "Oaktree",
+   "tags": [
+    "finance"
+   ],
+   "domain": "oaktreecapital.com",
+   "terms": "finance"
+  },
+  {
+   "name": "Sixth Street",
+   "ats": "workday",
+   "token": "sixthstreet",
+   "host": "wd1",
+   "site": "sixthstreetcareers",
+   "tags": [
+    "finance"
+   ],
+   "domain": "sixthstreet.com",
+   "terms": "finance"
+  },
+  {
+   "name": "Golub Capital",
+   "ats": "workday",
+   "token": "golubcapital",
+   "host": "wd501",
+   "site": "Golub_Capital_Careers",
+   "tags": [
+    "finance"
+   ],
+   "domain": "golubcapital.com",
+   "terms": "finance"
+  },
+  {
+   "name": "Brookfield",
+   "ats": "workday",
+   "token": "brookfield",
+   "host": "wd5",
+   "site": "Brookfield",
+   "tags": [
+    "finance"
+   ],
+   "domain": "brookfield.com",
+   "terms": "finance"
+  },
+  {
+   "name": "Deutsche Bank",
+   "ats": "workday",
+   "token": "db",
+   "host": "wd3",
+   "site": "DBWebsite",
+   "tags": [
+    "finance"
+   ],
+   "domain": "db.com",
+   "terms": "finance"
+  },
+  {
+   "name": "Barclays",
+   "ats": "workday",
+   "token": "barclays",
+   "host": "wd3",
+   "site": "External_Career_Site_Barclays",
+   "tags": [
+    "finance"
+   ],
+   "domain": "barclays.com",
+   "terms": "finance"
+  },
+  {
+   "name": "RBC",
+   "ats": "workday",
+   "token": "rbc",
+   "host": "wd3",
+   "site": "RBCGLOBAL1",
+   "tags": [
+    "finance"
+   ],
+   "domain": "rbc.com",
+   "terms": "finance"
+  },
+  {
+   "name": "Mizuho",
+   "ats": "workday",
+   "token": "mizuho",
+   "host": "wd1",
+   "site": "mizuhoamericas",
+   "tags": [
+    "finance"
+   ],
+   "domain": "mizuhogroup.com",
+   "terms": "finance"
+  },
+  {
+   "name": "Santander US",
+   "ats": "workday",
+   "token": "santander",
+   "host": "wd3",
+   "site": "SantanderCareers",
+   "tags": [
+    "finance"
+   ],
+   "domain": "santanderus.com",
+   "terms": "finance"
+  },
+  {
+   "name": "Stifel",
+   "ats": "icims",
+   "token": "careers-stifel",
+   "tags": [
+    "finance"
+   ],
+   "domain": "stifel.com"
+  },
+  {
+   "name": "Voya",
+   "ats": "workday",
+   "token": "godirect",
+   "host": "wd5",
+   "site": "voya_jobs",
+   "tags": [
+    "finance"
+   ],
+   "domain": "voya.com",
+   "terms": "finance"
+  },
+  {
+   "name": "FactSet",
+   "ats": "workday",
+   "token": "factset",
+   "host": "wd108",
+   "site": "FactsetCareers",
+   "tags": [
+    "finance",
+    "tech"
+   ],
+   "domain": "factset.com"
+  },
+  {
+   "name": "MSCI",
+   "ats": "icims",
+   "token": "uscareers-msci",
+   "tags": [
+    "finance",
+    "tech",
+    "quant"
+   ],
+   "domain": "msci.com"
+  },
+  {
+   "name": "Target",
+   "ats": "workday",
+   "token": "target",
+   "host": "wd5",
+   "site": "targetcareers",
+   "tags": [
+    "finance"
+   ],
+   "domain": "target.com",
+   "terms": [
+    "financial analyst",
+    "fp&a",
+    "finance associate"
+   ]
+  },
+  {
+   "name": "Coca-Cola",
+   "ats": "workday",
+   "token": "coke",
+   "host": "wd1",
+   "site": "coca-cola-careers",
+   "tags": [
+    "finance"
+   ],
+   "domain": "coca-colacompany.com",
+   "terms": [
+    "financial analyst",
+    "fp&a",
+    "finance associate"
+   ]
+  },
+  {
+   "name": "Procter & Gamble",
+   "ats": "workday",
+   "token": "pg",
+   "host": "wd5",
+   "site": "1000",
+   "tags": [
+    "finance"
+   ],
+   "domain": "pg.com",
+   "terms": [
+    "financial analyst",
+    "fp&a",
+    "finance associate"
+   ]
+  },
+  {
+   "name": "Johnson & Johnson",
+   "ats": "workday",
+   "token": "jj",
+   "host": "wd5",
+   "site": "JJ",
+   "tags": [
+    "finance"
+   ],
+   "domain": "jnj.com",
+   "terms": [
+    "financial analyst",
+    "fp&a",
+    "finance associate"
+   ]
+  },
+  {
+   "name": "Merck",
+   "ats": "workday",
+   "token": "msd",
+   "host": "wd5",
+   "site": "SearchJobs",
+   "tags": [
+    "finance"
+   ],
+   "domain": "merck.com",
+   "terms": [
+    "financial analyst",
+    "fp&a",
+    "finance associate"
+   ]
+  },
+  {
+   "name": "CVS Health",
+   "ats": "workday",
+   "token": "cvshealth",
+   "host": "wd1",
+   "site": "CVS_Health_Careers",
+   "tags": [
+    "finance"
+   ],
+   "domain": "cvshealth.com",
+   "terms": [
+    "financial analyst",
+    "fp&a",
+    "finance associate"
+   ]
+  },
+  {
+   "name": "Boeing",
+   "ats": "workday",
+   "token": "boeing",
+   "host": "wd1",
+   "site": "EXTERNAL_CAREERS",
+   "tags": [
+    "finance"
+   ],
+   "domain": "boeing.com",
+   "terms": [
+    "financial analyst",
+    "fp&a",
+    "finance associate"
+   ]
+  },
+  {
+   "name": "GE Vernova",
+   "ats": "workday",
+   "token": "gevernova",
+   "host": "wd5",
+   "site": "Vernova_ExternalSite",
+   "tags": [
+    "finance"
+   ],
+   "domain": "gevernova.com",
+   "terms": [
+    "financial analyst",
+    "fp&a",
+    "finance associate"
+   ]
+  },
+  {
+   "name": "3M",
+   "ats": "workday",
+   "token": "3m",
+   "host": "wd1",
+   "site": "Search",
+   "tags": [
+    "finance"
+   ],
+   "domain": "3m.com",
+   "terms": [
+    "financial analyst",
+    "fp&a",
+    "finance associate"
+   ]
+  },
+  {
+   "name": "Caterpillar",
+   "ats": "workday",
+   "token": "cat",
+   "host": "wd5",
+   "site": "CaterpillarCareers",
+   "tags": [
+    "finance"
+   ],
+   "domain": "caterpillar.com",
+   "terms": [
+    "financial analyst",
+    "fp&a",
+    "finance associate"
+   ]
+  },
+  {
+   "name": "General Motors",
+   "ats": "workday",
+   "token": "generalmotors",
+   "host": "wd5",
+   "site": "Careers_GM",
+   "tags": [
+    "finance"
+   ],
+   "domain": "gm.com",
+   "terms": [
+    "financial analyst",
+    "fp&a",
+    "finance associate"
+   ]
+  },
+  {
+   "name": "Visa",
+   "ats": "workday",
+   "token": "visa",
+   "host": "wd5",
+   "site": "Visa",
+   "tags": [
+    "finance",
+    "tech"
+   ],
+   "domain": "visa.com",
+   "terms": [
+    "financial analyst",
+    "fp&a",
+    "finance associate"
+   ]
+  },
+  {
+   "name": "Cisco",
+   "ats": "workday",
+   "token": "cisco",
+   "host": "wd5",
+   "site": "Cisco_Careers",
+   "tags": [
+    "finance",
+    "tech"
+   ],
+   "domain": "cisco.com",
+   "terms": [
+    "financial analyst",
+    "fp&a",
+    "finance associate"
+   ]
+  },
+  {
+   "name": "HP",
+   "ats": "workday",
+   "token": "hp",
+   "host": "wd5",
+   "site": "ExternalCareerSite",
+   "tags": [
+    "finance",
+    "tech"
+   ],
+   "domain": "hp.com",
+   "terms": [
+    "financial analyst",
+    "fp&a",
+    "finance associate"
+   ]
+  },
+  {
+   "name": "HPE",
+   "ats": "workday",
+   "token": "hpe",
+   "host": "wd5",
+   "site": "Jobsathpe",
+   "tags": [
+    "finance",
+    "tech"
+   ],
+   "domain": "hpe.com",
+   "terms": [
+    "financial analyst",
+    "fp&a",
+    "finance associate"
+   ]
+  },
+  {
+   "name": "Accenture",
+   "ats": "workday",
+   "token": "accenture",
+   "host": "wd103",
+   "site": "AccentureCareers",
+   "tags": [
+    "finance",
+    "tech"
+   ],
+   "domain": "accenture.com",
+   "terms": [
+    "financial analyst",
+    "fp&a",
+    "finance associate"
+   ]
+  },
+  {
+   "name": "PwC US (Experienced)",
+   "ats": "workday",
+   "token": "pwc",
+   "host": "wd3",
+   "site": "US_Experienced_Careers",
+   "tags": [
+    "finance"
+   ],
+   "domain": "pwc.com",
+   "terms": [
+    "financial analyst",
+    "fp&a",
+    "finance associate"
+   ]
+  },
+  {
+   "name": "PwC US (Entry Level)",
+   "ats": "workday",
+   "token": "pwc",
+   "host": "wd3",
+   "site": "US_Entry_Level_Careers",
+   "tags": [
+    "finance"
+   ],
+   "domain": "pwc.com",
+   "terms": [
+    "financial analyst",
+    "fp&a",
+    "finance associate"
+   ]
+  },
+  {
+   "name": "Honeywell",
+   "ats": "oracle",
+   "token": "honeywell",
+   "host": "ibqbjb.fa.ocs.oraclecloud.com",
+   "site": "Honeywell",
+   "tags": [
+    "finance"
+   ],
+   "domain": "honeywell.com",
+   "terms": [
+    "financial analyst",
+    "fp&a",
+    "finance associate"
+   ]
+  },
+  {
+   "name": "Oracle",
+   "ats": "oracle",
+   "token": "oracle",
+   "host": "eeho.fa.us2.oraclecloud.com",
+   "site": "CX_45001",
+   "tags": [
+    "finance",
+    "tech"
+   ],
+   "domain": "oracle.com",
+   "terms": [
+    "financial analyst",
+    "fp&a",
+    "finance associate"
+   ]
+  },
+  {
+   "name": "Ford",
+   "ats": "oracle",
+   "token": "ford",
+   "host": "efds.fa.em5.oraclecloud.com",
+   "site": "CX_1",
+   "tags": [
+    "finance"
+   ],
+   "domain": "ford.com",
+   "terms": [
+    "financial analyst",
+    "fp&a",
+    "finance associate"
+   ]
+  },
+  {
+   "name": "Uber",
+   "ats": "oracle",
+   "token": "uber",
+   "host": "iaziqy.fa.ocs.oraclecloud.com",
+   "site": "UberCareers",
+   "tags": [
+    "finance",
+    "tech"
+   ],
+   "domain": "uber.com",
+   "terms": [
+    "financial analyst",
+    "fp&a",
+    "finance associate",
+    "treasury analyst"
+   ]
+  },
+  {
+   "name": "Swiss Re",
+   "ats": "successfactors",
+   "token": "swissre",
+   "host": "careers.swissre.com",
+   "tags": [
+    "finance"
+   ],
+   "domain": "swissre.com"
+  },
+  {
+   "name": "Nomura",
+   "ats": "successfactors",
+   "token": "nomura",
+   "host": "careers.nomura.com",
+   "tags": [
+    "finance"
+   ],
+   "domain": "nomura.com"
+  },
+  {
+   "name": "ANZ",
+   "ats": "successfactors",
+   "token": "anz",
+   "host": "careers.anz.com",
+   "tags": [
+    "finance"
+   ],
+   "domain": "anz.com"
+  },
+  {
+   "name": "EY",
+   "ats": "successfactors",
+   "token": "ey",
+   "host": "careers.ey.com",
+   "tags": [
+    "finance"
+   ],
+   "domain": "ey.com",
+   "terms": [
+    "financial analyst",
+    "valuation",
+    "corporate finance",
+    "transaction",
+    "private equity"
+   ]
+  },
+  {
+   "name": "Scotiabank",
+   "ats": "successfactors",
+   "token": "scotiabank",
+   "host": "jobs.scotiabank.com",
+   "tags": [
+    "finance"
+   ],
+   "domain": "scotiabank.com",
+   "terms": "finance"
+  },
+  {
+   "name": "New York Life",
+   "ats": "successfactors",
+   "token": "newyorklife",
+   "host": "jobs.newyorklife.com",
+   "tags": [
+    "finance"
+   ],
+   "domain": "newyorklife.com"
+  },
+  {
+   "name": "Lincoln Financial",
+   "ats": "successfactors",
+   "token": "lincolnfinancial",
+   "host": "jobs.lincolnfinancial.com",
+   "tags": [
+    "finance"
+   ],
+   "domain": "lincolnfinancial.com"
+  },
+  {
+   "name": "Janus Henderson",
+   "ats": "successfactors",
+   "token": "janushenderson",
+   "host": "jobs.janushenderson.com",
+   "tags": [
+    "finance"
+   ],
+   "domain": "janushenderson.com"
+  },
+  {
+   "name": "Partners Group",
+   "ats": "successfactors",
+   "token": "partnersgroup",
+   "host": "jobs.partnersgroup.com",
+   "tags": [
+    "finance",
+    "realestate"
+   ],
+   "domain": "partnersgroup.com"
+  },
+  {
+   "name": "Nordea",
+   "ats": "successfactors",
+   "token": "nordea",
+   "host": "careers.nordea.com",
+   "tags": [
+    "finance"
+   ],
+   "domain": "nordea.com"
+  },
+  {
+   "name": "Intesa Sanpaolo",
+   "ats": "successfactors",
+   "token": "intesasanpaolo",
+   "host": "jobs.intesasanpaolo.com",
+   "locale": "en_US",
+   "tags": [
+    "finance"
+   ],
+   "domain": "intesasanpaolo.com"
+  },
+  {
+   "name": "Mapletree",
+   "ats": "successfactors",
+   "token": "mapletree",
+   "host": "careers.mapletree.com.sg",
+   "tags": [
+    "realestate"
+   ],
+   "domain": "mapletree.com.sg"
   }
  ]
 }

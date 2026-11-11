@@ -27,17 +27,19 @@ class Companies(unittest.TestCase):
                     self.assertRegex(c.get("host", ""), r"^wd\d+$")
                 if c["ats"] == "oracle":
                     self.assertRegex(c.get("host", ""), r"^[a-z0-9.-]+\.oraclecloud\.com$")
+                if c["ats"] == "successfactors":
+                    self.assertRegex(c.get("host", ""), r"^[a-z0-9.-]+\.[a-z]{2,}$")
                 if c["ats"] in ("workday", "oracle"):
                     self.assertTrue(c.get("site"))
                     t = c.get("terms")
                     self.assertTrue(t is None or t == "finance" or (isinstance(t, list) and all(isinstance(x, str) for x in t)))
-                else:
+                elif c["ats"] != "successfactors":
                     self.assertNotIn("terms", c)
                 if "onlyLocations" in c:
                     re.compile(c["onlyLocations"])
 
     def test_no_duplicate_boards_or_names(self):
-        boards = [(c["ats"], c["token"]) for c in self.companies]
+        boards = [(c["ats"], c["token"], c.get("site")) for c in self.companies]  # one Workday tenant can have several sites
         names = [c["name"].lower() for c in self.companies]
         self.assertEqual(len(boards), len(set(boards)))
         self.assertEqual(len(names), len(set(names)))
