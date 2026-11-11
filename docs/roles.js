@@ -26,5 +26,9 @@
   const SENIORITY = /\b(senior|sr\.?|staff|principal|lead|manager|director|head|chief|vp|vice\s+president|president|managing|distinguished|fellow|partner|ii|iii|iv|2|3|4)\b/i;
   const isEntry = (title) => ENTRY.test(title) && !SENIORITY.test(title);
 
-  window.ROLES = { roleOf, isFinance, isEntry };
+  // the role an application is filed under on the Applications page: real estate and development jobs by their
+  // category (their titles, e.g. "Acquisitions Analyst", would otherwise read as finance), everything else by title
+  const roleFor = (job) => ({ realestate: "Real Estate", development: "Development" })[job.category] || roleOf(job.title);
+
+  window.ROLES = { roleOf, roleFor, isFinance, isEntry };
 })();

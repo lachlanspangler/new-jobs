@@ -1,6 +1,6 @@
 "use strict";
 
-const TAG_COLORS = { ai: "#b08cff", quant: "#43e08a", hedge: "#ffa94d", tech: "#34d3ee", finance: "#ffd84d" };
+const TAG_COLORS = { ai: "#b08cff", quant: "#43e08a", hedge: "#ffa94d", tech: "#34d3ee", finance: "#ffd84d", realestate: "#ff8fb1" };
 const $ = (id) => document.getElementById(id);
 const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 const edge = (tags) => { for (const t of tags || []) if (TAG_COLORS[t]) return TAG_COLORS[t]; return "#7c8cff"; };

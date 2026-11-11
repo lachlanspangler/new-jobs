@@ -1,6 +1,6 @@
 "use strict";
 
-const TAG_COLORS = { ai: "#b08cff", quant: "#43e08a", hedge: "#ffa94d", tech: "#34d3ee", finance: "#ffd84d" };
+const TAG_COLORS = { ai: "#b08cff", quant: "#43e08a", hedge: "#ffa94d", tech: "#34d3ee", finance: "#ffd84d", realestate: "#ff8fb1" };
 const STORE = NJ.KEYS.apps;
 const $ = (id) => document.getElementById(id);
 const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
@@ -16,7 +16,7 @@ const roleOf = ROLES.roleOf;
 function recordApply(job) {
   const apps = loadApps();
   if (apps.some((r) => r.key === job.key)) return;
-  apps.push({ key: job.key, company: job.company, title: job.title, role: roleOf(job.title),
+  apps.push({ key: job.key, company: job.company, title: job.title, role: ROLES.roleFor(job),
               tags: job.tags || [], url: job.url, ts: new Date().toISOString() });
   saveApps(apps); APPLIED = new Set(apps.map((r) => r.key));
 }

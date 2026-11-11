@@ -1,9 +1,9 @@
 "use strict";
 
-const TAG_COLORS = { ai: "#b08cff", quant: "#43e08a", hedge: "#ffa94d", tech: "#34d3ee", finance: "#ffd84d" };
+const TAG_COLORS = { ai: "#b08cff", quant: "#43e08a", hedge: "#ffa94d", tech: "#34d3ee", finance: "#ffd84d", realestate: "#ff8fb1" };
 const STORE = NJ.KEYS.apps;
 const DSTORE = NJ.KEYS.dismissed;
-const state = { jobs: [], q: "", city: "", role: "", newonly: false, hideapplied: false, hidestaff: false, hidesenior: false, hideintern: false, entryonly: false, showdismissed: false, tags: new Set(), shown: 60 };
+const state = { jobs: [], q: "", city: "", role: "", newonly: false, hideapplied: false, hidestaff: false, hidesenior: false, hideintern: false, entryonly: false, showdismissed: false, tags: new Set(), cats: new Set(), shown: 60 };
 
 const IS_STAFF = /\bstaff\b|\bprincipal\b|\bdistinguished\b|\bfellow\b/i;
 const IS_SENIOR = /\bsenior\b|\bsr\.?\b/i;
@@ -20,6 +20,11 @@ function saveDismissed(s) { NJ.set(DSTORE, [...s]); }
 let DISMISSED = new Set();
 
 const roleOf = ROLES.roleOf;
+// job categories (set by fetch_jobs.py); older data without one counts as software
+const CATEGORIES = [["software", "Software"], ["quant", "Quant"], ["realestate", "Real estate"],
+  ["development", "Development"], ["finance", "Finance analyst"]];
+const CAT_LABEL = Object.fromEntries(CATEGORIES);
+const catOf = (j) => (CAT_LABEL[j.category] ? j.category : "software");
 
 function agoFrom(iso) {
   const t = new Date((iso || "").replace(" ", "T")).getTime();
@@ -58,8 +63,9 @@ function filtered() {
   return state.jobs.filter((j) => {
     if (!state.showdismissed && DISMISSED.has(j.key)) return false;
     if (state.tags.size && !(j.tags || []).some((t) => state.tags.has(t))) return false;
+    if (state.cats.size && !state.cats.has(catOf(j))) return false;
     if (state.newonly && !j.isNew) return false;
-    if (state.role && roleOf(j.title) !== state.role) return false;
+    if (state.role && ROLES.roleFor(j) !== state.role) return false;
     const loc = (j.location || "").toLowerCase();
     if (state.city === "priority" && !j.priority) return false;
     else if (state.city && state.city !== "priority" && !loc.includes(state.city)) return false;
@@ -94,6 +100,7 @@ function render() {
           <span class="r-dot"></span>
           <span class="r-title">${esc(j.title)}</span>
           <span class="r-co">${esc(j.company)}</span>
+          <span class="r-cat" data-c="${catOf(j)}">${CAT_LABEL[catOf(j)]}</span>
           <span class="r-loc">${j.priority ? "★ " : ""}${esc(j.location || "—")}</span>
           ${j.salary ? `<span class="r-sal">${esc(j.salary)}</span>` : ""}
           ${j.isNew ? '<span class="r-new">new</span>' : ""}
@@ -112,10 +119,31 @@ function render() {
 function recordApply(job) {
   const apps = loadApps();
   if (apps.some((r) => r.key === job.key)) return;
-  apps.push({ key: job.key, company: job.company, title: job.title, role: roleOf(job.title),
+  apps.push({ key: job.key, company: job.company, title: job.title, role: ROLES.roleFor(job),
               tags: job.tags || [], url: job.url, ts: new Date().toISOString() });
   saveApps(apps);
   APPLIED = appliedSet();
+}
+
+function renderCategories() {
+  const box = $("cats");
+  const counts = {};
+  state.jobs.forEach((j) => { counts[catOf(j)] = (counts[catOf(j)] || 0) + 1; });
+  box.innerHTML = "";
+  CATEGORIES.forEach(([c, label]) => {
+    const el = document.createElement("button");
+    el.type = "button";
+    el.className = "cat";
+    el.dataset.c = c;
+    el.setAttribute("aria-pressed", "false");
+    el.innerHTML = `${esc(label)} <span class="n">${(counts[c] || 0).toLocaleString("en-US")}</span>`;
+    el.onclick = () => {
+      state.cats.has(c) ? state.cats.delete(c) : state.cats.add(c);
+      el.setAttribute("aria-pressed", String(state.cats.has(c)));
+      state.shown = 60; render();
+    };
+    box.appendChild(el);
+  });
 }
 
 function renderTags() {
@@ -124,7 +152,7 @@ function renderTags() {
   box.innerHTML = "";
   all.forEach((tag) => {
     const el = document.createElement("span");
-    el.className = "tag"; el.dataset.t = tag; el.textContent = tag;
+    el.className = "tag"; el.dataset.t = tag; el.textContent = ({ realestate: "real estate" })[tag] || tag;
     el.onclick = () => { state.tags.has(tag) ? state.tags.delete(tag) : state.tags.add(tag); el.classList.toggle("on"); state.shown = 60; render(); };
     box.appendChild(el);
   });
@@ -136,6 +164,7 @@ async function load() {
   try {
     const d = await (await fetch("./jobs.json", { cache: "no-store" })).json();
     state.jobs = d.jobs || [];
+    renderCategories();
     $("s-count").textContent = d.count ?? state.jobs.length;
     $("s-new").textContent = d.new_today ?? 0;
     $("s-co").textContent = d.companies ?? 0;

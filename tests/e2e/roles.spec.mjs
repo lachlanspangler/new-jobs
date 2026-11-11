@@ -7,7 +7,7 @@ test("the Finance role and the Entry level toggle filter the board", async ({ pa
   const errors = [];
   page.on("pageerror", (e) => errors.push(String(e)));
   await page.goto("/index.html");
-  await expect(page.locator(".row")).toHaveCount(6);
+  await expect(page.locator(".row")).toHaveCount(8);
 
   await page.selectOption("#role", "Finance");
   expect(await titles(page)).toEqual(["Investment Banking Analyst", "Senior Financial Analyst, FP&A"]);
@@ -16,10 +16,10 @@ test("the Finance role and the Entry level toggle filter the board", async ({ pa
   expect(await titles(page)).toEqual(["Investment Banking Analyst"]);
 
   await page.selectOption("#role", ""); // entry level across every role: none of the plain engineering titles say so
-  expect(await titles(page)).toEqual(["Investment Banking Analyst"]);
+  expect(await titles(page)).toEqual(["Acquisitions Analyst", "Development Associate", "Investment Banking Analyst"]);
 
   await page.uncheck("#entryonly");
-  await expect(page.locator(".row")).toHaveCount(6);
+  await expect(page.locator(".row")).toHaveCount(8);
   await expect(page.locator("#tags .tag[data-t=\"finance\"]")).toBeVisible();
   expect(errors).toEqual([]);
 });

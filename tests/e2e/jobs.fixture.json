@@ -1,8 +1,8 @@
 {
  "generated_at": "2026-10-29T06:49:47+00:00",
- "count": 6,
- "new_today": 6,
- "companies": 4,
+ "count": 8,
+ "new_today": 8,
+ "companies": 5,
  "jobs": [
   {
    "company": "Acme",
@@ -18,7 +18,8 @@
    "salary": "",
    "firstSeen": "2026-10-28",
    "isNew": true,
-   "priority": true
+   "priority": true,
+   "category": "software"
   },
   {
    "company": "Acme",
@@ -34,7 +35,8 @@
    "salary": "",
    "firstSeen": "2026-10-28",
    "isNew": true,
-   "priority": true
+   "priority": true,
+   "category": "quant"
   },
   {
    "company": "Bolt",
@@ -50,7 +52,8 @@
    "salary": "",
    "firstSeen": "2026-10-28",
    "isNew": true,
-   "priority": true
+   "priority": true,
+   "category": "software"
   },
   {
    "company": "Cog",
@@ -66,7 +69,8 @@
    "salary": "",
    "firstSeen": "2026-10-28",
    "isNew": true,
-   "priority": true
+   "priority": true,
+   "category": "software"
   },
   {
    "company": "Dime Bank",
@@ -82,7 +86,8 @@
    "salary": "",
    "firstSeen": "2026-10-28",
    "isNew": true,
-   "priority": true
+   "priority": true,
+   "category": "finance"
   },
   {
    "company": "Dime Bank",
@@ -98,7 +103,49 @@
    "salary": "",
    "firstSeen": "2026-10-28",
    "isNew": true,
-   "priority": true
+   "priority": true,
+   "category": "finance"
+  },
+  {
+   "company": "Hines",
+   "tags": [
+    "realestate"
+   ],
+   "source": "workday",
+   "key": "workday:hines:/job/6",
+   "title": "Acquisitions Analyst",
+   "location": "Chicago, IL",
+   "url": "https://example.com/jobs/6",
+   "posted": "2026-10-28",
+   "salary": "",
+   "firstSeen": "2026-10-28",
+   "isNew": true,
+   "priority": true,
+   "category": "realestate"
+  },
+  {
+   "company": "Hines",
+   "tags": [
+    "realestate"
+   ],
+   "source": "workday",
+   "key": "workday:hines:/job/7",
+   "title": "Development Associate",
+   "location": "Houston, TX",
+   "url": "https://example.com/jobs/7",
+   "posted": "2026-10-28",
+   "salary": "",
+   "firstSeen": "2026-10-28",
+   "isNew": true,
+   "priority": false,
+   "category": "development"
   }
- ]
+ ],
+ "categories": {
+  "software": 3,
+  "quant": 1,
+  "realestate": 1,
+  "development": 1,
+  "finance": 2
+ }
 }

@@ -144,3 +144,21 @@ table.pipe .muted { color: var(--muted); }
 .reset-box p { margin: 0 0 10px; }
 .reset-box .row-btns { display: flex; gap: 8px; flex-wrap: wrap; }
 .reset-box #reset-confirm { background: #ff6b6b; border-color: #ff6b6b; color: #08101f; font-weight: 700; }
+
+/* job categories: filter buttons on the board, and a label on each row */
+.cats { max-width: 1100px; margin: 14px auto 0; padding: 0 22px; display: flex; gap: 8px; flex-wrap: wrap; }
+.cat { padding: 7px 14px; border-radius: 999px; font: 600 13px var(--sans, inherit); cursor: pointer; color: var(--fg);
+  background: var(--panel); border: 1px solid var(--line); }
+.cat .n { color: var(--muted); font-weight: 500; margin-left: 4px; font-family: var(--mono); font-size: 12px; }
+.cat[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: #08101f; }
+.cat[aria-pressed="true"] .n { color: #08101f; }
+.cat:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.row .r-cat { flex: 0 0 auto; font-size: 10.5px; font-weight: 700; padding: 1px 7px; border-radius: 5px; text-transform: uppercase;
+  letter-spacing: .03em; color: var(--muted); border: 1px solid var(--line); }
+.row .r-cat[data-c="quant"] { color: var(--quant); border-color: currentColor; }
+.row .r-cat[data-c="realestate"] { color: #ff8fb1; border-color: currentColor; }
+.row .r-cat[data-c="development"] { color: #ffb86b; border-color: currentColor; }
+.row .r-cat[data-c="finance"] { color: #ffd84d; border-color: currentColor; }
+.tag[data-t="finance"].on { background: #ffd84d; color: #2a2000; }
+.tag[data-t="realestate"].on { background: #ff8fb1; color: #2a0012; }
+@media (max-width: 760px) { .row .r-cat { display: none; } }
