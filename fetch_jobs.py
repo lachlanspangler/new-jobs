@@ -334,7 +334,9 @@ IC_CARD_SPLIT = '<li class="iCIMS_JobCardItem">'
 IC_LINK_RE = re.compile(r'<a href="(https://[^"]+/jobs/(\d+)/[^"]*/job)[^"]*" class="iCIMS_Anchor"')
 IC_TITLE_RE = re.compile(r"<h3[^>]*>\s*(.*?)\s*</h3>", re.S)
 IC_DATE_RE = re.compile(r'Posted Date</span>\s*<span title="(\d{1,2})/(\d{1,2})/(\d{4})')
-IC_LOC_RE = re.compile(r'Job Locations</span>\s*</dt>\s*<dd class="iCIMS_JobHeaderData"><span\s*>\s*(.*?)\s*</span>', re.S)
+IC_LOC_RE = re.compile(  # two card variants: a "Job Locations" field, or a "Location" label in the card header
+    r'Job Locations</span>\s*</dt>\s*<dd class="iCIMS_JobHeaderData"><span\s*>\s*(.*?)\s*</span>|'
+    r'field-label">\s*Locations?\s*</span>\s*<span\s*>\s*(.*?)\s*</span>', re.S)
 IC_PAGES_RE = re.compile(r"Page\s*(\d+)\s*of\s*(\d+)")
 
 
@@ -357,7 +359,7 @@ def parse_icims(page_html):
         rows.append({"id": m.group(2), "url": html.unescape(m.group(1)),
                      "title": html.unescape(TAG_RE.sub("", mt.group(1))).strip(),
                      "posted": f"{md.group(3)}-{int(md.group(1)):02d}-{int(md.group(2)):02d}" if md else "",
-                     "location": icims_location(ml.group(1)) if ml else ""})
+                     "location": icims_location(ml.group(1) or ml.group(2)) if ml else ""})
     mp = IC_PAGES_RE.search(page_html)
     return rows, (int(mp.group(1)), int(mp.group(2))) if mp else (1, 1)
 
@@ -379,8 +381,99 @@ def norm_icims(c):
     return out
 
 
+# --- SAP SuccessFactors Recruiting Marketing (RMK) career sites: the public, server-rendered /search/ page. It is the
+# path robots.txt allows (the RSS feed and JSON under /services/ are disallowed, so we never use them). Two layouts:
+# a results table (<tr class="data-row">) and Career Site Builder tiles (<li class="job-tile">). Page size is set by
+# each site, so we advance startrow by the rows we got. Sites that render results with JavaScript ("Unify") have
+# neither layout and count as a failed board.
+SF_MAX_PAGES = 10
+SF_ROW_SPLIT = '<tr class="data-row"'
+SF_TILE_SPLIT = '<li class="job-tile'
+SF_LINK_RE = re.compile(r'<a[^>]*?href="([^"]*/(\d+)/)"[^>]*class="jobTitle-link[^"]*"[^>]*>(.*?)</a>|'
+                        r'<a[^>]*class="jobTitle-link[^"]*"[^>]*href="([^"]*/(\d+)/)"[^>]*>(.*?)</a>', re.S)
+SF_LOC_RE = re.compile(r'<td class="colLocation[^"]*"[^>]*>\s*<span class="jobLocation">\s*(.*?)\s*</span>', re.S)
+SF_DATE_RE = re.compile(r'<td class="colDate[^"]*"[^>]*>\s*<span class="jobDate">\s*(.*?)\s*</span>', re.S)
+SF_FIELD_RE = re.compile(r'class="section-label[^"]*"[^>]*>\s*(.*?)\s*</span>\s*<div id="job-\d+-desktop-section-[^"]*-value">'
+                         r'\s*(.*?)\s*</div>', re.S)
+SF_TOTAL_RE = re.compile(r'class="paginationLabel"[^>]*>.*?<b>[^<]*</b>.*?<b>\s*([\d,.]+)\s*</b>|'
+                         r'id="tile-search-results-label"[^>]*>[^<]*?(\d[\d,.]*)\s*\D*</span>', re.S)
+MONTHS = {m: i for i, m in enumerate(("jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec"), 1)}
+
+
+def sf_date(txt):
+    """'7 Nov 2026' or 'Nov 9, 2026' -> '2026-11-07'; anything else -> ''."""
+    t = (txt or "").strip().replace(",", " ")
+    m = re.match(r"(\d{1,2})\s+([A-Za-z]{3})[a-z]*\.?\s+(\d{4})$", t) or re.match(r"([A-Za-z]{3})[a-z]*\.?\s+(\d{1,2})\s+(\d{4})$", t)
+    if not m:
+        return ""
+    a, b, y = m.groups()
+    day, mon = (a, b) if a.isdigit() else (b, a)
+    mon = MONTHS.get(mon.lower())
+    return f"{y}-{mon:02d}-{int(day):02d}" if mon else ""
+
+
+def _clean(fragment):
+    return re.sub(r"\s+", " ", html.unescape(TAG_RE.sub(" ", fragment or ""))).strip()
+
+
+def parse_successfactors(page_html):
+    """-> (rows, total). rows: {id, path, title, location, posted}; total None if the page doesn't say."""
+    rows = []
+    if SF_TILE_SPLIT in page_html:
+        for tile in page_html.split(SF_TILE_SPLIT)[1:]:
+            m = SF_LINK_RE.search(tile)
+            if not m:
+                continue
+            path, jid, title = (m.group(1), m.group(2), m.group(3)) if m.group(1) else (m.group(4), m.group(5), m.group(6))
+            fields = {_clean(k).lower(): _clean(v) for k, v in SF_FIELD_RE.findall(tile)}
+            loc = ", ".join(v for k, v in fields.items() if re.search(r"location|city|state|region|country", k) and v)
+            posted = next((sf_date(v) for k, v in fields.items() if "date" in k), "")
+            rows.append({"id": jid, "path": html.unescape(path), "title": _clean(title), "location": loc, "posted": posted})
+    else:
+        for tr in page_html.split(SF_ROW_SPLIT)[1:]:
+            tr = tr.split("</tr>")[0]
+            m = SF_LINK_RE.search(tr)
+            if not m:
+                continue
+            path, jid, title = (m.group(1), m.group(2), m.group(3)) if m.group(1) else (m.group(4), m.group(5), m.group(6))
+            ml, md = SF_LOC_RE.search(tr), SF_DATE_RE.search(tr)
+            rows.append({"id": jid, "path": html.unescape(path), "title": _clean(title),
+                         "location": _clean(ml.group(1)) if ml else "", "posted": sf_date(_clean(md.group(1))) if md else ""})
+    mt = SF_TOTAL_RE.search(page_html)
+    total = int(re.sub(r"\D", "", mt.group(1) or mt.group(2))) if mt else None
+    return rows, total
+
+
+def norm_successfactors(c):
+    host = c["host"]
+    terms = c.get("terms")
+    terms = [""] if not terms else search_terms(c, None)
+    out, seen = [], set()
+    for term in terms:
+        start = 0
+        for page in range(SF_MAX_PAGES):
+            q = urllib.parse.urlencode({"q": term, "startrow": start, "sortColumn": "referencedate",
+                                        "sortDirection": "desc", **({"locale": c["locale"]} if c.get("locale") else {})})
+            rows, total = parse_successfactors(fetch_html(f"https://{host}/search/?{q}", ua=UA))
+            if page == 0 and not rows and term == terms[0]:
+                if total == 0:
+                    break  # a real "no results" page for this search term
+                raise ValueError(f"successfactors {host}: no job rows on page 1 (JavaScript-rendered site?)")
+            for r in rows:
+                if r["id"] not in seen:
+                    seen.add(r["id"])
+                    out.append(_row(c, "successfactors", r["id"], r["title"], r["location"],
+                                    f"https://{host}{r['path']}", r["posted"], ""))
+            start += len(rows)
+            if not rows or (total is not None and start >= total):
+                break
+            time.sleep(PACING)
+    return out
+
+
 FETCHERS = {"greenhouse": norm_greenhouse, "ashby": norm_ashby, "lever": norm_lever, "workday": norm_workday,
-            "oracle": norm_oracle, "smartrecruiters": norm_smartrecruiters, "icims": norm_icims}
+            "oracle": norm_oracle, "smartrecruiters": norm_smartrecruiters, "icims": norm_icims,
+            "successfactors": norm_successfactors}
 
 # --- openquant.co: a curated quant job board (Next.js + Supabase, server-rendered).
 # It caps the unfiltered feed at 25 and ignores ?page, but server-side filters each

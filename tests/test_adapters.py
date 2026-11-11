@@ -134,9 +134,108 @@ class ICIMS(unittest.TestCase):
         self.assertEqual(fj.icims_location("UK-London"), "UK-London")
 
 
+class MoreRealSamples(unittest.TestCase):
+    """The same parsers on other employers' real responses (saved by the research agents)."""
+
+    def test_icims_header_location_variant(self):
+        for name, first, loc, pages in [("icims-careers-kbhome.html", "Design Studio Consultant", "Meridian, ID, US", (1, 1)),
+                                        ("icims-careers-stifel.html", "Bank Fraud Investigations Specialist", "Saint Louis, MO, US", (1, 3))]:
+            rows, p = fj.parse_icims((FIX / name).read_text())
+            self.assertEqual(p, pages, name)
+            self.assertEqual(len(rows), 5, name)
+            self.assertEqual((rows[0]["title"], rows[0]["location"]), (first, loc), name)
+
+    def test_oracle_home_depot(self):
+        data = json.loads((FIX / "oracle-hdep-CX.json").read_text())
+        hd = {"name": "Home Depot", "ats": "oracle", "token": "hdep", "host": "hdep.fa.us2.oraclecloud.com", "site": "CX",
+              "tags": ["finance"], "terms": ["analyst"]}
+        with mock.patch.object(fj, "fetch", return_value=data), quiet():
+            rows = fj.norm_oracle(hd)
+        self.assertEqual(len(rows), 5)
+        self.assertEqual(rows[0]["title"], "Portfolio Analyst")
+        self.assertTrue(rows[0]["url"].startswith("https://hdep.fa.us2.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX/job/"))
+
+    def test_smartrecruiters_iqeq_and_public_storage(self):
+        for name, token, first in [("smartrecruiters-IQEQ.json", "IQEQ", "Accountant 2, Fund Accounting"),
+                                   ("smartrecruiters-PublicStorage.json", "PublicStorage", "Tax Senior Analyst")]:
+            data = json.loads((FIX / name).read_text())
+            with mock.patch.object(fj, "fetch", return_value=data), quiet():
+                rows = fj.norm_smartrecruiters({"name": token, "ats": "smartrecruiters", "token": token, "tags": ["finance"]})
+            self.assertEqual(len(rows), 5, name)
+            self.assertEqual(rows[0]["title"], first, name)
+
+
+SF_SWISSRE = (FIX / "successfactors-swissre.html").read_text()
+SF_NOMURA = (FIX / "successfactors-nomura.html").read_text()
+SF_FRASERS = (FIX / "successfactors-frasersproperty.html").read_text()
+SWISSRE = {"name": "Swiss Re", "ats": "successfactors", "token": "swissre", "host": "careers.swissre.com", "tags": ["finance"]}
+
+
+class SuccessFactors(unittest.TestCase):
+    def test_table_layout_with_dates(self):
+        rows, total = fj.parse_successfactors(SF_SWISSRE)
+        self.assertEqual(total, 47)
+        self.assertEqual(len(rows), 5)
+        self.assertEqual(rows[1], {"id": "1446545433", "path": "/job/New-York-Investment-Analyst%2C-Corporate-Development-NY-10001/1446545433/",
+                                   "title": "Investment Analyst, Corporate Development", "location": "New York, NY, US",
+                                   "posted": "2026-11-11"})
+
+    def test_table_layout_without_dates_and_with_a_brand_prefix(self):
+        rows, total = fj.parse_successfactors(SF_NOMURA)
+        self.assertEqual(total, 135)
+        self.assertEqual(rows[1]["title"], "Investment Banking Analyst")
+        self.assertEqual(rows[1]["path"], "/Nomura/job/Central-Investment-Banking-Analyst-HK/1388005700/")
+        self.assertEqual(rows[1]["posted"], "")
+        self.assertTrue(rows[1]["location"].startswith("Central"))
+
+    def test_tile_layout(self):
+        rows, total = fj.parse_successfactors(SF_FRASERS)
+        self.assertEqual(total, 49)
+        self.assertEqual(len(rows), 5)
+        self.assertEqual((rows[0]["id"], rows[0]["title"], rows[0]["location"]),
+                         ("1456248233", "Financial Controller", "Australia, New South Wales"))
+
+    def test_dates(self):
+        self.assertEqual(fj.sf_date("7 Nov 2026"), "2026-11-07")
+        self.assertEqual(fj.sf_date("Nov 9, 2026"), "2026-11-09")
+        self.assertEqual(fj.sf_date("11 Nov 2026 "), "2026-11-11")
+        self.assertEqual(fj.sf_date("yesterday"), "")
+
+    def test_adapter_urls_paging_and_user_agent(self):
+        page2 = SF_SWISSRE.replace("1446512633", "99").replace("1446545433", "98")  # same layout, other ids
+        calls = []
+
+        def fetch_html(url, ua=None):
+            calls.append((url, ua))
+            return SF_SWISSRE if len(calls) == 1 else page2
+
+        with mock.patch.object(fj, "fetch_html", fetch_html), quiet():
+            rows = fj.norm_successfactors(SWISSRE)
+        self.assertTrue(calls[0][0].startswith("https://careers.swissre.com/search/?q=&startrow=0&sortColumn=referencedate"))
+        self.assertIn("startrow=5", calls[1][0])  # advanced by the rows actually returned (the site's page size)
+        self.assertTrue(all(ua == fj.UA for _, ua in calls))
+        self.assertEqual(rows[1]["url"], "https://careers.swissre.com/job/New-York-Investment-Analyst%2C-Corporate-Development-NY-10001/1446545433/")
+        self.assertEqual(rows[1]["key"], "successfactors:swissre:1446545433")
+        self.assertEqual(len({r["key"] for r in rows}), len(rows))
+
+    def test_terms_and_locale(self):
+        calls = []
+        with mock.patch.object(fj, "fetch_html", lambda url, ua=None: calls.append(url) or SF_SWISSRE.replace("<b>47</b>", "<b>5</b>")), quiet():
+            fj.norm_successfactors({**SWISSRE, "terms": ["analyst", "associate"], "locale": "en_US"})
+        self.assertEqual(len(calls), 2)
+        self.assertIn("q=analyst", calls[0])
+        self.assertIn("q=associate", calls[1])
+        self.assertTrue(all("locale=en_US" in u for u in calls))
+
+    def test_a_javascript_rendered_site_is_a_failure(self):
+        with mock.patch.object(fj, "fetch_html", return_value="<html><div id='app'></div></html>"), self.assertRaises(ValueError):
+            fj.norm_successfactors(SWISSRE)
+
+
 class Registry(unittest.TestCase):
     def test_every_ats_has_an_adapter(self):
-        self.assertEqual(set(fj.FETCHERS), {"greenhouse", "ashby", "lever", "workday", "oracle", "smartrecruiters", "icims"})
+        self.assertEqual(set(fj.FETCHERS), {"greenhouse", "ashby", "lever", "workday", "oracle", "smartrecruiters", "icims",
+                                            "successfactors"})
 
 
 if __name__ == "__main__":

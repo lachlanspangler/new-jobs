@@ -1,0 +1,419 @@
+{
+  "items" : [ {
+    "SearchId" : 1,
+    "Keyword" : "analyst",
+    "CorrectedKeyword" : null,
+    "UseExactKeywordFlag" : false,
+    "SuggestedKeyword" : null,
+    "ExecuteSpellCheckFlag" : true,
+    "Location" : null,
+    "LocationId" : null,
+    "Radius" : 0,
+    "RadiusUnit" : "MI",
+    "SelectedTitlesFacet" : null,
+    "SelectedCategoriesFacet" : null,
+    "SelectedPostingDatesFacet" : null,
+    "SelectedLocationsFacet" : null,
+    "LastSelectedFacet" : null,
+    "Facets" : "TITLES;LOCATIONS;LOCATION_LEVEL1;LOCATION_LEVEL2;LOCATION_LEVEL3;CATEGORIES;POSTING_DATES;WORK_LOCATIONS;FLEX_FIELDS;ORGANIZATIONS;WORKPLACE_TYPES",
+    "Offset" : 0,
+    "Limit" : 5,
+    "SortBy" : "RELEVANCY",
+    "TotalJobsCount" : 8,
+    "Latitude" : null,
+    "Longitude" : null,
+    "SiteNumber" : "CX",
+    "JobFamilyId" : null,
+    "PostingStartDate" : null,
+    "PostingEndDate" : null,
+    "SelectedWorkLocationsFacet" : null,
+    "RequisitionId" : null,
+    "CandidateNumber" : null,
+    "WorkLocationZipCode" : null,
+    "WorkLocationCountryCode" : null,
+    "SelectedFlexFieldsFacets" : null,
+    "OrganizationId" : null,
+    "SelectedOrganizationsFacet" : null,
+    "UserTargetFacetName" : null,
+    "UserTargetFacetInputTerm" : null,
+    "HotJobFlag" : null,
+    "WorkplaceType" : null,
+    "SelectedWorkplaceTypesFacet" : null,
+    "BotQRShortCode" : null,
+    "requisitionList" : [ {
+      "Id" : "8977",
+      "Title" : "Portfolio Analyst",
+      "PostedDate" : "2026-11-04",
+      "PostingEndDate" : null,
+      "Language" : "US",
+      "PrimaryLocationCountry" : "US",
+      "GeographyId" : 300000001440901,
+      "HotJobFlag" : false,
+      "WorkplaceTypeCode" : "ORA_HYBRID",
+      "JobFamily" : null,
+      "JobFunction" : null,
+      "WorkerType" : null,
+      "ContractType" : null,
+      "ManagerLevel" : null,
+      "JobSchedule" : null,
+      "JobShift" : null,
+      "JobType" : null,
+      "StudyLevel" : null,
+      "DomesticTravelRequired" : null,
+      "InternationalTravelRequired" : null,
+      "WorkDurationYears" : null,
+      "WorkDurationMonths" : null,
+      "WorkHours" : null,
+      "WorkDays" : null,
+      "LegalEmployer" : null,
+      "BusinessUnit" : null,
+      "Department" : null,
+      "Organization" : null,
+      "BusinessUnitId" : 300000005793193,
+      "LegalEmployerId" : 300000001402024,
+      "OrganizationId" : 300000001402024,
+      "MediaThumbURL" : null,
+      "ShortDescriptionStr" : "We are currently hiring for a Portfolio Analyst in Boston, MA. ",
+      "PrimaryLocation" : "Boston, MA, United States",
+      "Distance" : 44.108345,
+      "TrendingFlag" : true,
+      "BeFirstToApplyFlag" : false,
+      "Relevancy" : 44.10834503173828,
+      "WorkplaceType" : "Hybrid",
+      "ExternalQualificationsStr" : null,
+      "ExternalResponsibilitiesStr" : null
+    }, {
+      "Id" : "8380",
+      "Title" : "Portfolio Analyst, APAC",
+      "PostedDate" : "2026-10-19",
+      "PostingEndDate" : null,
+      "Language" : "US",
+      "PrimaryLocationCountry" : "SG",
+      "GeographyId" : 300000307313795,
+      "HotJobFlag" : false,
+      "WorkplaceTypeCode" : "ORA_ON_SITE",
+      "JobFamily" : null,
+      "JobFunction" : null,
+      "WorkerType" : null,
+      "ContractType" : null,
+      "ManagerLevel" : null,
+      "JobSchedule" : null,
+      "JobShift" : null,
+      "JobType" : null,
+      "StudyLevel" : null,
+      "DomesticTravelRequired" : null,
+      "InternationalTravelRequired" : null,
+      "WorkDurationYears" : null,
+      "WorkDurationMonths" : null,
+      "WorkHours" : null,
+      "WorkDays" : null,
+      "LegalEmployer" : null,
+      "BusinessUnit" : null,
+      "Department" : null,
+      "Organization" : null,
+      "BusinessUnitId" : 300000005793115,
+      "LegalEmployerId" : 300000005801741,
+      "OrganizationId" : 300000005801741,
+      "MediaThumbURL" : null,
+      "ShortDescriptionStr" : "",
+      "PrimaryLocation" : "Singapore, Singapore",
+      "Distance" : 42.124264,
+      "TrendingFlag" : true,
+      "BeFirstToApplyFlag" : false,
+      "Relevancy" : 42.124263763427734,
+      "WorkplaceType" : "On-site",
+      "ExternalQualificationsStr" : null,
+      "ExternalResponsibilitiesStr" : null
+    }, {
+      "Id" : "9061",
+      "Title" : "Command Centre Analyst II",
+      "PostedDate" : "2026-11-09",
+      "PostingEndDate" : null,
+      "Language" : "US",
+      "PrimaryLocationCountry" : "IE",
+      "GeographyId" : 300000277939587,
+      "HotJobFlag" : false,
+      "WorkplaceTypeCode" : "ORA_ON_SITE",
+      "JobFamily" : null,
+      "JobFunction" : null,
+      "WorkerType" : null,
+      "ContractType" : null,
+      "ManagerLevel" : null,
+      "JobSchedule" : null,
+      "JobShift" : null,
+      "JobType" : null,
+      "StudyLevel" : null,
+      "DomesticTravelRequired" : null,
+      "InternationalTravelRequired" : null,
+      "WorkDurationYears" : null,
+      "WorkDurationMonths" : null,
+      "WorkHours" : null,
+      "WorkDays" : null,
+      "LegalEmployer" : null,
+      "BusinessUnit" : null,
+      "Department" : null,
+      "Organization" : null,
+      "BusinessUnitId" : 300000005793037,
+      "LegalEmployerId" : 300000005787978,
+      "OrganizationId" : 300000001402318,
+      "MediaThumbURL" : null,
+      "ShortDescriptionStr" : "We’re seeking a GCC Analyst to join our Global Command Centre (GCC), providing operational monitoring, coordination, and customer support for critical data center services. This role is central to ensuring service continuity by managing alerts, incidents, and customer requests through structured processes and clear communication. ",
+      "PrimaryLocation" : "Dublin, Ireland",
+      "Distance" : 39.202007,
+      "TrendingFlag" : true,
+      "BeFirstToApplyFlag" : false,
+      "Relevancy" : 39.20200729370117,
+      "WorkplaceType" : "On-site",
+      "ExternalQualificationsStr" : null,
+      "ExternalResponsibilitiesStr" : null
+    }, {
+      "Id" : "8974",
+      "Title" : "Strategic Analyst",
+      "PostedDate" : "2026-10-16",
+      "PostingEndDate" : null,
+      "Language" : "US",
+      "PrimaryLocationCountry" : "NL",
+      "GeographyId" : 300000289265111,
+      "HotJobFlag" : false,
+      "WorkplaceTypeCode" : "ORA_ON_SITE",
+      "JobFamily" : null,
+      "JobFunction" : null,
+      "WorkerType" : null,
+      "ContractType" : null,
+      "ManagerLevel" : null,
+      "JobSchedule" : null,
+      "JobShift" : null,
+      "JobType" : null,
+      "StudyLevel" : null,
+      "DomesticTravelRequired" : null,
+      "InternationalTravelRequired" : null,
+      "WorkDurationYears" : null,
+      "WorkDurationMonths" : null,
+      "WorkHours" : null,
+      "WorkDays" : null,
+      "LegalEmployer" : null,
+      "BusinessUnit" : null,
+      "Department" : null,
+      "Organization" : null,
+      "BusinessUnitId" : 300000005793089,
+      "LegalEmployerId" : 300000389767528,
+      "OrganizationId" : 300000389767528,
+      "MediaThumbURL" : null,
+      "ShortDescriptionStr" : "",
+      "PrimaryLocation" : "Amsterdam, Noord-Holland, Netherlands",
+      "Distance" : 35.625816,
+      "TrendingFlag" : true,
+      "BeFirstToApplyFlag" : false,
+      "Relevancy" : 35.625816345214844,
+      "WorkplaceType" : "On-site",
+      "ExternalQualificationsStr" : null,
+      "ExternalResponsibilitiesStr" : null
+    }, {
+      "Id" : "8490",
+      "Title" : "Global Command Center Analyst",
+      "PostedDate" : "2026-10-23",
+      "PostingEndDate" : null,
+      "Language" : "US",
+      "PrimaryLocationCountry" : "US",
+      "GeographyId" : 300000001461602,
+      "HotJobFlag" : false,
+      "WorkplaceTypeCode" : "ORA_ON_SITE",
+      "JobFamily" : null,
+      "JobFunction" : null,
+      "WorkerType" : null,
+      "ContractType" : null,
+      "ManagerLevel" : null,
+      "JobSchedule" : null,
+      "JobShift" : null,
+      "JobType" : null,
+      "StudyLevel" : null,
+      "DomesticTravelRequired" : null,
+      "InternationalTravelRequired" : null,
+      "WorkDurationYears" : null,
+      "WorkDurationMonths" : null,
+      "WorkHours" : null,
+      "WorkDays" : null,
+      "LegalEmployer" : null,
+      "BusinessUnit" : null,
+      "Department" : null,
+      "Organization" : null,
+      "BusinessUnitId" : 300000005793193,
+      "LegalEmployerId" : 300000001402024,
+      "OrganizationId" : 300000001402024,
+      "MediaThumbURL" : null,
+      "ShortDescriptionStr" : "We are currently hiring for multiple GCC Analyst positions in our Ashburn location.  \n",
+      "PrimaryLocation" : "Ashburn, VA, United States",
+      "Distance" : 33.812016,
+      "TrendingFlag" : true,
+      "BeFirstToApplyFlag" : false,
+      "Relevancy" : 33.812015533447266,
+      "WorkplaceType" : "On-site",
+      "ExternalQualificationsStr" : null,
+      "ExternalResponsibilitiesStr" : null
+    } ],
+    "categoriesFacet" : [ {
+      "Id" : 300001770881829,
+      "Name" : "DC Ops",
+      "TotalCount" : 3
+    }, {
+      "Id" : 2017062506,
+      "Name" : "Finance",
+      "TotalCount" : 2
+    }, {
+      "Id" : 300001771081141,
+      "Name" : "Portfolio Management",
+      "TotalCount" : 2
+    }, {
+      "Id" : 2017062507,
+      "Name" : "Human Resources",
+      "TotalCount" : 1
+    } ],
+    "locationsFacet" : [ {
+      "Id" : 300000000361667,
+      "Name" : "Netherlands",
+      "TotalCount" : 2
+    }, {
+      "Id" : 300000000361763,
+      "Name" : "Singapore",
+      "TotalCount" : 2
+    }, {
+      "Id" : 300000000361862,
+      "Name" : "United States",
+      "TotalCount" : 2
+    }, {
+      "Id" : 300000000361400,
+      "Name" : "United Kingdom",
+      "TotalCount" : 1
+    }, {
+      "Id" : 300000000361475,
+      "Name" : "Ireland",
+      "TotalCount" : 1
+    }, {
+      "Id" : 300000001408022,
+      "Name" : "MA, United States",
+      "TotalCount" : 1
+    }, {
+      "Id" : 300000001408047,
+      "Name" : "VA, United States",
+      "TotalCount" : 1
+    }, {
+      "Id" : 300000277939587,
+      "Name" : "Dublin, Ireland",
+      "TotalCount" : 1
+    }, {
+      "Id" : 300000289264740,
+      "Name" : "Noord-Holland, Netherlands",
+      "TotalCount" : 1
+    }, {
+      "Id" : 300000307313795,
+      "Name" : "Singapore, Singapore",
+      "TotalCount" : 1
+    } ],
+    "postingDatesFacet" : [ {
+      "Id" : 7,
+      "Name" : "Less than 7 days",
+      "TotalCount" : 1
+    }, {
+      "Id" : 30,
+      "Name" : "Less than 30 days",
+      "TotalCount" : 6
+    }, {
+      "Id" : 31,
+      "Name" : "Greater than 30 days",
+      "TotalCount" : 2
+    } ],
+    "titlesFacet" : [ {
+      "Id" : "Command Center",
+      "Name" : "Command Center",
+      "TotalCount" : 3
+    }, {
+      "Id" : "ASSET_MANAGEMENT",
+      "Name" : "Asset Management",
+      "TotalCount" : 2
+    }, {
+      "Id" : "Financial Planning & Analysis",
+      "Name" : "Financial Planning & Analysis",
+      "TotalCount" : 2
+    }, {
+      "Id" : "Payroll",
+      "Name" : "Payroll",
+      "TotalCount" : 1
+    } ],
+    "workLocationsFacet" : [ {
+      "Id" : 300000357480914,
+      "Name" : "NL-Amsterdam-AMS8",
+      "TotalCount" : 2
+    }, {
+      "Id" : 300000006546424,
+      "Name" : "IE-Dublin-DUB10",
+      "TotalCount" : 1
+    }, {
+      "Id" : 300000006546927,
+      "Name" : "SG-Singapore-SIN11",
+      "TotalCount" : 1
+    }, {
+      "Id" : 300000006550850,
+      "Name" : "SG-Singapore-SIN01",
+      "TotalCount" : 1
+    }, {
+      "Id" : 300000006550905,
+      "Name" : "US-Boston-BOS01",
+      "TotalCount" : 1
+    }, {
+      "Id" : 300000172259227,
+      "Name" : "US-Ashburn-IAD41",
+      "TotalCount" : 1
+    }, {
+      "Id" : 300000416933354,
+      "Name" : "GB-London-LHR03",
+      "TotalCount" : 1
+    } ],
+    "flexFieldsFacet" : [ ],
+    "organizationsFacet" : [ {
+      "Id" : 300000001402024,
+      "Name" : "Digital Realty Trust, L.P.",
+      "TotalCount" : 2
+    }, {
+      "Id" : 300000001402318,
+      "Name" : "Digital Realty (UK) Limited",
+      "TotalCount" : 2
+    }, {
+      "Id" : 300000005801741,
+      "Name" : "Digital Investment Management Pte. Ltd.",
+      "TotalCount" : 2
+    }, {
+      "Id" : 300000389767528,
+      "Name" : "Interxion HeadQuarters BV",
+      "TotalCount" : 2
+    } ],
+    "workplaceTypesFacet" : [ {
+      "Id" : "ORA_ON_SITE",
+      "Name" : "On-site",
+      "TotalCount" : 6
+    }, {
+      "Id" : "ORA_HYBRID",
+      "Name" : "Hybrid",
+      "TotalCount" : 2
+    } ]
+  } ],
+  "count" : 1,
+  "hasMore" : false,
+  "limit" : 200,
+  "offset" : 0,
+  "links" : [ {
+    "rel" : "self",
+    "href" : "https://hdep.fa.us2.oraclecloud.com:443/hcmRestApi/resources/11.13.18.05/recruitingCEJobRequisitions",
+    "name" : "recruitingCEJobRequisitions",
+    "kind" : "collection"
+  }, {
+    "rel" : "action",
+    "href" : "https://hdep.fa.us2.oraclecloud.com:443/hcmRestApi/resources/11.13.18.05/recruitingCEJobRequisitions/action/getRequisitionsLocationCoordinates",
+    "name" : "getRequisitionsLocationCoordinates",
+    "kind" : "other"
+  }, {
+    "rel" : "action",
+    "href" : "https://hdep.fa.us2.oraclecloud.com:443/hcmRestApi/resources/11.13.18.05/recruitingCEJobRequisitions/action/getRequisitionDetailsForMap",
+    "name" : "getRequisitionDetailsForMap",
+    "kind" : "other"
+  } ]
+}
