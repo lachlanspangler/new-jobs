@@ -4218,6 +4218,383 @@
     "realestate"
    ],
    "domain": "mapletree.com.sg"
+  },
+  {
+   "name": "JLL",
+   "ats": "workday",
+   "token": "jll",
+   "host": "wd1",
+   "site": "jllcareers",
+   "tags": [
+    "realestate"
+   ],
+   "domain": "jll.com",
+   "terms": "finance"
+  },
+  {
+   "name": "Cushman & Wakefield",
+   "ats": "workday",
+   "token": "cw",
+   "host": "wd1",
+   "site": "External",
+   "tags": [
+    "realestate"
+   ],
+   "domain": "cushmanwakefield.com",
+   "terms": "finance"
+  },
+  {
+   "name": "Colliers",
+   "ats": "workday",
+   "token": "colliers",
+   "host": "wd3",
+   "site": "Colliers-External-Career-Site",
+   "tags": [
+    "realestate"
+   ],
+   "domain": "colliers.com",
+   "terms": "finance"
+  },
+  {
+   "name": "Marcus & Millichap",
+   "ats": "workday",
+   "token": "marcusmillichap",
+   "host": "wd108",
+   "site": "MarcusMillichap",
+   "tags": [
+    "realestate"
+   ],
+   "domain": "marcusmillichap.com",
+   "terms": "finance"
+  },
+  {
+   "name": "Walker & Dunlop",
+   "ats": "workday",
+   "token": "walkerdunlop",
+   "host": "wd1",
+   "site": "WD",
+   "tags": [
+    "realestate",
+    "finance"
+   ],
+   "domain": "walkerdunlop.com"
+  },
+  {
+   "name": "Berkadia",
+   "ats": "workday",
+   "token": "berkadia",
+   "host": "wd1",
+   "site": "Berkadia",
+   "tags": [
+    "realestate",
+    "finance"
+   ],
+   "domain": "berkadia.com"
+  },
+  {
+   "name": "Greystone",
+   "ats": "workday",
+   "token": "greyco",
+   "host": "wd108",
+   "site": "GTI",
+   "tags": [
+    "realestate",
+    "finance"
+   ],
+   "domain": "greystone.com"
+  },
+  {
+   "name": "Brookfield Properties",
+   "ats": "workday",
+   "token": "brookfield",
+   "host": "wd5",
+   "site": "brookfieldproperties",
+   "tags": [
+    "realestate"
+   ],
+   "domain": "brookfieldproperties.com",
+   "terms": "finance"
+  },
+  {
+   "name": "Clarion Partners",
+   "ats": "workday",
+   "token": "franklintempleton",
+   "host": "wd5",
+   "site": "Jobs-Clarion",
+   "tags": [
+    "realestate",
+    "finance"
+   ],
+   "domain": "clarionpartners.com"
+  },
+  {
+   "name": "LaSalle Investment Management",
+   "ats": "workday",
+   "token": "jll",
+   "host": "wd1",
+   "site": "lasallecareers",
+   "tags": [
+    "realestate",
+    "finance"
+   ],
+   "domain": "lasalle.com"
+  },
+  {
+   "name": "Bridge Investment Group",
+   "ats": "workday",
+   "token": "bridgeigp",
+   "host": "wd1",
+   "site": "BIGC",
+   "tags": [
+    "realestate",
+    "finance"
+   ],
+   "domain": "bridgeig.com"
+  },
+  {
+   "name": "OMERS / Oxford Properties",
+   "ats": "workday",
+   "token": "omers",
+   "host": "wd3",
+   "site": "OMERS_External",
+   "tags": [
+    "realestate",
+    "finance"
+   ],
+   "domain": "oxfordproperties.com"
+  },
+  {
+   "name": "Prologis",
+   "ats": "workday",
+   "token": "prologis",
+   "host": "wd5",
+   "site": "Prologis_External_Careers",
+   "tags": [
+    "realestate"
+   ],
+   "domain": "prologis.com"
+  },
+  {
+   "name": "Ventas",
+   "ats": "workday",
+   "token": "ventas",
+   "host": "wd503",
+   "site": "ventas_careers",
+   "tags": [
+    "realestate"
+   ],
+   "domain": "ventasreit.com"
+  },
+  {
+   "name": "Realty Income",
+   "ats": "workday",
+   "token": "realtyincome",
+   "host": "wd108",
+   "site": "realty_income_careers",
+   "tags": [
+    "realestate"
+   ],
+   "domain": "realtyincome.com"
+  },
+  {
+   "name": "AvalonBay",
+   "ats": "workday",
+   "token": "avalonbay",
+   "host": "wd5",
+   "site": "AVBExternal",
+   "tags": [
+    "realestate"
+   ],
+   "domain": "avalonbay.com",
+   "terms": "finance"
+  },
+  {
+   "name": "Invitation Homes",
+   "ats": "workday",
+   "token": "invitationhomes",
+   "host": "wd503",
+   "site": "INVH",
+   "tags": [
+    "realestate"
+   ],
+   "domain": "invitationhomes.com"
+  },
+  {
+   "name": "American Homes 4 Rent",
+   "ats": "workday",
+   "token": "amh",
+   "host": "wd12",
+   "site": "External_Careers",
+   "tags": [
+    "realestate"
+   ],
+   "domain": "amh.com"
+  },
+  {
+   "name": "Equinix",
+   "ats": "workday",
+   "token": "equinix",
+   "host": "wd1",
+   "site": "External",
+   "tags": [
+    "realestate",
+    "tech"
+   ],
+   "domain": "equinix.com",
+   "terms": "finance"
+  },
+  {
+   "name": "SBA Communications",
+   "ats": "workday",
+   "token": "sbasite",
+   "host": "wd5",
+   "site": "SBA_Communications_Careers",
+   "tags": [
+    "realestate"
+   ],
+   "domain": "sbasite.com"
+  },
+  {
+   "name": "Greystar",
+   "ats": "workday",
+   "token": "greystar",
+   "host": "wd1",
+   "site": "External",
+   "tags": [
+    "realestate"
+   ],
+   "domain": "greystar.com",
+   "terms": "finance"
+  },
+  {
+   "name": "Greystar (Campus)",
+   "ats": "workday",
+   "token": "greystar",
+   "host": "wd1",
+   "site": "Campus",
+   "tags": [
+    "realestate"
+   ],
+   "domain": "greystar.com"
+  },
+  {
+   "name": "Lendlease",
+   "ats": "workday",
+   "token": "lendlease",
+   "host": "wd3",
+   "site": "LendleaseCareers",
+   "tags": [
+    "realestate"
+   ],
+   "domain": "lendlease.com"
+  },
+  {
+   "name": "The Related Group",
+   "ats": "workday",
+   "token": "relatedgroup",
+   "host": "wd503",
+   "site": "relatedgroupcareers",
+   "tags": [
+    "realestate"
+   ],
+   "domain": "relatedgroup.com"
+  },
+  {
+   "name": "Lennar",
+   "ats": "workday",
+   "token": "lennar",
+   "host": "wd1",
+   "site": "Lennar_Jobs",
+   "tags": [
+    "realestate"
+   ],
+   "domain": "lennar.com",
+   "terms": "finance"
+  },
+  {
+   "name": "Lennar (Early Careers)",
+   "ats": "workday",
+   "token": "lennar",
+   "host": "wd1",
+   "site": "Early_Careers",
+   "tags": [
+    "realestate"
+   ],
+   "domain": "lennar.com"
+  },
+  {
+   "name": "PulteGroup",
+   "ats": "workday",
+   "token": "pultegroup",
+   "host": "wd1",
+   "site": "PGI",
+   "tags": [
+    "realestate"
+   ],
+   "domain": "pultegroup.com"
+  },
+  {
+   "name": "CoStar Group",
+   "ats": "workday",
+   "token": "costar",
+   "host": "wd1",
+   "site": "CoStarCareers",
+   "tags": [
+    "realestate",
+    "tech"
+   ],
+   "domain": "costar.com",
+   "terms": "finance"
+  },
+  {
+   "name": "Lincoln Property Company",
+   "ats": "greenhouse",
+   "token": "lpc",
+   "tags": [
+    "realestate"
+   ],
+   "domain": "lpc.com"
+  },
+  {
+   "name": "Northmarq",
+   "ats": "greenhouse",
+   "token": "northmarq",
+   "tags": [
+    "realestate",
+    "finance"
+   ],
+   "domain": "northmarq.com"
+  },
+  {
+   "name": "Arbor Realty Trust",
+   "ats": "greenhouse",
+   "token": "arborrealtytrust",
+   "tags": [
+    "realestate",
+    "finance"
+   ],
+   "domain": "arbor.com"
+  },
+  {
+   "name": "Harrison Street",
+   "ats": "lever",
+   "token": "harrisonst",
+   "tags": [
+    "realestate",
+    "finance"
+   ],
+   "domain": "harrisonst.com"
+  },
+  {
+   "name": "Digital Realty",
+   "ats": "oracle",
+   "token": "hdep",
+   "host": "hdep.fa.us2.oraclecloud.com",
+   "site": "CX",
+   "tags": [
+    "realestate"
+   ],
+   "domain": "digitalrealty.com"
   }
  ]
 }
