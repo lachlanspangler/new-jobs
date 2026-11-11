@@ -90,9 +90,54 @@ def is_finance(title):
     return bool(FIN_FIELD_RE.search(title) and FIN_ROLE_RE.search(title)) and not FIN_EXCLUDE_RE.search(title)
 
 
-def is_target(title):
-    swe_quant = bool(INCLUDE_RE.search(title)) and not EXCLUDE_RE.search(title)
-    return swe_quant or is_finance(title)
+# --- job categories ---------------------------------------------------------------------------------------------
+# Every kept job gets exactly one category. Real estate and development roles are analyst/associate-level roles in a
+# real-estate context: the company is tagged "realestate" in companies.json, or the title itself names real estate.
+CATEGORIES = ("software", "quant", "realestate", "development", "finance")
+RE_WORDS_RE = re.compile(
+    r"\b(real\s+estate|reits?|propert(y|ies)|multi-?family|self[\s-]?storage|single[\s-]family|student\s+housing|"
+    r"housing|hospitality|commercial\s+real|cre|land\s+acquisition|homebuild\w*)\b", re.IGNORECASE)
+RE_FIELD_RE = re.compile(
+    r"\b(acquisitions?|asset\s+management|investments?|investing|capital\s+markets|underwriting|valuations?|"
+    r"leasing|brokerage|transactions?|debt|equity|private\s+equity|portfolio|research|capital)\b",
+    re.IGNORECASE)
+DEV_RE = re.compile(r"\bdevelopment\b", re.IGNORECASE)
+NOT_RE_DEV_RE = re.compile(  # "development" that isn't real estate development
+    r"\b(software|web|app(lication)?|product|business|sales|fund|leadership|organi[sz]ational|talent|learning|"
+    r"training|curriculum|drug|clinical|engineering|game|mobile|front[\s-]?end|back[\s-]?end|full[\s-]?stack|"
+    r"platform|systems?|data|ml|ai|tools?)\s+development\b|\bdevelopment\s+(engineer|operations|tools)\b|"
+    r"\b(developer|devops|sdk)\b", re.IGNORECASE)
+QUANT_RE = re.compile(r"\b(quant|quantitative|trader|trading|trade\s*desk|desk\s*operations)\b", re.IGNORECASE)
+SALES_TRADING_RE = re.compile(r"\bsales\s*(&|and)\s*trading\b", re.IGNORECASE)
+SWE_STRONG_RE = re.compile(r"\b(software|developer|engineer|engineering|programmer|swe|sde|sre|devops)\b|c\+\+",
+                           re.IGNORECASE)
+
+
+def category_of(title, tags=()):
+    """The job's category, or None if it isn't a role this board keeps."""
+    t = title or ""
+    re_company = "realestate" in {x.lower() for x in tags or ()}
+    re_context = re_company or bool(RE_WORDS_RE.search(t))
+    analyst_level = bool(FIN_ROLE_RE.search(t)) and not FIN_EXCLUDE_RE.search(t)
+    if analyst_level and re_context and not SWE_STRONG_RE.search(t):
+        if DEV_RE.search(t) and not NOT_RE_DEV_RE.search(t):
+            return "development"
+        if RE_WORDS_RE.search(t) or RE_FIELD_RE.search(t):
+            return "realestate"
+    swe_or_quant = bool(INCLUDE_RE.search(t)) and not EXCLUDE_RE.search(t)
+    if swe_or_quant and QUANT_RE.search(t) and not SALES_TRADING_RE.search(t):
+        return "quant"
+    if swe_or_quant and SWE_STRONG_RE.search(t):
+        return "software"
+    if is_finance(t):
+        return "finance"
+    if swe_or_quant:
+        return "software"
+    return None
+
+
+def is_target(title, tags=()):
+    return category_of(title, tags) is not None
 
 
 def norm_greenhouse(c):
@@ -484,7 +529,7 @@ def build(companies, args, today, fetched=None):
     if attempted and len(failed) / attempted > FAIL_LIMIT:
         abort(f"{len(failed)} of {attempted} boards failed")
 
-    matched = [j for j in all_jobs if is_target(j["title"])] + curated
+    matched = [j for j in all_jobs if is_target(j["title"], j.get("tags"))] + curated
     live_keys = {j["key"] for j in matched}
     seen = load_seen(args.seen, previous, today)
     cutoff = (dt.date.fromisoformat(today) - dt.timedelta(days=args.prune_days)).isoformat()
@@ -510,6 +555,8 @@ def build(companies, args, today, fetched=None):
     rows = matched + carried
     for j in rows:
         j["priority"] = bool(PRIORITY_RE.search(j.get("location") or ""))
+        # curated openquant rows skip the title filter: anything it doesn't recognise is a quant role
+        j["category"] = category_of(j["title"], j.get("tags")) or ("quant" if j["source"] == "openquant" else "software")
     rows.sort(key=lambda j: (j["priority"], j.get("posted") or ""), reverse=True)  # newest first, cities boosted
 
     export = rows[:MAX_EXPORT]  # the top MAX_EXPORT, but always keep every openquant/builtin role
@@ -520,10 +567,11 @@ def build(companies, args, today, fetched=None):
         "generated_at": dt.datetime.now(dt.timezone.utc).isoformat(),
         "count": len(rows),
         "new_today": sum(1 for j in rows if j["isNew"]),
+        "categories": {c: sum(1 for j in rows if j["category"] == c) for c in CATEGORIES},
         "companies": len(companies),
         "jobs": [{k: j.get(k, "" if k not in ("tags",) else []) for k in (
             "company", "tags", "source", "key", "title", "location", "url", "posted", "salary",
-            "firstSeen", "isNew", "priority")} for j in export],
+            "firstSeen", "isNew", "priority", "category")} for j in export],
     }
     report = {"live": len(all_jobs) + len(curated), "matched": len(matched), "carried": len(carried),
               "new_today": payload["new_today"], "exported": len(export), "seen_before": before,

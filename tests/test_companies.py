@@ -5,7 +5,7 @@ import unittest
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-TAGS = {"ai", "quant", "hedge", "tech", "finance"}
+TAGS = {"ai", "quant", "hedge", "tech", "finance", "realestate"}
 
 
 class Companies(unittest.TestCase):

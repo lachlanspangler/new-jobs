@@ -325,7 +325,7 @@ class Run(unittest.TestCase):
         self.assertEqual((payload["count"], payload["new_today"]), (2, 2))
         self.assertEqual(payload["jobs"][0]["key"], "greenhouse:acme:1")  # priority city first
         self.assertEqual(set(payload["jobs"][0]), {"company", "tags", "source", "key", "title", "location", "url",
-                                                  "posted", "salary", "firstSeen", "isNew", "priority"})
+                                                  "posted", "salary", "firstSeen", "isNew", "priority", "category"})
 
     def test_most_boards_failing_aborts_without_writing(self):
         with tempfile.TemporaryDirectory() as t:
