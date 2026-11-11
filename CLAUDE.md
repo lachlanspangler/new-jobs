@@ -1,7 +1,8 @@
 # CLAUDE.md — new-jobs
 
-A static job board of new software / quant roles, pulled from public ATS APIs (Greenhouse, Ashby, Lever, Workday)
-plus openquant.co and Built In SF/NYC. Live at https://lachlanspangler.github.io/new-jobs/.
+A static job board of new software, quant, real estate, development and finance analyst roles, pulled from public
+job-board endpoints (Greenhouse, Ashby, Lever, Workday, Oracle Cloud, SmartRecruiters, iCIMS, SuccessFactors) plus
+openquant.co and Built In SF/NYC. Every job carries one `category` (ADR 0003). Live at https://lachlanspangler.github.io/new-jobs/.
 
 Start every session with `notes/STATUS.md`, then the last entries of `notes/DIARY.md` (append-only, newest at the
 bottom). Don't stop to ask the owner what you can decide: pick the sensible default, write why in the diary, keep
@@ -28,7 +29,9 @@ going. Big decisions get an ADR in `notes/adr/NNNN-title.md`.
 ## Rules
 - `fetch_jobs.py` stays standard-library only (no pip install in CI).
 - One broken board never fails a run: skip it, log it, keep its last good jobs.
-- Be polite to the ATS APIs: keep the pacing, never raise the cadence above every 3 hours without an ADR.
+- Be polite to the ATS APIs: keep the pacing and the per-host lanes, never raise the cadence above every 3 hours
+  without an ADR. Public endpoints only: no logins, no Cloudflare bypass, honour robots.txt.
+- Real estate, development and finance analyst roles are entry and mid level only (owner, 2026-11-10).
 - Never commit secrets (`token.json`, `client_secret.json` are gitignored) or generated data (`docs/jobs.json`,
   `seen.json`).
 - Commit locally; the owner pushes.

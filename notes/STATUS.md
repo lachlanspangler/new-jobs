@@ -1,4 +1,4 @@
-# Status — 2026-10-29: live
+# Status — 2026-11-11
 
 The setup below is **done** (2026-10-29): state and main pushed, Pages source = GitHub Actions, first run green
 (12,198 roles deployed). It now runs on its schedule; nothing more is needed from you.
@@ -27,6 +27,39 @@ The board now updates itself, with no laptop involved.
   pruned job coming back, carry-forward and its 30-day limit, the bad-run guards, step summary), a `state.sh`
   integration test against a local bare repo, a `build_site.sh` safety test, and actionlint + shellcheck.
 - A fresh code reviewer found 5 bugs and 8 smaller issues; all fixed except three low-risk ones listed under Known (see DIARY).
+
+## Categories: real estate, development, finance analyst (2026-11-10/11)
+Every job now carries one category, with a filter button for each on the board (they combine with every existing
+filter, and SF/Chicago/NYC ★ still sorts first). Real estate, development and finance analyst are entry and mid level
+only. Numbers from a full real run on 2026-11-11 (local, same code CI runs):
+
+| Category | Matched jobs | Companies with jobs |
+|---|---:|---:|
+| Software | 14,557 (12,819 shown; the 15,000 export cap trims software only) | 424 |
+| Quant | 910 | 129 |
+| Real estate | 142 | 60 |
+| Development | 15 | 9 |
+| Finance analyst | 1,367 | 189 |
+| **All** | **16,991** | |
+
+- **Companies: 454** (was 290): 173 greenhouse, 128 ashby, 120 workday, 12 successfactors, 10 lever, 9 oracle, 2 icims. Tagged: 140 finance,
+  34 real estate. All verified live before adding (research agents + my own probes); the full
+  added / left-out / unreachable lists are in the diary for 2026-11-04 and 2026-11-10.
+- **New adapters:** Oracle Cloud (JPMorgan, BNY, Lazard, Citizens, Digital Realty, Honeywell, Ford, Oracle, Uber),
+  SmartRecruiters, iCIMS (Stifel, MSCI), SuccessFactors (Swiss Re, Nomura, EY, Scotiabank, New York Life, Mapletree…),
+  all on public endpoints, robots.txt honoured, tested against real saved responses.
+- **Runtime:** the full run takes ~2¾ minutes (boards are fetched in parallel, one request at a time per employer host),
+  well inside the 30-minute timeout. 6 boards fail every run (dead tokens: Old Mission, Amplitude, Postman, Shield AI,
+  Wayve, Parloa); fix or remove them in `companies.json` when convenient.
+- **Check after the next push:** EY, Scotiabank and Mapletree chain to the Sectigo R46 root, which GitHub's Ubuntu
+  runners should have (the current Mozilla bundle does). If the run summary lists them as skipped, that's why.
+- **Unchanged:** the Applications page and tracker (job keys and storage keys are the same; real estate and
+  development applications are filed under those roles), guest mode, reset, the 3-hourly auto-update.
+- **Not covered, on purpose or for now:** custom career sites (Goldman Sachs), other systems (Avature: CBRE, MetLife;
+  Jobvite: Starwood; Oleeo: Jefferies, Evercore; UKG: Welltower, Vornado; Taleo, Eightfold…), Cloudflare-protected
+  sites (Hines, Tishman Speyer, Newmark) and robots-disallowed iCIMS tenants (Schwab, ICE, Related, Toll Brothers).
+  Capital One (now incl. Discover) is verified but stays out per your 2026-09-22 removal; say if you want it back.
+- To ship: `git push origin main`; the next scheduled run (or **Run workflow**) deploys it.
 
 ## Guest mode and reset (2026-10-29)
 - **`?guest` on any page** (e.g. https://lachlanspangler.github.io/new-jobs/?guest) shows the board with a completely

@@ -1,19 +1,29 @@
 # new-jobs
 
-A daily board of the newest **software & quant** roles across the biggest tech,
-AI, quant, and hedge-fund employers — pulled from the public **Greenhouse**,
-**Ashby**, and **Lever** APIs, filtered to the roles I care about, and shown on
-a fast static site. Clicking **Apply** tallies your applications per company,
-per role, and in total on a second page.
+A board of the newest **software, quant, real estate, development and finance analyst** roles across the biggest
+tech, AI, quant, hedge-fund, banking, asset-management, private-equity and real estate employers, pulled from their
+public job-board endpoints, filtered to the roles I care about, and shown on a fast static site. Clicking **Apply**
+tallies your applications per company, per role, and in total on a second page.
 
 Live site: **https://lachlanspangler.github.io/new-jobs/**
 
 ## What it does
 
-- Scans ~290 verified company boards (see `companies.json`) on Greenhouse, Ashby, Lever and Workday, plus
-  openquant.co and Built In SF/NYC.
-- Keeps target roles only: software / C++ / Python engineers, quant developer,
-  quant researcher, quant, trade-desk operations, and adjacent SWE titles.
+- Scans **454 verified company boards** (see `companies.json`) on Greenhouse, Ashby, Lever, Workday, Oracle Cloud,
+  SmartRecruiters, iCIMS and SuccessFactors, plus openquant.co and Built In SF/NYC.
+- Tags every role with one **category**, with a filter button for each on the board:
+
+  | Category | Keeps | Levels |
+  |---|---|---|
+  | Software | software / C++ / Python / ML / SRE / platform engineers | all (Hide senior/staff toggles) |
+  | Quant | quant researcher / developer / trader, trading, trade-desk ops | all |
+  | Real estate | acquisitions, asset management, investments, capital markets, REPE, REITs, brokerage analysts | entry & mid only |
+  | Development | real estate development analyst / associate | entry & mid only |
+  | Finance analyst | financial analyst, FP&A, investment banking, equity research, corporate finance, PE, credit, treasury | entry & mid only |
+
+  Real estate and development roles need a real estate context (the company is tagged `realestate`, or the title
+  names it), so "Acquisitions Analyst" is real estate at JLL and finance at a bank. "Entry & mid only" means no
+  senior, staff, lead, principal, director, VP or MD titles; agent, broker and back-office titles are dropped too.
 - Prioritizes **SF / Chicago / NYC** (★), flags roles first seen **today**, and
   shows location + salary (when the board exposes it).
 - **Application tracker** (`stats.html`): clicking Apply records the role in
@@ -75,12 +85,24 @@ make serve   # serve _site/ on http://127.0.0.1:8611
 
 ## Add companies
 
-Append to `companies.json` as `{ "name", "ats", "token", "tags" }`. Validate the
-token returns a non-empty job list first:
+Append to `companies.json` as `{ "name", "ats", "token", "tags" }` and check the board returns real postings first
+(`make check` validates the file). Tags: `ai`, `quant`, `hedge`, `tech`, `finance`, `realestate`; `realestate` makes
+the company's acquisitions / asset management / development roles count as real estate.
 
-- Greenhouse: `https://boards-api.greenhouse.io/v1/boards/<token>/jobs`
-- Ashby: `https://api.ashbyhq.com/posting-api/job-board/<token>`
-- Lever: `https://api.lever.co/v0/postings/<token>?mode=json`
+| `ats` | Extra fields | Public endpoint |
+|---|---|---|
+| `greenhouse` | | `https://boards-api.greenhouse.io/v1/boards/<token>/jobs` |
+| `ashby` | | `https://api.ashbyhq.com/posting-api/job-board/<token>` |
+| `lever` | | `https://api.lever.co/v0/postings/<token>?mode=json` |
+| `workday` | `host` (wd1…), `site`, optional `terms` | `POST https://<token>.<host>.myworkdayjobs.com/wday/cxs/<token>/<site>/jobs` |
+| `oracle` | `host` (…oraclecloud.com), `site`, optional `terms` | `https://<host>/hcmRestApi/resources/latest/recruitingCEJobRequisitions` (the careers site's own API) |
+| `smartrecruiters` | | `https://api.smartrecruiters.com/v1/companies/<token>/postings` |
+| `icims` | | `https://<token>.icims.com/jobs/search` (server-rendered; only where robots.txt allows it) |
+| `successfactors` | `host`, optional `terms`, `locale` | `https://<host>/search/` (the robots-allowed results page; never the disallowed `/services/` feeds) |
+
+`terms` is a list of search phrases (or `"finance"` for analyst, associate, software engineer, quant) for boards too
+big to read whole, e.g. a bank's Workday tenant or a corporate's FP&A search. Never add a board behind a login, a
+Cloudflare challenge, or a robots.txt disallow.
 
 ## Recruiter contacts (Recruiters page)
 
@@ -124,8 +146,9 @@ python3 make_drafts.py --limit 20    # create up to 20 drafts (browser auth once
 
 ## Notes
 
-- Only employers on these three ATSes are covered; firms on custom career sites
-  (some FAANG, and quant shops like Jane Street's own site, Citadel, Two Sigma)
-  can't be pulled this way and are omitted.
+- Only employers on the eight supported systems are covered. Custom career sites (Goldman Sachs, some FAANG, Jane
+  Street, Citadel, Two Sigma) and other systems (Avature, Jobvite, Oleeo, Taleo, UKG, Eightfold: e.g. CBRE, Starwood,
+  Jefferies, Evercore, MetLife) aren't, nor is anything behind Cloudflare or a robots.txt disallow (Hines, Tishman
+  Speyer, Schwab, ICE). See `notes/DIARY.md` for the full list.
 - Salary coverage is partial — Ashby exposes it structured; Greenhouse/Lever
   only when it's in the posting.
