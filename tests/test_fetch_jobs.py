@@ -157,13 +157,14 @@ class Filters(unittest.TestCase):
             self.assertFalse(fj.is_target(t), t)
 
     def test_finance_roles_need_a_finance_field_and_an_entry_type_role(self):
-        keep = ["Financial Analyst", "Senior Financial Analyst, FP&A", "FP&A Analyst", "Investment Banking Analyst",
+        keep = ["Financial Analyst", "Financial Analyst II", "FP&A Analyst", "Investment Banking Analyst",
                 "2027 Summer Analyst - Investment Banking", "Equity Research Associate", "Private Equity Associate",
                 "Credit Analyst", "Treasury Analyst", "M&A Analyst", "Corporate Development Associate",
                 "Wealth Management Associate", "Valuation Analyst", "Fund Accounting Analyst", "Economist",
                 "Sales & Trading Analyst", "Sales and Trading Summer Analyst", "Capital Markets Analyst Program",
                 "Investment Associate", "Junior Portfolio Analyst", "Finance Rotational Program"]
         drop = ["Data Analyst", "Security Analyst", "Business Analyst", "Marketing Analyst", "Sales Analyst",
+                "Senior Financial Analyst, FP&A", "Lead Credit Analyst",
                 "VP, Investment Banking", "Finance Manager", "Managing Director, Equity Research",
                 "Sales Associate", "Investment Sales Associate", "Recruiting Associate, Finance", "Legal Associate",
                 "Customer Success Associate", "Accounts Payable Specialist"]

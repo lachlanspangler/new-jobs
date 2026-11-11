@@ -31,14 +31,14 @@ test("each category has a button with its count, and the buttons filter the boar
   await cat(page, "Real estate").click();
   await cat(page, "Development").click();
   await cat(page, "Finance analyst").click();
-  expect((await titles(page)).sort()).toEqual(["Investment Banking Analyst", "Senior Financial Analyst, FP&A"]);
+  expect((await titles(page)).sort()).toEqual(["Financial Analyst II", "Investment Banking Analyst"]);
 
   // categories combine with the existing filters (here: the search box and Entry level)
   await page.check("#entryonly");
   expect(await titles(page)).toEqual(["Investment Banking Analyst"]);
   await page.uncheck("#entryonly");
-  await page.fill("#q", "senior");
-  expect(await titles(page)).toEqual(["Senior Financial Analyst, FP&A"]);
+  await page.fill("#q", "analyst ii");
+  expect(await titles(page)).toEqual(["Financial Analyst II"]);
   await page.fill("#q", "");
 
   await cat(page, "Finance analyst").click(); // all off again: everything shows

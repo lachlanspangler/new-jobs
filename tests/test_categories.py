@@ -67,7 +67,7 @@ class RealEstate(unittest.TestCase):
             self.assertEqual(cat(t), "finance", t)
         # FP&A stays finance even at a real estate company, unless the title names real estate
         self.assertEqual(cat("Financial Analyst", RE), "finance")
-        self.assertEqual(cat("Senior Financial Analyst, FP&A", RE), "finance")
+        self.assertEqual(cat("FP&A Analyst", RE), "finance")
 
 
 class Development(unittest.TestCase):
@@ -89,7 +89,7 @@ class Development(unittest.TestCase):
 
 class Finance(unittest.TestCase):
     def test_kept(self):
-        for t in ["Financial Analyst", "Senior Financial Analyst, FP&A", "FP&A Analyst", "Investment Banking Analyst",
+        for t in ["Financial Analyst", "Financial Analyst II", "FP&A Analyst", "Investment Banking Analyst",
                   "2027 Summer Analyst - Investment Banking", "Equity Research Associate", "Corporate Finance Analyst",
                   "Private Equity Associate", "Credit Analyst", "Treasury Analyst", "M&A Analyst", "Valuation Analyst"]:
             self.assertEqual(cat(t), "finance", t)
@@ -98,6 +98,30 @@ class Finance(unittest.TestCase):
         for t in ["Data Analyst", "Business Analyst", "VP, Investment Banking", "Finance Manager", "Investment Sales Associate",
                   "Recruiting Associate, Finance", "Accounts Payable Specialist"]:
             self.assertIsNone(cat(t), t)
+
+
+class Levels(unittest.TestCase):
+    """Real estate, development and finance analyst: entry and mid level only. Software and quant keep every level."""
+
+    def test_senior_and_staff_titles_are_dropped_for_the_new_categories(self):
+        for t, tags in [("Senior Financial Analyst, FP&A", ()), ("Lead Credit Analyst", ()), ("VP, Equity Research Associate", ()),
+                        ("Senior Associate, Acquisitions", RE), ("Senior Development Associate", RE),
+                        ("Associate Director, Asset Management", RE), ("Principal, Investments Associate", RE),
+                        ("Managing Director, Investment Banking Analyst Program", ()), ("Staff Accountant Analyst", ()),
+                        ("Executive Director, Capital Markets Associate", RE), ("Sr. Real Estate Analyst", ())]:
+            self.assertIsNone(cat(t, tags), t)
+
+    def test_entry_and_mid_levels_are_kept(self):
+        for t, tags, c in [("Financial Analyst", (), "finance"), ("Financial Analyst II", (), "finance"),
+                           ("Investment Banking Associate", (), "finance"), ("Acquisitions Associate", RE, "realestate"),
+                           ("Asset Management Analyst III", RE, "realestate"), ("Development Associate", RE, "development"),
+                           ("2027 Summer Analyst - Investment Banking", (), "finance"), ("Junior Development Analyst", RE, "development")]:
+            self.assertEqual(cat(t, tags), c, t)
+
+    def test_software_and_quant_keep_every_level(self):
+        self.assertEqual(cat("Senior Software Engineer"), "software")
+        self.assertEqual(cat("Staff Software Engineer"), "software")
+        self.assertEqual(cat("Principal Quant Researcher"), "quant")
 
 
 class Tagging(unittest.TestCase):

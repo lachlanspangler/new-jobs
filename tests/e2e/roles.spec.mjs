@@ -10,9 +10,9 @@ test("the Finance role and the Entry level toggle filter the board", async ({ pa
   await expect(page.locator(".row")).toHaveCount(8);
 
   await page.selectOption("#role", "Finance");
-  expect(await titles(page)).toEqual(["Investment Banking Analyst", "Senior Financial Analyst, FP&A"]);
+  expect(await titles(page)).toEqual(["Financial Analyst II", "Investment Banking Analyst"]);
 
-  await page.check("#entryonly"); // the senior role isn't entry level
+  await page.check("#entryonly"); // "II" is mid level, not entry level
   expect(await titles(page)).toEqual(["Investment Banking Analyst"]);
 
   await page.selectOption("#role", ""); // entry level across every role: none of the plain engineering titles say so

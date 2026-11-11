@@ -113,8 +113,23 @@ SWE_STRONG_RE = re.compile(r"\b(software|developer|engineer|engineering|programm
                            re.IGNORECASE)
 
 
+# Real estate, development and finance analyst roles are entry- and mid-level only (owner, 2026-11-10): nothing senior
+# or staff. Software and quant keep every level, with the site's Hide senior / Hide staff toggles.
+SENIOR_RE = re.compile(
+    r"\b(senior|sr\.?|staff|principal|lead|director|vp|svp|evp|vice\s+president|managing|head|chief|partner|"
+    r"executive|distinguished|fellow|md)\b", re.IGNORECASE)
+ENTRY_MID_ONLY = {"realestate", "development", "finance"}
+
+
 def category_of(title, tags=()):
     """The job's category, or None if it isn't a role this board keeps."""
+    cat = _category(title, tags)
+    if cat in ENTRY_MID_ONLY and SENIOR_RE.search(title or ""):
+        return None
+    return cat
+
+
+def _category(title, tags=()):
     t = title or ""
     re_company = "realestate" in {x.lower() for x in tags or ()}
     re_context = re_company or bool(RE_WORDS_RE.search(t))
