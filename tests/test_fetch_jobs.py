@@ -359,6 +359,37 @@ class Run(unittest.TestCase):
         self.assertEqual(attempted, 2)
         self.assertIn("unexpected payload", errors[0])
 
+    def test_parallel_fetch_is_polite_per_host_and_keeps_order(self):
+        import threading
+        import time as real_time
+        inflight, peak, lock = {}, {}, threading.Lock()
+
+        def fake(c):
+            h = fj.host_of(c)
+            with lock:
+                inflight[h] = inflight.get(h, 0) + 1
+                peak[h] = max(peak.get(h, 0), inflight[h])
+            real_time.sleep(0.02)
+            with lock:
+                inflight[h] -= 1
+            if c["token"] == "bad":
+                raise RuntimeError("down")
+            return [row(f"{c['ats']}:{c['token']}:1")]
+
+        gh = [{"name": f"G{i}", "ats": "greenhouse", "token": f"g{i}", "tags": ["tech"]} for i in range(9)]
+        wd = [{"name": f"W{i}", "ats": "workday", "token": "bank", "host": "wd1", "site": f"s{i}", "tags": ["finance"]} for i in range(4)]
+        bad = [{"name": "Bad", "ats": "lever", "token": "bad", "tags": ["tech"]}]
+        companies = gh + wd + bad
+        with mock.patch.dict(fj.FETCHERS, {"greenhouse": fake, "workday": fake, "lever": fake}), \
+                mock.patch.object(fj, "PACING", 0):
+            out = fj.fetch_all(companies)
+        self.assertEqual([c["name"] for c, _r, _e in out], [c["name"] for c in companies])  # stable order
+        self.assertLessEqual(peak["boards-api.greenhouse.io"], fj.SHARED_HOST_LANES)
+        self.assertGreater(peak["boards-api.greenhouse.io"], 1)                     # it really is parallel
+        self.assertEqual(peak["bank.wd1.myworkdayjobs.com"], 1)                       # an employer's host: one at a time
+        self.assertIsInstance(out[-1][2], RuntimeError)
+        self.assertTrue(all(e is None for _c, _r, e in out[:-1]))
+
     def test_main_writes_both_files_and_step_summary(self):
         with tempfile.TemporaryDirectory() as t:
             summ = Path(t, "summary.md")

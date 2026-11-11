@@ -696,17 +696,57 @@ def annotate(level, msg):
     print(f"::{level}::{msg}" if os.environ.get("GITHUB_ACTIONS") else f"{level}: {msg}")
 
 
+# Boards are fetched in parallel, but politely per host: shared public APIs (Greenhouse, Ashby, Lever,
+# SmartRecruiters) get at most SHARED_HOST_LANES requests in flight, and an employer's own host (a Workday tenant, an
+# Oracle pod, an iCIMS or SuccessFactors site) one at a time, with the usual pacing between boards on each lane.
+WORKERS = 12
+SHARED_HOST_LANES = 3
+SHARED_HOSTS = {"greenhouse": "boards-api.greenhouse.io", "ashby": "api.ashbyhq.com", "lever": "api.lever.co",
+                "smartrecruiters": "api.smartrecruiters.com"}
+
+
+def host_of(c):
+    if c["ats"] in SHARED_HOSTS:
+        return SHARED_HOSTS[c["ats"]]
+    if c["ats"] == "workday":
+        return f"{c['token']}.{c['host']}.myworkdayjobs.com"
+    if c["ats"] == "icims":
+        return f"{c['token']}.icims.com"
+    return c.get("host") or c["token"]
+
+
+def fetch_all(companies):
+    """[(company, rows or None, error or None)] in companies order; one board's failure never affects another."""
+    import threading
+    from concurrent.futures import ThreadPoolExecutor
+    lanes = {}
+    for c in companies:
+        h = host_of(c)
+        lanes.setdefault(h, threading.BoundedSemaphore(SHARED_HOST_LANES if h in SHARED_HOSTS.values() else 1))
+
+    def one(c):
+        with lanes[host_of(c)]:
+            try:
+                return c, FETCHERS[c["ats"]](c), None
+            except Exception as e:  # one broken board never fails the run
+                return c, None, e
+            finally:
+                time.sleep(PACING)
+
+    with ThreadPoolExecutor(max_workers=WORKERS) as pool:
+        return list(pool.map(one, companies))
+
+
 def collect(companies, args):
     """Fetch every board. Returns (rows_before_title_filter, curated_rows, failed_boards, errors, attempted)."""
     all_jobs, curated, failed, errors, attempted = [], [], set(), [], 0
-    for c in companies:
+    for c, rows, err in fetch_all(companies):
         attempted += 1
-        try:
-            all_jobs.extend(FETCHERS[c["ats"]](c))
-        except Exception as e:  # one broken board never fails the run
+        if err is None:
+            all_jobs.extend(rows)
+        else:
             failed.add(f"{c['ats']}:{c['token']}")
-            errors.append(f"{c['name']}: {e}")
-        time.sleep(PACING)
+            errors.append(f"{c['name']}: {err}")
 
     # optional per-company location allow-list (e.g. SpaceX -> California only)
     loc_filters = {c["name"]: re.compile(c["onlyLocations"], re.IGNORECASE)
