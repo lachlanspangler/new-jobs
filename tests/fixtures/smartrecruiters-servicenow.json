@@ -1,0 +1,457 @@
+{
+ "offset": 0,
+ "limit": 100,
+ "totalFound": 768,
+ "content": [
+  {
+   "id": "744000161019119",
+   "name": "CRM Sales Director ",
+   "uuid": "69bf7c75-29cf-4958-b13d-dce9f7d328d1",
+   "jobAdId": "b10bbc18-d012-449d-a83e-3cd322568a8a",
+   "defaultJobAd": true,
+   "refNumber": "JB0077012",
+   "company": {
+    "identifier": "ServiceNow",
+    "name": "ServiceNow"
+   },
+   "releasedDate": "2026-11-11T02:34:16.615Z",
+   "location": {
+    "city": "Mexico City",
+    "country": "mx",
+    "address": "Arcos Bosques Av. Javier Barros Sierra 495 Santa Fe, Zedec Sta F\u00e9, \u00c1lvaro Obreg\u00f3n",
+    "postalCode": "01219",
+    "remote": false,
+    "hybrid": false,
+    "fullLocation": "Mexico City, , Mexico"
+   },
+   "industry": {
+    "id": "it_and_services",
+    "label": "Information Technology And Services"
+   },
+   "department": {
+    "id": "2294208",
+    "label": "Sales"
+   },
+   "function": {
+    "id": "sales",
+    "label": "Sales"
+   },
+   "typeOfEmployment": {
+    "id": "permanent",
+    "label": "Full-time"
+   },
+   "experienceLevel": {
+    "id": "not_applicable",
+    "label": "Not Applicable"
+   },
+   "customField": [
+    {
+     "fieldId": "60345fa28b4ba8595bef1863",
+     "fieldLabel": "Recruiting Team",
+     "valueId": "professional",
+     "valueLabel": "Professional"
+    },
+    {
+     "fieldId": "60345d5c5165a31b17288279",
+     "fieldLabel": "Region",
+     "valueId": "c07e4bb2ef75103f5710e95052af2b21",
+     "valueLabel": "LATAM - Latin America"
+    },
+    {
+     "fieldId": "6034601b43915a29a4b3389b",
+     "fieldLabel": "Job Location",
+     "valueId": "L_MEX002",
+     "valueLabel": "Av. Javier Barros Sierra 495, Mexico City, 01219, Mexico(L_MEX002)"
+    },
+    {
+     "fieldId": "60345e1a0b24a127cbdfa148",
+     "fieldLabel": "Employee Type",
+     "valueId": "0082f6cbe6154da19322cbab1f6aa5af",
+     "valueLabel": "Regular"
+    },
+    {
+     "fieldId": "5f63a78f1dae5c5c4e54ba2b",
+     "fieldLabel": "Department",
+     "valueId": "2294208",
+     "valueLabel": "Sales"
+    },
+    {
+     "fieldId": "COUNTRY",
+     "fieldLabel": "Country/Region",
+     "valueId": "mx",
+     "valueLabel": "Mexico"
+    },
+    {
+     "fieldId": "5f63a78f1dae5c5c4e54ba2a",
+     "fieldLabel": "Brands",
+     "valueId": "default",
+     "valueLabel": "ServiceNow"
+    },
+    {
+     "fieldId": "603462175165a31b1728827d",
+     "fieldLabel": "Cost Center",
+     "valueId": "CC3807",
+     "valueLabel": "3807 CRM & Industry - Solution Sales MGRs"
+    },
+    {
+     "fieldId": "618ed92b8f5e5f110e5bfb95",
+     "fieldLabel": "Work Persona",
+     "valueId": "5530c877-6b63-4bf5-bde8-215ef35bf172",
+     "valueLabel": "Flexible or Remote"
+    },
+    {
+     "fieldId": "690cc0e8c682c3dbadaa7d73",
+     "fieldLabel": "Job Posting Type",
+     "valueId": "professional",
+     "valueLabel": "Professional"
+    }
+   ],
+   "visibility": "PUBLIC",
+   "ref": "https://api.smartrecruiters.com/v1/companies/ServiceNow/postings/744000161019119",
+   "creator": {
+    "name": "Ercilia Vianna"
+   },
+   "language": {
+    "code": "en",
+    "label": "English",
+    "labelNative": "English (US)"
+   }
+  },
+  {
+   "id": "744000160989639",
+   "name": "Staff Site Reliability Engineer - Federal",
+   "uuid": "01f31b80-ed3e-43b2-ad56-97d671d3dd6b",
+   "jobAdId": "49586bbd-7a22-4c7e-8fa7-1d8866f6fa1e",
+   "defaultJobAd": true,
+   "refNumber": "JB0077236",
+   "company": {
+    "identifier": "ServiceNow",
+    "name": "ServiceNow"
+   },
+   "releasedDate": "2026-11-11T00:22:22.104Z",
+   "location": {
+    "city": "Santa Clara",
+    "region": "CALIFORNIA",
+    "country": "us",
+    "address": "Building A,B,C 2225 Lawson Lane",
+    "postalCode": "95054",
+    "remote": false,
+    "hybrid": true,
+    "fullLocation": "Santa Clara, CALIFORNIA, United States"
+   },
+   "industry": {
+    "id": "it_and_services",
+    "label": "Information Technology And Services"
+   },
+   "department": {
+    "id": "2294038",
+    "label": "Engineering, Infrastructure and Operations"
+   },
+   "function": {
+    "id": "engineering",
+    "label": "Engineering"
+   },
+   "typeOfEmployment": {
+    "id": "permanent",
+    "label": "Full-time"
+   },
+   "experienceLevel": {
+    "id": "not_applicable",
+    "label": "Not Applicable"
+   },
+   "customField": [
+    {
+     "fieldId": "60345fa28b4ba8595bef1863",
+     "fieldLabel": "Recruiting Team",
+     "valueId": "professional",
+     "valueLabel": "Professional"
+    },
+    {
+     "fieldId": "60345d5c5165a31b17288279",
+     "fieldLabel": "Region",
+     "valueId": "722a833b93e4437798309f43c0d25990",
+     "valueLabel": "AMS - North America and Canada"
+    },
+    {
+     "fieldId": "6034601b43915a29a4b3389b",
+     "fieldLabel": "Job Location",
+     "valueId": "L_SJC005",
+     "valueLabel": "2225 Lawson Lane, Santa Clara, California, 95054, United States of America(L_SJC005)"
+    },
+    {
+     "fieldId": "60345e1a0b24a127cbdfa148",
+     "fieldLabel": "Employee Type",
+     "valueId": "0082f6cbe6154da19322cbab1f6aa5af",
+     "valueLabel": "Regular"
+    },
+    {
+     "fieldId": "5f63a78f1dae5c5c4e54ba2b",
+     "fieldLabel": "Department",
+     "valueId": "2294038",
+     "valueLabel": "Engineering, Infrastructure and Operations"
+    },
+    {
+     "fieldId": "COUNTRY",
+     "fieldLabel": "Country/Region",
+     "valueId": "us",
+     "valueLabel": "United States"
+    },
+    {
+     "fieldId": "5f63a78f1dae5c5c4e54ba2a",
+     "fieldLabel": "Brands",
+     "valueId": "default",
+     "valueLabel": "ServiceNow"
+    },
+    {
+     "fieldId": "603462175165a31b1728827d",
+     "fieldLabel": "Cost Center",
+     "valueId": "CC1500",
+     "valueLabel": "1500 GCS Cloud Operations"
+    },
+    {
+     "fieldId": "618ed92b8f5e5f110e5bfb95",
+     "fieldLabel": "Work Persona",
+     "valueId": "5530c877-6b63-4bf5-bde8-215ef35bf172",
+     "valueLabel": "Flexible or Remote"
+    },
+    {
+     "fieldId": "690cc0e8c682c3dbadaa7d73",
+     "fieldLabel": "Job Posting Type",
+     "valueId": "professional",
+     "valueLabel": "Professional"
+    }
+   ],
+   "visibility": "PUBLIC",
+   "ref": "https://api.smartrecruiters.com/v1/companies/ServiceNow/postings/744000160989639",
+   "language": {
+    "code": "en",
+    "label": "English",
+    "labelNative": "English (US)"
+   }
+  },
+  {
+   "id": "744000160988769",
+   "name": "Reliability Engineer",
+   "uuid": "8e9df19f-f3e6-42a6-9634-395ee8e74ae9",
+   "jobAdId": "f8b5aeac-f315-4a14-a357-20e36c6b8bc1",
+   "defaultJobAd": true,
+   "refNumber": "JB0077226",
+   "company": {
+    "identifier": "ServiceNow",
+    "name": "ServiceNow"
+   },
+   "releasedDate": "2026-11-11T00:09:26.658Z",
+   "location": {
+    "city": "Santa Clara",
+    "region": "CALIFORNIA",
+    "country": "us",
+    "address": "Building A,B,C 2225 Lawson Lane",
+    "postalCode": "95054",
+    "remote": false,
+    "hybrid": true,
+    "fullLocation": "Santa Clara, CALIFORNIA, United States"
+   },
+   "industry": {
+    "id": "it_and_services",
+    "label": "Information Technology And Services"
+   },
+   "department": {
+    "id": "2294038",
+    "label": "Engineering, Infrastructure and Operations"
+   },
+   "function": {
+    "id": "engineering",
+    "label": "Engineering"
+   },
+   "typeOfEmployment": {
+    "id": "permanent",
+    "label": "Full-time"
+   },
+   "experienceLevel": {
+    "id": "not_applicable",
+    "label": "Not Applicable"
+   },
+   "customField": [
+    {
+     "fieldId": "60345fa28b4ba8595bef1863",
+     "fieldLabel": "Recruiting Team",
+     "valueId": "professional",
+     "valueLabel": "Professional"
+    },
+    {
+     "fieldId": "60345d5c5165a31b17288279",
+     "fieldLabel": "Region",
+     "valueId": "722a833b93e4437798309f43c0d25990",
+     "valueLabel": "AMS - North America and Canada"
+    },
+    {
+     "fieldId": "6034601b43915a29a4b3389b",
+     "fieldLabel": "Job Location",
+     "valueId": "L_SJC005",
+     "valueLabel": "2225 Lawson Lane, Santa Clara, California, 95054, United States of America(L_SJC005)"
+    },
+    {
+     "fieldId": "60345e1a0b24a127cbdfa148",
+     "fieldLabel": "Employee Type",
+     "valueId": "0082f6cbe6154da19322cbab1f6aa5af",
+     "valueLabel": "Regular"
+    },
+    {
+     "fieldId": "5f63a78f1dae5c5c4e54ba2b",
+     "fieldLabel": "Department",
+     "valueId": "2294038",
+     "valueLabel": "Engineering, Infrastructure and Operations"
+    },
+    {
+     "fieldId": "COUNTRY",
+     "fieldLabel": "Country/Region",
+     "valueId": "us",
+     "valueLabel": "United States"
+    },
+    {
+     "fieldId": "5f63a78f1dae5c5c4e54ba2a",
+     "fieldLabel": "Brands",
+     "valueId": "default",
+     "valueLabel": "ServiceNow"
+    },
+    {
+     "fieldId": "603462175165a31b1728827d",
+     "fieldLabel": "Cost Center",
+     "valueId": "CC1500",
+     "valueLabel": "1500 GCS Cloud Operations"
+    },
+    {
+     "fieldId": "618ed92b8f5e5f110e5bfb95",
+     "fieldLabel": "Work Persona",
+     "valueId": "bf7551c6-9b06-4e7c-8217-3baf43edd060",
+     "valueLabel": "Flexible"
+    },
+    {
+     "fieldId": "690cc0e8c682c3dbadaa7d73",
+     "fieldLabel": "Job Posting Type",
+     "valueId": "early-career",
+     "valueLabel": "Early Career"
+    }
+   ],
+   "visibility": "PUBLIC",
+   "ref": "https://api.smartrecruiters.com/v1/companies/ServiceNow/postings/744000160988769",
+   "language": {
+    "code": "en",
+    "label": "English",
+    "labelNative": "English (US)"
+   }
+  },
+  {
+   "id": "744000160987819",
+   "name": "Senior Staff Software Engineer, AI-Native Engineering - Flow",
+   "uuid": "334917e6-7f89-4828-8963-c91b04c3475b",
+   "jobAdId": "4bc630c0-edc5-447a-9f96-36d1bf0ff6fb",
+   "defaultJobAd": false,
+   "refNumber": "JB0076725",
+   "company": {
+    "identifier": "ServiceNow",
+    "name": "ServiceNow"
+   },
+   "releasedDate": "2026-11-10T23:55:45.467Z",
+   "location": {
+    "city": "Addison",
+    "region": "Texas",
+    "country": "us",
+    "address": "15725 North Dallas Parkway",
+    "postalCode": "75001",
+    "remote": true,
+    "hybrid": false,
+    "fullLocation": "Addison, Texas, United States"
+   },
+   "industry": {
+    "id": "it_and_services",
+    "label": "Information Technology And Services"
+   },
+   "department": {
+    "id": "2294038",
+    "label": "Engineering, Infrastructure and Operations"
+   },
+   "function": {
+    "id": "engineering",
+    "label": "Engineering"
+   },
+   "typeOfEmployment": {
+    "id": "permanent",
+    "label": "Full-time"
+   },
+   "experienceLevel": {
+    "id": "not_applicable",
+    "label": "Not Applicable"
+   },
+   "customField": [
+    {
+     "fieldId": "60345fa28b4ba8595bef1863",
+     "fieldLabel": "Recruiting Team",
+     "valueId": "professional",
+     "valueLabel": "Professional"
+    },
+    {
+     "fieldId": "60345d5c5165a31b17288279",
+     "fieldLabel": "Region",
+     "valueId": "722a833b93e4437798309f43c0d25990",
+     "valueLabel": "AMS - North America and Canada"
+    },
+    {
+     "fieldId": "6034601b43915a29a4b3389b",
+     "fieldLabel": "Job Location",
+     "valueId": "L_RMTE_CA",
+     "valueLabel": "Remote, CA, USA(L_RMTE_CA)"
+    },
+    {
+     "fieldId": "60345e1a0b24a127cbdfa148",
+     "fieldLabel": "Employee Type",
+     "valueId": "0082f6cbe6154da19322cbab1f6aa5af",
+     "valueLabel": "Regular"
+    },
+    {
+     "fieldId": "5f63a78f1dae5c5c4e54ba2b",
+     "fieldLabel": "Department",
+     "valueId": "2294038",
+     "valueLabel": "Engineering, Infrastructure and Operations"
+    },
+    {
+     "fieldId": "COUNTRY",
+     "fieldLabel": "Country/Region",
+     "valueId": "us",
+     "valueLabel": "United States"
+    },
+    {
+     "fieldId": "5f63a78f1dae5c5c4e54ba2a",
+     "fieldLabel": "Brands",
+     "valueId": "default",
+     "valueLabel": "ServiceNow"
+    },
+    {
+     "fieldId": "603462175165a31b1728827d",
+     "fieldLabel": "Cost Center",
+     "valueId": "CC6137",
+     "valueLabel": "6137 Flow Engineering"
+    },
+    {
+     "fieldId": "618ed92b8f5e5f110e5bfb95",
+     "fieldLabel": "Work Persona",
+     "valueId": "5530c877-6b63-4bf5-bde8-215ef35bf172",
+     "valueLabel": "Flexible or Remote"
+    },
+    {
+     "fieldId": "690cc0e8c682c3dbadaa7d73",
+     "fieldLabel": "Job Posting Type",
+     "valueId": "professional",
+     "valueLabel": "Professional"
+    }
+   ],
+   "visibility": "PUBLIC",
+   "ref": "https://api.smartrecruiters.com/v1/companies/ServiceNow/postings/744000160987819",
+   "language": {
+    "code": "en",
+    "label": "English",
+    "labelNative": "English (US)"
+   }
+  }
+ ]
+}

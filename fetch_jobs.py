@@ -18,7 +18,7 @@ Exit 2 (nothing written) if most boards fail or no roles come back, so a bad run
 """
 
 from __future__ import annotations
-import argparse, datetime as dt, html, json, os, re, sys, time, urllib.error, urllib.request
+import argparse, datetime as dt, html, json, os, re, sys, time, urllib.error, urllib.parse, urllib.request
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent
@@ -223,10 +223,7 @@ def norm_workday(c):
     base = f"https://{tenant}.{host}.myworkdayjobs.com"
     url = f"{base}/wday/cxs/{tenant}/{site}/jobs"
     seen, out = set(), []
-    # banks etc. use "terms": "finance" (or their own list) in companies.json
-    terms = c.get("terms") or WORKDAY_TERMS
-    if terms == "finance":
-        terms = FINANCE_WORKDAY_TERMS
+    terms = search_terms(c, WORKDAY_TERMS)  # banks etc. use "terms": "finance" (or their own list)
     for term in terms:  # query relevant roles server-side, then dedup
         for offset in range(0, 100, 20):
             body = json.dumps({"limit": 20, "offset": offset, "searchText": term, "appliedFacets": {}}).encode()
@@ -249,7 +246,126 @@ def norm_workday(c):
     return out
 
 
-FETCHERS = {"greenhouse": norm_greenhouse, "ashby": norm_ashby, "lever": norm_lever, "workday": norm_workday}
+# --- Oracle Cloud HCM (e.g. JPMorgan): the public Candidate Experience REST endpoint the careers site itself uses.
+# Searched by keyword like Workday, because these boards are huge; "terms" in companies.json overrides the default.
+ORACLE_PAGE = 25
+ORACLE_MAX_PAGES = 4
+
+
+def search_terms(c, default):
+    terms = c.get("terms") or default
+    return FINANCE_WORKDAY_TERMS if terms == "finance" else terms
+
+
+def norm_oracle(c):
+    host, site = c["host"], c["site"]
+    out, seen = [], set()
+    for term in search_terms(c, FINANCE_WORKDAY_TERMS):
+        for page in range(ORACLE_MAX_PAGES):
+            finder = (f"findReqs;siteNumber={site},keyword={urllib.parse.quote(term)},"
+                      f"limit={ORACLE_PAGE},offset={page * ORACLE_PAGE},sortBy=POSTING_DATES_DESC")
+            data = fetch(f"https://{host}/hcmRestApi/resources/latest/recruitingCEJobRequisitions"
+                         f"?onlyData=true&expand=requisitionList&finder={finder}")
+            items = data.get("items") or []
+            if not items:
+                raise ValueError(f"oracle {host}: no items in response")
+            reqs = items[0].get("requisitionList") or []
+            for r in reqs:
+                jid = str(r.get("Id") or "")
+                if not jid or jid in seen:
+                    continue
+                seen.add(jid)
+                out.append(_row(c, "oracle", jid, r.get("Title", ""), r.get("PrimaryLocation") or "",
+                                f"https://{host}/hcmUI/CandidateExperience/en/sites/{site}/job/{jid}",
+                                r.get("PostedDate") or "", ""))
+            if len(reqs) < ORACLE_PAGE or (page + 1) * ORACLE_PAGE >= (items[0].get("TotalJobsCount") or 0):
+                break
+            time.sleep(0.2)
+    return out
+
+
+# --- SmartRecruiters: the public Posting API (no key needed for published postings).
+SR_PAGE = 100
+SR_MAX_PAGES = 10
+
+
+def norm_smartrecruiters(c):
+    out = []
+    for page in range(SR_MAX_PAGES):
+        data = fetch(f"https://api.smartrecruiters.com/v1/companies/{urllib.parse.quote(c['token'])}/postings"
+                     f"?limit={SR_PAGE}&offset={page * SR_PAGE}")
+        content = data.get("content")
+        if content is None:
+            raise ValueError(f"smartrecruiters {c['token']}: unexpected payload")
+        if page == 0 and not content:
+            raise ValueError(f"smartrecruiters {c['token']}: no postings (wrong company identifier?)")
+        for p in content:
+            loc = p.get("location") or {}
+            where = ", ".join(x for x in (loc.get("city"), loc.get("region"), (loc.get("country") or "").upper()) if x)
+            if loc.get("remote"):
+                where = f"Remote - {where}" if where else "Remote"
+            out.append(_row(c, "smartrecruiters", p["id"], p.get("name", ""), where,
+                            f"https://jobs.smartrecruiters.com/{c['token']}/{p['id']}", p.get("releasedDate") or "", ""))
+        if len(content) < SR_PAGE or (page + 1) * SR_PAGE >= (data.get("totalFound") or 0):
+            break
+        time.sleep(0.2)
+    return out
+
+
+# --- iCIMS: the public, server-rendered job search page (robots.txt allows /jobs/search; we never touch
+# login/referral/candidate paths). One card per posting; "Page X of N" tells us when to stop.
+ICIMS_MAX_PAGES = 10
+IC_CARD_SPLIT = '<li class="iCIMS_JobCardItem">'
+IC_LINK_RE = re.compile(r'<a href="(https://[^"]+/jobs/(\d+)/[^"]*/job)[^"]*" class="iCIMS_Anchor"')
+IC_TITLE_RE = re.compile(r"<h3[^>]*>\s*(.*?)\s*</h3>", re.S)
+IC_DATE_RE = re.compile(r'Posted Date</span>\s*<span title="(\d{1,2})/(\d{1,2})/(\d{4})')
+IC_LOC_RE = re.compile(r'Job Locations</span>\s*</dt>\s*<dd class="iCIMS_JobHeaderData"><span\s*>\s*(.*?)\s*</span>', re.S)
+IC_PAGES_RE = re.compile(r"Page\s*(\d+)\s*of\s*(\d+)")
+
+
+def icims_location(raw):
+    """'US-CA-San Francisco' -> 'San Francisco, CA, US'; anything else is kept as is."""
+    parts = [p.strip() for p in html.unescape(raw or "").split("-")]
+    if len(parts) >= 3 and len(parts[0]) == 2 and len(parts[1]) <= 3:
+        return f"{'-'.join(parts[2:])}, {parts[1]}, {parts[0]}"
+    return html.unescape(raw or "").strip()
+
+
+def parse_icims(page_html):
+    rows = []
+    for card in page_html.split(IC_CARD_SPLIT)[1:]:
+        m = IC_LINK_RE.search(card)
+        mt = IC_TITLE_RE.search(card)
+        if not m or not mt:
+            continue
+        md, ml = IC_DATE_RE.search(card), IC_LOC_RE.search(card)
+        rows.append({"id": m.group(2), "url": html.unescape(m.group(1)),
+                     "title": html.unescape(TAG_RE.sub("", mt.group(1))).strip(),
+                     "posted": f"{md.group(3)}-{int(md.group(1)):02d}-{int(md.group(2)):02d}" if md else "",
+                     "location": icims_location(ml.group(1)) if ml else ""})
+    mp = IC_PAGES_RE.search(page_html)
+    return rows, (int(mp.group(1)), int(mp.group(2))) if mp else (1, 1)
+
+
+def norm_icims(c):
+    out, seen = [], set()
+    for page in range(ICIMS_MAX_PAGES):
+        page_html = fetch_html(f"https://{c['token']}.icims.com/jobs/search?ss=1&in_iframe=1&pr={page}", ua=UA)
+        rows, (cur, last) = parse_icims(page_html)
+        if page == 0 and not rows:
+            raise ValueError(f"icims {c['token']}: no job cards on page 1")
+        for r in rows:
+            if r["id"] not in seen:
+                seen.add(r["id"])
+                out.append(_row(c, "icims", r["id"], r["title"], r["location"], r["url"], r["posted"], ""))
+        if not rows or cur >= last:
+            break
+        time.sleep(PACING)
+    return out
+
+
+FETCHERS = {"greenhouse": norm_greenhouse, "ashby": norm_ashby, "lever": norm_lever, "workday": norm_workday,
+            "oracle": norm_oracle, "smartrecruiters": norm_smartrecruiters, "icims": norm_icims}
 
 # --- openquant.co: a curated quant job board (Next.js + Supabase, server-rendered).
 # It caps the unfiltered feed at 25 and ignores ?page, but server-side filters each
@@ -298,8 +414,8 @@ BI_PATH_RE = re.compile(r'data-alias="(/job/[^"]+)"')
 BI_POSTED_RE = re.compile(r'>([^<]*(?:Ago|Today))</span>')
 
 
-def fetch_html(url):
-    req = urllib.request.Request(url, headers={"User-Agent": BROWSER_UA, "Accept": "text/html"})
+def fetch_html(url, ua=BROWSER_UA):
+    req = urllib.request.Request(url, headers={"User-Agent": ua, "Accept": "text/html"})
     with urllib.request.urlopen(req, timeout=20) as r:
         return r.read().decode("utf-8", "ignore")
 

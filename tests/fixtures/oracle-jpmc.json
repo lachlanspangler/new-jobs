@@ -1,0 +1,1174 @@
+{
+ "items": [
+  {
+   "SearchId": 1,
+   "Keyword": "analyst",
+   "CorrectedKeyword": null,
+   "UseExactKeywordFlag": false,
+   "SuggestedKeyword": null,
+   "ExecuteSpellCheckFlag": true,
+   "Location": null,
+   "LocationId": null,
+   "Radius": 0,
+   "RadiusUnit": "MI",
+   "SelectedTitlesFacet": null,
+   "SelectedCategoriesFacet": null,
+   "SelectedPostingDatesFacet": null,
+   "SelectedLocationsFacet": null,
+   "LastSelectedFacet": null,
+   "Facets": "TITLES;LOCATIONS;LOCATION_LEVEL1;LOCATION_LEVEL2;LOCATION_LEVEL3;CATEGORIES;POSTING_DATES;WORK_LOCATIONS;FLEX_FIELDS;ORGANIZATIONS;WORKPLACE_TYPES",
+   "Offset": 0,
+   "Limit": 25,
+   "SortBy": "RELEVANCY",
+   "TotalJobsCount": 1010,
+   "Latitude": null,
+   "Longitude": null,
+   "SiteNumber": "CX_1001",
+   "JobFamilyId": null,
+   "PostingStartDate": null,
+   "PostingEndDate": null,
+   "SelectedWorkLocationsFacet": null,
+   "RequisitionId": null,
+   "CandidateNumber": null,
+   "WorkLocationZipCode": null,
+   "WorkLocationCountryCode": null,
+   "SelectedFlexFieldsFacets": null,
+   "OrganizationId": null,
+   "SelectedOrganizationsFacet": null,
+   "UserTargetFacetName": null,
+   "UserTargetFacetInputTerm": null,
+   "HotJobFlag": null,
+   "WorkplaceType": null,
+   "SelectedWorkplaceTypesFacet": null,
+   "BotQRShortCode": null,
+   "requisitionList": [
+    {
+     "Id": "210783447",
+     "Title": "Global Corporate Banking (Mid-Cap) - Junior Banker \u2013 Analyst",
+     "PostedDate": "2026-08-25",
+     "PostingEndDate": null,
+     "Language": "US",
+     "PrimaryLocationCountry": "JP",
+     "GeographyId": 300000020276089,
+     "HotJobFlag": false,
+     "WorkplaceTypeCode": null,
+     "JobFamily": "Analysts",
+     "JobFunction": "Program Analysts & Associate",
+     "WorkerType": null,
+     "ContractType": null,
+     "ManagerLevel": null,
+     "JobSchedule": null,
+     "JobShift": null,
+     "JobType": null,
+     "StudyLevel": null,
+     "DomesticTravelRequired": null,
+     "InternationalTravelRequired": null,
+     "WorkDurationYears": null,
+     "WorkDurationMonths": null,
+     "WorkHours": null,
+     "WorkDays": null,
+     "LegalEmployer": null,
+     "BusinessUnit": null,
+     "Department": null,
+     "Organization": null,
+     "BusinessUnitId": 300060261545756,
+     "LegalEmployerId": 300000087182135,
+     "OrganizationId": 300064748109649,
+     "MediaThumbURL": null,
+     "ShortDescriptionStr": "You will play an integral part to help gain, manage and maintain client relationships in close coordination with senior bankers.",
+     "PrimaryLocation": "Tokyo-To, Japan",
+     "Distance": 169.91518,
+     "TrendingFlag": false,
+     "BeFirstToApplyFlag": false,
+     "Relevancy": 169.91517639160156,
+     "WorkplaceType": "",
+     "ExternalQualificationsStr": null,
+     "ExternalResponsibilitiesStr": null
+    },
+    {
+     "Id": "210793803",
+     "Title": "Credit Trading \u2013 Private Credit \u2013 Analyst",
+     "PostedDate": "2026-09-23",
+     "PostingEndDate": null,
+     "Language": "US",
+     "PrimaryLocationCountry": "US",
+     "GeographyId": 300000020694566,
+     "HotJobFlag": false,
+     "WorkplaceTypeCode": null,
+     "JobFamily": "Analysts",
+     "JobFunction": "Program Analysts & Associate",
+     "WorkerType": null,
+     "ContractType": null,
+     "ManagerLevel": null,
+     "JobSchedule": null,
+     "JobShift": null,
+     "JobType": null,
+     "StudyLevel": null,
+     "DomesticTravelRequired": null,
+     "InternationalTravelRequired": null,
+     "WorkDurationYears": null,
+     "WorkDurationMonths": null,
+     "WorkHours": null,
+     "WorkDays": null,
+     "LegalEmployer": null,
+     "BusinessUnit": null,
+     "Department": null,
+     "Organization": null,
+     "BusinessUnitId": 300060261545756,
+     "LegalEmployerId": 300000087181264,
+     "OrganizationId": 300000164504365,
+     "MediaThumbURL": null,
+     "ShortDescriptionStr": "Join the CIB Credit Trading & Financing organization!",
+     "PrimaryLocation": "New York, NY, United States",
+     "Distance": 169.10152,
+     "TrendingFlag": false,
+     "BeFirstToApplyFlag": false,
+     "Relevancy": 169.1015167236328,
+     "WorkplaceType": "",
+     "ExternalQualificationsStr": null,
+     "ExternalResponsibilitiesStr": null
+    },
+    {
+     "Id": "210801954",
+     "Title": "Finance and Business Management -  Analyst",
+     "PostedDate": "2026-10-20",
+     "PostingEndDate": null,
+     "Language": "US",
+     "PrimaryLocationCountry": "HK",
+     "GeographyId": 300000020278285,
+     "HotJobFlag": false,
+     "WorkplaceTypeCode": null,
+     "JobFamily": "Analysts",
+     "JobFunction": "Program Analysts & Associate",
+     "WorkerType": null,
+     "ContractType": null,
+     "ManagerLevel": null,
+     "JobSchedule": null,
+     "JobShift": null,
+     "JobType": null,
+     "StudyLevel": null,
+     "DomesticTravelRequired": null,
+     "InternationalTravelRequired": null,
+     "WorkDurationYears": null,
+     "WorkDurationMonths": null,
+     "WorkHours": null,
+     "WorkDays": null,
+     "LegalEmployer": null,
+     "BusinessUnit": null,
+     "Department": null,
+     "Organization": null,
+     "BusinessUnitId": 300060261545756,
+     "LegalEmployerId": 300000086438620,
+     "OrganizationId": 300000164164817,
+     "MediaThumbURL": null,
+     "ShortDescriptionStr": "Join the Office of the CFO for mentorship in Finance and Business Management.",
+     "PrimaryLocation": "Central and Western, Hong Kong Island, Hong Kong",
+     "Distance": 164.29753,
+     "TrendingFlag": false,
+     "BeFirstToApplyFlag": false,
+     "Relevancy": 164.2975311279297,
+     "WorkplaceType": "",
+     "ExternalQualificationsStr": null,
+     "ExternalResponsibilitiesStr": null
+    },
+    {
+     "Id": "210805977",
+     "Title": "2027 Global Finance & Business Management Analyst Program - Full-time Analyst - Delaware",
+     "PostedDate": "2026-11-09",
+     "PostingEndDate": null,
+     "Language": "US",
+     "PrimaryLocationCountry": "US",
+     "GeographyId": 300000020705781,
+     "HotJobFlag": false,
+     "WorkplaceTypeCode": null,
+     "JobFamily": "Analysts",
+     "JobFunction": "Program Analysts & Associate",
+     "WorkerType": null,
+     "ContractType": null,
+     "ManagerLevel": null,
+     "JobSchedule": null,
+     "JobShift": null,
+     "JobType": null,
+     "StudyLevel": null,
+     "DomesticTravelRequired": null,
+     "InternationalTravelRequired": null,
+     "WorkDurationYears": null,
+     "WorkDurationMonths": null,
+     "WorkHours": null,
+     "WorkDays": null,
+     "LegalEmployer": null,
+     "BusinessUnit": null,
+     "Department": null,
+     "Organization": null,
+     "BusinessUnitId": 300000086610244,
+     "LegalEmployerId": 300000087185180,
+     "OrganizationId": 300000164615072,
+     "MediaThumbURL": null,
+     "ShortDescriptionStr": "Seeking individuals passionate about analytics, data, and innovation to leverage insights, and AI tools for strategic decision making.",
+     "PrimaryLocation": "Newark, DE, United States",
+     "Distance": 156.31932,
+     "TrendingFlag": false,
+     "BeFirstToApplyFlag": false,
+     "Relevancy": 156.31932067871094,
+     "WorkplaceType": "",
+     "ExternalQualificationsStr": null,
+     "ExternalResponsibilitiesStr": null
+    }
+   ],
+   "categoriesFacet": [
+    {
+     "Id": 300000086153065,
+     "Name": "Analysts",
+     "TotalCount": 134
+    },
+    {
+     "Id": 300000086153391,
+     "Name": "Associates",
+     "TotalCount": 102
+    },
+    {
+     "Id": 300000086152593,
+     "Name": "Business Management",
+     "TotalCount": 89
+    },
+    {
+     "Id": 300000086143853,
+     "Name": "Client Advisory",
+     "TotalCount": 46
+    },
+    {
+     "Id": 300000086152757,
+     "Name": "Credit Risk",
+     "TotalCount": 46
+    },
+    {
+     "Id": 300000086251864,
+     "Name": "Product Management",
+     "TotalCount": 25
+    },
+    {
+     "Id": 300000086144190,
+     "Name": "Auditing",
+     "TotalCount": 24
+    },
+    {
+     "Id": 300000086152753,
+     "Name": "Software Engineering",
+     "TotalCount": 24
+    },
+    {
+     "Id": 300000086250151,
+     "Name": "Portfolio Management",
+     "TotalCount": 24
+    },
+    {
+     "Id": 300000086144023,
+     "Name": "Private Bankers",
+     "TotalCount": 20
+    },
+    {
+     "Id": 300000086249994,
+     "Name": "Controller",
+     "TotalCount": 19
+    },
+    {
+     "Id": 300000086144116,
+     "Name": "Seasonal Employee",
+     "TotalCount": 18
+    },
+    {
+     "Id": 300000086152826,
+     "Name": "Financial Analysis",
+     "TotalCount": 17
+    },
+    {
+     "Id": 300000086251877,
+     "Name": "Client Management",
+     "TotalCount": 15
+    },
+    {
+     "Id": 300000921822354,
+     "Name": "Trading Services",
+     "TotalCount": 15
+    },
+    {
+     "Id": 300000086152508,
+     "Name": "Predictive Science",
+     "TotalCount": 14
+    },
+    {
+     "Id": 300000086250752,
+     "Name": "Relationship Manager",
+     "TotalCount": 14
+    },
+    {
+     "Id": 300000086249650,
+     "Name": "Quant Analytics",
+     "TotalCount": 13
+    },
+    {
+     "Id": 300000086250047,
+     "Name": "Client Sales",
+     "TotalCount": 13
+    },
+    {
+     "Id": 300000086250134,
+     "Name": "Analytics Solutions & Delivery",
+     "TotalCount": 13
+    },
+    {
+     "Id": 300049452668353,
+     "Name": "Technical Program Delivery",
+     "TotalCount": 13
+    },
+    {
+     "Id": 300001586035618,
+     "Name": "Trade Lifecycle",
+     "TotalCount": 11
+    },
+    {
+     "Id": 300000086144003,
+     "Name": "Data Management",
+     "TotalCount": 10
+    },
+    {
+     "Id": 300001586035624,
+     "Name": "Transactions",
+     "TotalCount": 10
+    },
+    {
+     "Id": 300000086249661,
+     "Name": "Account Service",
+     "TotalCount": 9
+    },
+    {
+     "Id": 300000086249881,
+     "Name": "Client Service",
+     "TotalCount": 9
+    },
+    {
+     "Id": 300001586035594,
+     "Name": "Fund Servicing",
+     "TotalCount": 9
+    },
+    {
+     "Id": 300035862339235,
+     "Name": "Product Portfolio & Delivery",
+     "TotalCount": 9
+    },
+    {
+     "Id": 300000086153256,
+     "Name": "Risk Analytics/Modeling",
+     "TotalCount": 8
+    },
+    {
+     "Id": 300001586035505,
+     "Name": "Client Service Delivery",
+     "TotalCount": 8
+    },
+    {
+     "Id": 300001568270660,
+     "Name": "Lending Services",
+     "TotalCount": 7
+    },
+    {
+     "Id": 300001586035378,
+     "Name": "Payments Lifecycle",
+     "TotalCount": 7
+    },
+    {
+     "Id": 300000086143922,
+     "Name": "Recruiting",
+     "TotalCount": 6
+    },
+    {
+     "Id": 300000086152685,
+     "Name": "Business Analysis",
+     "TotalCount": 6
+    },
+    {
+     "Id": 300000086153090,
+     "Name": "Research",
+     "TotalCount": 6
+    },
+    {
+     "Id": 300000086250565,
+     "Name": "Investors",
+     "TotalCount": 6
+    },
+    {
+     "Id": 300001586035338,
+     "Name": "Client Operations Management",
+     "TotalCount": 6
+    },
+    {
+     "Id": 300056769267812,
+     "Name": "Algo Trading",
+     "TotalCount": 6
+    },
+    {
+     "Id": 300000086153329,
+     "Name": "Trusts & Estates",
+     "TotalCount": 5
+    },
+    {
+     "Id": 300000086153427,
+     "Name": "Implementation",
+     "TotalCount": 5
+    }
+   ],
+   "locationsFacet": [
+    {
+     "Id": 300000000289738,
+     "Name": "United States",
+     "TotalCount": 507
+    },
+    {
+     "Id": 300000020657200,
+     "Name": "NY, United States",
+     "TotalCount": 208
+    },
+    {
+     "Id": 300000020694566,
+     "Name": "New York, NY, United States",
+     "TotalCount": 190
+    },
+    {
+     "Id": 300000000289276,
+     "Name": "United Kingdom",
+     "TotalCount": 121
+    },
+    {
+     "Id": 300000020657211,
+     "Name": "TX, United States",
+     "TotalCount": 118
+    },
+    {
+     "Id": 300000057005324,
+     "Name": "LONDON, United Kingdom",
+     "TotalCount": 104
+    },
+    {
+     "Id": 300000020709331,
+     "Name": "Plano, TX, United States",
+     "TotalCount": 99
+    },
+    {
+     "Id": 300000020657175,
+     "Name": "DE, United States",
+     "TotalCount": 85
+    },
+    {
+     "Id": 300000020657203,
+     "Name": "OH, United States",
+     "TotalCount": 84
+    },
+    {
+     "Id": 300000000289360,
+     "Name": "India",
+     "TotalCount": 78
+    },
+    {
+     "Id": 300000020694866,
+     "Name": "Columbus, OH, United States",
+     "TotalCount": 77
+    },
+    {
+     "Id": 300000057007721,
+     "Name": "LONDON, LONDON, United Kingdom",
+     "TotalCount": 72
+    },
+    {
+     "Id": 300000020657198,
+     "Name": "NJ, United States",
+     "TotalCount": 66
+    },
+    {
+     "Id": 300000020685544,
+     "Name": "Jersey City, NJ, United States",
+     "TotalCount": 64
+    },
+    {
+     "Id": 300000020683471,
+     "Name": "Wilmington, DE, United States",
+     "TotalCount": 62
+    },
+    {
+     "Id": 300000000289330,
+     "Name": "Hong Kong",
+     "TotalCount": 55
+    },
+    {
+     "Id": 300000020657181,
+     "Name": "IL, United States",
+     "TotalCount": 52
+    },
+    {
+     "Id": 300000020701539,
+     "Name": "Chicago, IL, United States",
+     "TotalCount": 52
+    },
+    {
+     "Id": 300000000289639,
+     "Name": "Singapore",
+     "TotalCount": 47
+    },
+    {
+     "Id": 300000081134219,
+     "Name": "Maharashtra, India",
+     "TotalCount": 46
+    },
+    {
+     "Id": 300000081151360,
+     "Name": "Mumbai, Maharashtra, India",
+     "TotalCount": 46
+    },
+    {
+     "Id": 300000020657177,
+     "Name": "FL, United States",
+     "TotalCount": 41
+    },
+    {
+     "Id": 300000020657172,
+     "Name": "CA, United States",
+     "TotalCount": 38
+    },
+    {
+     "Id": 300000020278279,
+     "Name": "Hong Kong Island, Hong Kong",
+     "TotalCount": 36
+    },
+    {
+     "Id": 300000020278285,
+     "Name": "Central and Western, Hong Kong Island, Hong Kong",
+     "TotalCount": 35
+    },
+    {
+     "Id": 300000081134215,
+     "Name": "Karnataka, India",
+     "TotalCount": 34
+    },
+    {
+     "Id": 300000081145775,
+     "Name": "Bengaluru, Karnataka, India",
+     "TotalCount": 34
+    },
+    {
+     "Id": 300000020333146,
+     "Name": "Singapore, Singapore",
+     "TotalCount": 27
+    },
+    {
+     "Id": 300000000289576,
+     "Name": "Philippines",
+     "TotalCount": 25
+    },
+    {
+     "Id": 300000020361132,
+     "Name": "National Capital Region, Philippines",
+     "TotalCount": 24
+    },
+    {
+     "Id": 300000020705781,
+     "Name": "Newark, DE, United States",
+     "TotalCount": 24
+    },
+    {
+     "Id": 300000020361305,
+     "Name": "Metro Manila, National Capital Region, Philippines",
+     "TotalCount": 23
+    },
+    {
+     "Id": 300000020688371,
+     "Name": "Tampa, FL, United States",
+     "TotalCount": 22
+    },
+    {
+     "Id": 300000020705969,
+     "Name": "San Francisco, CA, United States",
+     "TotalCount": 22
+    },
+    {
+     "Id": 300000000289081,
+     "Name": "Argentina",
+     "TotalCount": 19
+    },
+    {
+     "Id": 300000000289387,
+     "Name": "Japan",
+     "TotalCount": 19
+    },
+    {
+     "Id": 300000020276089,
+     "Name": "Tokyo-To, Japan",
+     "TotalCount": 19
+    },
+    {
+     "Id": 300000020361032,
+     "Name": "Ciudad Aut\u00f3noma de Buenos Aires, Argentina",
+     "TotalCount": 18
+    },
+    {
+     "Id": 300000020657170,
+     "Name": "AZ, United States",
+     "TotalCount": 18
+    },
+    {
+     "Id": 300000020678161,
+     "Name": "Houston, TX, United States",
+     "TotalCount": 18
+    }
+   ],
+   "postingDatesFacet": [
+    {
+     "Id": 7,
+     "Name": "Less than 7 days",
+     "TotalCount": 124
+    },
+    {
+     "Id": 30,
+     "Name": "Less than 30 days",
+     "TotalCount": 489
+    },
+    {
+     "Id": 31,
+     "Name": "Greater than 30 days",
+     "TotalCount": 521
+    }
+   ],
+   "titlesFacet": [
+    {
+     "Id": "PAA",
+     "Name": "Program Analysts & Associate",
+     "TotalCount": 249
+    },
+    {
+     "Id": "CLM",
+     "Name": "Client Management",
+     "TotalCount": 142
+    },
+    {
+     "Id": "OPS",
+     "Name": "Operations",
+     "TotalCount": 138
+    },
+    {
+     "Id": "FIN",
+     "Name": "Finance",
+     "TotalCount": 122
+    },
+    {
+     "Id": "RSK",
+     "Name": "Risk",
+     "TotalCount": 71
+    },
+    {
+     "Id": "TEC",
+     "Name": "Technology",
+     "TotalCount": 51
+    },
+    {
+     "Id": "D&A",
+     "Name": "Data & Analytics",
+     "TotalCount": 49
+    },
+    {
+     "Id": "PIM",
+     "Name": "Product/Investment Mgmt",
+     "TotalCount": 48
+    },
+    {
+     "Id": "PRO",
+     "Name": "Product",
+     "TotalCount": 42
+    },
+    {
+     "Id": "AUD",
+     "Name": "Internal Audit",
+     "TotalCount": 27
+    },
+    {
+     "Id": "PPM",
+     "Name": "Project & Process Mgmt",
+     "TotalCount": 15
+    },
+    {
+     "Id": "ADM",
+     "Name": "Administration",
+     "TotalCount": 14
+    },
+    {
+     "Id": "HRS",
+     "Name": "Human Resources",
+     "TotalCount": 12
+    },
+    {
+     "Id": "MKT",
+     "Name": "Marketing & Communications",
+     "TotalCount": 11
+    },
+    {
+     "Id": "O&C",
+     "Name": "Oversight & Control",
+     "TotalCount": 6
+    },
+    {
+     "Id": "S&D",
+     "Name": "Strategy & Development",
+     "TotalCount": 6
+    },
+    {
+     "Id": "GS",
+     "Name": "General Services",
+     "TotalCount": 4
+    },
+    {
+     "Id": "CMP",
+     "Name": "Compliance",
+     "TotalCount": 2
+    },
+    {
+     "Id": "UNA",
+     "Name": "Unassigned",
+     "TotalCount": 1
+    }
+   ],
+   "workLocationsFacet": [
+    {
+     "Id": 300000161126808,
+     "Name": "60064-270 Park",
+     "TotalCount": 86
+    },
+    {
+     "Id": 300000161078910,
+     "Name": "32173-25 Bank Street",
+     "TotalCount": 71
+    },
+    {
+     "Id": 300000161110891,
+     "Name": "54101-1111 Polaris",
+     "TotalCount": 61
+    },
+    {
+     "Id": 300000161117503,
+     "Name": "59636-Legacy West C",
+     "TotalCount": 50
+    },
+    {
+     "Id": 300000161100439,
+     "Name": "52381-One Christina Center",
+     "TotalCount": 38
+    },
+    {
+     "Id": 300000161065225,
+     "Name": "10468-Chase Tower Chicago",
+     "TotalCount": 36
+    },
+    {
+     "Id": 300000161082606,
+     "Name": "33432-CapitaSpring",
+     "TotalCount": 35
+    },
+    {
+     "Id": 300000161064854,
+     "Name": "02968-NOC 4",
+     "TotalCount": 33
+    },
+    {
+     "Id": 300000161067083,
+     "Name": "03363-277 Park",
+     "TotalCount": 29
+    },
+    {
+     "Id": 300000161082803,
+     "Name": "33436-JPMorgan Chase & Co Towers A ",
+     "TotalCount": 24
+    },
+    {
+     "Id": 300000161127084,
+     "Name": "60062-390 Madison",
+     "TotalCount": 24
+    },
+    {
+     "Id": 300000161082797,
+     "Name": "33492-JPMorgan Chase & Co Towers, M",
+     "TotalCount": 22
+    },
+    {
+     "Id": 300000161064890,
+     "Name": "02969-NOC 5",
+     "TotalCount": 21
+    },
+    {
+     "Id": 300000161067089,
+     "Name": "03618-60 Victoria Embankment",
+     "TotalCount": 16
+    },
+    {
+     "Id": 300000161067221,
+     "Name": "03354-5 Manhattan West",
+     "TotalCount": 15
+    },
+    {
+     "Id": 300000161127581,
+     "Name": "59693-Legacy West A",
+     "TotalCount": 15
+    },
+    {
+     "Id": 300000160289918,
+     "Name": "02042-560 Mission Street",
+     "TotalCount": 13
+    },
+    {
+     "Id": 300000161067054,
+     "Name": "03357-4 Metrotech",
+     "TotalCount": 13
+    },
+    {
+     "Id": 300000161072389,
+     "Name": "33235-Belgrano",
+     "TotalCount": 13
+    },
+    {
+     "Id": 300000161072552,
+     "Name": "33171-OneChangi",
+     "TotalCount": 12
+    },
+    {
+     "Id": 300000161079411,
+     "Name": "41037-237 Park",
+     "TotalCount": 12
+    },
+    {
+     "Id": 300000161128701,
+     "Name": "60631-Legacy West F",
+     "TotalCount": 12
+    },
+    {
+     "Id": 300000161079572,
+     "Name": "32084-JPMorgan Towers",
+     "TotalCount": 11
+    },
+    {
+     "Id": 300000161082665,
+     "Name": "33418-Atrium Garden",
+     "TotalCount": 11
+    },
+    {
+     "Id": 300035128317753,
+     "Name": "00997-One Cabot Square",
+     "TotalCount": 11
+    },
+    {
+     "Id": 300000161122000,
+     "Name": "59179-Delaware Tech Center",
+     "TotalCount": 9
+    },
+    {
+     "Id": 300000159300430,
+     "Name": "01525-712 Main",
+     "TotalCount": 8
+    },
+    {
+     "Id": 300000161064830,
+     "Name": "02976-Fountain Square 1",
+     "TotalCount": 8
+    },
+    {
+     "Id": 300000161082876,
+     "Name": "33184-TaunusTurm",
+     "TotalCount": 8
+    },
+    {
+     "Id": 300000161104558,
+     "Name": "52379-Three Christina Center",
+     "TotalCount": 8
+    },
+    {
+     "Id": 300034459227574,
+     "Name": "00856-Rockefeller Center",
+     "TotalCount": 8
+    },
+    {
+     "Id": 300000161068741,
+     "Name": "04065-EBBC C",
+     "TotalCount": 7
+    },
+    {
+     "Id": 300000161078754,
+     "Name": "32176-85 Castlereagh Street",
+     "TotalCount": 7
+    },
+    {
+     "Id": 300000161082629,
+     "Name": "33446-Shanghai Tower",
+     "TotalCount": 7
+    },
+    {
+     "Id": 300000161019408,
+     "Name": "00778-NCC5",
+     "TotalCount": 6
+    },
+    {
+     "Id": 300000161065574,
+     "Name": "01211-Dorset Building",
+     "TotalCount": 6
+    },
+    {
+     "Id": 300000161067745,
+     "Name": "02980-Tempe Bldg G",
+     "TotalCount": 6
+    },
+    {
+     "Id": 300000161072449,
+     "Name": "33498-21 Marche Saint Honore",
+     "TotalCount": 6
+    },
+    {
+     "Id": 300000161078892,
+     "Name": "32183-Prima Bay",
+     "TotalCount": 6
+    },
+    {
+     "Id": 300000161082689,
+     "Name": "33437-Embassy Tech Village - Parcel",
+     "TotalCount": 6
+    }
+   ],
+   "flexFieldsFacet": [],
+   "organizationsFacet": [
+    {
+     "Id": 300000164615072,
+     "Name": "179942-NORTH AMERICA RECRUITING",
+     "TotalCount": 8
+    },
+    {
+     "Id": 300000164243534,
+     "Name": "284077-RETAIL BANKING",
+     "TotalCount": 7
+    },
+    {
+     "Id": 300000164212080,
+     "Name": "431418-FAST BANK PRICING NA",
+     "TotalCount": 5
+    },
+    {
+     "Id": 300000164659211,
+     "Name": "002441-JPMORGAN CHASE BANK NA",
+     "TotalCount": 5
+    },
+    {
+     "Id": 300000164699085,
+     "Name": "024833-CIB RISK BM - US",
+     "TotalCount": 5
+    },
+    {
+     "Id": 300000165093250,
+     "Name": "038859-JP EQTY CAP MKTS  0333919522",
+     "TotalCount": 5
+    },
+    {
+     "Id": 300000164168824,
+     "Name": "326269-EUROPE EQ CASH - FBL",
+     "TotalCount": 4
+    },
+    {
+     "Id": 300000164543587,
+     "Name": "272015-PERFORMANCE CONSULTING",
+     "TotalCount": 4
+    },
+    {
+     "Id": 300000164626559,
+     "Name": "161780-CARD D&A BRANDED_COES",
+     "TotalCount": 4
+    },
+    {
+     "Id": 300004861017830,
+     "Name": "392897-WM BANKERS",
+     "TotalCount": 4
+    },
+    {
+     "Id": 300063442926506,
+     "Name": "468352-AM OPS - PHILIPPINES 3491",
+     "TotalCount": 4
+    },
+    {
+     "Id": 300078268942298,
+     "Name": "146122-AWM BM RECRUITING",
+     "TotalCount": 4
+    },
+    {
+     "Id": 300000164151038,
+     "Name": "146941-CB PAYMENTS - IPS- GASED",
+     "TotalCount": 3
+    },
+    {
+     "Id": 300000164383343,
+     "Name": "175300-FIG NA SECURITIES COVERAGE VP",
+     "TotalCount": 3
+    },
+    {
+     "Id": 300000164413257,
+     "Name": "147701-PB HONG KONG BANKER-44594 (PC)",
+     "TotalCount": 3
+    },
+    {
+     "Id": 300000164615316,
+     "Name": "021863-CONSUMER/BUSINESS BANKING",
+     "TotalCount": 3
+    },
+    {
+     "Id": 300000164677022,
+     "Name": "370726-ICB-IPLAT-F&BM-UK",
+     "TotalCount": 3
+    },
+    {
+     "Id": 300000164922795,
+     "Name": "255522-PB TAIWAN BANKER-44594  (SC)",
+     "TotalCount": 3
+    },
+    {
+     "Id": 300000164980914,
+     "Name": "127995-BRAZIL OTHER GENERAL MANAGEMENT",
+     "TotalCount": 3
+    },
+    {
+     "Id": 300000165105649,
+     "Name": "021927-CIB TECH AUDIT - NAMR",
+     "TotalCount": 3
+    },
+    {
+     "Id": 300000165242802,
+     "Name": "239708-EMEA IBC EPRM JPMS PLC",
+     "TotalCount": 3
+    },
+    {
+     "Id": 300000557201408,
+     "Name": "378660-JPMWM PXT F&BM",
+     "TotalCount": 3
+    },
+    {
+     "Id": 300000811985209,
+     "Name": "134009-QTR - X-ASSET SINGAPORE",
+     "TotalCount": 3
+    },
+    {
+     "Id": 300002234386651,
+     "Name": "384655-AM-US FUNDS-RETIREMENT-EVERYDAY 401K-SALES-USA-1044",
+     "TotalCount": 3
+    },
+    {
+     "Id": 300003673660527,
+     "Name": "386598-CRE COLLATERAL ANALYSIS",
+     "TotalCount": 3
+    },
+    {
+     "Id": 300003921598856,
+     "Name": "388930-LENDING SOLUTIONS & ADVICE",
+     "TotalCount": 3
+    },
+    {
+     "Id": 300004199181253,
+     "Name": "390714-ASIA TAIWAN-TAIWAN TEAM (SC)",
+     "TotalCount": 3
+    },
+    {
+     "Id": 300004199181385,
+     "Name": "390713-ASIA CHINA (SC)",
+     "TotalCount": 3
+    },
+    {
+     "Id": 300004507143278,
+     "Name": "392059-IB CREDIT RISK-NA HEALTHCARE & ENTERTN. & BUS SERVCS",
+     "TotalCount": 3
+    },
+    {
+     "Id": 300004861181439,
+     "Name": "392905-WM FO & SUPPORT GERMANY",
+     "TotalCount": 3
+    },
+    {
+     "Id": 300009579572930,
+     "Name": "402859-GT SEP PROGRAM - US",
+     "TotalCount": 3
+    },
+    {
+     "Id": 300027300380481,
+     "Name": "455535-LIQUIDITY & ACCOUNT SOLUTIONS BM NAMR",
+     "TotalCount": 3
+    },
+    {
+     "Id": 300037441020784,
+     "Name": "485760-ASIA HKP - HONG KONG PROF (SC)",
+     "TotalCount": 3
+    },
+    {
+     "Id": 300037441140974,
+     "Name": "485758-PB CHINA PROF - 44594  (SC)",
+     "TotalCount": 3
+    },
+    {
+     "Id": 300038931547779,
+     "Name": "485795-PB CHINA PROF - SG (PC)",
+     "TotalCount": 3
+    },
+    {
+     "Id": 300064748053033,
+     "Name": "563168-HHN - NORTHEAST - LARGE",
+     "TotalCount": 3
+    },
+    {
+     "Id": 300064748055119,
+     "Name": "563416-US EQR BIOTECH SMID",
+     "TotalCount": 3
+    },
+    {
+     "Id": 300084271368494,
+     "Name": "220259-ANALYTIC ADVISORS CORPORATE-US",
+     "TotalCount": 3
+    },
+    {
+     "Id": 300000164077220,
+     "Name": "234083-WHOLESALE CREDIT RISK QR NA",
+     "TotalCount": 2
+    },
+    {
+     "Id": 300000164149394,
+     "Name": "377603-CB RISK INDIA CRE REO",
+     "TotalCount": 2
+    }
+   ],
+   "workplaceTypesFacet": [
+    {
+     "Id": "ORA_ON_SITE",
+     "Name": "On-site",
+     "TotalCount": 1010
+    }
+   ]
+  }
+ ],
+ "count": 1,
+ "hasMore": false,
+ "limit": 200,
+ "offset": 0,
+ "links": [
+  {
+   "rel": "self",
+   "href": "https://jpmc.fa.oraclecloud.com:443/hcmRestApi/resources/11.13.18.05/recruitingCEJobRequisitions",
+   "name": "recruitingCEJobRequisitions",
+   "kind": "collection"
+  },
+  {
+   "rel": "action",
+   "href": "https://jpmc.fa.oraclecloud.com:443/hcmRestApi/resources/11.13.18.05/recruitingCEJobRequisitions/action/getRequisitionsLocationCoordinates",
+   "name": "getRequisitionsLocationCoordinates",
+   "kind": "other"
+  },
+  {
+   "rel": "action",
+   "href": "https://jpmc.fa.oraclecloud.com:443/hcmRestApi/resources/11.13.18.05/recruitingCEJobRequisitions/action/getRequisitionDetailsForMap",
+   "name": "getRequisitionDetailsForMap",
+   "kind": "other"
+  }
+ ]
+}

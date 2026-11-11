@@ -1,10 +1,13 @@
 """companies.json must stay well-formed: a bad entry should fail make check, not a production run."""
 import json
 import re
+import sys
 import unittest
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(ROOT))
+import fetch_jobs as fj  # noqa: E402
 TAGS = {"ai", "quant", "hedge", "tech", "finance", "realestate"}
 
 
@@ -17,11 +20,14 @@ class Companies(unittest.TestCase):
         for c in self.companies:
             with self.subTest(c.get("name")):
                 self.assertTrue(c.get("name") and c.get("token"))
-                self.assertIn(c["ats"], {"greenhouse", "ashby", "lever", "workday"})
+                self.assertIn(c["ats"], set(fj.FETCHERS))
                 self.assertTrue(set(c.get("tags", [])) <= TAGS, c.get("tags"))
                 self.assertTrue(c.get("tags"))
                 if c["ats"] == "workday":
                     self.assertRegex(c.get("host", ""), r"^wd\d+$")
+                if c["ats"] == "oracle":
+                    self.assertRegex(c.get("host", ""), r"^[a-z0-9.-]+\.oraclecloud\.com$")
+                if c["ats"] in ("workday", "oracle"):
                     self.assertTrue(c.get("site"))
                     t = c.get("terms")
                     self.assertTrue(t is None or t == "finance" or (isinstance(t, list) and all(isinstance(x, str) for x in t)))
