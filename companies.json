@@ -1,5 +1,5 @@
 {
- "_comment": "Verified Ashby/Greenhouse/Lever boards. Add entries as {name, ats, token, tags}; validate the token returns a non-empty jobs list before adding.",
+ "_comment": "Verified Greenhouse/Ashby/Lever/Workday boards. Add entries as {name, ats, token, tags} (Workday also needs host, site, and optional terms: 'finance' or a list); validate the board returns a non-empty jobs list before adding.",
  "companies": [
   {
    "name": "Abridge",
@@ -2629,6 +2629,852 @@
     "tech"
    ],
    "domain": "duolingo.com"
+  },
+  {
+   "name": "Citi",
+   "ats": "workday",
+   "token": "citi",
+   "host": "wd5",
+   "site": "2",
+   "tags": [
+    "finance"
+   ],
+   "domain": "citi.com",
+   "terms": "finance"
+  },
+  {
+   "name": "Morgan Stanley",
+   "ats": "workday",
+   "token": "ms",
+   "host": "wd5",
+   "site": "External",
+   "tags": [
+    "finance"
+   ],
+   "domain": "morganstanley.com",
+   "terms": "finance"
+  },
+  {
+   "name": "Bank of America",
+   "ats": "workday",
+   "token": "ghr",
+   "host": "wd1",
+   "site": "Lateral-US",
+   "tags": [
+    "finance"
+   ],
+   "domain": "bankofamerica.com",
+   "terms": "finance"
+  },
+  {
+   "name": "Wells Fargo",
+   "ats": "workday",
+   "token": "wf",
+   "host": "wd1",
+   "site": "WellsFargoJobs",
+   "tags": [
+    "finance"
+   ],
+   "domain": "wellsfargo.com",
+   "terms": "finance"
+  },
+  {
+   "name": "State Street",
+   "ats": "workday",
+   "token": "statestreet",
+   "host": "wd1",
+   "site": "Global",
+   "tags": [
+    "finance"
+   ],
+   "domain": "statestreet.com",
+   "terms": "finance"
+  },
+  {
+   "name": "Fidelity Investments",
+   "ats": "workday",
+   "token": "fmr",
+   "host": "wd1",
+   "site": "FidelityCareers",
+   "tags": [
+    "finance"
+   ],
+   "domain": "fidelity.com",
+   "terms": "finance"
+  },
+  {
+   "name": "T. Rowe Price",
+   "ats": "workday",
+   "token": "troweprice",
+   "host": "wd5",
+   "site": "TRowePrice",
+   "tags": [
+    "finance"
+   ],
+   "domain": "troweprice.com",
+   "terms": "finance"
+  },
+  {
+   "name": "Northern Trust",
+   "ats": "workday",
+   "token": "ntrs",
+   "host": "wd1",
+   "site": "northerntrust",
+   "tags": [
+    "finance"
+   ],
+   "domain": "northerntrust.com",
+   "terms": "finance"
+  },
+  {
+   "name": "PNC",
+   "ats": "workday",
+   "token": "pnc",
+   "host": "wd5",
+   "site": "External",
+   "tags": [
+    "finance"
+   ],
+   "domain": "pnc.com",
+   "terms": "finance"
+  },
+  {
+   "name": "U.S. Bank",
+   "ats": "workday",
+   "token": "usbank",
+   "host": "wd1",
+   "site": "US_Bank_Careers",
+   "tags": [
+    "finance"
+   ],
+   "domain": "usbank.com",
+   "terms": "finance"
+  },
+  {
+   "name": "Ameriprise",
+   "ats": "workday",
+   "token": "ameriprise",
+   "host": "wd5",
+   "site": "Ameriprise",
+   "tags": [
+    "finance"
+   ],
+   "domain": "ameriprise.com",
+   "terms": "finance"
+  },
+  {
+   "name": "Invesco",
+   "ats": "workday",
+   "token": "invesco",
+   "host": "wd1",
+   "site": "IVZ",
+   "tags": [
+    "finance"
+   ],
+   "domain": "invesco.com",
+   "terms": "finance"
+  },
+  {
+   "name": "TIAA",
+   "ats": "workday",
+   "token": "tiaa",
+   "host": "wd1",
+   "site": "Search",
+   "tags": [
+    "finance"
+   ],
+   "domain": "tiaa.org",
+   "terms": "finance"
+  },
+  {
+   "name": "PIMCO",
+   "ats": "workday",
+   "token": "pimco",
+   "host": "wd1",
+   "site": "pimco-careers",
+   "tags": [
+    "finance"
+   ],
+   "domain": "pimco.com",
+   "terms": "finance"
+  },
+  {
+   "name": "Vanguard",
+   "ats": "workday",
+   "token": "vanguard",
+   "host": "wd5",
+   "site": "vanguard_external",
+   "tags": [
+    "finance"
+   ],
+   "domain": "vanguard.com",
+   "terms": "finance"
+  },
+  {
+   "name": "Wellington Management",
+   "ats": "workday",
+   "token": "wellington",
+   "host": "wd5",
+   "site": "External",
+   "tags": [
+    "finance"
+   ],
+   "domain": "wellington.com",
+   "terms": "finance"
+  },
+  {
+   "name": "Neuberger Berman",
+   "ats": "workday",
+   "token": "nb",
+   "host": "wd1",
+   "site": "NBCareers",
+   "tags": [
+    "finance"
+   ],
+   "domain": "nb.com",
+   "terms": "finance"
+  },
+  {
+   "name": "AllianceBernstein",
+   "ats": "workday",
+   "token": "abglobal",
+   "host": "wd1",
+   "site": "AllianceBernsteinCareers",
+   "tags": [
+    "finance"
+   ],
+   "domain": "alliancebernstein.com",
+   "terms": "finance"
+  },
+  {
+   "name": "PGIM / Prudential",
+   "ats": "workday",
+   "token": "pru",
+   "host": "wd5",
+   "site": "Careers",
+   "tags": [
+    "finance"
+   ],
+   "domain": "prudential.com",
+   "terms": "finance"
+  },
+  {
+   "name": "Northwestern Mutual",
+   "ats": "workday",
+   "token": "northwesternmutual",
+   "host": "wd5",
+   "site": "CORPORATE-CAREERS",
+   "tags": [
+    "finance"
+   ],
+   "domain": "northwesternmutual.com",
+   "terms": "finance"
+  },
+  {
+   "name": "LPL Financial",
+   "ats": "workday",
+   "token": "lplfinancial",
+   "host": "wd1",
+   "site": "External",
+   "tags": [
+    "finance"
+   ],
+   "domain": "lpl.com",
+   "terms": "finance"
+  },
+  {
+   "name": "Carlyle",
+   "ats": "workday",
+   "token": "carlyle",
+   "host": "wd1",
+   "site": "carlyle",
+   "tags": [
+    "finance"
+   ],
+   "domain": "carlyle.com",
+   "terms": "finance"
+  },
+  {
+   "name": "Apollo",
+   "ats": "workday",
+   "token": "athene",
+   "host": "wd5",
+   "site": "Apollo_Careers",
+   "tags": [
+    "finance"
+   ],
+   "domain": "apollo.com",
+   "terms": "finance"
+  },
+  {
+   "name": "Ares Management",
+   "ats": "workday",
+   "token": "aresmgmt",
+   "host": "wd1",
+   "site": "External",
+   "tags": [
+    "finance"
+   ],
+   "domain": "aresmgmt.com",
+   "terms": "finance"
+  },
+  {
+   "name": "Blue Owl",
+   "ats": "workday",
+   "token": "blueowl",
+   "host": "wd1",
+   "site": "blueowl",
+   "tags": [
+    "finance"
+   ],
+   "domain": "blueowl.com",
+   "terms": "finance"
+  },
+  {
+   "name": "PJT Partners",
+   "ats": "workday",
+   "token": "pjtpartners",
+   "host": "wd1",
+   "site": "Careers",
+   "tags": [
+    "finance"
+   ],
+   "domain": "pjtpartners.com",
+   "terms": "finance"
+  },
+  {
+   "name": "Houlihan Lokey",
+   "ats": "workday",
+   "token": "hl",
+   "host": "wd1",
+   "site": "Campus",
+   "tags": [
+    "finance"
+   ],
+   "domain": "hl.com",
+   "terms": "finance"
+  },
+  {
+   "name": "Piper Sandler",
+   "ats": "workday",
+   "token": "pipersandler",
+   "host": "wd501",
+   "site": "Piper_Sandler_Careers",
+   "tags": [
+    "finance"
+   ],
+   "domain": "pipersandler.com",
+   "terms": "finance"
+  },
+  {
+   "name": "Raymond James",
+   "ats": "workday",
+   "token": "raymondjames",
+   "host": "wd1",
+   "site": "RaymondJamesCareers",
+   "tags": [
+    "finance"
+   ],
+   "domain": "raymondjames.com",
+   "terms": "finance"
+  },
+  {
+   "name": "Baird",
+   "ats": "workday",
+   "token": "baird",
+   "host": "wd1",
+   "site": "Careers",
+   "tags": [
+    "finance"
+   ],
+   "domain": "rwbaird.com",
+   "terms": "finance"
+  },
+  {
+   "name": "Guggenheim Investments",
+   "ats": "workday",
+   "token": "guggenheiminvestment",
+   "host": "wd5",
+   "site": "External",
+   "tags": [
+    "finance"
+   ],
+   "domain": "guggenheiminvestments.com",
+   "terms": "finance"
+  },
+  {
+   "name": "Nasdaq",
+   "ats": "workday",
+   "token": "nasdaq",
+   "host": "wd1",
+   "site": "Global_External_Site",
+   "tags": [
+    "finance"
+   ],
+   "domain": "nasdaq.com",
+   "terms": "finance"
+  },
+  {
+   "name": "CME Group",
+   "ats": "workday",
+   "token": "cmegroup",
+   "host": "wd1",
+   "site": "cme_careers",
+   "tags": [
+    "finance"
+   ],
+   "domain": "cmegroup.com",
+   "terms": "finance"
+  },
+  {
+   "name": "Cboe",
+   "ats": "workday",
+   "token": "cboe",
+   "host": "wd1",
+   "site": "External_Career_CBOE",
+   "tags": [
+    "finance"
+   ],
+   "domain": "cboe.com",
+   "terms": "finance"
+  },
+  {
+   "name": "S&P Global",
+   "ats": "workday",
+   "token": "spgi",
+   "host": "wd5",
+   "site": "SPGI_Careers",
+   "tags": [
+    "finance"
+   ],
+   "domain": "spglobal.com",
+   "terms": "finance"
+  },
+  {
+   "name": "Morningstar",
+   "ats": "workday",
+   "token": "morningstar",
+   "host": "wd5",
+   "site": "Morningstar",
+   "tags": [
+    "finance"
+   ],
+   "domain": "morningstar.com",
+   "terms": "finance"
+  },
+  {
+   "name": "Broadridge",
+   "ats": "workday",
+   "token": "broadridge",
+   "host": "wd5",
+   "site": "Careers",
+   "tags": [
+    "finance",
+    "tech"
+   ],
+   "domain": "broadridge.com",
+   "terms": "finance"
+  },
+  {
+   "name": "TD Bank",
+   "ats": "workday",
+   "token": "td",
+   "host": "wd3",
+   "site": "TD_Bank_Careers",
+   "tags": [
+    "finance"
+   ],
+   "domain": "td.com",
+   "terms": "finance"
+  },
+  {
+   "name": "BMO",
+   "ats": "workday",
+   "token": "bmo",
+   "host": "wd3",
+   "site": "External",
+   "tags": [
+    "finance"
+   ],
+   "domain": "bmo.com",
+   "terms": "finance"
+  },
+  {
+   "name": "MUFG",
+   "ats": "workday",
+   "token": "mufgub",
+   "host": "wd3",
+   "site": "MUFG-Careers",
+   "tags": [
+    "finance"
+   ],
+   "domain": "mufgamericas.com",
+   "terms": "finance"
+  },
+  {
+   "name": "Truist",
+   "ats": "workday",
+   "token": "truist",
+   "host": "wd1",
+   "site": "Careers",
+   "tags": [
+    "finance"
+   ],
+   "domain": "truist.com",
+   "terms": "finance"
+  },
+  {
+   "name": "Fifth Third",
+   "ats": "workday",
+   "token": "fifththird",
+   "host": "wd5",
+   "site": "53careers",
+   "tags": [
+    "finance"
+   ],
+   "domain": "53.com",
+   "terms": "finance"
+  },
+  {
+   "name": "KeyBank",
+   "ats": "workday",
+   "token": "keybank",
+   "host": "wd5",
+   "site": "External_Career_Site",
+   "tags": [
+    "finance"
+   ],
+   "domain": "key.com",
+   "terms": "finance"
+  },
+  {
+   "name": "Regions",
+   "ats": "workday",
+   "token": "regions",
+   "host": "wd5",
+   "site": "Regions_Careers",
+   "tags": [
+    "finance"
+   ],
+   "domain": "regions.com",
+   "terms": "finance"
+  },
+  {
+   "name": "M&T Bank",
+   "ats": "workday",
+   "token": "mtb",
+   "host": "wd5",
+   "site": "MTB",
+   "tags": [
+    "finance"
+   ],
+   "domain": "mtb.com",
+   "terms": "finance"
+  },
+  {
+   "name": "Huntington",
+   "ats": "workday",
+   "token": "huntington",
+   "host": "wd12",
+   "site": "HNBcareers",
+   "tags": [
+    "finance"
+   ],
+   "domain": "huntington.com",
+   "terms": "finance"
+  },
+  {
+   "name": "Ally",
+   "ats": "workday",
+   "token": "ally",
+   "host": "wd1",
+   "site": "Ally",
+   "tags": [
+    "finance"
+   ],
+   "domain": "ally.com",
+   "terms": "finance"
+  },
+  {
+   "name": "Synchrony",
+   "ats": "workday",
+   "token": "synchronyfinancial",
+   "host": "wd5",
+   "site": "careers",
+   "tags": [
+    "finance"
+   ],
+   "domain": "synchrony.com",
+   "terms": "finance"
+  },
+  {
+   "name": "Fiserv",
+   "ats": "workday",
+   "token": "fiserv",
+   "host": "wd5",
+   "site": "EXT",
+   "tags": [
+    "finance",
+    "tech"
+   ],
+   "domain": "fiserv.com",
+   "terms": "finance"
+  },
+  {
+   "name": "FIS",
+   "ats": "workday",
+   "token": "fis",
+   "host": "wd5",
+   "site": "SearchJobs",
+   "tags": [
+    "finance",
+    "tech"
+   ],
+   "domain": "fisglobal.com",
+   "terms": "finance"
+  },
+  {
+   "name": "Bridgewater",
+   "ats": "greenhouse",
+   "token": "bridgewater89",
+   "tags": [
+    "finance",
+    "hedge"
+   ],
+   "domain": "bridgewater.com"
+  },
+  {
+   "name": "Graham Capital",
+   "ats": "greenhouse",
+   "token": "grahamcapitalmanagement",
+   "tags": [
+    "finance",
+    "hedge",
+    "quant"
+   ],
+   "domain": "grahamcapital.com"
+  },
+  {
+   "name": "William Blair",
+   "ats": "greenhouse",
+   "token": "williamblair",
+   "tags": [
+    "finance"
+   ],
+   "domain": "williamblair.com"
+  },
+  {
+   "name": "Lincoln International",
+   "ats": "greenhouse",
+   "token": "lincolninternational",
+   "tags": [
+    "finance"
+   ],
+   "domain": "lincolninternational.com"
+  },
+  {
+   "name": "LionTree",
+   "ats": "greenhouse",
+   "token": "liontree",
+   "tags": [
+    "finance"
+   ],
+   "domain": "liontree.com"
+  },
+  {
+   "name": "TPG",
+   "ats": "greenhouse",
+   "token": "tpgcareers",
+   "tags": [
+    "finance"
+   ],
+   "domain": "tpg.com"
+  },
+  {
+   "name": "General Atlantic",
+   "ats": "greenhouse",
+   "token": "generalatlantic",
+   "tags": [
+    "finance"
+   ],
+   "domain": "generalatlantic.com"
+  },
+  {
+   "name": "StepStone Group",
+   "ats": "greenhouse",
+   "token": "stepstone",
+   "tags": [
+    "finance"
+   ],
+   "domain": "stepstonegroup.com"
+  },
+  {
+   "name": "Adams Street Partners",
+   "ats": "greenhouse",
+   "token": "adamsstreetpartners",
+   "tags": [
+    "finance"
+   ],
+   "domain": "adamsstreetpartners.com"
+  },
+  {
+   "name": "ICONIQ",
+   "ats": "greenhouse",
+   "token": "iconiq",
+   "tags": [
+    "finance"
+   ],
+   "domain": "iconiqcapital.com"
+  },
+  {
+   "name": "iCapital",
+   "ats": "greenhouse",
+   "token": "icapitalnetwork",
+   "tags": [
+    "finance",
+    "tech"
+   ],
+   "domain": "icapital.com"
+  },
+  {
+   "name": "CAIS",
+   "ats": "greenhouse",
+   "token": "cais",
+   "tags": [
+    "finance",
+    "tech"
+   ],
+   "domain": "caisgroup.com"
+  },
+  {
+   "name": "PitchBook",
+   "ats": "greenhouse",
+   "token": "pitchbookdata",
+   "tags": [
+    "finance",
+    "tech"
+   ],
+   "domain": "pitchbook.com"
+  },
+  {
+   "name": "AlphaSense",
+   "ats": "greenhouse",
+   "token": "alphasense",
+   "tags": [
+    "finance",
+    "tech"
+   ],
+   "domain": "alpha-sense.com"
+  },
+  {
+   "name": "Addepar",
+   "ats": "greenhouse",
+   "token": "addepar1",
+   "tags": [
+    "finance",
+    "tech"
+   ],
+   "domain": "addepar.com"
+  },
+  {
+   "name": "Altruist",
+   "ats": "greenhouse",
+   "token": "altruist",
+   "tags": [
+    "finance",
+    "tech"
+   ],
+   "domain": "altruist.com"
+  },
+  {
+   "name": "Clear Street",
+   "ats": "greenhouse",
+   "token": "clearstreet",
+   "tags": [
+    "finance",
+    "tech"
+   ],
+   "domain": "clearstreet.io"
+  },
+  {
+   "name": "Bill.com",
+   "ats": "greenhouse",
+   "token": "billcom",
+   "tags": [
+    "finance",
+    "tech"
+   ],
+   "domain": "bill.com"
+  },
+  {
+   "name": "Payoneer",
+   "ats": "greenhouse",
+   "token": "payoneer",
+   "tags": [
+    "finance",
+    "tech"
+   ],
+   "domain": "payoneer.com"
+  },
+  {
+   "name": "Mission Lane",
+   "ats": "greenhouse",
+   "token": "missionlane",
+   "tags": [
+    "finance",
+    "tech"
+   ],
+   "domain": "missionlane.com"
+  },
+  {
+   "name": "9fin",
+   "ats": "ashby",
+   "token": "9fin",
+   "tags": [
+    "finance",
+    "tech"
+   ],
+   "domain": "9fin.com"
+  },
+  {
+   "name": "Mosaic",
+   "ats": "ashby",
+   "token": "mosaic",
+   "tags": [
+    "finance",
+    "tech"
+   ],
+   "domain": "mosaic.pe"
+  },
+  {
+   "name": "Titan",
+   "ats": "ashby",
+   "token": "titan",
+   "tags": [
+    "finance",
+    "tech"
+   ],
+   "domain": "titan.com"
+  },
+  {
+   "name": "Savvy Wealth",
+   "ats": "ashby",
+   "token": "savvy",
+   "tags": [
+    "finance",
+    "tech"
+   ],
+   "domain": "savvywealth.com"
+  },
+  {
+   "name": "Acorns",
+   "ats": "ashby",
+   "token": "acorns",
+   "tags": [
+    "finance",
+    "tech"
+   ],
+   "domain": "acorns.com"
   }
  ]
 }

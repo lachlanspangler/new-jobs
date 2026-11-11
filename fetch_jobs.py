@@ -168,7 +168,9 @@ def workday_date(txt):
 
 WORKDAY_TERMS = ("software engineer", "c++", "python", "quant", "developer", "research", "data engineer", "trading",
                  "financial analyst")
-FINANCE_WORKDAY_TERMS = ("analyst", "associate", "financial analyst", "investment banking", "software engineer", "quant")
+# banks and asset managers: two broad finance terms (Workday's search returns every analyst/associate posting, and the
+# title filter keeps the finance ones) plus their tech/quant roles. 4 terms x <=5 pages keeps each tenant <=20 calls.
+FINANCE_WORKDAY_TERMS = ("analyst", "associate", "software engineer", "quant")
 
 
 def norm_workday(c):
